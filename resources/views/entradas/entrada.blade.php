@@ -98,11 +98,16 @@
              </textarea>
          </div>
 
-
+         <div class="col-md-12 text-center">
+									<label>Dimensiones para imagen destacada<br><span style="color: red;">540px  x  600px</span></label>
+					</div>
           <div class="col-sm-12">
           <label class="control-label " style="text-align: center; margin-top:4px;">Imagen destacada</label>
           <input type="file" name="destacada" accept="image/*">
         </div>
+        <div class="col-md-12 text-center">
+									<label>Dimensiones para el banner<br><span style="color: red;">1920px  x  736px</span></label>
+					</div>
         <div class="col-sm-12">
                 <label class="control-label " style="text-align: center; margin-top:4px;">Banner</label>
                 <input type="file" name="banner" accept="image/*">

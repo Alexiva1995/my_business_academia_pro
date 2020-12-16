@@ -109,7 +109,10 @@
                                             <option value="Mis Cursos">Mis Cursos</option>
 						                </select>
 						            </div>
-						        </div>
+								</div>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para el banner <br><span style="color: red;">350px  x  450px</span></label>
+								</div>
 						        <div class="col-md-12">
 						            <div class="form-group">
 						                <label>Imagen</label>
