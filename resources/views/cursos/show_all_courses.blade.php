@@ -21,7 +21,7 @@
 
 
 @section('content')
-    <div class="" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
+    <div class="section-landing" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
         <div class="col mb-4 mt-2">
             <div class="title-page-course col-md-12"><span class="text-white">
             <h2>Todos los Cursos</h2>
@@ -31,33 +31,26 @@
         <div class="row p-4">
             @if ($courses->count() > 0)
                 @foreach ($courses  as $course)
-                    <div class="col-md-3 mt-1 box-courses">
+                <div class="col-md-3 box-courses" style="margin-top: 20px;">
                         @if (!is_null($course->thumbnail_cover))
-                            <img src="{{ asset('uploads/images/courses/covers/'.$course->thumbnail_cover) }}" class="card-img-top" alt="...">
+                        <img src="{{ asset('uploads/images/courses/covers/'.$course->thumbnail_cover) }}" class="card-img-top" alt="...">
                         @else
-                            <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top" alt="...">
+                        <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top" alt="...">
                         @endif
                         <div class="card-img-overlay course-overlay">
-                            <div class="container-fluid">
-                                <div class="row card-carousel-text mr-1">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="col-md-9 p-0">
-                                                <h6>
-                                                    <a href="{{ route('courses.show', [$course->slug, $course->id]) }}" class="text-white">{{ $course->title }}</a>
-                                                </h6>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <i class="far fa-user-circle text-white"><p class="text-center text-white" style="font-size: 10px;">{{ $course->users->count() }}</p></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row ml-0 d-flex h-100 mr-1 ml-1">
+                            <div class="col-md-10 my-auto  recomendados-title text-center p-0" style="margin-bottom: 7px !important">
+                            <p class="col-sm w-100 text-center" style="font-size: 17px;"> <a href="" class="text-white"> {{ $course->title }}</a></p>
                             </div>
+                            <div class="col-md-1 my-auto float-left p-0" style="margin-bottom: 7px !important">
+                                <h6 class="text-white w-100">
+                                    <i class="far fa-user-circle text-center">
+                                        <p style="font-size: 10px;">{{ $course->users->count() }}</p>
+                                    </i>
+                                    
+                                </h6>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 @endforeach
@@ -69,12 +62,10 @@
                 </div>
             @endif
         </div>
-
-
-        <div class="d-flex justify-content-center paginador">
+    </div>
+    <div class="d-flex justify-content-center paginador">
             {{ $courses->links("pagination::bootstrap-4") }}
         </div>
-    </div>
 
 
         {{-- SECCIÓN REFERIDOS (USUARIOS LOGGUEADOS) --}}

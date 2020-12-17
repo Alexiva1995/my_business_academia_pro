@@ -204,7 +204,7 @@
 		<div class="col-md-12">
 			<div class="row ml-4 mr-4">
 				<div class="col-md-2 pl-0 pr-0">
-            <div class="card card-comisiones" style="background-color: #1C1D21!important;">
+            <div class="card card-comisiones" style="background-color: #2A91FF!important;">
                   <div class="card-body text-center">
                     <h5 class="card-title text-white comisiones-card-title nivel-body">Nivel</h5>
                   </div>

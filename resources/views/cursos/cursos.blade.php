@@ -495,7 +495,7 @@ $tercero++;
                                     <div class="text-sm text-white" style="line-height:1;">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <a class="text-primary" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}"> {{ $mentor->nombre }}</a>
+                                                <a  href="{{ url('courses/mentor/'.$mentor->mentor_id) }}" style="color:#fff"> {{ $mentor->nombre }}</a>
                                             </div>
                                             <div class="col-md-2">
                                                 <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;"></i></a>

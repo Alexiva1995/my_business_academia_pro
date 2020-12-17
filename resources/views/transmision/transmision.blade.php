@@ -71,7 +71,7 @@
          </div>
       </div>
    @endif
-
+   @if (!Auth::guest())
    <div class="section-landing" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
       <div class="col">
          <div class="section-title-landing" style="padding-bottom: 35px;">PRÓXIMAS TRANSMISIONES EN VIVO</div>
@@ -228,7 +228,7 @@
          <div class="row">No se encontraron próximas transmisiones...</div>
       @endif
    </div>
-
+   @endif
    <div class="section-landing" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
       <div class="col">
          <div class="section-title-landing" style="padding-bottom: 35px; text-align:center;">TRANSMISIONES RECIENTES</div>

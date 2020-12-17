@@ -1,5 +1,9 @@
 @extends('layouts.landing')
-
+<style>
+.btn-rounded{
+  padding: 5px!important;
+}
+</style>
 {{-- fullcalendar--}}
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/calendario/fullcalendar.min.css')}}">
 

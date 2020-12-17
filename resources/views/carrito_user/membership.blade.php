@@ -46,6 +46,7 @@
                                                 <div class="row" style="padding:20px;">
                                                     @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
+                                                        <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
@@ -59,6 +60,7 @@
                                                 
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
+                                                        <h5 class="text-danger mt-4 mb-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->discount_annual}}<span class="period text-danger" style="font-size:12px;">/Anual</span> <span class="text-white">registrándote</span></h5>
                                                 @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span class="period">/Anual</span></h4>
                                                 @endif
@@ -87,6 +89,7 @@
                                                 <div class="row" style="padding:20px;">
                                                     @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
+                                                        <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
@@ -100,6 +103,7 @@
                                                 
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
+                                                        <h5 class="text-danger mt-4 mb-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->discount_annual}}<span class="period text-danger" style="font-size:12px;">/Anual</span> <span class="text-white">registrándote</span></h5>
                                                 @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span class="period">/Anual</span></h4>
                                                 @endif
@@ -129,6 +133,7 @@
                                                 <div class="row" style="padding:20px;">
                                                     @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
+                                                        <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
@@ -142,6 +147,7 @@
                                                 
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
+                                                        <h5 class="text-danger mt-4 mb-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->discount_annual}}<span class="period text-danger" style="font-size:12px;">/Anual</span> <span class="text-white">registrándote</span></h5>
                                                 @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span class="period">/Anual</span></h4>
                                                 @endif
@@ -167,6 +173,7 @@
                                                 <div class="row" style="padding:20px;">
                                                    @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
+                                                        <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
@@ -180,6 +187,7 @@
                                                 
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
+                                                        <h5 class="text-danger mt-4 mb-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->discount_annual}}<span class="period text-danger" style="font-size:12px;">/Anual</span> <span class="text-white">registrándote</span></h5>
                                                 @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span class="period">/Anual</span></h4>
                                                 @endif
