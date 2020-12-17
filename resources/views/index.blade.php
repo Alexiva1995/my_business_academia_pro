@@ -202,7 +202,7 @@
         	                <img src="{{ asset('uploads/images/courses/featured_covers/'.$cursoDestacado->featured_cover) }}" class="d-block w-100 img-fluid" alt="...">
         	                <div class="carousel-caption">
                                 <p style="color:#007bff; font-size: 22px; font-weight: bold; margin-top: -20px;">NUEVO CURSO</p>
-        						<div class="course-autor">{{$cursoDestacado->mentor->display_name}}</div>
+        						<div class="course-autor text-white">{{$cursoDestacado->mentor->display_name}}</div>
         						<div class="course-title"> <a href="{{ route('courses.show', [$cursoDestacado->slug, $cursoDestacado->id]) }}" style="color: white;">{{ $cursoDestacado->title }}</a></div>
         	                    <!--<div class="course-category">{{ $cursoDestacado->category->title }}</div>-->
         	                </div>
@@ -416,16 +416,17 @@
                             
                             @if (!is_null($mentor->avatar))
                                 <!-- <img src="{{ asset('uploads/avatar/'.$mentor->avatar) }}" class="card-img-top new-course-img" alt="..."> -->
-                                <img src="{{ asset('uploads/avatar/'.$mentor->avatar) }}" class="card-img-top new-course-img" alt="...">
+                                <img src="{{ asset('uploads/avatar/'.$mentor->avatar) }}" class="card-img-top new-course-img" alt="..." style="">
+
                             @else
                                 <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top new-course-img" alt="...">
                             @endif
-                            <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-img-overlay d-flex flex-column mentor-overlay">
                                 <div class="mt-auto">
                                     <div class="text-sm text-white" style="line-height:1;">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                <a class="text-white" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}"> {{ $mentor->nombre }}</a>
+                                                <a class="text-primary" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}"> {{ $mentor->nombre }}</a>
                                             </div>
                                             <div class="col-md-2">
                                                 <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;"></i></a>

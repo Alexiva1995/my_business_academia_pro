@@ -157,27 +157,41 @@ class CoursesOrdenController extends Controller
      */
     public function getDataillOrden($iduser): array{
         $item = ShoppingCart::where('user_id', '=', $iduser)
-                    ->where('membership_id', '<>', NULL)
+                    ->orderBy('id', 'DESC')
                     ->first();
         
-
         $totalItems = 0;
         
-        $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
-        if ($item->period == 'Mensual'){
-            $total = $membresia->descuento;
-        }else{
-            $total = $membresia->discount_annual;
+        if (!is_null($item->membership_id)){
+            $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
+            if ($item->period == 'Mensual'){
+                $total = $membresia->descuento;
+            }else{
+                $total = $membresia->discount_annual;
+            }
+
+            $arrayCursos = [
+                'idmembresia' => $membresia->id,
+                'nombre' => $membresia->name,
+                'precio' => $total,
+                'tipo' => $item->period,
+                'img' => 'no disponible',
+                'links' => 0,
+            ];
+        }else if (!is_null($item->offer_id)){
+            $oferta = DB::table('offers_live')->where('id', $item->offer_id)->first();
+            $total = $oferta->price;
+
+            $arrayCursos = [
+                'idmembresia' => $oferta->id,
+                'nombre' => $oferta->title,
+                'precio' => $total,
+                //'tipo' => $item->period,
+                'img' => 'no disponible',
+                'links' => 0,
+            ];
         }
             
-        $arrayCursos = [
-            'idmembresia' => $membresia->id,
-            'nombre' => $membresia->name,
-            'precio' => $total,
-            'tipo' => $item->period,
-            'img' => 'no disponible',
-            'links' => 0,
-        ];
         $totalItems += $total;
 
         $data = [
@@ -200,12 +214,20 @@ class CoursesOrdenController extends Controller
 
             //$idmembresia = $this->getDataMembeship(Auth::user()->ID);
             $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)
-                            ->where('membership_id', '<>', NULL)
+                            ->orderBy('id', 'DESC')
                             ->first();
             
             //$enlace = Addresip::where('ip', request()->ip())->first();
+            
+            if (!is_null($item->membership_id)){
+                $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
 
-            $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
+                $monto = ((($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual) * 100);
+            }else if (!is_null($item->offer_id)){
+                $oferta = DB::table('offers_live')->where('id', $item->offer_id)->first();
+
+                $monto = $oferta->price*100;
+            }
 
             $customer = Customer::create(array(
                 'email' => $request->stripeEmail,
@@ -214,26 +236,26 @@ class CoursesOrdenController extends Controller
 
             $charge = Charge::create(array(
                 'customer' => $customer->id,
-                'amount'   => (($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual * 100),
+                'amount'   => $monto,
                 'currency' => 'usd'
             ));
 
             $datosMembresia = [
-                'idmembresia' => $membresia->id,
-                'nombre' => $membresia->name,
-                'precio' => ($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual,
-                'tipo' => $item->period == 'Mensual',
-                'img' => asset('uploads/images/memberships/'.$membresia->image),
+                'idmembresia' => (!is_null($item->membership_id)) ? $item->membership_id : $item->offer_id,
+                'nombre' => (!is_null($item->membership_id)) ? $membresia->name : $oferta->title,
+                'precio' => $monto/100,
+                'tipo' => (!is_null($item->membership_id)) ? $item->period : '',
+                'img' => (!is_null($item->membership_id)) ? asset('uploads/images/memberships/'.$membresia->image) : asset('uploads/images/offers/'.$oferta->resource_url),
                 'links' => Auth::user()->sponsor_id,
             ];
             
             $orden = new CourseOrden();
             $orden->user_id = Auth::user()->ID;
-            $orden->total = ($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual;
+            $orden->total = $monto/100;
             $orden->detalles = json_encode($datosMembresia);
             $orden->idtransacion_stripe = $request->stripeToken;
             $orden->status = 1;
-            $orden->type_product = 'membresia';
+            $orden->type_product = (!is_null($item->membership_id)) ? 'membresia' : 'oferta';
             $orden->save();
 
             $carrito = new ShoppingCartController();
@@ -251,16 +273,17 @@ class CoursesOrdenController extends Controller
     
     //comprar con billetera
     public function buy_wallet(Request $datos){
-      
-        $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)->first();
+        
+        $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)->orderBy('id', 'DESC')->first();
             
-        // $enlace = Addresip::where('ip', request()->ip())->first();
+        if (!is_null($item->membership_id)){
+            $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
 
-        $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
-        if ($item->period == 'Mensual'){
-            $total = $membresia->descuento;
-        }else{
-            $total = $membresia->discount_annual;
+            $total = ($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual;
+        }else if (!is_null($item->offer_id)){
+            $oferta = DB::table('offers_live')->where('id', $item->offer_id)->first();
+
+            $total = $oferta->price;
         }
       
         if(Auth::user()->wallet_amount < $total){
@@ -268,11 +291,11 @@ class CoursesOrdenController extends Controller
         }
       
         $datosMembresia = [
-            'idmembresia' => $membresia->id,
-            'nombre' => $membresia->name,
+            'idmembresia' => (!is_null($item->membership_id)) ? $item->membership_id : $item->offer_id,
+            'nombre' => (!is_null($item->membership_id)) ? $membresia->name : $oferta->title,
             'precio' => $total,
-            'tipo' => $item->period,
-            'img' => asset('uploads/images/memberships/'.$membresia->image),
+            'tipo' => (!is_null($item->membership_id)) ? $item->period : '',
+            'img' => (!is_null($item->membership_id)) ? asset('uploads/images/memberships/'.$membresia->image) : asset('uploads/images/offers/'.$oferta->resource_url),
             'links' => Auth::user()->sponsor_id,
         ];
             
@@ -281,7 +304,7 @@ class CoursesOrdenController extends Controller
         $orden->total = $total;
         $orden->detalles = json_encode($datosMembresia);
         $orden->status = 1;
-        $orden->type_product = 'membresia';
+        $orden->type_product = (!is_null($item->membership_id)) ? 'membresia' : 'oferta';
         $orden->save();
         
         $carrito = new ShoppingCartController();
@@ -315,25 +338,27 @@ class CoursesOrdenController extends Controller
     //comprar con paypal
     public function buy_paypal(Request $datos){
         
-        $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)->first();
+        $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)->orderBy('id', 'DESC')->first();
         //$enlace = Addresip::where('ip', request()->ip())->first();
 
-        $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
-        if ($item->period == 'Mensual'){
-            $total = $membresia->descuento;
-        }else{
-            $total = $membresia->discount_annual;
+        if (!is_null($item->membership_id)){
+            $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
+
+            $total = ($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual;
+        }else if (!is_null($item->offer_id)){
+            $oferta = DB::table('offers_live')->where('id', $item->offer_id)->first();
+
+            $total = $oferta->price;
         }
 
         $datosMembresia = [
-            'idmembresia' => $membresia->id,
-            'nombre' => $membresia->name,
+            'idmembresia' => (!is_null($item->membership_id)) ? $item->membership_id : $item->offer_id,
+            'nombre' => (!is_null($item->membership_id)) ? $membresia->name : $oferta->title,
             'precio' => $total,
-            'tipo' => $item->period,
-            'img' => asset('uploads/images/memberships/'.$membresia->image),
+            'tipo' => (!is_null($item->membership_id)) ? $item->period : '',
+            'img' => (!is_null($item->membership_id)) ? asset('uploads/images/memberships/'.$membresia->image) : asset('uploads/images/offers/'.$oferta->resource_url),
             'links' => Auth::user()->sponsor_id,
         ];
-        
         
         $orden = new CourseOrden();
         $orden->user_id = Auth::user()->ID;
@@ -341,7 +366,7 @@ class CoursesOrdenController extends Controller
         $orden->detalles = json_encode($datosMembresia);
         $orden->idtransacion_paypal = Carbon::now()->format('YmdHis');
         $orden->status = 0;
-        $orden->type_product = 'membresia';
+        $orden->type_product = (!is_null($item->membership_id)) ? 'membresia' : 'oferta';
         $orden->save();
         
         // eliminar la direccion ip y el id de la persona que me dio el link
@@ -354,47 +379,49 @@ class CoursesOrdenController extends Controller
     public function pay_membership_coinpayment(Request $request){
         try {
 
-            $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)->first();
+            $item = ShoppingCart::where('user_id', '=', Auth::user()->ID)->orderBy('id', 'DESC')->first();
             
             //$enlace = Addresip::where('ip', request()->ip())->first();
+            if (!is_null($item->membership_id)){
+                $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
 
-            $membresia = DB::table('memberships')->where('id', $item->membership_id)->first();
-            if ($item->period == 'Mensual'){
-                $total = $membresia->descuento;
-            }else{
-                $total = $membresia->discount_annual;
+                $monto = ($item->period == 'Mensual') ? $membresia->descuento : $membresia->discount_annual;
+            }else if (!is_null($item->offer_id)){
+                $oferta = DB::table('offers_live')->where('id', $item->offer_id)->first();
+
+                $monto = $oferta->price;
             }
-           
+
             $datosMembresia = [
-                'idmembresia' => $membresia->id,
-                'nombre' => $membresia->name,
-                'precio' => $total,
-                'tipo' => $item->period,
+                'idmembresia' => (!is_null($item->membership_id)) ? $item->membership_id : $item->offer_id,
+                'nombre' => (!is_null($item->membership_id)) ? $membresia->name : $oferta->title,
+                'precio' => $monto,
+                'tipo' => (!is_null($item->membership_id)) ? $item->period : '',
+                'img' => (!is_null($item->membership_id)) ? asset('uploads/images/memberships/'.$membresia->image) : asset('uploads/images/offers/'.$oferta->resource_url),
                 'links' => Auth::user()->sponsor_id,
-                'img' => asset('uploads/images/memberships/'.$membresia->image)
             ];
             
             $orden = new CourseOrden();
             $orden->user_id = Auth::user()->ID;
-            $orden->total = $total;
+            $orden->total = $monto;
             $orden->detalles = json_encode($datosMembresia);
             $orden->status = 0;
-            $orden->type_product = 'membresia';
+            $orden->type_product = (!is_null($item->membership_id)) ? 'membresia' : 'oferta';
             $orden->save();
 
             $transacion = [
-                'amountTotal' => $total,
-                'note' => 'Compra membresía por '.number_format($total, 2, ',', '.').' USD',
+                'amountTotal' => $monto,
+                'note' => 'Compra de '.$orden->type_product.' por '.number_format($monto, 2, ',', '.').' USD',
                 'idorden' => $orden->id,
                 'buyer_email' => Auth::user()->user_email,
                 'redirect_url' => route('courses')
             ];
 
             $transacion['items'][] = [
-                'itemDescription' => $membresia->name,
-                'itemPrice' => $total, // USD
+                'itemDescription' => (!is_null($item->membership_id)) ? $membresia->name : $oferta->title,
+                'itemPrice' => $monto, // USD
                 'itemQty' => (INT) 1,
-                'itemSubtotalAmount' => $total // USD
+                'itemSubtotalAmount' => $monto // USD
             ];
             
             /* eliminar la direccion ip y el id de la persona que me dio el link*/

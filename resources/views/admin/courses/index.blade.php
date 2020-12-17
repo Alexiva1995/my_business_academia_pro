@@ -179,13 +179,19 @@
 						                <label>Duración del Curso</label>
 						            	<input type="text" class="form-control" name="duration" >
 						            </div>
-						        </div>
+								</div>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para el cover <br><span style="color: red;">1400px  x  500px</span></label>
+								</div>
 						        <div class="col-md-12">
 						            <div class="form-group">
 						                <label>Imagen de Cover</label>
 						            	<input type="file" class="form-control" name="cover" >
 						            </div>
-						        </div>
+								</div>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para la miniatura <br><span style="color: red;">350px  x  450px</span></label>
+								</div>
 						        <div class="col-md-12">
 						            <div class="form-group">
 						                <label>Imagen Miniatura</label>

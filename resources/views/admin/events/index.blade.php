@@ -176,14 +176,19 @@
 								<div class="col-md-12">
 						        	<label>Duración (Minutos)</label>
             						<input type="number" class="form-control" name="duration" required>
-						        </div>
+								</div>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para el banner <br><span style="color: red;">900px  x  321px</span></label>
+								</div>
 						        <div class="col-md-12">
 									<div class="form-group">
 									<label class="control-label text-center">Banner</label>
 										<input class="form-control" type="file" name="banner" required>
 									</div>
-						        </div>
-
+						        </div><br>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para la miniatura <br><span style="color: red;">350px  x  450px</span></label>
+								</div>
 						        <div class="col-md-12">
 									<div class="form-group">
 									<label class="control-label text-center">Miniatura</label>
