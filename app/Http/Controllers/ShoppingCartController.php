@@ -120,64 +120,38 @@ class ShoppingCartController extends Controller
      */
     public function store(Request $request, $id, $type = null, $period = null){
         if (Auth::guest()){
-            $itemAgregado = DB::table('shopping_cart')
+            DB::table('shopping_cart')
                                 ->where('user_id', '=', request()->ip())
-                                ->where('membership_id', '=', $id)
-                                ->count();
+                                ->delete();
 
-            if ($itemAgregado == 0){
+          
+            $item = new ShoppingCart();
+            $item->user_id = request()->ip();
+            //$item->course_id = $id;
+            $item->membership_id = $id;
+            $item->period = $period;
+            $item->date = date('Y-m-d');
+            $item->save();
+
+            return redirect('shopping-cart')->with('msj-exitoso', 'El item ha sido agregado a su carrito de compras con éxito.');
+        }else{
+            DB::table('shopping_cart')
+                ->where('user_id', '=', Auth::user()->ID)
+                ->delete();
+
+            if ($request->type == 'membresia'){
                 $item = new ShoppingCart();
-                $item->user_id = request()->ip();
-                //$item->course_id = $id;
+                $item->user_id = Auth::user()->ID;
                 $item->membership_id = $id;
                 $item->period = $period;
                 $item->date = date('Y-m-d');
                 $item->save();
-            }elseif($itemAgregado == 1){
-                
-                //eliminamos la membresia y agregamos la otra
-                $this->actualizarMembresias($id, $period, (Auth::user()) ? Auth::user()->ID : request()->ip());
-            }
-
-            return redirect('shopping-cart')->with('msj-exitoso', 'El item ha sido agregado a su carrito de compras con éxito.');
-        }else{
-            if ($request->type == 'membresia'){
-                $itemAgregado = DB::table('shopping_cart')
-                                ->where('user_id', '=', Auth::user()->ID)
-                                ->where('membership_id', '=', $id)
-                                ->count();
-
-                if ($itemAgregado == 0){
-                    $item = new ShoppingCart();
-                    $item->user_id = Auth::user()->ID;
-                    $item->membership_id = $id;
-                    $item->period = $period;
-                    $item->date = date('Y-m-d');
-                    $item->save();
-                }elseif($itemAgregado == 1){
-                
-                //eliminamos la membresia y agregamos la otra
-                $this->actualizarMembresias($id, $period, (Auth::user()) ? Auth::user()->ID : request()->ip());
-               }
-
             }else if ($request->type == 'oferta'){
-                $itemAgregado = DB::table('shopping_cart')
-                                    ->where('user_id', '=', Auth::user()->ID)
-                                    ->where('offer_id', '=', $id)
-                                    ->count();
-
-                if ($itemAgregado == 0){
-                    $item = new ShoppingCart();
-                    $item->user_id = Auth::user()->ID;
-                    $item->offer_id = $id;
-                    $item->date = date('Y-m-d');
-                    $item->save();
-                    
-                }elseif($itemAgregado == 1){
-                
-                //eliminamos la membresia y agregamos la otra
-                $this->actualizarMembresias($id, $period, (Auth::user()) ? Auth::user()->ID : request()->ip());
-                }
+                $item = new ShoppingCart();
+                $item->user_id = Auth::user()->ID;
+                $item->offer_id = $id;
+                $item->date = date('Y-m-d');
+                $item->save();
             }
         }
             
@@ -297,8 +271,6 @@ class ShoppingCartController extends Controller
         
         if ($datosOrden->type_product == 'membresia') {
             $compra->link = $detallesMembresia->links;
-        }else{
-            
         }
         $compra->save();
 
@@ -332,6 +304,9 @@ class ShoppingCartController extends Controller
                       'status' => 1,
                       'membership_status' => 1,
                       'membership_expiration' => $fechaExpiracion]);
+        }else{
+            DB::table('offers_users')
+                ->insert(['user_id' => $datosOrden->user_id, 'offer_id' => $detallesMembresia->idmembresia, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')]);
         }
                       
         DB::table('shopping_cart')
@@ -414,19 +389,50 @@ class ShoppingCartController extends Controller
             }    
     }
 
-    public function purchases_record(){
+    public function purchases_record(Request $request){
         // TITLE
         view()->share('title', 'Historial de Compras');
         
-        $compras = Purchase::with(['details'])->orderBy('id', 'DESC')->get();
-        
-        foreach ($compras as $compra){
-            foreach ($compra->details as $p){
-                $compra->membership = $p->membership;
+        if (is_null($request->get('membership'))){
+            $compras = Purchase::dates($request->get('initial_date'), $request->get('final_date'))
+                        ->method($request->get('payment_method'))
+                        ->with(['details'])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+            
+            foreach ($compras as $compra){
+                foreach ($compra->details as $detalle){
+                    if (!is_null($detalle->membership_id)){
+                        $compra->product = 'Membresía';
+                        $compra->description = $detalle->membership;
+                    }else if (!is_null($detalle->offer_id)){
+                        $compra->product = 'Oferta';
+                        $compra->description = $detalle->offer;
+                    }
+                }
+            }
+        }else{
+            $posiblesCompras = Purchase::with(['details'])
+                        ->orderBy('id', 'DESC')
+                        ->get();
+
+            $compras = collect();
+            foreach ($posiblesCompras as $compra){
+                foreach ($compra->details as $detalle){
+                    if (!is_null($detalle->membership_id)){
+                        if ($detalle->membership_id == $request->get('membership')){
+                            $compra->product = 'Membresía';
+                            $compra->description = $detalle->membership;
+                            $compras->push($compra);
+                        }
+                    }
+                }
             }
         }
+        
+        $membresias = DB::table('memberships')->orderBy('id', 'ASC')->get();
 
-        return view('admin.purchasesRecord')->with(compact('compras'));
+        return view('admin.purchasesRecord')->with(compact('compras', 'membresias'));
     }
 
 

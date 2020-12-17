@@ -10,6 +10,9 @@ class Membership extends Model
 
     protected $fillable = ['name', 'image', 'price', 'price_annual', 'descuento', 'discount_annual', 'ganancia', 'streamings', 'type'];
 
+    public function upgrade_message(){
+        return $this->hasOne('App\Models\UpgradeMessage');
+    }
     public function users(){
         return $this->hasMany('App\Models\User');
     }

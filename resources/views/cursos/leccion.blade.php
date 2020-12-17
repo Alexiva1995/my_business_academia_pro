@@ -406,8 +406,11 @@
           </button>
         </div>
         <div class="modal-body text-center">
-          <h4 class="text-muted">¿Qué esperas para mejorar tu membresía y subir de nivel?</h4>
-          <p class="text-muted">Con esto tedrás acceso a nuevas lecciones...</p>
+          <h4 class="text-muted">{{ Auth::user()->membership->upgrade_message->title }}</h4>
+          <p class="text-muted">{{ Auth::user()->membership->upgrade_message->description }}</p>
+          @if (!is_null(Auth::user()->membership->upgrade_message->image))
+            <img src="{{ asset('uploads/images/memberships/upgradeMessage/'.Auth::user()->membership->upgrade_message->image) }}" alt="">
+          @endif
           <a href="{{route('shopping-cart.store', [Auth::user()->membership_id+1, 'membresia', 'Mensual'])}}" class="btn btn-color-green text-white" style="background: #6ab742;">SUBIR DE NIVEL</a>
         </div>
         <div class="modal-footer">

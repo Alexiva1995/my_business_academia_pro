@@ -438,8 +438,15 @@ Route::group(['prefix' => 'installer'], function (){
           Route::post('update-question', 'EvaluationController@update_question')->name('admin.courses.evaluation.update-question');
           Route::get('delete-question/{id}', 'EvaluationController@delete_question')->name('admin.courses.evaluation.delete-question');
         });
+
+        
      });
 
+     Route::group(['prefix' => 'memberships'], function(){
+      Route::get('/', 'MembershipController@index')->name('admin.memberships.index');
+      Route::post('update', 'MembershipController@update')->name('admin.memberships.update');
+      Route::post('update-message', 'MembershipController@update_message')->name('admin.memberships.update-message');
+    });
      //Eventos admin
      Route::group(['prefix' => 'events'], function(){
        Route::get('prueba', 'EventsController@prueba');

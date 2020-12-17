@@ -820,6 +820,15 @@ class Menu
                     ],
                 ]
             ],
+            'Membresías' => [
+                'submenu' => 0,
+                'ruta' => 'admin.memberships.index',
+                'black'=> '0',
+                'icono' => 'fa fa-star',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
+            ],
             'Historial de Compras' => [
                 'submenu' => 0,
                 'ruta' => 'admin.purchases-record',
