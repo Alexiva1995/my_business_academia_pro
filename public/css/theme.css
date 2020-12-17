@@ -303,7 +303,7 @@ h5.title-level {
 }
 
 .next-streaming-date {
-    font-size: 25px;
+    font-size: 20px;
     color: #fff;
     font-weight: 300;
     padding-top: 10px;
@@ -2294,4 +2294,8 @@ p.card-text.font-weight-bold.mr-2 {
 
 .img-background-razones {
     background-image: url('../nosotros/afiliados/fondo.png');
+}
+
+.mentor-overlay{
+    background: linear-gradient(180deg, rgba(255,255,255,0) 74%, rgba(20,20,20,1) 100%);
 }

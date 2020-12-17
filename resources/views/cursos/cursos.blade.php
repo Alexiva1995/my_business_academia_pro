@@ -490,7 +490,7 @@ $tercero++;
                             @else
                                 <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top new-course-img" alt="...">
                             @endif
-                            <div class="card-img-overlay d-flex flex-column">
+                            <div class="card-img-overlay d-flex flex-column mentor-overlay">
                                 <div class="mt-auto">
                                     <div class="text-sm text-white" style="line-height:1;">
                                         <div class="row">
