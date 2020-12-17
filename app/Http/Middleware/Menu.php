@@ -27,13 +27,13 @@ class Menu
     public function handle($request, Closure $next)
     {
         if (Auth::user()) {
-
+            
             if(Auth::user()->rol_id == 0 || Auth::user()->rol_id == 1) {
-
+                
                 $menus = $this->menuAdmin();
-
+                
             }elseif(Auth::user()->rol_id >= 2){
-
+                
                 $data = $this->menu('activos');
                 $menus = $this->menuActivo($data);
 
@@ -123,8 +123,8 @@ class Menu
               if(!empty($binario->binario)){
                   $automatico = 1;
               }
-
-
+              
+             
         return [
             'Inicio' => [
                 'submenu' => 0,
@@ -579,7 +579,7 @@ class Menu
     {
         $permiso = null;
         $settings = Settings::first();
-
+        
             $permiso = DB::table('settingpermiso')->where('iduser', Auth::user()->ID)->get()[0];
 
              $habilitar = 0;
@@ -613,8 +613,8 @@ class Menu
               }elseif((request()->is('admin/users/networkrecords')) ? 'active' : ''){
                   $red ='active';
               }
-
-
+             
+        
         return [
             'Inicio' => [
                 'submenu' => 0,
@@ -685,7 +685,7 @@ class Menu
                     ],
                 ]
             ],
-
+             
 
              'Entradas' => [
                  'submenu' => 0,
@@ -706,7 +706,7 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->red : 0,
                 'activo' => 0,
             ],
-
+            
             'Historial de comisiones' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -729,7 +729,7 @@ class Menu
                     ],
                 ]
             ],
-
+            
             'Cursos' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -774,7 +774,7 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
+                    
                     'Cursos mas vistos' => [
                         'ruta' => 'admin.courses.vistos',
                         'complementoruta' => '',
@@ -796,7 +796,7 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
+                   
                 ]
             ],
             'Banners' => [
@@ -829,7 +829,7 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
                 'activo' => 0,
             ],
-
+            
             /*
             'Nuevo Registro' => [
                 'submenu' => 0,
@@ -930,14 +930,14 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->usuario : 0,
                 'activo' => 0,
             ],
-
-
+            
+            
             'Envio de correos' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
                 'icono' => 'fas fa-envelope-open-text',
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->correos : 0,
-                'activo' => (request()->is('admin/settings*')) ? 'active' : '',
+                'activo' => (request()->is('admin/correo*')) ? 'active' : '',
                 'menus' => [
                     'Correos a la Red' => [
                         'ruta' => 'correo-vista',
@@ -953,7 +953,7 @@ class Menu
                     ],
                 ]
             ],
-
+            
             'Pop up' => [
                 'submenu' => 0,
                 'ruta' => 'setting-pop',
@@ -963,7 +963,7 @@ class Menu
                 'permisoAdmin' => 1,
                 'activo' => 0,
             ],
-            'Soporte' => [
+             'Soporte' => [
                 'submenu' => 3,
                 'ruta' => 'javascript:;',
                 'icono' => 'fas fa-tools',
@@ -991,8 +991,18 @@ class Menu
 
                 ]
             ],
-
-
+            
+           
+            'Slider' => [
+                'submenu' => 0,
+                'ruta' => 'setting-logo',
+                'black'=> '0',
+                'icono' => 'fas fa-sliders-h',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => 0,
+            ],
+            
             /*
             'Binario' => [
                 'submenu' => 0,
@@ -1178,7 +1188,7 @@ class Menu
                     ],
                 ]
             ],
-
+            
             'Tickets/Soporte' => [
                 'submenu' => 0,
                 'ruta' => 'todosticket',
@@ -1320,7 +1330,7 @@ class Menu
                 ]
             ],
              */
-            /*
+            /* 
             'Ajustes' => [
                 'submenu' => 1,
                 'ruta' => 'javascript',
@@ -1349,15 +1359,15 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
-
+                    
+                    
                     'Configuración Cripto' => [
                         'ruta' => 'setting-btcconfi',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
+                    
                     'Comisiones' => [
                         'ruta' => 'setting-comisiones',
                         'complementoruta' => '',
@@ -1410,7 +1420,7 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
+                    
                     'Activacion' => [
                         'ruta' => 'setting-activacion',
                         'complementoruta' => '',
@@ -1508,11 +1518,11 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
+                   
                 ]
             ],
              */
-
+            
              /*
             'Herramientas' => [
                 'submenu' => 1,
