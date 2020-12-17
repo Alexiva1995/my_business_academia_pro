@@ -20,7 +20,7 @@
         <div class="form-group">
             <button class="btn text-white btn-color-green" onclick="pagarS()">Tarjeta</button>
             <button class="btn text-white btn-color-green" onclick="pagarC()">Cripto</button>
-            {{--<button class="btn text-white btn-color-green" onclick="pagarPaypal()">Paypal</button>--}}
+            <button class="btn text-white btn-color-green" onclick="pagarPaypal()">Paypal</button>
             <button class="btn text-white btn-color-green" onclick="pagarB()">Billetera</button><br><br>
         </div>
         @endif
@@ -49,7 +49,8 @@
             <input type="hidden" name="metodo" value="billetera">
             <input type="hidden" name="total" value="{{$totalItems}}">
         </form>
-         <form action="{{route('shopping-cart-paypal')}}" method="post" id="form-paypal">
+        
+        <form action="{{route('shopping-cart-paypal')}}" method="post" id="form-paypal">
             {{ csrf_field() }}
             <input type="hidden" name="metodo" value="paypal">
         </form>
@@ -79,7 +80,7 @@
             </div>
         </div>
         <div id="stripe2" class="stripe2 d-none">
-            <form action="{{route('shopping-cart.finish')}}" method="POST">
+            <form action="{{route('shopping-cart.pay-membership-stripe')}}" method="POST">
                 {{ csrf_field() }}
                 <input type="hidden" name="metodo" value="stripe">
                 <script
@@ -92,7 +93,7 @@
                     data-locale="auto">
                 </script>
             </form>
-            <form action="{{route('shopping-cart.finish')}}" method="post" id="form-coin2">
+            <form action="{{route('shopping-cart.pay-membership-coinpayment')}}" method="post" id="form-coin2">
                 {{ csrf_field() }}
                 <input type="hidden" name="metodo" value="cripto">
             </form>
@@ -102,6 +103,7 @@
             <input type="hidden" name="metodo" value="billetera">
             <input type="hidden" name="total" value="{{$totalItems}}">
         </form>
+        
         <form action="{{route('shopping-cart-paypal')}}" method="post" id="form-paypal2">
             {{ csrf_field() }}
             <input type="hidden" name="metodo" value="paypal">
