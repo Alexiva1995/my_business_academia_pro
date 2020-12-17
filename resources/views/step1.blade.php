@@ -255,19 +255,19 @@
     <div class="card" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
             <div class="col-md-6">
-              <img src="{{ asset('nosotros/fundadores/josegordo.png') }}" style="width: 100%; max-height:650px;">
+              <img src="{{ asset('nosotros/fundadores/josegordo.png') }}" style="width: 100%;">
             </div>
-            <div class="col-md-6 align-items-center" style="color: #fff; background-color: #1c1d21;">
+            <div class="col-md-6 align-items-center d-flex justify-content-center" style="color: #fff; background-color: #1c1d21;">
             <div class="card-body">
 
                 <p class="card-title" style="padding: 0px 20px; text-align: left; color: #2A91FF; font-family:Muli, Sans-serif; font-size: 50px; font-weight: bold;">
                     JOSÉ GORDO
                 </p>
 
-               <p class="card-text align-items-center d-flex justify-content-center" style="padding: 0px 20px; text-align: left; color: #fff; line-height: 30px;">
+               <p class="card-text align-items-center d-flex justify-content-center" style="padding: 0px 20px; text-align: left; color: #fff; line-height: 28px;">
                 Especialista en desarrollo de negocios rentables, sostenibles y de expansión global.
                </p>
-               <p class="card-text align-items-center d-flex justify-content-center" style="text-align: left; line-height: 40px; margin-botton:0px!important; padding-bottom: 0px !important;">
+               <p class="card-text align-items-center d-flex justify-content-center" style="text-align: left; line-height: 35px; margin-botton:0px!important; padding-bottom: 0px !important;">
                 15 años de experiencia en el mundo financiero, eterno aprendiz y emprendedor, amante de las finanzas, la innovación, y los proyectos de impacto social. Con la experiencia ganada a través los años y su pasión por el desarrollo personal y profesional de sus equipos de trabajo, ha creado diferentes técnicas de entrenamientos altamente efectivo, además de ser escritor y autor de 4 libros de negocios, 2 best seller. Fundador y Co-creador de My Business Academy Pro, así como de Piense y Hágase Rico, El Legado. Su compromiso es dejar huella en todo país que pise y persona que lo acompañe</p>
             </div>
           </div>
@@ -277,7 +277,7 @@
 
     <div class="card mb-3" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
-          <div class="col-md-6 align-items-center" style="color: #fff; background-color: #1c1d21;">
+          <div class="col-md-6 align-items-center d-flex justify-content-center" style="color: #fff; background-color: #1c1d21;">
           <div class="card-body">
 
               <p class="card-title" style="padding: 0px 20px; color: #2A91FF; font-family:Muli, Sans-serif; font-size: 50px; font-weight: bold;">
@@ -292,7 +292,7 @@
             </div>
            </div>
             <div class="col-md-6">
-              <img src="{{ asset('nosotros/fundadores/mujer.png') }}" style="width: 100%; max-height:650px;">
+              <img src="{{ asset('nosotros/fundadores/mujer.png') }}" style="width: 100%;">
             </div>
           </div>
         </div>
@@ -402,3 +402,4 @@
    </div>
 
 @endsection
+
