@@ -6,7 +6,11 @@
         transform: scale(1.1);
         z-index: 9;
        }
-
+    
+    .aumento{
+       font-weight: 700;
+       font-size: 18px;
+    }
     </style>
 @endpush
 
@@ -73,7 +77,7 @@
            </div>
           <div class="col-md-8 nosotros-text" style="background-color: #fff;">
             <div class="card-body row align-items-center justify-content-center">
-               <p class="card-text" style="padding: 30px 30px;">5 niveles de aprendizaje: desde el principiante, básico o intermedio para introducirte al fascinante mundo de las finanzas, hasta el avanzado y pro, que te llevan a lograr resultados extraordinarios.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px;">5 niveles de aprendizaje: desde el principiante, básico o intermedio para introducirte al fascinante mundo de las finanzas, hasta el avanzado y pro, que te llevan a lograr resultados extraordinarios.</p>
             </div>
           </div>
          </div>
@@ -84,7 +88,7 @@
         <div class="row no-gutters">
           <div class="col-md-8 nosotros-text" style="background-color: #fff;">
             <div class="card-body row align-items-center">
-               <p class="card-text" style="padding: 30px 30px;">Se cuenta con múltiples módulos y varias lecciones que cubren el concepto y contexto total del fascinante mundo Fintech, incluyendo sus diferentes campos de acción, como el forex, real estate y muchos otros.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px;">Se cuenta con múltiples módulos y varias lecciones que cubren el concepto y contexto total del fascinante mundo Fintech, incluyendo sus diferentes campos de acción, como el forex, real estate y muchos otros.</p>
             </div>
           </div>
            <div class="col-md-4">
@@ -101,7 +105,7 @@
            </div>
           <div class="col-md-8 nosotros-text" style="color: #fff; background-color: #2A91FF;">
             <div class="card-body row align-items-center">
-               <p class="card-text" style="padding: 30px 30px;">Nuestro propósito es llevarte más allá de la riqueza, por ello no solo te hacemos crecer monetariamente, sino también personalmente, ofreciéndote mucho contenido de desarrollo personal y crecimiento integral como profesional.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 17px;">Nuestro propósito es llevarte más allá de la riqueza, por ello no solo te hacemos crecer monetariamente, sino también personalmente, ofreciéndote mucho contenido de desarrollo personal y crecimiento integral como profesional.</p>
             </div>
           </div>
          </div>
@@ -111,54 +115,54 @@
 </div>
 <div class="col-md-12 py-5" style="background-color: #FFFFFF;">
         <div class="section-title-landing new-courses-section-title mb-2" style="text-align: center;">
-                Nuestros Valores
+                <h2 style="font-weight: 800; font-size: 40px;">NUESTROS VALORES</h2>
         </div>
         <div class="row align-items-center justify-content-center">
             <div class="containerscale">
                     <div class="card m-2">
-                            <img class="rounded-circle" src="{{ asset('nosotros/nosotros/09-285x300.png') }}" alt="Card image"  width="150px" height="150px">
+                            <img class="rounded-circle" src="{{ asset('nosotros/nosotros/09-285x300.png') }}" alt="Card image"  width="160px" height="160px">
                             <div class="card-img-overlay d-flex flex-column">
-                                    <h6 class="text-white my-auto text-center">Conexión</h6>
+                                    <h6 class="text-white my-auto text-center aumento">Conexión</h6>
                             </div>
                     </div>
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/10-285x300.png') }}" alt="Card image"  width="150px" height="150px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/10-285x300.png') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
-                                <h6 class="text-white my-auto text-center">Innovación</h6>
+                                <h6 class="text-white my-auto text-center aumento">Innovación</h6>
                         </div>
                 </div>
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/08-285x300.png') }}" alt="Card image"  width="150px" height="150px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/08-285x300.png') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
-                                <h6 class="text-white my-auto text-center">Crecimiento</h6>
+                                <h6 class="text-white my-auto text-center aumento">Crecimiento</h6>
                         </div>
                 </div>
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/11-285x300.png') }}" alt="Card image"  width="150px" height="150px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/11-285x300.png') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
-                                <h6 class="text-white my-auto text-center">Calidad</h6>
+                                <h6 class="text-white my-auto text-center aumento">Calidad</h6>
                         </div>
                 </div>
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/12-285x300.png') }}" alt="Card image"  width="150px" height="150px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/12-285x300.png') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
-                                <h6 class="text-white my-auto text-center">Eficacia</h6>
+                                <h6 class="text-white my-auto text-center aumento">Eficacia</h6>
                         </div>
                 </div>
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/13-285x300.png') }}" alt="Card image"  width="150px" height="150px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/13-285x300.png') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
-                                <h6 class="text-white my-auto text-center">Trascendencia</h6>
+                                <h6 class="text-white my-auto text-center aumento">Trascendencia</h6>
                         </div>
                 </div>
             </div>
@@ -248,8 +252,8 @@
 
 
 <div class="col-md-12" style="background-color: #1C1D21;">
-     <div class="section-title-landing new-courses-section-title" style="text-align: center;     padding: 30px; color: #FFFFFF;">
-      Nuestros Fundadores
+     <div class="section-title-landing new-courses-section-title" style="text-align: center; padding: 30px; color: #2A91FF;">
+      <h2 style="font-weight: 800; font-size: 40px;">NUESTROS FUNDADORES</h2>
     </div>
 
     <div class="card" style="max-width: 100%; margin-bottom: 0rem!important;">
@@ -260,14 +264,14 @@
             <div class="col-md-6 align-items-center d-flex justify-content-center" style="color: #fff; background-color: #1c1d21;">
             <div class="card-body">
 
-                <p class="card-title" style="padding: 0px 20px; text-align: left; color: #2A91FF; font-family:Muli, Sans-serif; font-size: 50px; font-weight: bold;">
+                <h2 class="card-title" style="text-align: right; color: #2A91FF; font-size: 35px; font-weight: bold;">
                     JOSÉ GORDO
-                </p>
+                </h2>
 
-               <p class="card-text align-items-center d-flex justify-content-center" style="padding: 0px 20px; text-align: left; color: #fff; line-height: 28px;">
+               <p class="card-text align-items-center d-flex justify-content-center" style="font-weight: 500; font-size: 19px; line-height: 1.6em; color: #2A91FF; text-align: right;">
                 Especialista en desarrollo de negocios rentables, sostenibles y de expansión global.
                </p>
-               <p class="card-text align-items-center d-flex justify-content-center" style="text-align: left; line-height: 35px; margin-botton:0px!important; padding-bottom: 0px !important;">
+               <p class="card-text align-items-center d-flex justify-content-center" style="text-align: right; line-height: 30px; font-weight: 500; font-size: 19px;">
                 15 años de experiencia en el mundo financiero, eterno aprendiz y emprendedor, amante de las finanzas, la innovación, y los proyectos de impacto social. Con la experiencia ganada a través los años y su pasión por el desarrollo personal y profesional de sus equipos de trabajo, ha creado diferentes técnicas de entrenamientos altamente efectivo, además de ser escritor y autor de 4 libros de negocios, 2 best seller. Fundador y Co-creador de My Business Academy Pro, así como de Piense y Hágase Rico, El Legado. Su compromiso es dejar huella en todo país que pise y persona que lo acompañe</p>
             </div>
           </div>
@@ -280,14 +284,14 @@
           <div class="col-md-6 align-items-center d-flex justify-content-center" style="color: #fff; background-color: #1c1d21;">
           <div class="card-body">
 
-              <p class="card-title" style="padding: 0px 20px; color: #2A91FF; font-family:Muli, Sans-serif; font-size: 50px; font-weight: bold;">
+              <p class="card-title" style="text-align: left; color: #2A91FF; font-size: 35px; font-weight: bold;">
                     MARIANA LÓPEZ DE WAARD
                 </p>
 
-               <p class="card-text align-items-center d-flex justify-content-center" style="padding: 0px 30px; color: #fff; line-height: 40px;">
+               <p class="card-text align-items-center d-flex justify-content-center" style="font-weight: 500; font-size: 19px; line-height: 1.6em; color: #2A91FF; text-align: left;">
                 Licenciada en Marketing con Especialidad en Negocios Internacionales, Filántropa, Exitosa Empresaria y Conferencista de empresas con expansión global.
                </p>
-               <p class="card-text align-items-center d-flex justify-content-center" style="padding: 0px 30px; line-height: 40px;">
+               <p class="card-text align-items-center d-flex justify-content-center" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">
                  Experta en la apertura de nuevos mercados y mentora de grandes equipos de trabajo de la industria del Multinivel. Su compromiso es influir positivamente en mujeres y hombres para sacar al líder que llevan dentro e impulsarlos a cumplir sus sueños.</p>
             </div>
            </div>
@@ -301,7 +305,7 @@
 
     <div class="col-md-12" style="background-color: #EDEDED;">
      <div class="section-title-landing new-courses-section-title" style="text-align: center; padding: 30px; color: #2A91FF;">
-      Nuestros Especialistas
+      <h2 style="font-weight: 800; font-size: 40px;">NUESTROS ESPECIALISTAS</h2>
     </div>
 
 <div class="col-md-10 offset-md-1">
@@ -319,9 +323,9 @@
            </div>
           <div class="col-md-8" style="background-color: #EDEDED;">
             <div class="card-body">
-                <p class="card-text" style="padding-left: 20px; line-height: 40px; color:#2A91FF; font-size: 40px; font-weight: bold;">Tania Tostado</p>
+                <p class="card-text" style="color: #2A91FF; font-size: 35px; font-weight: bold;">Tania Tostado</p>
 
-               <p class="card-text" style="padding-left: 20px; line-height: 35px;">Licenciada en Administración financiera con especialidad en finanzas corporativas, ha colaborado con bancos de talla mundial como: UBS, Credit Suisse y Deutche Bank en Suiza, Bank Hapoalim en Israel, Baern Stearns Securities en EUA, entre muchos otros. En 2008, fue ganadora del premio Best Development, otorgado por la International Property Awards y CNBC. Como consultora independiente, asesora a múltiples y reconocidas empresas en latinoamérica para hacer importantes transacciones con cifras de millones de dólares.</p>
+               <p class="card-text" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">Licenciada en Administración financiera con especialidad en finanzas corporativas, ha colaborado con bancos de talla mundial como: UBS, Credit Suisse y Deutche Bank en Suiza, Bank Hapoalim en Israel, Baern Stearns Securities en EUA, entre muchos otros. En 2008, fue ganadora del premio Best Development, otorgado por la International Property Awards y CNBC. Como consultora independiente, asesora a múltiples y reconocidas empresas en latinoamérica para hacer importantes transacciones con cifras de millones de dólares.</p>
             </div>
           </div>
         </div>
@@ -332,9 +336,9 @@
           <div class="col-md-8" style="background-color: #EDEDED;">
               <div class="card-body">
 
-               <p class="card-text" style="padding-left: 20px; line-height: 40px; color:#2A91FF; font-size: 40px; font-weight: bold;">Erick Reynaga</p>
+               <p class="card-text" style="color: #2A91FF; font-size: 35px; font-weight: bold;">Erick Reynaga</p>
 
-               <p class="card-text" style="padding-right: 20px; line-height: 40px;">Especialista con 6 años de experiencia en el mundo del Trading, Forex y las Criptodivisas, así como de fondos de inversión con marcas de reconocimiento internacional. Cuenta con una maestría en administración y negocios, es líder de proyectos educativos financieros para diferentes cúpulas de negocios de jóvenes empresarios en México y es promotor de una Sociedad Financiera de Operación Múltiple en la que se operan diversas transacciones con crypto.</p>
+               <p class="card-text" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">Especialista con 6 años de experiencia en el mundo del Trading, Forex y las Criptodivisas, así como de fondos de inversión con marcas de reconocimiento internacional. Cuenta con una maestría en administración y negocios, es líder de proyectos educativos financieros para diferentes cúpulas de negocios de jóvenes empresarios en México y es promotor de una Sociedad Financiera de Operación Múltiple en la que se operan diversas transacciones con crypto.</p>
             </div>
           </div>
           <div class="col-md-4" style="background-color: #EDEDED;">
@@ -365,9 +369,9 @@
           <div class="col-md-8" style="background-color: #EDEDED;">
             <div class="card-body">
 
-                <p class="card-text" style="padding-left: 20px; line-height: 40px; color:#2A91FF; font-size: 40px; font-weight: bold;"> Mirela Vuckovic</p>
+                <p class="card-text" style="color: #2A91FF; font-size: 35px; font-weight: bold;"> Mirela Vuckovic</p>
 
-               <p class="card-text" style="padding-left: 20px; line-height: 40px;">Lic. en Economía por la University of Split de Croacia. Colaboró en Londres para importantes marcas de offshore banking. En México tiene 12 años como consultora directiva de reconocidas empresas Fintech en todo Latam. Así como instructora de diversos programas académicos con diferentes marcas de la industria financiera.</p>
+               <p class="card-text" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">Lic. en Economía por la University of Split de Croacia. Colaboró en Londres para importantes marcas de offshore banking. En México tiene 12 años como consultora directiva de reconocidas empresas Fintech en todo Latam. Así como instructora de diversos programas académicos con diferentes marcas de la industria financiera.</p>
             </div>
           </div>
         </div>
@@ -379,9 +383,9 @@
           <div class="col-md-8" style="background-color: #EDEDED;">
               <div class="card-body">
 
-                <p class="card-text" style="padding-left: 20px; line-height: 40px; color:#2A91FF; font-size: 40px; font-weight: bold;"> Manuel Guerrero Aguilar</p>
+                <p class="card-text" style="color: #2A91FF; font-size: 35px; font-weight: bold;"> Manuel Guerrero Aguilar</p>
 
-               <p class="card-text" style="padding-right: 20px; line-height: 40px;">Lic. en administración Financiera, apasionado del conocimiento y la aplicación de la tecnología en los mercados financieros, desde muy joven se ha interesado por explorar y promover temas de inversiones, forex, trading, IA, entre otros.</p>
+               <p class="card-text" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">Lic. en administración Financiera, apasionado del conocimiento y la aplicación de la tecnología en los mercados financieros, desde muy joven se ha interesado por explorar y promover temas de inversiones, forex, trading, IA, entre otros.</p>
             </div>
           </div>
           <div class="col-md-4" style="background-color: #EDEDED;">
