@@ -323,7 +323,7 @@
                             @endif
                             <div class="card-img-overlay d-flex flex-column course-overlay">
                                 <div class="mt-auto">
-                                    <div class="section-title-landing text-white" style="line-height:1;">{{ $cursoNuevo->title }}</div>
+                                    <div class="section-title-landing text-white text-center" style="line-height:1;">{{ $cursoNuevo->title }}</div>
                                     <div class="row">
                                        <div class="col-md-12">
                                            <p class="ico" style="float: right;"> <i class="far fa-user-circle"> {{ $cursoNuevo->users->count()}}</i></p>

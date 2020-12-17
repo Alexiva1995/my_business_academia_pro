@@ -250,10 +250,10 @@ $contador++;
     <h6 class="card-title" style="font-size: 12px">{{$recommended->mentor->display_name}}</h6>
 </div>
 <div class="row ml-0 d-flex h-100">
-    <div class="col-md-9 my-auto  recomendados-title" style="margin-bottom: 7px !important">
-       <p class="col-sm w-100 pl-0" style="font-size: 20px;"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></p>
+    <div class="col-md-10 my-auto  recomendados-title text-center" style="margin-bottom: 7px !important">
+       <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></p>
     </div>
-    <div class="col-md-3 my-auto" style="margin-bottom: 7px !important">
+    <div class="col-md-1 my-auto" style="margin-bottom: 7px !important">
         <h6 class="text-white w-100">
             <i class="far fa-user-circle text-center">
                 <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
@@ -294,10 +294,10 @@ $segundo++;
     <h6 class="card-title" style="font-size: 14px">{{$recommended->mentor->display_name}}</h6>
 </div>
 <div class="row ml-0 d-flex h-100">
-<div class="col-md-9 my-auto recomendados-title" style="margin-bottom: 7px !important">
-        <p class="col-sm w-100 pl-0" style="font-size: 20px;"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></p>
+<div class="col-md-10 my-auto recomendados-title" style="margin-bottom: 7px !important">
+        <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></p>
     </div>
-    <div class="col-md-3 my-auto" style="margin-bottom: 7px !important">
+    <div class="col-md-2 my-auto" style="margin-bottom: 7px !important">
         <h6 class="text-white w-100">
             <i class="far fa-user-circle text-center">
                 <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
@@ -336,10 +336,10 @@ $tercero++;
     <h6 class="card-title" style="font-size: 14px">{{$recommended->mentor->display_name}}</h6>
 </div>
 <div class="row ml-0 d-flex h-100">
-    <div class="col-md-9 my-auto recomendados-title" style="margin-bottom: 7px !important">
-        <h6 class="col-sm w-100 pl-0" style="font-size: 20px"><img src="{{ asset('images/icons/video-player-green.svg') }}" alt="" height="20px" width="20px"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></h6>
+    <div class="col-md-10 my-auto recomendados-title" style="margin-bottom: 7px !important">
+        <h6 class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px"><a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white text-center"> {{$recommended->title}}</a></h6>
     </div>
-    <div class="col-md-3 my-auto" style="margin-bottom: 7px !important">
+    <div class="col-md-2 my-auto" style="margin-bottom: 7px !important">
         <h6 class="text-white w-100">
             <i class="far fa-user-circle text-center">
                 <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
@@ -408,7 +408,7 @@ $tercero++;
                             @endif
                             <div class="card-img-overlay d-flex flex-column course-overlay">
                                 <div class="mt-auto">
-                                    <div class="section-title-landing text-white" style="line-height:1;">{{ $cursoNuevo->title }}</div>
+                                    <div class="section-title-landing text-white text-center" style="line-height:1;">{{ $cursoNuevo->title }}</div>
                                     <div class="row">
                                        <div class="col-md-12">
                                            <p class="ico" style="float: right;"> <i class="far fa-user-circle"> {{ $cursoNuevo->users->count()}}</i></p>
