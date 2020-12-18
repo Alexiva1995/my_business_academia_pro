@@ -838,6 +838,15 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
                 'activo' => 0,
             ],
+            'Promociones' => [
+                'submenu' => 0,
+                'ruta' => 'admin.promotions.index',
+                'black'=> '0',
+                'icono' => 'fa fa-star',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
+            ],
             
             /*
             'Nuevo Registro' => [

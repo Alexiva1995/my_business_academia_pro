@@ -447,6 +447,13 @@ Route::group(['prefix' => 'installer'], function (){
       Route::post('update', 'MembershipController@update')->name('admin.memberships.update');
       Route::post('update-message', 'MembershipController@update_message')->name('admin.memberships.update-message');
     });
+
+    Route::group(['prefix' => 'promotions'], function(){
+      Route::get('/', 'PromotionController@index')->name('admin.promotions.index');
+      Route::post('store', 'PromotionController@store')->name('admin.promotions.store');
+      Route::post('update', 'PromotionController@update')->name('admin.promotions.update');
+      Route::get('change-status/{id}/{status}', 'PromotionController@change_status')->name('admin.promotions.change-status');
+    });
      //Eventos admin
      Route::group(['prefix' => 'events'], function(){
        Route::get('prueba', 'EventsController@prueba');

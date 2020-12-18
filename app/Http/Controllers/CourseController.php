@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Lesson;
 use App\Models\LessonUser;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -270,8 +271,9 @@ class CourseController extends Controller{
 
         /*Datos del progress bar*/
 
+        $promociones = Promotion::where('status', '=', 1)->orderBy('id', 'DESC')->get();
 
-        return view('cursos.cursos')->with(compact('username','cursosDestacados', 'cursosNuevos', 'idStart', 'idEnd', 'previous', 'next', 'courses', 'mentores', 'cursos', 'cursosRecomendados', 'total', 'last_course', 'progress_bar', 'leccion_info'));
+        return view('cursos.cursos')->with(compact('username','cursosDestacados', 'cursosNuevos', 'idStart', 'idEnd', 'previous', 'next', 'courses', 'mentores', 'cursos', 'cursosRecomendados', 'total', 'last_course', 'progress_bar', 'leccion_info', 'promociones'));
     }
 
     /*Ver todos los cursos */

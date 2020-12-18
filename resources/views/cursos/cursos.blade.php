@@ -425,6 +425,39 @@ $tercero++;
     @endif
     {{-- FIN DE SECCIÓN CURSOS MÁS NUEVOS--}}
 
+    {{-- PROMOCIONES PUBLICITARIAS --}}
+    @if ($promociones->count() > 0)
+        <div class="section-landing mt-3" style="background-color: #121317;">
+            <div class="col">
+                <h3><span class="text-primary">Promociones Publicitarias</span></h3>
+            </div>
+
+            <!--Carrusel-->
+            <div id="carouselPromotions" class="carousel slide" data-bs-ride="carousel">
+                @if ($promociones->count() > 1)
+                    @php $p1 = 0; @endphp
+                    <ol class="carousel-indicators">
+                        @foreach ($promociones as $pro)
+                            <li data-target="#carouselPromotions" data-slide-to="{{ $p1 }}" @if ($p1 == 0) class="active" @endif></li>
+                            @php $p1++; @endphp
+                        @endforeach
+                    </ol>
+                @endif
+                <div class="carousel-inner">
+                    @php $p2 = 0; @endphp
+                    @foreach ($promociones as $promocion)
+                        @php $p2++; @endphp
+                        <div class="carousel-item @if ($p2 == 1) active @endif">
+                            <h5 >{{ $promocion->title }}</h5>
+                            <p >{!! $promocion->description !!}</p>
+                            <img src="{{ asset('uploads/images/coursesPromotions/'.$promocion->banner) }}" class="d-block w-100" alt="...">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    @endif
+    {{-- FIN DE PROMOCIONES PUBLICITARIAS --}}
 
     {{-- SECCIÓN CURSOS POR CATEGORÍA --}}
     @if(!empty($courses))
