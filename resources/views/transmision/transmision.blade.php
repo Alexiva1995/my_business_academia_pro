@@ -91,7 +91,7 @@
       </div>
    @endif
 
-   @if (!Auth::guest())
+   @if (!Auth::guest() && $total > 0)
    <div class="section-landing" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
       <div class="col">
          <div class="section-title-landing" style="padding-bottom: 35px;">PRÓXIMAS TRANSMISIONES EN VIVO</div>
@@ -245,7 +245,7 @@
             @endif
          </div>
       @else
-         <div class="row">No se encontraron próximas transmisiones...</div>
+         <!--<div class="row">No se encontraron próximas transmisiones...</div>-->
       @endif
    </div>
    @endif
@@ -288,8 +288,8 @@
                   </div>
                </div>
             @endforeach
-         @else
-            No se encontraron transmisiones recientes...
+         <!--@else
+            <div class="row">No se encontraron transmisiones recientes...</div>-->
          @endif
       </div>
    </div>
