@@ -4,10 +4,10 @@
             <div class="box box-primary">
                 <div class="box-body box-profile" style="color:white; text-align: center;">
 
-                   <img src="{{asset('/uploads/avatar/'.$data['principal']->avatar)}}" style="width: 100px; height: 100px; border-radius: 50%;">
+                   <img src="{{asset('/uploads/avatar/'.$data['principal']->avatar)}}" style="width: 120px; height: 120px; border-radius: 50%;">
 
                   @if(!empty($data['insignia']))
-                  <img src="{{ $data['insignia'] }}" height="80px" width="80px" style="margin: 20px; width: 100px; height: 100px;">
+                  <img src="{{ $data['insignia'] }}" height="80px" width="80px" style="margin: 20px; width: 80px; height: 80px;">
                   @endif
 
                   @if(Auth::user()->ID == $data['principal']->ID || Auth::user()->rol_id == 0)    
