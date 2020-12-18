@@ -564,6 +564,19 @@ h5.title-level {
     }
 }
 
+@media (min-width: 576px) and (max-width: 576px) {
+    
+    .estilostreaming{
+        font-size: 80px!important;
+        margin-top: 20%!important;
+    }
+    .estilostreamingtwo{
+        font-size: 20px!important;
+        margin-top: 0px!important;
+    }
+
+}
+
 @media (min-width: 576px) and (max-width: 768px) {
     .course-category-caption a {
         font-size: 12px;
@@ -615,7 +628,9 @@ h5.title-level {
     .icon-bar {
         display: none;
     }
+
 }
+
 
 @media (min-width: 1024px) {
     .course-category-caption a {
@@ -641,6 +656,14 @@ h5.title-level {
     }
     .nivel-body {
         height: 230px!important;
+    }
+    .estilostreaming{
+        font-size: 60px!important;
+        margin-top: 20%!important;
+    }
+    .estilostreamingtwo{
+        font-size: 20px!important;
+        line-height: 30px!important;
     }
 }
 
@@ -729,6 +752,16 @@ h5.title-level {
     .next-streaming-date {
         font-size: 20px!important;
     }
+    .estilostreaming{
+        font-size: 30px!important;
+
+        margin-top: 0px!important;
+    }
+    .estilostreamingtwo{
+        font-size: 20px!important;
+        line-height:0px!important;
+        margin-top: 0px!important;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 768px) {
@@ -744,12 +777,26 @@ h5.title-level {
     .recomendados-title {
         margin-top: 5px!important;
     }
+
+    .estilostreaming{
+        font-size: 50px!important;
+        margin-top: 20%!important;
+    }
+    .estilostreamingtwo{
+        font-size: 18px!important;
+        line-height: 20px!important;
+    }
 }
 
 @media (min-width: 1366px) and (max-width: 1366px) {
     .nivel-body {
         height: 182px!important;
     }
+
+    .estilostreaming {
+        font-size: 80px!important;
+    }
+    
 }
 
 .title-page-course {
@@ -1808,6 +1855,23 @@ p.card-text.font-weight-bold.mr-2 {
     color: #2A91FF;
     font-weight: 700!important;
     margin-top: 50px;
+}
+
+.estilostreaming {
+    text-align: right;
+    font-size: 100px;
+    line-height: 60px;
+    color: #cb242b;
+    font-weight: 700!important;
+    margin-top: 40%;
+}
+
+.estilostreamingtwo{
+    font-size: 30px;
+    line-height: 60px;
+    color: #fff;
+    font-weight: 400!important;
+    margin-top: 10px;
 }
 
 .afiliados-title-one {

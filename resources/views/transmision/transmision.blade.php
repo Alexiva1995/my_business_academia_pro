@@ -6,6 +6,25 @@
     <h3 class="mb-2"><span class="text-white">Hola</span><span class="text-primary"> {{Auth::user()->display_name}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
 </div>
 @endif
+
+<div class="container-fluid courses-slider" style="background-color: #1C1D21;margin-bottom: 0px; padding-bottom: 0px;">
+    <div class="container-fluid courses-slider" style="padding-bottom: 0px;">
+      <div id="mainSlider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item  active ">
+              <div class="overlay"></div>
+                  <img src="{{ asset('images/streaming-1.jpg') }}" class="d-block w-100" alt="...">
+                   <div class="carousel-caption">
+                    <div class="col-md-5 offset-md-5">
+                    <div class="estilostreaming">STREAMING</div>
+                    <div class="estilostreamingtwo">Disfruta de <b> Sesiones en vivo <b></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
    @if(!empty($evento_actual))
       <div style="width: 100%; position: relative; display: inline-block;">
          <img src="{{ asset('uploads/images/banner/'.$evento_actual->image) }}" alt="" style="height: 500px; width:100%; opacity: 0.5;">
@@ -51,7 +70,7 @@
                </div>
             </div>
          </div>
-      </div><br><br>
+      </div>
    @endif
 
    @if (Session::has('msj'))
@@ -71,7 +90,8 @@
          </div>
       </div>
    @endif
-   @if (!Auth::guest())
+
+   @if (!Auth::guest() && $total > 0)
    <div class="section-landing" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
       <div class="col">
          <div class="section-title-landing" style="padding-bottom: 35px;">PRÓXIMAS TRANSMISIONES EN VIVO</div>
@@ -225,7 +245,7 @@
             @endif
          </div>
       @else
-         <div class="row">No se encontraron próximas transmisiones...</div>
+         <!--<div class="row">No se encontraron próximas transmisiones...</div>-->
       @endif
    </div>
    @endif
@@ -268,8 +288,8 @@
                   </div>
                </div>
             @endforeach
-         @else
-            No se encontraron transmisiones recientes...
+         <!--@else
+            <div class="row">No se encontraron transmisiones recientes...</div>-->
          @endif
       </div>
    </div>
