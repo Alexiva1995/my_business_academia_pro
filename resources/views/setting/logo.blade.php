@@ -324,7 +324,7 @@
             <div class="box-body">
                 
             <div class="alert alert-info" role="alert">
-              <h5><strong>Nota: El tamaño de la imagen adecuado es 1118 X 120 pixeles</strong></h5>
+              <h5><strong>Nota: El tamaño de la imagen adecuado es 1069 X 240 pixeles</strong></h5>
             </div>
             
           <form method="post" action="{{route('setting-save-home')}}" enctype="multipart/form-data" 

@@ -18,13 +18,13 @@
                     
                     @if($con == 0)
                   <div class="item active">
-                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}" style="width: 100%; height: 120px;">
+                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}" style="width: 100%; height: 240px;">
 
                    
                   </div>
                   @else
                   <div class="item">
-                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}"  style="width: 100%; height: 120px;">
+                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}"  style="width: 100%; height: 240px;">
 
                     
                   </div>
