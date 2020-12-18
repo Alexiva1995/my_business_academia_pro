@@ -171,7 +171,7 @@
                                 </p>
                                 <div class="card-body p-2">
                                 <div class="row d-flex align-items-center body-miscursos">
-                                    <h6 class="col-9 d-flex align-items-center" style="font-size:12px;"><a href="{{ route('courses.show', [$curso->slug, $curso->id]) }}" class="text-secondary">{{$curso->title}}</a>
+                                    <h6 class="col-9 d-flex align-items-center text-title-miscursos" style="font-size:16px;"><a href="{{ route('courses.show', [$curso->slug, $curso->id]) }}" class="text-secondary">{{$curso->title}}</a>
                                     </h6>
 
                                     <div class="col-3 p-2 d-flex align-items-center d-none d-sm-none d-md-block icon-miscursos"><img src="{{ asset('images/icons/video-player-blue.svg') }}" alt="" height="15px" width="15px"></div>

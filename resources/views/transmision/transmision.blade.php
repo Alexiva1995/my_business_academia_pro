@@ -3,7 +3,7 @@
 @section('content')
 @if (!Auth::guest())
 <div class="title-page-course col-md"><span class="text-white">
-    <h3 class="mb-2"><span class="text-white">Hola</span><span class="text-primary"> {{Auth::user()->display_name}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
+    <h3 class="mb-4"><span class="text-white">Hola</span><span class="text-primary"> {{Auth::user()->display_name}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
 </div>
 @endif
 
@@ -24,7 +24,64 @@
         </div>
     </div>
   </div>
+</div><!--BANNER END-->
+
+<div class="container-fluid" style="background-color: #1C1D21;">
+   <div class="col-md-12">
+   <div class="row mt-4">
+            <div class="col-md-6">
+            <img src="{{ asset('images/fxtfotohome.png') }}" class="img-fluid" alt="...">
+            </div>
+            <div class="col-md-6" style="margin-top:10%;">
+            <img src="{{ asset('images/FTXlive-logo.png') }}" class="img-fluid" alt="...">
+               <h5 class="text-white mt-4">
+                   El usuario podrá disfrutar, sin importar el lugar en donde se encuentre, con su ordenador o su cel, desde presentaciones de negocios, hasta capacitaciones de todo tipo en vivo, lanzamientos y más.
+               </h5>
+            
+            </div>
+      </div>
+   </div>
+	
 </div>
+<hr style="height: 1px;background-color: #707070;">
+<div class="container-fluid" style="background-color: #1C1D21;">
+   <div class="col-md-12">
+   <div class="row">
+            <div class="col-md-6" style="margin-top:10%;">
+               <h1 class="text-primary font-weight-bold ftxlivestreming-text">FTX LIVESTREAMING</h1>
+               <h5 class="text-white mt-4">
+               Un espacio de entrenamientos en vivo para emprendedores, su propuesta de valor se distingue por ofrecer: Información de primer nivel y en tiempo real, así como motivación para aprender de forma sencilla y herramientas precisas para que se ponga en practica el conocimiento adquirido en los streaming de forma inmediata.
+               </h5>
+            
+            </div>
+            <div class="col-md-6">
+            <img src="{{ asset('images/fxtmodif.png') }}" class="img-fluid" alt="...">
+            </div>
+      </div>
+   </div>
+	
+</div>
+<hr style="height: 1px;background-color: #707070;">
+<div class="container-fluid" style="background-color: #1C1D21;">
+   <div class="col-md-12">
+   <div class="row">
+            <div class="col-md-6">
+            <img src="{{ asset('images/ftxliveacceso.png') }}" class="img-fluid" alt="...">
+            </div>
+            <div class="col-md-6" style="margin-top:5%;">
+               <h1 class="text-primary font-weight-bold">ACCESO</h1>
+               <h5 class="text-white mt-4">
+               El acceso será exclusivo para las personas que sean socios de Beyond y tengan un login de acceso. Dentro de las principales ventajas de este canal, es su fácil acceso, su increíble diseño, así como su chat interactivo, el cual permitirá tener vinculación inmediata y más cercana a la red, ya que la inmediatez y naturalidad en que son transmitidos los enlaces, permitirá a los espectadores participar, haciendo preguntas acerca del contenido que se este explorando, pudiendo aclarar sus dudas de manera inmediata.
+               </h5>
+            
+            </div>
+      </div>
+   </div>
+	
+</div>
+<hr style="height: 1px;background-color: #707070;">
+
+
    @if(!empty($evento_actual))
       <div style="width: 100%; position: relative; display: inline-block;">
          <img src="{{ asset('uploads/images/banner/'.$evento_actual->image) }}" alt="" style="height: 500px; width:100%; opacity: 0.5;">
