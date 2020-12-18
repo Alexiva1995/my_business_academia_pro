@@ -44,12 +44,14 @@
                                             </div>
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:20px;">
+                                                    <div class="col-md-12">
                                                     @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
                                                         <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
+                                                    </div>
                                                     <h1 class="text-center text-white">. . . . . . . . . . . . . .</h1><br><br>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center">¡Podrás dar el primer paso a SER lo que deseas SER aquí!</h5><br>
@@ -87,12 +89,14 @@
                                             </div>
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:20px;">
+                                                    <div class="col-md-12">
                                                     @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
                                                         <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
+                                                    </div>
                                                     <h1 class="text-center text-white">. . . . . . . . . . . . . .</h1><br><br>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center"> ¡Nos alegra que estés pasando al segundo escalón!</h5><br><br>
@@ -131,12 +135,14 @@
                                             </div>
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:20px;">
+                                                    <div class="col-md-12">
                                                     @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
                                                         <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
+                                                    </div>
                                                     <h1 class="text-center text-white">. . . . . . . . . . . . . .</h1><br><br>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center"> ¡WOW! Siéntete orgullos de ti si creces a este nivel en tu formación, lo mejor está por venir.</h5><br>
@@ -171,12 +177,14 @@
                                             <div class="card-header-purple-price" style="position: absolute;"><h1 class="card-title text-white text-uppercase text-center">{{$membresia->name}}</h1></div>
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:20px;">
+                                                    <div class="col-md-12">
                                                    @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price}}<span class="period">/Mensual</span></h4>
                                                         <h5 class="text-danger mt-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->descuento}}<span class="period text-danger" style="font-size:12px;">/Mensual</span> <span class="text-white">registrándote</span></h5>
                                                     @else
                                                         <h4 class="card-price text-azul-claro text-center"><del style="font-size: 30px;">${{$membresia->price}}</del> ${{$membresia->descuento}}<span class="period">/Mensual</span></h4>
                                                     @endif
+                                                    </div>
                                                     <h1 class="text-center text-white">. . . . . . . . . . . . . .</h1><br><br>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center"> ¡FELICIDADES!</h5><br>
