@@ -61,7 +61,7 @@
         <div class="carousel-inner">
             <div class="carousel-item  active ">
               <div class="overlay"></div>
-                  <img src="{{ asset('nosotros/afiliados/streaming-1.jpg') }}" class="d-block w-100" alt="...">
+                  <img src="{{ asset('images/streaming-1.jpg') }}" class="d-block w-100" alt="...">
                    <div class="carousel-caption">
                     <div class="col-md-5 offset-md-5">
                     <div class="estilostreaming">STREAMING</div>
