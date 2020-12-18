@@ -51,8 +51,29 @@
                </div>
             </div>
          </div>
-      </div><br><br>
+      </div>
    @endif
+
+
+   <div class="container-fluid courses-slider" style="background-color: #1C1D21;margin-bottom: 0px; padding-bottom: 0px;">
+    <div class="container-fluid courses-slider" style="padding-bottom: 0px;">
+      <div id="mainSlider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item  active ">
+              <div class="overlay"></div>
+                  <img src="{{ asset('nosotros/afiliados/streaming-1.jpg') }}" class="d-block w-100" alt="...">
+                   <div class="carousel-caption">
+                    <div class="col-md-5 offset-md-5">
+                    <div class="estilostreaming">STREAMING</div>
+                    <div class="estilostreamingtwo">Disfruta de <b> Sesiones en vivo <b></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
 
    @if (Session::has('msj'))
       <div class="col-md-12">
@@ -71,6 +92,7 @@
          </div>
       </div>
    @endif
+
    @if (!Auth::guest())
    <div class="section-landing" style="background: linear-gradient(to bottom, #222326 50%, #1C1D21 50.1%);">
       <div class="col">
