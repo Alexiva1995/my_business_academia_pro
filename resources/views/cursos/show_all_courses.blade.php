@@ -40,7 +40,7 @@
                         <div class="card-img-overlay course-overlay">
                         <div class="row ml-0 d-flex h-100 mr-1 ml-1">
                             <div class="col-md-10 my-auto  recomendados-title text-center p-0" style="margin-bottom: 7px !important">
-                            <p class="col-sm w-100 text-center" style="font-size: 17px;"> <a href="" class="text-white"> {{ $course->title }}</a></p>
+                            <p class="col-sm w-100 text-center" style="font-size: 17px;"> <a href="{{ route('courses.show', [$course->slug, $course->id]) }}" class="text-white"> {{ $course->title }}</a></p>
                             </div>
                             <div class="col-md-1 my-auto float-left p-0" style="margin-bottom: 7px !important">
                                 <h6 class="text-white w-100">
