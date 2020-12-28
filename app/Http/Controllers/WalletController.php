@@ -698,20 +698,34 @@ class WalletController extends Controller
 	//tabla de historial de cortes, liquidaciones
 	public function cortes(){
 	    
-	    view()->share('title', 'Historial de Cortes');
+	    view()->share('title', 'Liquidaciones');
 	    
 	    $moneda = Monedas::where('principal', 1)->get()->first();
-	    $wallets = Wallet::where('iduser', Auth::user()->ID)->where('tipotransacion','!=', '2')->where('tipotransacion','!=', '0')->get();
+	    if(Auth::user()->rol_id != 0){
+	    $wallets = Pagos::where('iduser', Auth::user()->ID)->get();
+	    }else{
+	    $wallets = Pagos::get();    
+	    }
 	    
-	    $adicional =0;
-		$monedaAdicional = Monedadicional::find(1);
-        if (!empty($monedaAdicional)) { 
-            $adicional =1;
-        }
 	    
-	    return view('wallet.cortes')->with(compact('wallets', 'moneda','adicional'));
+	    return view('wallet.cortes')->with(compact('wallets', 'moneda'));
 	}
-
+	
+	
+	public function cortesfiltros(Request $datos){
+	    
+	    view()->share('title', 'Liquidaciones');
+	    
+	    $moneda = Monedas::where('principal', 1)->get()->first();
+	    if(Auth::user()->rol_id != 0){
+	    $wallets = Pagos::where('iduser', Auth::user()->ID)->whereDate('fechasoli', '>=' ,$datos->fecha1)->whereDate('fechasoli', '<=' ,$datos->fecha2)->get();
+	    }else{
+	    $wallets = Pagos::whereDate('fechasoli', '>=' ,$datos->fecha1)->whereDate('fechasoli', '<=' ,$datos->fecha2)->get();    
+	    }
+	    
+	    
+	    return view('wallet.cortes')->with(compact('wallets', 'moneda'));
+	}
 
 
 		public function reporcomision(){
