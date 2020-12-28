@@ -204,7 +204,7 @@
                                 <!--<input type="hidden" name="lesson_slug" value="{{ $lesson->slug}}">
                                 <input type="hidden" name="course_id" value="{{ $lesson->course->id}}">-->
                                 <input type="hidden" name="lesson_id" value="{{ $lesson->id }}">
-                                <input type="text" class="form-control" placeholder="Escribe tu comentario" name="comment" id="comment" required>
+                                <input type="text" class="form-control" placeholder="Escribe tu comentario" name="comment" id="comment" required style="color:#fff;">
                                 <a class="btn btn-outline-success mt-2 ml-2" onclick="newComment();" id="store_comment_submit">Enviar</a>
                                 <button class="btn btn-success" type="button" disabled id="store_comment_loader" style="display: none;">
                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -263,7 +263,7 @@
               <div class="row">
                @foreach ($lesson->course->materials as $material)
                   <div class="col-md-6 mt-2">
-                    <h5 style="background-color: #27282C; padding: 10px 20px; color: #007bff;">{{ $material->title }}</h5>
+                    <h5 style="background-color: #27282C; padding: 10px 20px; color: #007bff; font-size:12px;">{{ $material->material }}</h5>
                     <div class="row">
                       <div class="col-md-6">
                         @if (!is_null($material->image))
@@ -406,7 +406,7 @@
           </button>
         </div>
         <div class="modal-body text-center">
-          <h4 class="text-muted">{{ Auth::user()->membership->upgrade_message->title }}</h4>
+        <h4 class="text-muted">{{ Auth::user()->membership->upgrade_message->title }}</h4>
           <p class="text-muted">{{ Auth::user()->membership->upgrade_message->description }}</p>
           @if (!is_null(Auth::user()->membership->upgrade_message->image))
             <img src="{{ asset('uploads/images/memberships/upgradeMessage/'.Auth::user()->membership->upgrade_message->image) }}" alt="">
