@@ -192,6 +192,16 @@ class Menu
                 'permisoAdmin' => 1,
                 'activo' => 0,
             ],
+
+            'Notificaciones de eventos' => [
+                'submenu' => 0,
+                'ruta' => 'settings-correo-anexar',
+                'black'=> '0',
+                'icono' => 'fas fa-envelope-open-text',
+                'complementoruta' => '',
+                'permisoAdmin' => (Auth::user()->rol_id == 2) ? 1 : 0,
+                'activo' => 0,
+            ],
         ];
     }
 
