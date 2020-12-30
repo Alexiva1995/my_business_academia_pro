@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Article;
 use App\Models\Ticket;
 use App\Models\Support;
+use App\Models\Banner;
 class SoporteController extends Controller
 {
 
@@ -27,7 +28,10 @@ class SoporteController extends Controller
     {
         // TITLE
         view()->share('title', 'Ayuda');
-        return view('soporte.index');
+        $banner = Banner::where('page', 'Soporte')
+                    ->where('status', '=', 1)
+                    ->first();
+        return view('soporte.index', compact('banner'));
     }
 
     public function academy()

@@ -350,6 +350,7 @@ Route::group(['prefix' => 'installer'], function (){
           Route::post('update', 'BannerController@update')->name('admin.banners.update');
           Route::get('change-status/{id}/{status}', 'BannerController@change_status')->name('admin.banners.change-status');
           Route::get('disabled', 'BannerController@disabled')->name('admin.banners.disabled');
+          Route::get('soporte', 'BannerController@soporte')->name('admin.banner.soporte');
         });
           //Soporte (Ayuda)
         Route::get('/soporte','SoporteController@index')->name('soporte');

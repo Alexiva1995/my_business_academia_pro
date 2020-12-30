@@ -836,6 +836,12 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
+                    'Banner Soporte' => [
+                        'ruta' => 'admin.banner.soporte',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
                 ]
             ],
             'Membresías' => [

@@ -11,6 +11,7 @@
 		});
 
         function showImg($id){
+			console.log($id);
  			$("#banner-img").attr("src", $("#"+$id).attr('data-source'));
  			$("#modal-image").modal("show");
 		}
@@ -106,12 +107,14 @@
                                             <option value="Blog">Blog</option>
                                             <option value="Streaming">Streaming</option>
                                             <option value="Mis Eventos">Mis Eventos</option>
-                                            <option value="Mis Cursos">Mis Cursos</option>
+											<option value="Mis Cursos">Mis Cursos</option>
+											<option value="Soporte">Soporte</option>
 						                </select>
 						            </div>
 								</div>
 								<div class="col-md-12 text-center">
-									<label>Dimensiones para el banner <br><span style="color: red;">350px  x  450px</span></label>
+									<label>Dimensiones para el banner lateral <br><span style="color: red;">350px  x  450px</span></label>&nbsp;. 
+									<label>Dimensiones para el banner de soporte <br><span style="color: red;">1400px  x  500px</span></label>
 								</div>
 						        <div class="col-md-12">
 						            <div class="form-group">
@@ -154,7 +157,7 @@
 						            <label>Título del Banner</label>
 						            <input type="text" class="form-control" name="title" id="title" required>
 						        </div>
-						    </div>
+							</div>
 						    <div class="col-md-12">
 						        <div class="form-group">
 						            <label>Ubicación</label>
@@ -167,10 +170,15 @@
                                         <option value="Blog">Blog</option>
                                         <option value="Streaming">Streaming</option>
                                         <option value="Mis Eventos">Mis Eventos</option>
-                                        <option value="Mis Cursos">Mis Cursos</option>
+										<option value="Mis Cursos">Mis Cursos</option>
+										<option value="Soporte">Soporte</option>
 					                </select>
 						        </div>
-						    </div>
+							</div>
+							<div class="col-md-12 text-center">
+									<label>Dimensiones para el banner lateral <br><span style="color: red;">350px  x  450px</span></label>&nbsp;. 
+									<label>Dimensiones para el banner de soporte <br><span style="color: red;">1400px  x  500px</span></label>
+							</div>
 						    <div class="col-md-12">
 						        <div class="form-group">
 					                <label>Imagen</label>
@@ -206,7 +214,7 @@
 				    <div class="container-fluid">
 				        <div class="row">
 							<div class="col-md-12">
-								<img src="" alt="" id="banner-img">
+								<img src="" alt="" id="banner-img" style="max-width: 50%;">
 							</div>
 						</div>
 				    </div>

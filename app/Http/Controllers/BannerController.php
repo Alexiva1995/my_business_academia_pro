@@ -19,7 +19,7 @@ class BannerController extends Controller{
 
     public function store(Request $request){
         $banner = new Banner($request->all());
-
+       // dd($banner, $request->all());
         if ($request->hasFile('image')){
             $file = $request->file('image');
             $name = $banner->id.".".$file->getClientOriginalExtension();
@@ -69,5 +69,16 @@ class BannerController extends Controller{
                     ->get();
 
         return view('admin.banners.disabled')->with(compact('banners'));
+    }
+
+    public function soporte(){
+        // TITLE
+        view()->share('title', 'Banner sección soporte');
+
+        $banner = Banner::where('page', 'Soporte')
+                    ->where('status', '=', 1)
+                    ->first();
+
+        return view('admin.banners.soporte')->with(compact('banner'));
     }
 }

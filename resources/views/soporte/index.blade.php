@@ -4,11 +4,11 @@
 
 
 <div class="col-xs-12">
-    <br><br><br>
-    <div><h1 class="text-center text-primary font-weight-bold">Base de Conocimiento</h1></div><br><br><br><br>
+    <div><h1 class="text-center text-primary font-weight-bold">Base de Conocimiento</h1></div><br>
+
 
     <div class="col-md-offset-2">
-            <div class="form-group col-md-9" style="background:#4b646f!imporntant; border:none;">
+            <div class="form-group col-md-9" style="border:none;">
                 <form action="{{route('admin.soporte.search.questions')}}" method="GET">
                  <div class="input-group">
                       <div class="input-group-addon" style="background:none; border:none;">
@@ -20,7 +20,7 @@
                 </form>
             </div>
     </div>
-    <br><br><br><br><br><br>
+    <br><br><br>
 
     <div class="col-md-offset-2">
                 <div class="row">
@@ -30,6 +30,19 @@
 
                 </div>
     </div>
+
+    <div class="col-md-8 col-md-offset-2 text-center" style="margin-bottom: 30px;">
+        <h3 class="white">Para nosotros lo mas importante es que tengas una buena experiencia, explora cada una de las opciones y si no encuentras lo que buscas <a href="{{route('soporte.tickets')}}" class="text-primary font-weight-bold">crea un ticket</a></h3>
+
+    </div>
+
+    @if (!is_null($banner))
+    <div class="container-fluid" style="margin-bottom: 50px;">
+        <img src="{{ asset('uploads/images/banners/'.$banner->image) }}" class="d-block w-100 img-fluid" alt="..." style="max-width:100%;">
+
+    </div>
+    @endif              
+
 
 </div>
 

@@ -74,7 +74,7 @@
 				    <div class="container-fluid">
 				        <div class="row">
 							<div class="col-md-12">
-								<img src="" alt="" id="banner-img">
+								<img src="" alt="" id="banner-img" style="max-width: 50%;">
 							</div>
 						</div>
 				    </div>
