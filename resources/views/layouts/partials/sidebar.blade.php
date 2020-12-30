@@ -137,7 +137,7 @@
         </div> 
         
         {{--<a href="{{ route('courses.show.all') }}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fas fa-graduation-cap"></i> Todos los cursos</a>--}}
-        <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv" style="color: white;"><i class="far fa-list-alt"></i> Contenidos <i class="fas fa-angle-down"></i></a>
+        {{--<a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv" style="color: white;"><i class="far fa-list-alt"></i> Contenidos <i class="fas fa-angle-down"></i></a>
         <div class="collapse" id="categoriesDiv" style="padding-left: 15px;">
             @foreach ($categoriasSidebar as $categoria)
             @if (!is_null($categoria->course))
@@ -159,7 +159,7 @@
                                 @endforeach
                             </div>-->
             <!--@endforeach-->
-        </div>
+        </div>--}}
 
         @if(Auth::user())
             @if(Auth::user()->rol_id == 0)
