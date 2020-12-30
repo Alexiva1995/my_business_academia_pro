@@ -35,16 +35,19 @@
 
 		<div class="box">
 			<div class="box-body">
+                @if (!is_null($banner))
 				<div style="text-align: right;">
                     <a onclick="editar({{$banner}});" class="btn btn-danger descargar"><i class="fa fa-edit"></i> Editar Banner</a>
 				</div>
-
+                @endif
                 <br class="col-xs-12">
                 @if (!is_null($banner))
                     <div class="container-fluid" style="margin-bottom: 50px;">
                         <img src="{{ asset('uploads/images/banners/'.$banner->image) }}" class="d-block w-75 img-fluid" style="max-width:100%;">
 
                     </div>
+                @else
+                <h3 class="white"> No se encontro banner para esta sección...</h3>
                 @endif
 				
 			</div>
