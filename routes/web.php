@@ -538,6 +538,7 @@ Route::group(['prefix' => 'installer'], function (){
 
           //todos los retiros, corte y liquidaciones
           Route::get('/cortes','WalletController@cortes')->name('wallet-cortes');
+          Route::post('/cortesfiltros','WalletController@cortesfiltros')->name('wallet-cortes-filtros');
 
           //tabla de comisiones a pagar
           Route::get('/comisionesapagar','WalletController@comisionespagar')->name('wallet-comisiones-pagar');

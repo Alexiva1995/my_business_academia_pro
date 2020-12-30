@@ -171,15 +171,29 @@ class Menu
                     ],
                 ]
             ],
-
+            
             'Billetera' => [
-                'submenu' => 0,
-                'ruta' => 'wallet-index',
-                'black'=> '0',
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
                 'icono' => 'fas fa-wallet',
                 'complementoruta' => '',
                 'permisoAdmin' => 1,
-                'activo' => 0,
+                'activo' => (request()->is('admin/wallet*')) ? 'active' : '',
+                'menus' => [
+                    'Mi Billetera' => [
+                        'ruta' => 'wallet-index',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    
+                    'Liquidaciones' => [
+                        'ruta' => 'wallet-cortes',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                 ]
             ],
 
 
@@ -190,6 +204,16 @@ class Menu
                 'icono' => 'glyphicon glyphicon-list-alt',
                 'complementoruta' => '',
                 'permisoAdmin' => 1,
+                'activo' => 0,
+            ],
+            
+            'Notificaciones de eventos' => [
+                'submenu' => 0,
+                'ruta' => 'settings-correo-anexar',
+                'black'=> '0',
+                'icono' => 'fas fa-envelope-open-text',
+                'complementoruta' => '',
+                'permisoAdmin' => (Auth::user()->rol_id == 2) ? 1 : 0,
                 'activo' => 0,
             ],
         ];
@@ -333,7 +357,7 @@ class Menu
                 'ruta' => 'javascript:;',
                 'icono' => 'fas fa-wallet',
                 'complementoruta' => '',
-                'permisoAdmin' => ($data['billetera']->activo == 0) ? 0 : 1,
+                'permisoAdmin' => 1,
                 'activo' => (request()->is('admin/wallet*')) ? 'active' : '',
                 'menus' => [
                     'Mi Billetera' => [
@@ -342,27 +366,14 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    'Historial de Transferencias' => [
-                        'ruta' => 'wallet-historial',
-                        'complementoruta' => '',
-                        'black'=> '0',
-                        'oculto'=> 'activo',
-                    ],
-
-                    'Historial de Cortes' => [
+                    
+                    'Liquidaciones' => [
                         'ruta' => 'wallet-cortes',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-
-                    'Canje de Puntos' => [
-                        'ruta' => 'cambio-canje',
-                        'complementoruta' => '',
-                        'black'=> '0',
-                        'oculto'=> ($settings->canje == 1) ? 'activo' : 'inactivo',
-                    ],
-                ]
+                 ]
             ],
 
             'Calendario' => [
@@ -723,6 +734,13 @@ class Menu
                     ],
                     'Informe de Comisiones' => [
                         'ruta' => 'wallet-repor-comision-new',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    
+                    'Liquidaciones' => [
+                        'ruta' => 'wallet-cortes',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',

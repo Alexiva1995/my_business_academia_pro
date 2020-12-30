@@ -750,7 +750,7 @@ class CourseController extends Controller{
              
              $estadistica->usuario = ($user == null) ? 'N/A' : $user->display_name;
              $estadistica->title = ($curse == null) ? 'N/A' : $curse->title;
-             $estadistica->progreso = ($estadistica->progress / $valor);
+             $estadistica->progreso = $estadistica->progress;
              $estadistica->mentor = $curse->mentor->display_name;
              
          }
