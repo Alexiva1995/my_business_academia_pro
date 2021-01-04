@@ -428,7 +428,11 @@
           @if (!is_null(Auth::user()->membership->upgrade_message->image))
             <img src="{{ asset('uploads/images/memberships/upgradeMessage/'.Auth::user()->membership->upgrade_message->image) }}" alt="">
           @endif
-          <a href="{{route('shopping-cart.store', [Auth::user()->membership_id+1, 'membresia', 'Mensual'])}}" class="btn btn-color-green text-white" style="background: #6ab742;">SUBIR DE NIVEL</a>
+          @if (Auth::user()->membership_id == 4)
+            <a href="{{route('shopping-cart.store', [4, 'membresia', 'Anual'])}}" class="btn btn-color-green text-white" style="background: #6ab742;">COMPRAR MEMBRESÍA ANUAL</a>
+          @else
+            <a href="{{route('shopping-cart.store', [Auth::user()->membership_id+1, 'membresia', 'Mensual'])}}" class="btn btn-color-green text-white" style="background: #6ab742;">SUBIR DE NIVEL</a>
+          @endif
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
