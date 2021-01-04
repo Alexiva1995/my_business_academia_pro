@@ -51,7 +51,7 @@
                         ->orderBy('id', 'DESC')
                         ->first();
     }
-
+    
 @endphp
 
 <!-- Sidebar -->
@@ -87,8 +87,57 @@
                             </div>-->
             </form>
         </div>
-        <a href="{{ route('courses.show.all') }}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fas fa-graduation-cap"></i> Todos los cursos</a>
-        <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv" style="color: white;"><i class="far fa-list-alt"></i> Contenidos <i class="fas fa-angle-down"></i></a>
+        
+
+        <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv1" style="color: white;"><i class="fas fa-graduation-cap"></i> Todos los cursos <i class="fas fa-angle-down"></i></a>
+        <div class="collapse" id="categoriesDiv1" style="padding-left: 15px;">
+
+            <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv2" style="color: white;"><i class="fa fa-star"></i>  SER <i class="fas fa-angle-down"></i> </a>
+
+            <div class="collapse" id="categoriesDiv2" style="padding-left: 15px;">
+                @foreach($cursos as $curs)
+                 @if($curs->membership_id == 1)
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                 @endif
+                @endforeach
+            </div> 
+            
+            <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv3" style="color: white;"><i class="fa fa-star"></i>  Hacer <i class="fas fa-angle-down"></i> </a>
+
+            <div class="collapse" id="categoriesDiv3" style="padding-left: 15px;">
+                @foreach($cursos as $curs)
+                 @if($curs->membership_id == 2)
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                 @endif
+                @endforeach
+            </div> 
+            
+            
+            <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv4" style="color: white;"><i class="fa fa-star"></i>  Tener <i class="fas fa-angle-down"></i> </a>
+
+            <div class="collapse" id="categoriesDiv4" style="padding-left: 15px;">
+                @foreach($cursos as $curs)
+                 @if($curs->membership_id == 3) 
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                 @endif
+                @endforeach
+            </div> 
+            
+            
+            <a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv5" style="color: white;"><i class="fa fa-star"></i>  Trascender <i class="fas fa-angle-down"></i> </a>
+
+            <div class="collapse" id="categoriesDiv5" style="padding-left: 15px;">
+                @foreach($cursos as $curs)
+                 @if($curs->membership_id == 4)
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                 @endif
+                @endforeach
+            </div> 
+
+        </div> 
+        
+        {{--<a href="{{ route('courses.show.all') }}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fas fa-graduation-cap"></i> Todos los cursos</a>--}}
+        {{--<a class="list-group-item bg-dark-gray" data-toggle="collapse" href="#categoriesDiv" style="color: white;"><i class="far fa-list-alt"></i> Contenidos <i class="fas fa-angle-down"></i></a>
         <div class="collapse" id="categoriesDiv" style="padding-left: 15px;">
             @foreach ($categoriasSidebar as $categoria)
             @if (!is_null($categoria->course))
@@ -110,21 +159,22 @@
                                 @endforeach
                             </div>-->
             <!--@endforeach-->
-        </div>
+        </div>--}}
 
         @if(Auth::user())
             @if(Auth::user()->rol_id == 0)
                 <a href="{{route('setting-logo')}}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fa fa-gear"></i> Ajustes</a>
             @endif
             <a href="{{ route ('soporte')}}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fa fa-question-circle-o" aria-hidden="true"></i> Ayuda</a>
-
-            <a class="list-group-item bg-dark-gray" style="color: white;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            
+             <a class="list-group-item bg-dark-gray" style="color: white;" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-power-off"></i> {{ __('Salir') }}
                     </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                      @csrf
-            </form>
+                 </form>
+            
         @endif
         @guest
             <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=1' }}">REGISTRARME</a>

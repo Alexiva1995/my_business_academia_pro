@@ -285,6 +285,8 @@ class PagoController extends Controller
                  $total = ($usuario->wallet_amount - $monto);
              }
              
+             if($monto >= 50){
+
 	             $tipopago = '';
 	             
 	             $banacario = 'Numero de cuenta: '. $datos->cuenta.'';
@@ -331,7 +333,7 @@ class PagoController extends Controller
 		
 		$user->wallet_amount = $total;
 		$user->save();
-	          
+	           }
 	        }
 	    }
 	    

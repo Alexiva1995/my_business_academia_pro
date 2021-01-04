@@ -350,6 +350,7 @@ Route::group(['prefix' => 'installer'], function (){
           Route::post('update', 'BannerController@update')->name('admin.banners.update');
           Route::get('change-status/{id}/{status}', 'BannerController@change_status')->name('admin.banners.change-status');
           Route::get('disabled', 'BannerController@disabled')->name('admin.banners.disabled');
+          Route::get('soporte', 'BannerController@soporte')->name('admin.banner.soporte');
         });
           //Soporte (Ayuda)
         Route::get('/soporte','SoporteController@index')->name('soporte');
@@ -538,6 +539,7 @@ Route::group(['prefix' => 'installer'], function (){
 
           //todos los retiros, corte y liquidaciones
           Route::get('/cortes','WalletController@cortes')->name('wallet-cortes');
+          Route::post('/cortesfiltros','WalletController@cortesfiltros')->name('wallet-cortes-filtros');
 
           //tabla de comisiones a pagar
           Route::get('/comisionesapagar','WalletController@comisionespagar')->name('wallet-comisiones-pagar');

@@ -345,8 +345,8 @@
                   </div>
                </div>
             @endforeach
-         <!--@else
-            <div class="row">No se encontraron transmisiones recientes...</div>-->
+         @else
+            <div class="row"></div>
          @endif
       </div>
    </div>
