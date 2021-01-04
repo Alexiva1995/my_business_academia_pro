@@ -175,9 +175,8 @@
                 <a class="nav-item nav-link m-2" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Materiales</a>
               @endif
               
-              @if ($progresoCurso->certificate == 1)
-                <a class="nav-item nav-link m-2" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Certificado</a>
-              @endif 
+              <a class="nav-item nav-link m-2" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Certificado</a>
+            
             </div>
           </nav>
           <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -337,16 +336,34 @@
                 @php $cont2++; @endphp
             @endforeach
             </div>
-            @if ( ($progresoCurso->certificate == 0) && (!is_null($lesson->course->evaluation)) )
-                  <div class="card mt-2 mb-2" style="background-color: #2A91FF;">
-                    <div class="card-header text-center" >
-                      <a href="{{ route('client.courses.take-evaluation', [$lesson->course->slug, $lesson->course_id]) }}">
-                        <h5 class="mb-0 font-weight-bold d-block position-relative py-2" style="color: white;">
-                          PRESENTAR EVALUACIÓN
-                        </h5>
-                      </a>
+            @if (!is_null($lesson->course->evaluation))
+                @if ($progresoCurso->certificate == 0)
+                    <div class="card mt-2 mb-2" style="background-color: #2A91FF;">
+                        <div class="card-header text-center" >
+                            <a href="{{ route('client.courses.take-evaluation', [$lesson->course->slug, $lesson->course_id]) }}">
+                                <h5 class="mb-0 font-weight-bold d-block position-relative py-2" style="color: white;">
+                                    PRESENTAR EVALUACIÓN
+                                </h5>
+                            </a>
+                        </div>
                     </div>
-                  </div>
+                @else
+                    <div class="card mt-2 mb-2" style="background-color: #2A91FF;">
+                        <div class="card-header text-center" >
+                            <h5 class="mb-0 font-weight-bold d-block position-relative py-2" style="color: white;">
+                                YA USTED APROBÓ LA EVALUACIÓN
+                            </h5>
+                        </div>
+                    </div>
+                @endif
+            @else
+                <div class="card mt-2 mb-2" style="background-color: #2A91FF;">
+                    <div class="card-header text-center" >
+                        <h5 class="mb-0 font-weight-bold d-block position-relative py-2" style="color: white;">
+                            ESTE CURSO NO POSEE EVALUACIÓN
+                        </h5>
+                    </div>
+                </div>
             @endif
             <a href="{{route('courses.show.all')}}" class="btn btn-primary play-course-button btn-block mb-2" ><i class="fa fa-plus-circle" aria-hidden="true"></i> ADQUIRIR MÁS CURSOS</a>
 
