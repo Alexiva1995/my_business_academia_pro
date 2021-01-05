@@ -261,7 +261,13 @@
               
               <div class="row">
                @foreach ($lesson->course->materials as $material)
+                  @php 
+                      $d = $lesson->course->materials->where('image', 'eeuu.png')->count();
+                  @endphp
                   <div class="col-md-6 mt-2">
+                    @if ($d >= 2)
+                    <h5 class="text-center" style="padding: 10px 20px;">{{ $material->title }}</h5>
+                    @endif
                     <h5 style="background-color: #27282C; padding: 10px 20px; color: #007bff; font-size:12px;">{{ $material->material }}</h5>
                     <div class="row">
                       <div class="col-md-6">
