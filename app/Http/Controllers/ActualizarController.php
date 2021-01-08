@@ -218,6 +218,13 @@ class ActualizarController extends Controller
                     $user->user_pass = md5($request->clave);
                     $user->password = bcrypt($request->clave);
                     $user->clave = encrypt($request->clave);
+
+                    $streaming = new StreamingController();
+                    $userStreaming = $streaming->verifyUser($user->user_email);
+                    if (!is_null($userStreaming)){
+                        $userStreaming->password = $user->password;
+                        $userStreaming->save();
+                    }
                 }
 
                 $user->save();
