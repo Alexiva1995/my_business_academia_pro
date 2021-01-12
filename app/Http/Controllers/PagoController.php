@@ -323,6 +323,7 @@ class PagoController extends Controller
 			'credito' => $monto,
 			'balance' => 0,
 			'tipotransacion' => 3,
+			'membresia' => ' ',
 		];
 		
 		

@@ -49,8 +49,8 @@ class ComisionController extends Controller
               if($membrecia != null){
               $porcentaje = ($membrecia->ganancia / 100);
               
-                $concepto= 'Ganancia por la compra del referido '.$ref->display_name.' por la Membresia '.$comp->nombre;
-                $comisiones->guardarComision($iduser, $compra->id, ($compra->total * $porcentaje), $ref->user_email, 1, $concepto, 'membresias');
+                $concepto= 'Ganancia por la compra del referido '.$ref->display_name;
+                $comisiones->guardarComision($iduser, $compra->id, ($compra->total * $porcentaje), $ref->user_email, 1, $concepto, 'membresias', $comp->nombre);
               }
           }
       }

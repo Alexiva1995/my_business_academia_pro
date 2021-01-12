@@ -78,9 +78,55 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 
-	   	return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+	   	return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
+	
+	
+	//filtro por membresia
+	public function filtromembre(Request $request){
+	    
+	    $moneda = Monedas::where('principal', 1)->get()->first();
+		$datos = [];
+		$totalcompleto =0;
+		
+	    if (Auth::user()->rol_id == 0) {
+
+			view()->share('title', 'Historial de Comisiones');
+
+			$wallets = Wallet::where('membresia', $request->membresia)->get();
+			$total = $this->calcularTotal($wallets);
+			//recargas
+			$recargas = Wallet::where('tipotransacion', 4)->get();
+			$totalrecarga = $this->calcularTotal($recargas);
+		} else {
+			$wallets = Wallet::where('iduser', Auth::user()->ID)->where('membresia', $request->membresia)->get();
+			$total = $this->calcularTotal($wallets);
+			//recargas
+			$recargas = Wallet::where('tipotransacion', 4)->where('iduser', Auth::user()->ID)->get();
+			$totalrecarga = $this->calcularTotal($recargas);
+		}
+		
+		foreach($recargas as $recar){
+         $user = User::find($recar->iduser);
+         $recar->display_name = ($user == null) ? 'N/A' : $user->display_name;
+         $recar->wallet_amount = ($user == null) ? 'N/A' : $user->wallet_amount;
+		}
+		
+		$adicional =0;
+		$monedaAdicional = Monedadicional::find(1);
+        if (!empty($monedaAdicional)) { 
+            $adicional =1;
+        }
+        
+        $membresias = DB::table('memberships')->get();
+        
+        return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
+	}
+	
+	
 
 
 	//filtro por fecha
@@ -123,8 +169,10 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 		
-    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
 	
 	
@@ -173,9 +221,11 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 		
         
-    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
 
 
@@ -224,8 +274,10 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 	    
-	    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+	    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
 	
 	
@@ -353,6 +405,7 @@ class WalletController extends Controller
 		   'balance' => $datos['balance'],
 		   'tipotransacion' => $datos['tipotransacion'],
 		   'monedaAdicional' => $moneda,
+		   'membresia' => $datos['membresia'],
 	   ]);
 	}
 	

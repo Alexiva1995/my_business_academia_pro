@@ -513,7 +513,10 @@ Route::group(['prefix' => 'installer'], function (){
           Route::post('/fil', 'WalletController@filtro')->name('wallet-filtro');
           Route::post('/filuser', 'WalletController@filtrouser')->name('wallet-filtro-user');
           Route::post('/filref', 'WalletController@filtrorefe')->name('wallet-filtro-normal');
-
+          
+          //filtro por membresia y filtro por metodo de pago
+          Route::post('/filtromembreship', 'WalletController@filtromembre')->name('wallet-filtro-membresia');
+           
           Route::post('/transferencia', 'WalletController@transferencia')->name('wallet-transferencia');
           Route::get('/obtenermetodo/{id}', 'WalletController@datosMetodo')->name('wallet-metodo');
           Route::post('/retiro', 'WalletController@retiro')->name('wallet-retiro');

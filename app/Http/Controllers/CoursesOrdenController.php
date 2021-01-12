@@ -327,6 +327,7 @@ class CoursesOrdenController extends Controller
             'credito' => $datosMembresia['precio'],
             'balance' => $user->wallet_amount,
             'tipotransacion' => 1,
+            'membresia' => (!is_null($item->membership_id)) ? $membresia->name : $oferta->title,
         ];
         $wallet = new WalletController;
         $wallet->saveWallet($savewallet);
