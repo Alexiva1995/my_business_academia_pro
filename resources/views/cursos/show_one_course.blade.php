@@ -154,7 +154,7 @@
 
                   </div>
                </div>
-               <div class="col-md-3 mt-2 text-center">
+               <div class="col-12 col-md-3 mt-2 text-center">
                   @if (Auth::guest())
                      <a href="{{route('shopping-cart.membership')}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
                   @else
@@ -179,7 +179,7 @@
                         @if (Auth::user()->membership_status == 1)
                        
                         @if(!is_null($first_lesson))
-                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
+                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mt-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
                         @endif
                         @else
                            <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
@@ -286,7 +286,7 @@
                   @else
                      @if (Auth::user()->membership_status == 1)
                         @if(!is_null($first_lesson))
-                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
+                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mt-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
                         @endif
                      @else
                         <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
@@ -305,30 +305,30 @@
                            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$leccion->id}}">
                               <div class="col-md-12 accordion-seccion-leccion align-items-center">
                                  <div class="row align-items-center ">
-                                    <div class="col-md-1 p-0">
+                                    <div class="col-2 col-md-1 p-0">
                                        <div class="cuadrado p-1 pl-2 pr-2" style="background: {{$arrayColor[$leccion->subcategory_id]}}; outline-color:{{$arrayColor[$leccion->subcategory_id]}}; ">
                                           <h4 class="text-white m-0">
                                              <strong>@if ($cont < 10) 0{{ $cont }} @else {{ $cont }} @endif</strong>
                                           </h4>
                                        </div>
                                     </div>
-                                    <div class="col-md-10 pl-0">
+                                    <div class="col-10 col-md-10">
                                        <h5 class="panel-title about-course-text m-0">
                                           @if ( (!Auth::guest()) && (!is_null($progresoCurso)) )
                                              @if (Auth::user()->membership_status == 1)
                                             @if($first_lesson->id == $leccion->id)
-                                             <a href="{{ route('lesson.show', [$leccion->slug, $leccion->id, $curso->id]) }}" class="about-course-text text-primary">
+                                             <a href="{{ route('lesson.show', [$leccion->slug, $leccion->id, $curso->id]) }}" class="text-acordion-leccion text-primary">
                                                    {{ $leccion->title }}
                                                 </a>
                                               @else
 
-                                                <a href="{{ route('lesson.show', [$leccion->slug, $leccion->id, $curso->id]) }}" class="about-course-text">
+                                                <a href="{{ route('lesson.show', [$leccion->slug, $leccion->id, $curso->id]) }}" class="text-acordion-leccion">
                                                    {{ $leccion->title }}
                                                 </a>
                                                 @endif
                                                  @foreach($lecciones_vistas as $leccion_vista)
                                                     @if($leccion_vista->lesson_id == $leccion->id)
-                                                   <label class="text-success">&nbsp;&nbsp;&nbsp;&nbsp;Vista <i class="far fa-check-circle"></i> </label>
+                                                   <label class="text-success text-leccion-vista">&nbsp;&nbsp;&nbsp;&nbsp;Vista <i class="far fa-check-circle"></i> </label>
                                                    @endif
                                                 @endforeach
                                              @else
@@ -365,14 +365,14 @@
             <h3 class="text-white mb-2 mt-2">Este curso no posee lecciones...</h3>
             @endif
             <div class="row">
-               <div class="col-6 text-left">
+               <div class="col-12 col-md-6 text-left">
                   @if (!Auth::guest())
-                     <a href="{{route('client.my-courses')}}" class="btn btn-success play-course-button mt-2" ><i class="fas fa-user-circle" aria-hidden="true"></i> IR A MIS CURSOS</a>
+                     <a href="{{route('client.my-courses')}}" class="btn btn-success btn-block play-course-button mt-2" ><i class="fas fa-user-circle" aria-hidden="true"></i> IR A MIS CURSOS</a>
                   @endif
-                  <a href="{{route('courses.show.all')}}" class="btn btn-primary play-course-button mt-2" ><i class="fa fa-search" aria-hidden="true"></i> EXPLORAR MÁS CURSOS</a>
+                  <a href="{{route('courses.show.all')}}" class="btn btn-primary btn-block play-course-button mt-2" ><i class="fa fa-search" aria-hidden="true"></i> EXPLORAR MÁS CURSOS</a>
                </div>
             
-               <div class="col-6 text-right">
+               <div class="col-12 col-md-6 text-right">
                   @if (Auth::guest())
                      <a href="{{route('shopping-cart.membership')}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
                   @else
@@ -396,7 +396,7 @@
                      @else
                         @if (Auth::user()->membership_status == 1)
                         @if(!is_null($first_lesson))
-                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
+                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="mt-2 px-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
                         @endif
                         @else
                            <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>

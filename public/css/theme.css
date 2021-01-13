@@ -771,6 +771,12 @@ h5.title-level {
     .ftxlivestreming-text{
         font-size: 1.5rem!important;
     }
+    .text-acordion-leccion{
+        font-size: 14px!important;
+    }
+    .text-leccion-vista{
+        font-size: 14px!important;
+    }
     
 }
 
@@ -2381,4 +2387,8 @@ p.card-text.font-weight-bold.mr-2 {
 
 .mentor-overlay{
     background: linear-gradient(180deg, rgba(255,255,255,0) 74%, rgba(20,20,20,1) 100%);
+}
+
+.text-acordion-leccion{
+    color: #838181;
 }
