@@ -632,6 +632,11 @@ h5.title-level {
         display: none;
     }
 
+    .clock-live-text {
+        font-size: 20px!important;
+        font-weight: 800!important;
+    }
+
 }
 
 
@@ -670,6 +675,10 @@ h5.title-level {
     }
     .text-title-miscursos{
         font-size: 12px!important;
+    }
+    .clock-live-text {
+        font-size: 30px!important;
+        font-weight: 800!important;
     }
 }
 
@@ -716,6 +725,11 @@ h5.title-level {
     .clock-text {
         font-size: 25px!important;
         font-weight: 400!important;
+    }
+
+    .clock-live-text {
+        font-size: 10px!important;
+        font-weight: 800!important;
     }
     .title-status-live {
         font-size: 20px!important;
@@ -2270,6 +2284,13 @@ p.card-text.font-weight-bold.mr-2 {
     font-size: 80px;
     font-weight: 800;
     justify-content: center;
+}
+
+.clock-live-text {
+    font-size: 40px;
+    font-weight: 800;
+    justify-content: center;
+    align-items: center!important;
 }
 
 .title-remain {

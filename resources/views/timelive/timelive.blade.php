@@ -48,37 +48,37 @@
 
             $('#' + elem).append(
 
-               '<p class="p-1 bd-highlight" style="font-size: 80px; font-weight:800;">' +
+               '<p class="p-1 text-center clock-live-text">' +
                t.remainDays +
-               '<p style="margin-left: -40px; margin-top: 100px; font-weight:800;">DIAS</p>' +
+               '<p> DÍAS</p>' +
                '</p>' +
 
-               '<p class="p-2 bd-highlight" style="font-size: 70px; font-weight:800;">' +
-               ':' +
+               '<p class="p-2 text-primary text-center clock-live-text">' +
+               ',' +
                '</p>' +
 
-               '<p class="p-1 bd-highlight" style="font-size: 80px; font-weight:800;">' +
+               '<p class="p-1 clock-live-text">' +
                t.remainHours +
-               '<p style="margin-left: -68px; margin-top: 100px; font-weight:800;">HORAS</p>' +
+               '<p> HORAS</p>' +
                '</p>' +
 
-               '<p class="p-2 bd-highlight" style="font-size: 70px; font-weight:800;">' +
-               ':' +
+               '<p class="p-2 text-primary clock-live-text">' +
+               ',' +
                '</p>' +
 
-               '<p class="p-1 bd-highlight" style="font-size: 80px; font-weight:800;">' +
+               '<p class="p-1 clock-live-text">' +
                t.remainMinutes +
 
-               '<p style="margin-left: -80px; margin-top: 100px; font-weight:800;">MINUTOS</p>' +
+               '<p> MINUTOS</p>' +
                '</p>' +
 
-               '<p class="p-2 bd-highlight" style="font-size: 70px; font-weight:800;">' +
-               ':' +
+               '<p class="p-2 text-primary clock-live-text">' +
+               'Y' +
                '</p>' +
-               '<p class="p-1 bd-highlight" style="font-size: 80px; font-weight:800;">' +
+               '<p class="p-1 clock-live-text">' +
                t.remainSeconds +
 
-               '<p style="margin-left: -85px; margin-top: 100px; font-weight:800;">SEGUNDOS</p>' +
+               '<p> SEGUNDOS</p>' +
                '</p>'
 
             )
@@ -87,12 +87,17 @@
       }, 1000)
    };
    //Verificar que cuando no exista el evento no lo tome
-   countdown('{{($evento != null) ? $evento->date.'
-      '.$evento->time : $fechaActual}}', 'clock');
+      if (document.getElementById('isset_event').value == 1){
+       countdown('{{$evento->date.' '.$evento->time}}', 'clock');
+   }else{
+       countdown('{{$fechaActual}}', 'clock');
+   }
+   //
 </script>
 @endpush
 
 @if(!empty($evento))
+<input type="hidden" id="isset_event" value="1" >
 <div>
 
    @if (Session::has('msj-exitoso'))
@@ -131,9 +136,9 @@
                     TIEMPO PARA INICIAR EL LIVE
          </div>
 
-          <div class="d-flex justify-content-center bd-highlight mb-1 text-white clock-text" style="" id="clock">
+         <div class="d-flex mb-1 text-center text-white clock-live-text" id="clock">
                     
-         </div>
+                    </div>
 
 
       </div>
