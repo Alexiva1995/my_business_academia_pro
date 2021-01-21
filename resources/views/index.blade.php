@@ -162,6 +162,12 @@
 @endpush
 
 @section('content')
+
+@if (app('request')->input('logout') == "1")
+      <script>
+         document.getElementById('logout-form').submit();
+      </script>
+   @endif
     @if (Session::has('msj-exitoso'))
         <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
             <strong>{{ Session::get('msj-exitoso') }}</strong>
