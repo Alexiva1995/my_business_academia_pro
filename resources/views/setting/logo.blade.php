@@ -30,6 +30,17 @@
 
 {{-- información --}}
 <div class="col-xs-12">
+  @if (Session::has('msj-exitoso'))
+      <div class="alert alert-success">
+        <strong>{{ Session::get('msj-exitoso') }}</strong>
+      </div>
+    @endif
+
+    @if (Session::has('msj-erroneo'))
+      <div class="alert alert-danger">
+        <strong>{{ Session::get('msj-erroneo') }}</strong>
+      </div>
+    @endif
   <div class="box box-info mostrar">
     <div class="box-header with-border">
       <div class="box-title white">
@@ -327,11 +338,15 @@
               <h5><strong>Nota: El tamaño de la imagen adecuado es 1069 X 240 pixeles</strong></h5>
             </div>
             
-          <form method="post" action="{{route('setting-save-home')}}" enctype="multipart/form-data" 
-                  class="dropzone" id="dropzone">
+          <form method="post" action="{{route('setting-save-home')}}" enctype="multipart/form-data">
             {{ csrf_field() }}
-           
-            </form>
+            <input class="form-control" type="file" name="file" required>
+            <br>
+            <div class="tex-center">
+              <input type="submit" class="btn btn-primary" value="Cargar Imagen">
+            </div>
+            
+          </form>
             
             </div>
           </div>

@@ -26,15 +26,19 @@ class ComponentController extends Controller
         $dopzone = Component::all();
         $cantidad = count($dopzone);
      
-     if($cantidad < 5){
-         if ($datos->file('file')) {
-            $imagen = $datos->file('file');
-            $nombre_imagen = 'drop_'.time().'.'.$imagen->getClientOriginalExtension();
-            $path = public_path() .'/drop';
-            $imagen->move($path, $nombre_imagen);
-            $drop->slider = $nombre_imagen;
-            $drop->save();
-           }
+        if($cantidad < 5){
+            if ($datos->file('file')) {
+                $imagen = $datos->file('file');
+                $nombre_imagen = 'drop_'.time().'.'.$imagen->getClientOriginalExtension();
+                $path = public_path() .'/drop';
+                $imagen->move($path, $nombre_imagen);
+                $drop->slider = $nombre_imagen;
+                $drop->save();
+
+                return redirect('admin/settings/sistema')->with('msj-exitoso', 'El banner ha sido cargado con éxito');
+            }
+        }else{
+            return redirect('admin/settings/sistema')->with('msj-erroneo', 'Ya tiene la cantidad de banners permitidos');
         }
         
     }
