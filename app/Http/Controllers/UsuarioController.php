@@ -281,7 +281,7 @@ class UsuarioController extends Controller
        $permisos = Permiso::all();
        $tipo = request()->tip;
        if(request()->tip == 0){
-        $usuarios = User::where('ID', '!=', '1')->where('rol_id', request()->tip)->get();
+        $usuarios = User::where('rol_id', request()->tip)->get();
        }else{
         $usuarios = User::where('rol_id', request()->tip)->get();
        }
@@ -291,7 +291,11 @@ class UsuarioController extends Controller
        $nivel = $this->coincidirNivel($user->ID);  
        $rol = Rol::where('id', $user->rol_id)->first();
        $patrocinador = User::where('ID', $user->referred_id)->first();
-       $user->patrocinador = $patrocinador->display_name;
+       if (!is_null($patrocinador)){
+           $user->patrocinador = $patrocinador->display_name;
+       }else{
+           $user->patrocinador = '-';
+       }
        $user->rol = $rol->name;
        $user->nivel = $nivel;
 

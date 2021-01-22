@@ -6,11 +6,10 @@
 			$('#mytable').DataTable( {
 				responsive: true,
 			});
+		});
 
-			$('.editar').on('click',function(e){
- 				e.preventDefault();
-
- 				var route = $(this).attr('data-route');
+		function editar($id){
+ 				var route = $("#"+$id).attr('data-route');
  				$.ajax({
 	                url:route,
 	                type:'GET',
@@ -21,8 +20,7 @@
 	                    $("#modal-edit").modal("show");
 	                }
 	            });
-			});
-		});
+			}
 	</script>
 @endpush
 
@@ -64,7 +62,7 @@
 								<td class="text-center"><i class="{{ $categoria->icon }}"></i></td>
 								<td class="text-center">{{ $categoria->courses_count }}</td>
 								<td class="text-center">
-									<a class="btn btn-info editar" data-route="{{ route('admin.courses.edit-category', $categoria->id) }}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-info" data-route="{{ route('admin.courses.edit-category', $categoria->id) }}" id="{{$categoria->id}}" onclick="editar(this.id);"><i class="fa fa-edit"></i></a>
 									@if ($categoria->courses_count == 0)
 										<a class="btn btn-danger" href="{{ route('admin.courses.delete-category', $categoria->id) }}"><i class="fa fa-trash"></i></a>
 									@endif

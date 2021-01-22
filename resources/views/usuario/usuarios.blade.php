@@ -20,7 +20,7 @@
               Correo Electrónico
             </th>
             <th class="text-center">
-              Referifo Por
+              Referido Por
             </th>
             @if ($tipo != 2)
             <th class="text-center">
