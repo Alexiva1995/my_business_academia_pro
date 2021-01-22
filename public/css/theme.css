@@ -656,6 +656,14 @@ h5.title-level {
     .caption-hidden {
         display: none;
     }
+    .title-remain{
+        font-size: 25px;
+        font-weight: 600;
+    }
+    .clock-text {
+        font-size: 80px;
+        font-weight: 800;
+    }
 }
 
 @media (min-width: 1024px) and (max-width: 1024px) {
@@ -2298,8 +2306,6 @@ p.card-text.font-weight-bold.mr-2 {
 .clock-text {
     padding-left: 15%;
     padding-right: 15%;
-    font-size: 80px;
-    font-weight: 800;
     justify-content: center;
 }
 
