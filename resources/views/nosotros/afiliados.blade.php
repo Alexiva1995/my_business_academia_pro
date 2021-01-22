@@ -8,7 +8,7 @@
         <div class="carousel-inner">
             <div class="carousel-item  active ">
               <div class="overlay"></div>
-                  <img src="{{ asset('nosotros/afiliados/header4.png') }}" class="d-block w-100" alt="...">
+                  <img src="{{ asset('nosotros/afiliados/header4.jpg') }}" class="d-block w-100" alt="...">
                   <div class="carousel-caption caption-show">
                   <div class="row">
                       <div class="col-2 mt-4 pl-0 pr-0">

@@ -22,7 +22,7 @@
         <div class="carousel-inner">
             <div class="carousel-item  active ">
               <div class="overlay"></div>
-                  <img src="{{ asset('nosotros/nosotros/nosotros.png') }}" class="d-block w-100" alt="...">
+                  <img src="{{ asset('nosotros/nosotros/nosotros.jpg') }}" class="d-block w-100" alt="...">
                    <div class="carousel-caption">
                     <div class="col-md-5 offset-md-5">
                     <div class="estilobusiness">MY BUSINESS ACADEMY PRO</div>
@@ -50,7 +50,7 @@
                      <h4 class="m-4 card-title align-items-center d-flex justify-content-center" style="text-align: center;">Te hacemos crecer personal y profesionalmente con mucho contenido de valor que te ayudará a cumplir tus objetivos.</h4>
                 </div>
             </div>
-                <div class="col-md-6" style="min-height: 300px; background-image: url('{{ asset('nosotros/nosotros/02.png') }}'); background-size: cover; background-position: top;">
+                <div class="col-md-6" style="min-height: 300px; background-image: url('{{ asset('nosotros/nosotros/02.jpg') }}'); background-size: cover; background-position: top;">
                 </div>
         </div>
     </div>
@@ -60,12 +60,12 @@
       <div class="card" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
             <div class="col-md-4">
-                <img src="{{ asset('nosotros/nosotros/03.png') }}" class="card-img" alt="...">
+                <img src="{{ asset('nosotros/nosotros/03.jpg') }}" class="card-img" alt="...">
             </div>
             <div class="col-md-4 nosotros-text" style="background-color: #2A91FF; text-align: center; color: #fff;">
               <p class="mt-2" style="padding: 30px 30px;">El modelo académico cuenta con flexibilidad de aprendizaje, información de primer nivel y herramientas de aplicación sencilla e inmediata.</p>
             </div>
-             <div class="col-md-4" style="min-height: 200px; background-image: url('{{ asset('nosotros/nosotros/04.png') }}'); background-size: cover; background-position: top;">
+             <div class="col-md-4" style="min-height: 200px; background-image: url('{{ asset('nosotros/nosotros/04.jpg') }}'); background-size: cover; background-position: top;">
             </div>
         </div>
       </div>
@@ -73,7 +73,7 @@
       <div class="card" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
            <div class="col-md-4">
-              <img src="{{ asset('nosotros/nosotros/05.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/05.jpg') }}" class="card-img" alt="...">
            </div>
           <div class="col-md-8 nosotros-text" style="background-color: #fff;">
             <div class="card-body row align-items-center justify-content-center">
@@ -92,7 +92,7 @@
             </div>
           </div>
            <div class="col-md-4">
-              <img src="{{ asset('nosotros/nosotros/06.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/06.jpg') }}" class="card-img" alt="...">
            </div>
          </div>
        </div>
@@ -101,7 +101,7 @@
        <div class="card mb-3" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
            <div class="col-md-4">
-              <img src="{{ asset('nosotros/nosotros/07.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/07.jpg') }}" class="card-img" alt="...">
            </div>
           <div class="col-md-8 nosotros-text" style="color: #fff; background-color: #2A91FF;">
             <div class="card-body row align-items-center">
@@ -120,7 +120,7 @@
         <div class="row align-items-center justify-content-center">
             <div class="containerscale">
                     <div class="card m-2">
-                            <img class="rounded-circle" src="{{ asset('nosotros/nosotros/09-285x300.png') }}" alt="Card image"  width="160px" height="160px">
+                            <img class="rounded-circle" src="{{ asset('nosotros/nosotros/09.jpg') }}" alt="Card image"  width="160px" height="160px">
                             <div class="card-img-overlay d-flex flex-column">
                                     <h6 class="text-white my-auto text-center aumento">Conexión</h6>
                             </div>
@@ -128,7 +128,7 @@
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/10-285x300.png') }}" alt="Card image"  width="160px" height="160px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/10.jpg') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
                                 <h6 class="text-white my-auto text-center aumento">Innovación</h6>
                         </div>
@@ -136,7 +136,7 @@
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/08-285x300.png') }}" alt="Card image"  width="160px" height="160px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/08.jpg') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
                                 <h6 class="text-white my-auto text-center aumento">Crecimiento</h6>
                         </div>
@@ -144,7 +144,7 @@
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/11-285x300.png') }}" alt="Card image"  width="160px" height="160px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/11.jpg') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
                                 <h6 class="text-white my-auto text-center aumento">Calidad</h6>
                         </div>
@@ -152,7 +152,7 @@
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/12-285x300.png') }}" alt="Card image"  width="160px" height="160px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/12.jpg') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
                                 <h6 class="text-white my-auto text-center aumento">Eficacia</h6>
                         </div>
@@ -160,7 +160,7 @@
             </div>
             <div class="containerscale">
                 <div class="card m-2">
-                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/13-285x300.png') }}" alt="Card image"  width="160px" height="160px">
+                        <img class="rounded-circle" src="{{ asset('nosotros/nosotros/13.jpg') }}" alt="Card image"  width="160px" height="160px">
                         <div class="card-img-overlay d-flex flex-column">
                                 <h6 class="text-white my-auto text-center aumento">Trascendencia</h6>
                         </div>
@@ -180,7 +180,7 @@
       <div class="card mb-3">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ asset('nosotros/nosotros/09-285x300.png') }}" style="max-width: 100%;" class="rounded-circle  w-75">
+                <img src="{{ asset('nosotros/nosotros/09.jpg') }}" style="max-width: 100%;" class="rounded-circle  w-75">
               <div class="card-img-overlay d-flex flex-column no-margin no-padding" style="color: #fff; text-align: center;">
                     <div class="my-auto w-75">
                         <div class="new-course-title">
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <img src="{{ asset('nosotros/nosotros/10-285x300.png') }}" style="max-width: 100%;" class="rounded-circle w-75">
+                <img src="{{ asset('nosotros/nosotros/10.jpg') }}" style="max-width: 100%;" class="rounded-circle w-75">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                     <div class="my-auto w-75">
                         <div class="new-course-title">
@@ -200,7 +200,7 @@
                 </div>
             </div>
              <div class="col-md-4">
-                 <img src="{{ asset('nosotros/nosotros/08-285x300.png') }}" style="max-width: 100%;" class="rounded-circle w-75">
+                 <img src="{{ asset('nosotros/nosotros/08.jpg') }}" style="max-width: 100%;" class="rounded-circle w-75">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                     <div class="my-auto w-75">
                         <div class="new-course-title">
@@ -215,7 +215,7 @@
       <div class="card mb-3" style="max-width: 100%;">
         <div class="row">
             <div class="col-md-4">
-              <img src="{{ asset('nosotros/nosotros/11-285x300.png') }}" style="max-width: 100%;" class="rounded-circle w-75">
+              <img src="{{ asset('nosotros/nosotros/11.jpg') }}" style="max-width: 100%;" class="rounded-circle w-75">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                     <div class="my-auto w-75">
                         <div class="new-course-title">
@@ -225,7 +225,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-              <img src="{{ asset('nosotros/nosotros/12-285x300.png') }}" style="max-width: 100%;" class="rounded-circle w-75">
+              <img src="{{ asset('nosotros/nosotros/12.jpg') }}" style="max-width: 100%;" class="rounded-circle w-75">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                     <div class="my-auto w-75">
                         <div class="new-course-title">
@@ -235,7 +235,7 @@
                 </div>
             </div>
              <div class="col-md-4">
-              <img src="{{ asset('nosotros/nosotros/13-285x300.png') }}" style="max-width: 100%;" class="rounded-circle w-75">
+              <img src="{{ asset('nosotros/nosotros/13.jpg') }}" style="max-width: 100%;" class="rounded-circle w-75">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                     <div class="my-auto w-75">
                         <div class="new-course-title">
@@ -259,7 +259,7 @@
     <div class="card" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
             <div class="col-md-6">
-              <img src="{{ asset('nosotros/fundadores/josegordo.png') }}" style="width: 100%;">
+              <img src="{{ asset('nosotros/fundadores/josegordo.jpg') }}" style="width: 100%;">
             </div>
             <div class="col-md-6 align-items-center d-flex justify-content-center" style="color: #fff; background-color: #1c1d21;">
             <div class="card-body">
@@ -296,7 +296,7 @@
             </div>
            </div>
             <div class="col-md-6">
-              <img src="{{ asset('nosotros/fundadores/mujer.png') }}" style="width: 100%;">
+              <img src="{{ asset('nosotros/fundadores/mujer.jpg') }}" style="width: 100%;">
             </div>
           </div>
         </div>
@@ -312,7 +312,7 @@
     <div class="card mb-3" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
            <div class="col-md-4" style="background-color: #EDEDED;">
-              <img src="{{ asset('nosotros/nosotros/16.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/16.jpg') }}" class="card-img" alt="...">
              <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                <div class="mt-auto">
                   <div class="new-course-title" style="background-color: #333; padding: 8px; float: right; color: #2A91FF;">
@@ -342,7 +342,7 @@
             </div>
           </div>
           <div class="col-md-4" style="background-color: #EDEDED;">
-              <img src="{{ asset('nosotros/nosotros/17.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/17.jpg') }}" class="card-img" alt="...">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                <div class="mt-auto">
                   <div class="new-course-title" style="background-color: #333; padding: 8px; float: left; color: #2A91FF;">
@@ -357,7 +357,7 @@
     <div class="card mb-3" style="max-width: 100%; margin-bottom: 0rem!important; margin-top: 80px;">
         <div class="row no-gutters">
            <div class="col-md-4" style="background-color: #EDEDED;">
-              <img src="{{ asset('nosotros/nosotros/18.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/18.jpg') }}" class="card-img" alt="...">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                <div class="mt-auto">
                   <div class="new-course-title" style="background-color: #333; padding: 8px; float: right; color: #2A91FF;">
@@ -389,7 +389,7 @@
             </div>
           </div>
           <div class="col-md-4" style="background-color: #EDEDED;">
-              <img src="{{ asset('nosotros/nosotros/19.png') }}" class="card-img" alt="...">
+              <img src="{{ asset('nosotros/nosotros/19.jpg') }}" class="card-img" alt="...">
               <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
                <div class="mt-auto">
                   <div class="new-course-title" style="background-color: #333; padding: 8px; color: #2A91FF; float: left;">
