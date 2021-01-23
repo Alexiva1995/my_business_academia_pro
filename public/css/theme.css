@@ -816,6 +816,10 @@ h5.title-level {
         font-size: 20px!important;
         font-weight: 400!important;
     }
+     .clock-live-text {
+        font-size: 10px!important;
+        font-weight: 800!important;
+    }
 }
 
 
@@ -2310,7 +2314,6 @@ p.card-text.font-weight-bold.mr-2 {
 }
 
 .clock-live-text {
-    font-size: 40px;
     font-weight: 800;
     justify-content: center;
     align-items: center!important;
