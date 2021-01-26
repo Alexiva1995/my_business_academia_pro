@@ -346,38 +346,34 @@
 
           <div id="accordion">
                 @php $cont2 = 0; @endphp
-                <!-- Accordion item 1 -->
                 @foreach($all_lessons as $lesson)
                 <div class="card mt-2 card-accordion" id="card-lesson-content">
-                        <div class="card-header collapsed border-0 collapsible-link" id="heading{{$lesson->id}}" data-toggle="collapse" data-target="#collapse{{$lesson->id}}" aria-expanded="false" aria-controls="collapse{{$lesson->id}}">
-                                @if($first_lesson->id == $lesson->id)
-                              <a href="{{ route('lesson.show', [$lesson->slug, $lesson->id, $lesson->course_id]) }}">
-                                        <h5 class="mb-0 font-weight-bold d-block position-relative py-2 text-success">
-                                         <i class="text-success fa fa-play-circle"></i>  @if ($progresoCurso->language == 'es') {{$lesson->title}} @else {{$lesson->english_title}} @endif
-                                        </h5>
-                                </a>
-                          @else
-                           <a href="{{ route('lesson.show', [$lesson->slug, $lesson->id, $lesson->course_id]) }}">
-                                        <h5 class="mb-0 font-weight-bold d-block position-relative py-2">
-                                         <i class="text-primary fa fa-play-circle"></i>  @if ($progresoCurso->language == 'es') {{$lesson->title}} @else {{$lesson->english_title}} @endif
-                                        </h5>
-                                </a>
-                          @endif
-                           @foreach($lecciones_vistas as $leccion_vista)
+                    <div class="card-header collapsed border-0 collapsible-link" id="heading{{$lesson->id}}" data-toggle="collapse" data-target="#collapse{{$lesson->id}}" aria-expanded="false" aria-controls="collapse{{$lesson->id}}">
+                        <h5 class="mb-0 font-weight-bold d-block position-relative py-2">
+                            <a href="{{ route('lesson.show', [$lesson->slug, $lesson->id, $lesson->course_id]) }}"> 
+                                @if ($first_lesson->id == $lesson->id) 
+                                    <i class="text-success fa fa-play-circle"></i> <span class="text-success"> @if ($progresoCurso->language == 'es') {{$lesson->title}} @else {{$lesson->english_title}} @endif </span>
+                                @else
+                                    <i class="text-primary fa fa-play-circle"></i> <span> @if ($progresoCurso->language == 'es') {{$lesson->title}} @else {{$lesson->english_title}} @endif </span> 
+                                @endif
+                            </a>
+                        </h5>
+                        
+                        @foreach($lecciones_vistas as $leccion_vista)
                             @if($leccion_vista->lesson_id == $lesson->id)
                                 @if($leccion_vista->lesson_id == $first_lesson->id)
-                                <label class="text-success float-right">&nbsp;&nbsp;&nbsp;&nbsp;En curso <i class="far fa-check-circle"></i> </label>
+                                    <label class="text-primary float-right">&nbsp;&nbsp;&nbsp;&nbsp;En curso <i class="far fa-check-circle"></i> </label>
                                 @else
-                                <label class="text-success float-right">&nbsp;&nbsp;&nbsp;&nbsp;Vista <i class="far fa-check-circle"></i> </label>
+                                    <label class="text-success float-right">&nbsp;&nbsp;&nbsp;&nbsp;Vista <i class="far fa-check-circle"></i> </label>
                                 @endif
                             @endif
                         @endforeach
-                        </div>
-                        <div id="collapse{{$lesson->id}}" class="collapse" aria-labelledby="heading{{$lesson->id}}" data-parent="#accordion">
+                    </div>
+                    <div id="collapse{{$lesson->id}}" class="collapse" aria-labelledby="heading{{$lesson->id}}" data-parent="#accordion">
                         <div class="card-body">
-                                {{$lesson->description}}
+                            {{$lesson->description}}
                         </div>
-                        </div>
+                    </div>
                 </div>
                 @php $cont2++; @endphp
             @endforeach
