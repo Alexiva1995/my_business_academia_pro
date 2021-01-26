@@ -47,7 +47,6 @@
             });
         }
 
-        
         function editNote($nota){
             $("#id-note").val($nota.id);
             $("#title-note").val($nota.title);
@@ -82,6 +81,7 @@
                 }
             });
         }
+
         function deleteNote($id){
             var route = "https://mybusinessacademypro.com/academia/anotaciones/delete/"+$id;
             $.ajax({
@@ -97,40 +97,45 @@
         }
         
         function newPresentation(){
-            $("#store_presentation_submit").css('display', 'none');
-            $("#store_presentation_loader").css('display', 'block');
-            var route = "https://mybusinessacademypro.com/academia/settings/event";
-            var form = $('#store_presentation_form')[0];
-            var parametros = new FormData(form);
-            $.ajax({
-                url:route,
-                type:'POST',
-                data:  parametros,
-                processData: false,
-                contentType: false,
-                success:function(ans){
-                    $("#store_presentation_loader").css('display', 'none');
-                    $("#store_presentation_submit").css('display', 'block');
-                    if (ans == false){
-                        $("#msj-success-ajax").css('display', 'none');
-                        $("#modal-settings-presentation").modal("hide");
-                        $("#option-modal-settings").modal("hide");
-                        $("#msj-error-text").html("Hubo un error al cargar la memoria");
-                        $("#msj-error-ajax").css('display', 'block');
-                    }else{
-                        $("#msj-error-ajax").css('display', 'none');
-                        $("#modal-settings-presentation").modal("hide");
-                        $("#option-modal-settings").modal("hide");
-                        $("#msj-success-text").html("La memoria ha sido agregada con éxito");
-                        $("#msj-success-ajax").css('display', 'block');
-                        //$("#presentations_section").html(ans);
-                        refreshMenu();
-                        refreshPresentationSection(false);
-                    }
-                }
-            });
-        }
+            var imgsize = document.getElementById("presentation_file").files[0].size;
 
+            if(imgsize > 10000000){
+                alert('El archivo supera el tamaño permitido (10MB)');
+            }else{
+                $("#store_presentation_submit").css('display', 'none');
+                $("#store_presentation_loader").css('display', 'block');
+                var route = "https://mybusinessacademypro.com/academia/settings/event";
+                var form = $('#store_presentation_form')[0];
+                var parametros = new FormData(form);
+                $.ajax({
+                    url:route,
+                    type:'POST',
+                    data:  parametros,
+                    processData: false,
+                    contentType: false,
+                    success:function(ans){
+                        $("#store_presentation_loader").css('display', 'none');
+                        $("#store_presentation_submit").css('display', 'block');
+                        if (ans == false){
+                            $("#msj-success-ajax").css('display', 'none');
+                            $("#modal-settings-presentation").modal("hide");
+                            $("#option-modal-settings").modal("hide");
+                            $("#msj-error-text").html("Hubo un error al cargar la memoria");
+                            $("#msj-error-ajax").css('display', 'block');
+                        }else{
+                            $("#msj-error-ajax").css('display', 'none');
+                            $("#modal-settings-presentation").modal("hide");
+                            $("#option-modal-settings").modal("hide");
+                            $("#msj-success-text").html("La memoria ha sido agregada con éxito");
+                            $("#msj-success-ajax").css('display', 'block');
+                            //$("#presentations_section").html(ans);
+                            refreshMenu();
+                            refreshPresentationSection(false);
+                        }
+                    }
+                });
+            }
+        }
         function newVideo(){
             $("#store_video_submit").css('display', 'none');
             $("#store_video_loader").css('display', 'block');

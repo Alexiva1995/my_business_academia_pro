@@ -14,7 +14,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Seleccione la memoria</label>
-                                    <input type="file" class="form-control" name="presentation" required>
+                                    <input type="file" class="form-control" name="presentation" id="presentation_file" required>
                                 </div>
                             </div>
                         </div>
