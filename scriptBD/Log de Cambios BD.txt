@@ -262,5 +262,8 @@ Dev:Luisana Marín
 
 05/01/2021
 Dev:Crisleivys Gil
-
 *Modificados los titulos de los materiales (correr el script support_material)
+
+26/01/2020
+Dev:Luisana Marín
+*Nueva tabla comment_responses (Correr script comment_responses.sql)

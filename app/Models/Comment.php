@@ -20,4 +20,8 @@ class Comment extends Model
 
         return $this->belongsTo(User::class, 'user_id', 'ID');
     }
+
+    public function responses(){
+    	return $this->hasMany('App\Models\CommentResponse');
+    }
 }

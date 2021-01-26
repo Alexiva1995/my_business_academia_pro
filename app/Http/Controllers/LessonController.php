@@ -12,6 +12,7 @@ use App\Models\User;
 use DB;
 use Auth;
 use App\Models\Subcategory;
+use App\Models\CommentResponse;
 use Carbon\Carbon;
 class LessonController extends Controller{
     /**
@@ -176,7 +177,10 @@ class LessonController extends Controller{
                                 ->where('user_id', '=', Auth::user()->ID)
                                 ->first();
 
-            $all_comments = Comment::where('lesson_id', $lesson_id)->get();
+            $all_comments = Comment::with('responses')
+                                ->where('lesson_id', $lesson_id)
+                                ->orderBy('id', 'DESC')
+                                ->get();
 
             $directos = User::where('referred_id', Auth::user()->ID)->get()->count('ID');
 
@@ -272,17 +276,25 @@ class LessonController extends Controller{
     /*AGREGAR COMENTARIOS*/
     public function lesson_comments(Request $request){
 
-        $datosLeccion = Lesson::find($request->lesson_id);
-        $lesson_comments = new Comment($request->all());
-        //$lesson_comments->comment =$request->comment;
-        //$lesson_comments->lesson_id =$request->lesson_id;
-        $lesson_comments->user_id = Auth::user()->ID;
-        $lesson_comments->date = Carbon::now()->format('Y-m-d');
-        $lesson_comments->save();
+         $lesson = Lesson::find($request->lesson_id);
+        if (isset($request->response)){
+            $respuesta = new CommentResponse($request->all());
+            $respuesta->user_id = Auth::user()->ID;
+            $respuesta->date = date('Y-m-d');
+            $respuesta->save();
+        }else{
+            $lesson_comments = new Comment($request->all());
+            $lesson_comments->user_id = Auth::user()->ID;
+            $lesson_comments->date = Carbon::now()->format('Y-m-d');
+            $lesson_comments->save();
+        } 
 
-        $all_comments = Comment::where('lesson_id', $request->lesson_id)->orderBy('id', 'DESC')->get();
+        $all_comments = Comment::with('responses')
+                            ->where('lesson_id', $request->lesson_id)
+                            ->orderBy('id', 'DESC')
+                            ->get();
 
-        return view('cursos.commentsSection')->with(compact('all_comments'));
+        return view('cursos.commentsSection')->with(compact('all_comments', 'lesson'));
          //return redirect('courses/lesson/'.$datosLeccion->slug.'/'.$datosLeccion->id.'/'.$datosLeccion->course_id);
 
     }
