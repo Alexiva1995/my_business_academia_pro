@@ -656,6 +656,14 @@ h5.title-level {
     .caption-hidden {
         display: none;
     }
+    .title-remain{
+        font-size: 25px;
+        font-weight: 600;
+    }
+    .clock-text {
+        font-size: 80px;
+        font-weight: 800;
+    }
 }
 
 @media (min-width: 1024px) and (max-width: 1024px) {
@@ -807,6 +815,10 @@ h5.title-level {
     .title-status-live {
         font-size: 20px!important;
         font-weight: 400!important;
+    }
+     .clock-live-text {
+        font-size: 10px!important;
+        font-weight: 800!important;
     }
 }
 
@@ -2298,13 +2310,10 @@ p.card-text.font-weight-bold.mr-2 {
 .clock-text {
     padding-left: 15%;
     padding-right: 15%;
-    font-size: 80px;
-    font-weight: 800;
     justify-content: center;
 }
 
 .clock-live-text {
-    font-size: 40px;
     font-weight: 800;
     justify-content: center;
     align-items: center!important;
