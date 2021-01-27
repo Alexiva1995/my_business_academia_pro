@@ -146,9 +146,11 @@ class LessonController extends Controller{
     }*/
     public function lesson($lesson_slug, $lesson_id, $course_id){
         if (Auth::user()->membership_status == 1){
-            /**Guarda la lecci'on al acceder*/
+            /**Guarda la lección al acceder*/
             $leccion_guardada = LessonUser::where('lesson_id',$lesson_id)
-                                ->where('user_id',Auth::user()->ID)->first();
+                                    ->where('user_id', Auth::user()->ID)
+                                    ->first();
+
             //dd($leccion_guardada, Empty($leccion_guardada));
             if(Empty($leccion_guardada)){
                 $leccion_vista = new LessonUser;
@@ -157,25 +159,46 @@ class LessonController extends Controller{
                 $leccion_vista->course_id= $course_id;
                 $leccion_vista->status = 1;
                 $leccion_vista->save();
-            }
-            else{
-                $fecha = date('Y-m-d H:i:s');
+            }else{
+                //$fecha = date('Y-m-d H:i:s');
                 $leccion_guardada->updated_at = date('Y-m-d H:i:s');
                 $leccion_guardada->save();
             }
 
-            $lesson = Lesson::where('id', '=',$lesson_id)
-                        ->with('course')
-                        ->first();
-            $all_lessons = Lesson::where([
-                ['course_id', '=',  $course_id]
-               // ['subcategory_id', '<=', Auth::user()->membership_id]
-            ])->get();
+            $lecciones_vistas = LessonUser::where('user_id', Auth::user()->ID)
+                                    ->where('course_id', $course_id)
+                                    ->get();
+
+            /*$leccion_vista = LessonUser::where('user_id', Auth::user()->ID)
+                                ->where('course_id', $course_id)
+                                ->get();*/
+
+            $total_vista = $lecciones_vistas->count();
+            $total_lesson = Lesson::where('course_id',$course_id)->count();
+            $progress_bar = ( ($total_vista*100) / $total_lesson);
 
             $progresoCurso = DB::table('courses_users')
                                 ->where('course_id', '=', $course_id)
                                 ->where('user_id', '=', Auth::user()->ID)
                                 ->first();
+
+            if ($progresoCurso->progress != $progress_bar){
+                DB::table('courses_users')
+                ->where('course_id', '=', $course_id)
+                ->where('user_id', '=', Auth::user()->ID)
+                ->update(['progress' => $progress_bar,
+                          'updated_at' => date('Y-m-d H:i:s')]);
+            }
+            /*if($total_lesson == 0){
+                $progress_bar = 0;
+            }else{
+                $progress_bar = (($total_vista*100)/$total_lesson);
+            }*/
+
+            $lesson = Lesson::where('id', '=',$lesson_id)
+                        ->with('course')
+                        ->first();
+            $all_lessons = Lesson::where('course_id', '=',  $course_id)->get();
 
             $all_comments = Comment::with('responses')
                                 ->where('lesson_id', $lesson_id)
@@ -184,27 +207,16 @@ class LessonController extends Controller{
 
             $directos = User::where('referred_id', Auth::user()->ID)->get()->count('ID');
 
-            $last_lesson = LessonUser::where('user_id', Auth::user()->ID)->where('course_id', $course_id)->latest('updated_at')->first();
+            $last_lesson = LessonUser::where('user_id', Auth::user()->ID)
+                                ->where('course_id', $course_id)
+                                ->latest('updated_at')
+                                ->first();
           
             if (!is_null($last_lesson)){
                 $first_lesson = Lesson::where('id', $last_lesson->lesson_id)->first();
             }else{
                 $first_lesson = Lesson::where('course_id', '=', $id)->orderBy('id', 'ASC')->first();
             }
-
-            $lecciones_vistas = LessonUser::where('user_id', Auth::user()->ID)->where('course_id', $course_id)->get();
-
-         
-                $leccion_vista = LessonUser::where('user_id', Auth::user()->ID)->where('course_id', $course_id)->get();
-                $total_vista = $leccion_vista->count();
-                $total_lesson = Lesson::where('course_id',$course_id )->count();
-                if(Empty($total_lesson)){
-                    $progress_bar =0;
-                }
-                else{
-                    $progress_bar = (($total_vista*100)/$total_lesson);
-                }
-                //dd($leccion_vista, $total_vista, $progress_bar);
                 
             $cursosMembresia = DB::table('courses')
                                     ->select('id')
@@ -214,6 +226,7 @@ class LessonController extends Controller{
             $cantCursosMembresia = $cursosMembresia->count();
             $cantCursosMembresiaUsuario = 0;
             $cantCursosMembresiaFinalizados = 0;
+            $cantCursosCertificados = 0;
             $cursosMembresiaArray = array();
             foreach ($cursosMembresia as $cursoMembresia){
                 array_push($cursosMembresiaArray, $cursoMembresia->id);
@@ -227,14 +240,30 @@ class LessonController extends Controller{
 
                     if ($cursoUsuario->progress == 100){
                         $cantCursosMembresiaFinalizados++;
+                        if ($cursoUsuario->certificate == 1){
+                            $cantCursosCertificados++;
+                        }
                     }
                 }
             }
             
+            $checkAward = 0;
             $modalUpgrade = 0;
             if ($cantCursosMembresia == $cantCursosMembresiaUsuario){
                 if ($cantCursosMembresia == $cantCursosMembresiaFinalizados){
                     $modalUpgrade = 1;
+
+                    if ($cantCursosMembresia == $cantCursosCertificados){
+                        $premio = DB::table('awards_users')
+                                ->where('user_id', '=', Auth::user()->ID)
+                                ->where('award_id', '=', Auth::user()->membership->award->id)
+                                ->first();
+                        if (is_null($premio)){
+                            Auth::user()->awards()->attach(Auth::user()->membership->award->id);
+                            $checkAward = 1;
+                        }
+                    }
+                    
                 }else if (($cantCursosMembresia-1) == $cantCursosMembresiaFinalizados){
                     $cursoRestante = DB::table('courses_users')
                                         ->where('user_id', '=', Auth::user()->ID)
@@ -261,7 +290,7 @@ class LessonController extends Controller{
                 }
             }
         
-            return view('cursos.leccion', compact('lesson', 'all_lessons','all_comments', 'progresoCurso','directos', 'last_lesson', 'first_lesson', 'lecciones_vistas', 'progress_bar', 'modalUpgrade'));
+            return view('cursos.leccion', compact('lesson', 'all_lessons','all_comments', 'progresoCurso','directos', 'last_lesson', 'first_lesson', 'lecciones_vistas', 'modalUpgrade', 'checkAward'));
                 
         
         }else{

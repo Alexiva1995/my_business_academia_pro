@@ -17,6 +17,7 @@
 			$("#price_annual").val($membresia.price_annual);
 			$("#discount").val($membresia.descuento);
 			$("#discount_annual").val($membresia.discount_annual);
+			$("#award_title").val($membresia.award.name)
 			$("#modal-edit").modal("show");
 		}
 
@@ -128,6 +129,19 @@
 										<input type="file" class="form-control" name="image" >
 									</div>
 								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Título del Trofeo</label>
+										<input type="text" class="form-control" name="award_title" id="award_title">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Imagen del Trofeo</label>
+										<input type="file" class="form-control" name="award" >
+									</div>
+								</div>
+								
 							</div>
 						</div>
 				    </div>

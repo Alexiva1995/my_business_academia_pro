@@ -28,4 +28,8 @@ class Membership extends Model
     public function details(){
         return $this->hasMany('App\Models\ShoppingCart');
     }
+
+     public function award(){
+        return $this->hasOne('App\Models\Award');
+    }
 }

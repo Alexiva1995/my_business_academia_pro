@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Membership;
 use App\Models\UpgradeMessage;
+use App\Models\Award;
 
 class MembershipController extends Controller
 {
@@ -12,7 +13,7 @@ class MembershipController extends Controller
         // TITLE
         view()->share('title', 'Listado de Membresías');
         
-        $membresias = Membership::with('upgrade_message')
+        $membresias = Membership::with('upgrade_message', 'award')
                             ->orderBy('id', 'ASC')
                             ->get();
         
@@ -29,7 +30,19 @@ class MembershipController extends Controller
             $file->move(public_path().'/uploads/images/memberships', $name);
             $membresia->image = $name;
         }
+
         $membresia->save();
+
+        $premio = Award::where('membership_id', '=', $membresia->id)->first();
+        $premio->name = $request->award_title;
+        if ($request->hasFile('award')){
+            $file2 = $request->file('award');
+            $name2 = $premio->id.".".$file2->getClientOriginalExtension();
+            $file2->move(public_path().'/uploads/images/memberships/awards', $name2);
+            $premio->image = $name2;
+        }
+        $premio->save();
+        
 
         return redirect('admin/memberships')->with('msj-exitoso', 'Los datos de la membresía han sido actualizados con éxito');
     }

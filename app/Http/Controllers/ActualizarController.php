@@ -39,7 +39,8 @@ class ActualizarController extends Controller
         $data = $this->infoUsuario(Auth::user()->ID);
         $yo = null;
         $notes = Note::where('user_id', Auth::user()->ID)->with('streaming')->get();
-        return view('usuario.userEdit')->with(compact('data','yo', 'notes'));
+        $trofeos = Auth::user()->awards;
+        return view('usuario.userEdit')->with(compact('data','yo', 'notes', 'trofeos'));
     }
 
     /**

@@ -33,6 +33,10 @@
                     <a class="nav-link" id="anotaciones-tab" data-toggle="tab" href="#anotaciones" role="tab" aria-controls="anotaciones"
                         aria-selected="false">Mis notas</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="trofeos-tab" data-toggle="tab" href="#trofeos" role="tab" aria-controls="trofeos"
+                        aria-selected="false">Mis Trofeos</a>
+                </li>
             </ul>
             <!-- Aquí es informacion personal -->
 
@@ -71,6 +75,12 @@
                     @include('usuario.formEdit.anotaciones')
                 </div>
                 <!-- Termina Anotaciones -->
+
+                <!-- Empieza Trofeos -->
+                 <div class="tab-pane fade" id="trofeos" role="tabpanel" aria-labelledby="trofeos-tab">
+                    @include('usuario.formEdit.trofeos')
+                </div>
+                <!-- Termina Trofeos -->
 
             </div>
 

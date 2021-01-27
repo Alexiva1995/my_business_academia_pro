@@ -134,4 +134,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\SurveyResponse');
     }
+
+    public function awards(){
+        return $this->belongsToMany('App\Models\Award', 'awards_users','user_id', 'award_id')->withTimestamps();
+    }
 }

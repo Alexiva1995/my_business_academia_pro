@@ -14,6 +14,7 @@
 @section('content')
     <input type="hidden" id="membership_id" value="{{Auth::user()->membership_id}}" />
     <input type="hidden" id="modal_upgrade" value="{{ $modalUpgrade }}" />
+    <input type="hidden" id="modal_award" value="{{ $checkAward }}" />
   @if (Session::has('msj-exitoso'))
       <div class="alert alert-success" style="margin: 5px 15px;">
          {{ Session::get('msj-exitoso') }}
@@ -154,8 +155,8 @@
         <div class="row">
           <div class="col-md-12">
           <div class="progress ml-3 mr-3">
-            <div class="progress-bar progress-bar-striped progress-bar-animated font-weight-bold" role="progressbar" aria-valuenow="{{$progress_bar}}%" aria-valuemin="0" aria-valuemax="100" style="width: {{$progress_bar}}%">
-                {{$progress_bar}}% COMPLETADO
+            <div class="progress-bar progress-bar-striped progress-bar-animated font-weight-bold" role="progressbar" aria-valuenow="{{$progresoCurso->progress}}%" aria-valuemin="0" aria-valuemax="100" style="width: {{$progresoCurso->progress}}%">
+                {{$progresoCurso->progress}}% COMPLETADO
             </div>
           </div>
           </div><!--Progress bar end-->
@@ -408,47 +409,6 @@
                 </div>
             @endif
             <a href="{{route('courses.show.all')}}" class="btn btn-primary play-course-button btn-block mb-2" ><i class="fa fa-plus-circle" aria-hidden="true"></i> ADQUIRIR MÁS CURSOS</a>
-
-
-          <!--<div class="row">
-            <div class="col-lg-12 mx-auto mt-2 mb-2">
-
-              <div id="accordionContentLeccion" class="accordion-leccion">
-                @php $cont2 = 0; @endphp
-
-                @foreach($all_lessons as $lesson)
-                  <div id="card{{$lesson->id}}" class="card mb-2">
-                    <div class="card-header accordion-leccion-content" data-toggle="collapse" data-target="#collapse{{$lesson->id}}">
-                      <a href="{{ route('lesson.show', [$lesson->slug, $lesson->id, $lesson->course_id]) }}">
-                        <h5 class="mb-0 font-weight-bold d-block position-relative collapsible-link py-2">
-                          <i class="text-primary fa fa-play-circle"></i>{{$lesson->title}}
-                        </h5>
-                      </a>
-                      <h6 class="mb-0 ml-4 d-block py-2"><i class="fa fa-clock-o" aria-hidden="true"></i> {{$lesson->duration}} m</h6>
-                    </div>
-                    <div id="collapse{{$lesson->id}}" class="card-body collapse" data-parent="#accordionContentLeccion">
-                      <p class="card-text about-course-text ">
-                        {{$lesson->description}}
-                      </p>
-                    </div>
-                  </div>
-                  @php $cont2++; @endphp
-                @endforeach
-                @if ($progresoCurso->certificate == 0)
-                  <div class="card mb-2" style="background-color: #2A91FF;">
-                    <div class="card-header text-center" >
-                      <a href="{{ route('client.courses.take-evaluation', [$lesson->course->slug, $lesson->course_id]) }}">
-                        <h5 class="mb-0 font-weight-bold d-block position-relative py-2" style="color: white;">
-                          PRESENTAR EVALUACIÓN
-                        </h5>
-                      </a>
-                    </div>
-                  </div>
-                @endif
-              </div>
-            </div>
-          </div>-->
-
         </div>
       </div>
     </div>
@@ -483,6 +443,28 @@
     </div>
   </div>
 
+   {{-- Modal Premio --}}
+  <div class="modal fade" id="awardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background-color: black;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: white;">MEMBERSHIP AWARD</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+        <h4 class="text-muted">¡Felicidades!</h4>
+          <p class="text-muted">Has ganado el trofeo por completar todos los cursos de tu membresía actual</p>
+          <img src="{{ asset('uploads/images/memberships/awards/'.Auth::user()->membership->award->image) }}" style="width: 300px; height: 300px;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   @endsection
   @push('scripts')
   <script>    
@@ -498,6 +480,9 @@
     });
     if ($("#modal_upgrade").val() == 1){
         $("#upgradeModal").modal("show");
+    }
+    if ($("#modal_award").val() == 1){
+        $("#awardModal").modal("show");
     }
   });
   
