@@ -123,10 +123,6 @@ class LessonController extends Controller{
     public function delete($id){
         $leccion = Lesson::find($id);
 
-        DB::table('support_material')
-            ->where('lesson_id', '=', $id)
-            ->delete();
-
         $leccion->delete();
 
         return redirect('admin/courses/lessons/'.$leccion->course_id)->with('msj-exitoso', 'La lección ha sido eliminada con éxito.');
