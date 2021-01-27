@@ -35,15 +35,10 @@
                             document.getElementById("clock").innerHTML = "0:0:0:0";
                             $('#status-text').append('<h1 class="title-status-live">El live está por iniciar</h1>');
                             $("#close").css('display', 'none');
+                            $("#open").html(ans);
                             $("#open").css('display', 'block');
                         }
                     });
-
-                    clearInterval(timerUpdate);
-                    document.getElementById("clock").innerHTML = "0:0:0:0";
-                    $('#status-text').append('<h1 class="title-status-live">El live está por iniciar</h1>');
-                    $("#close").css('display', 'none');
-                    $("#open").css('display', 'block');
                 } else {
                     document.getElementById("clock").innerHTML = t.remainDays+" : "+t.remainHours+" : "+t.remainMinutes+" : "+t.remainSeconds;
                 }
