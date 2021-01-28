@@ -171,6 +171,37 @@ class Menu
                     ],
                 ]
             ],
+
+            'Tickets/Soporte' => [
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
+                'icono' => 'fas fa-ticket-alt',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => (request()->is('admin/ticket*')) ? 'active' : '',
+                'menus' => [
+                    'Generar Tickets/Soporte' => [
+                        'ruta' => 'ticket',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Mis Tickets/Soporte' => [
+                        'ruta' => 'soporte.tickets.clients',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    /*
+                    'Todos Los Tickets/Soporte' => [
+                        'ruta' => 'todosticket',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    */
+                ]
+            ],
             
             'Billetera' => [
                 'submenu' => 1,
@@ -462,10 +493,10 @@ class Menu
                         'ruta' => 'ticket',
                         'complementoruta' => '',
                         'black'=> '0',
-                        'oculto'=> 'activo',
+                        'oculto'=> 'activo', 
                     ],
                     'Mis Tickets/Soporte' => [
-                        'ruta' => 'misticket',
+                        'ruta' => 'soporte.tickets.clients',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
@@ -717,6 +748,7 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->red : 0,
                 'activo' => 0,
             ],
+
             
             'Historial de comisiones' => [
                 'submenu' => 1,
