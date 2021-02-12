@@ -62,8 +62,8 @@
             <div class="col-md-4">
                 <img src="{{ asset('nosotros/nosotros/03.jpg') }}" class="card-img" alt="...">
             </div>
-            <div class="col-md-4 nosotros-text" style="background-color: #2A91FF; text-align: center; color: #fff;">
-              <p class="mt-2" style="padding: 30px 30px;">El modelo académico cuenta con flexibilidad de aprendizaje, información de primer nivel y herramientas de aplicación sencilla e inmediata.</p>
+            <div class="col-md-4 nosotros-text" style="background-color: white; text-align: center; ">
+              <p class="mt-2" style="padding: 30px 30px; font-weight: 400; font-size: 17px;">El modelo académico cuenta con flexibilidad de aprendizaje, información de primer nivel y herramientas de aplicación sencilla e inmediata.</p>
             </div>
              <div class="col-md-4" style="min-height: 200px; background-image: url('{{ asset('nosotros/nosotros/04.jpg') }}'); background-size: cover; background-position: top;">
             </div>
@@ -75,9 +75,9 @@
            <div class="col-md-4">
               <img src="{{ asset('nosotros/nosotros/05.jpg') }}" class="card-img" alt="...">
            </div>
-          <div class="col-md-8 nosotros-text" style="background-color: #fff;">
+          <div class="col-md-8 nosotros-text" style="background-color: #2A91FF;">
             <div class="card-body row align-items-center justify-content-center">
-               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px;">5 niveles de aprendizaje: desde el principiante, básico o intermedio para introducirte al fascinante mundo de las finanzas, hasta el avanzado y pro, que te llevan a lograr resultados extraordinarios.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px; color: white;">5 niveles de aprendizaje: desde el principiante, básico o intermedio para introducirte al fascinante mundo de las finanzas, hasta el avanzado y pro, que te llevan a lograr resultados extraordinarios.</p>
             </div>
           </div>
          </div>

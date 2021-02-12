@@ -128,7 +128,9 @@
                   <h4 class="card-title white">{{$red->nombre}}</h4>
                 </div>
               </div>
-              <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"> Compartir Link</i></a> </h6>
+              <h6 class="white" align="right" style="font-size: 9px;">
+                <a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"></i> Compartir Link</a> 
+              </h6>
            </div>
          </div>
       </div>
@@ -150,7 +152,7 @@
             </div>
           </div>
 
-          <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"> Compartir Link</i></a> </h6>
+          <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"></i> Compartir Link</a> </h6>
         </div>
        </div>
       </div>
@@ -200,7 +202,7 @@
                 <h4 class="card-title white">{{$red->nombre}}</h4>
             </div>
           </div>
-          <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"> Compartir Link</i></a> </h6>
+          <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"></i> Compartir Link</a> </h6>
         </div>
        </div>
       </div>
@@ -221,7 +223,7 @@
                 <h4 class="card-title white">{{$red->nombre}}</h4>
             </div>
           </div>
-          <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"> Compartir Link</i></a> </h6>
+          <h6 class="white" align="right" style="font-size: 9px;"><a class="btn white" href="{{$red->link}}" target="_blank"><i class="white fas fa-share-alt"></i> Compartir Link</a> </h6>
         </div>
        </div>
       </div>

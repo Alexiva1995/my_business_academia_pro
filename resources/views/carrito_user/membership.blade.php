@@ -31,7 +31,7 @@
     <div class="col-12 mb-2">
         <div class="row">
             <section class="pricing">
-                <div class="container mb-5">
+                <div class="ml-5 mr-5 mb-5">
                     <div class="row">
                         @foreach ($membresias as $membresia)
                             @switch($membresia->id)
@@ -54,9 +54,9 @@
                                                     </div>
                                                     <h1 class="text-center text-white">. . . . . . . . . . </h1><br><br>
                                                 </div>
-                                                <h5 class="p-2 text-white text-center">¡Podrás dar el primer paso a SER lo que deseas SER aquí!</h5>
+                                                <h5 class="p-2 text-white text-center">¡Aquí podrás dar el primer paso a SER lo que deseas SER!</h5>
                                                 <h5 class="p-2 text-white text-center"><strong class="text-azul-claro">En este primer nivel podrás acceder a:</strong></h5>
-                                                <h5 class="p-2 text-white text-center">+ de 100 videos con increíbles especialistas en los diversos temas de Desarrollo Humano (Liderazgo, Comunicación, Inteligencia Emocional, Coaching, Salud y equilibrio, etc.) + Contenido especial de Finanzas.</h5>
+                                                <h5 class="p-2 text-white text-center">+ de 100 videos con increíbles especialistas en los diversos temas de Desarrollo Humano (Liderazgo, Comunicación, Inteligencia Emocional, Coaching, etc.) + Contenido especial de Educación Financiera Finanzas.</h5>
                                                 <h5 class="p-2 text-white text-center">+ de 15 videos con increíbles especialistas en los diversos temas Fintech</h5>
                                                 <h4 class="p-2 text-azul-claro text-center">+ 4 LIVE STREAMING <br> AL MES</h4>
                                                 
@@ -102,8 +102,8 @@
                                                 <h5 class="p-2 text-white text-center"> ¡Nos alegra que estés pasando al segundo escalón!</h5><br>
                                                 <h5 class="p-2 text-orange text-center">Aquí encontrarás todo lo que necesitas saber para HACER y lograr.</h5><br>
                                                 <h5 class="p-2 text-white text-center">Disfrutarás de todo el contenido de este nivel y del anterior</h5>
-                                                <h5 class="p-2 text-white text-center">+ de 150 videos con increíbles especialistas en los diversos temas de Ventas, Emprendurismo, Desarrollo Humano y Finanzas</h5><br>
-                                                <h4 class="p-2 text-orange text-center">+ 6 STREAMING <br> AL MES</h4>
+                                                <h5 class="p-2 text-white text-center">+ de 150 videos con increíbles especialistas en los diversos temas de Ventas (Estrategia, mkt digital, publicidad, etc) + Emprendurismo (Modelos de negocio, fondeo, legalidad, etc) + Desarrollo Humano y Finanzas</h5><br>
+                                                <h4 class="p-2 text-orange text-center">+ 6 LIVE STREAMING <br> AL MES</h4>
                                                 
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
@@ -145,12 +145,12 @@
                                                     </div>
                                                     <h1 class="text-center text-white">. . . . . . . . . . </h1><br><br>
                                                 </div>
-                                                <h5 class="p-2 text-white text-center"> ¡WOW! Siéntete orgullos de ti si creces a este nivel en tu formación, lo mejor está por venir.</h5><br>
-                                                <h5 class="p-2 text-verde-claro text-center">Accederás:</h5>
-                                                <h5 class="p-2 text-white text-center">A todo el contenido de este nivel y los 2 anteriores</h5><br>
-                                                <h5 class="p-2 text-white text-center">+ de 200 videos con increíbles especialistas en los diversos temas de Fintech, Real Estate + Ventas, Emprendurismo, Desarrollo Humano y Finanzas</h5><br>
-                                                <h4 class="p-2 text-verde-claro text-center">+ 8 STREAMING <br> AL MES</h4>
-                                                
+                                                <h5 class="p-2 text-white text-center"> ¡WOW! Siéntete orgulloso de ti si creces a este nivel en tu formación, lo mejor está por venir.</h5><br>
+                                                <h5 class="p-2 text-verde-claro text-center">Aprenderás la ciencia y el arte de: TENER </h5>
+                                                <h5 class="p-2 text-white text-center">Accederás a todo el contenido de este nivel y los 2 anteriores</h5><br>
+                                                <h5 class="p-2 text-white text-center">+ de 200 videos con increíbles especialistas en los diversos temas de Fintech(criptomonedas, analisis tecnico, riesgos, retornos, etc) + Real Estate (Inversiones, legalidad, fix & flip, valuaciones, ROI, etc.) + Ventas, Emprendurismo, Desarrollo Humano y Finanzas</h5><br>
+                                                <h4 class="p-2 text-verde-claro text-center">+ 8 LIVE STREAMING <br> AL MES</h4>
+
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
                                                         <h5 class="text-danger mt-4 mb-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->discount_annual}}<span class="period text-danger" style="font-size:12px;">/Anual</span> <span class="text-white">registrándote</span></h5>
@@ -171,6 +171,7 @@
                                         </div>
                                     </div>
                                 @break
+
                                 @case(4)
                                     <div class="col-lg-3 mt-4 mb-5">
                                         <div class="card mb-5 mb-lg-0">
@@ -188,11 +189,11 @@
                                                     <h1 class="text-center text-white">. . . . . . . . . . </h1><br><br>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center"> ¡FELICIDADES!</h5>
-                                                <h5 class="p-2 text-white text-center">¡Estas a punto de convertirte en un PRO de los Negocios!</h5>
-                                                <h5 class="p-2 text-purple text-center">Gozarás de todo el contenido de este nivel y de lo anterior.</h5><br>
-                                                <h5 class="p-2 text-white text-center">+ de 250 videos con increíbles especialistas en los diversos temas Enseñanza, Mindfullnes + Fintech, Real Estate, Ventas, Emprendurismo, Desarrollo Humano y Finanzas</h5>
-                                                <h4 class="p-2 text-purple text-center">+ 10 STREAMING <br> AL MES</h4>
-                                                
+                                                <h5 class="p-2 text-white text-center">¡Estas a punto de convertirte en un PRO de los Negocios globales!</h5>
+                                                <h5 class="p-2 text-purple text-center">Gozarás de todo el contenido de este nivel y de todo lo anterior.</h5><br>
+                                                <h5 class="p-2 text-white text-center">+ de 250 videos con increíbles especialistas en los diversos temas Enseñanza (Tecnicas instruccionales y de aprendizaje, tecnologia, uso de tu voz, etc.) + Bienestar (Nutrición, fitness, equilibrio) + + Fintech, Real Estate, Ventas, Emprendurismo, Desarrollo Humano y Finanzas.</h5>
+                                                <h4 class="p-2 text-purple text-center">+ 10 LIVE STREAMING <br> AL MES</h4>
+
                                                 @if (Auth::guest())
                                                         <h4 class="card-price text-azul-claro text-center"> ${{$membresia->price_annual}}<span class="period">/Anual</span></h4>
                                                         <h5 class="text-danger mt-4 mb-4 p-1 text-center"><span class="text-white">Obtén precio preferencial</span> ${{$membresia->discount_annual}}<span class="period text-danger" style="font-size:12px;">/Anual</span> <span class="text-white">registrándote</span></h5>

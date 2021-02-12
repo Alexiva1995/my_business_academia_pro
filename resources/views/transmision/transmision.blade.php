@@ -48,7 +48,7 @@
    <div class="col-md-12">
    <div class="row">
             <div class="col-md-6" style="margin-top:10%;">
-               <h1 class="text-primary font-weight-bold ftxlivestreming-text">FTX LIVESTREAMING</h1>
+               <h1 class="text-primary font-weight-bold ftxlivestreming-text">STREAMING MBA PRO</h1>
                <h5 class="text-white mt-4">
                Un espacio de entrenamientos en vivo para emprendedores, su propuesta de valor se distingue por ofrecer: Información de primer nivel y en tiempo real, así como motivación para aprender de forma sencilla y herramientas precisas para que se ponga en practica el conocimiento adquirido en los streaming de forma inmediata.
                </h5>

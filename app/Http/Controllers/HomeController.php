@@ -34,6 +34,12 @@ class HomeController extends Controller{
             $msg->subject($data['subject']);
         });
 
+        Mail::send('emails.confirmationContactUs',['data' => $data], function($msg) use ($data){
+            $msg->to($data['email']);
+            $msg->subject('Confirmación My Business AcademyPro');
+            $msg->from('mail@mybusinessacademypro.com');
+        });
+
         return redirect('/')->with('msj-exitoso', 'Tu mensaje ha sido enviado con éxito');
     }
     
@@ -76,7 +82,10 @@ class HomeController extends Controller{
    }
 
    public function index(){
-       
+      $modalSinergia = 0;
+      if (redirect()->getUrlGenerator()->previous() == "https://sinergiared.com/"){
+        $modalSinergia = 1;
+      }
        //pop up
        $pop = Pop::find(1);
        $pop_up = 0;
@@ -288,10 +297,8 @@ class HomeController extends Controller{
                 $mentor->courses = $cursostmp;
             }
       
-      
-
       return view('index')->with(compact('cursosDestacados', 'cursosNuevos', 'idStart', 'idEnd', 'previous', 'next', 'refeDirec', 'proximoEvento', 'checkPais', 'horaEvento', 'avance', 'misEventosArray', 'mentores',
-      'pop','pop_up'));
+      'pop','pop_up', 'modalSinergia'));
    }
 
    public function search(Request $request){

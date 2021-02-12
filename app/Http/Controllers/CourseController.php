@@ -442,9 +442,17 @@ class CourseController extends Controller{
                       'created_at' => $fecha, 'updated_at' => $fecha]);*/
 
         if (!is_null($primeraLeccion)){
-            return redirect('courses/lesson/'.$primeraLeccion->slug.'/'.$primeraLeccion->id.'/'.$curso->id)->with('msj-exitoso', 'El curso ha sido agregado a su lista con éxito.');
+            if ($language == 'es'){
+                return redirect('courses/lesson/'.$primeraLeccion->slug.'/'.$primeraLeccion->id.'/'.$curso->id.'#googtrans(es|es)')->with('msj-exitoso', 'El curso ha sido agregado a su lista con éxito.');
+            }else{
+                return redirect('courses/lesson/'.$primeraLeccion->slug.'/'.$primeraLeccion->id.'/'.$curso->id.'#googtrans(es|en)')->with('msj-exitoso', 'El curso ha sido agregado a su lista con éxito.');
+            }
         }else{
-            return redirect('courses/show/'.$curso->slug.'/'.$curso->id)->with('msj-exitoso', 'El curso ha sido agregado a su lista con éxito.');
+            if ($language == 'es'){
+                return redirect('courses/show/'.$curso->slug.'/'.$curso->id.'#googtrans(es|es)')->with('msj-exitoso', 'El curso ha sido agregado a su lista con éxito.');
+            }else{
+                return redirect('courses/show/'.$curso->slug.'/'.$curso->id.'#googtrans(es|en)')->with('msj-exitoso', 'El curso ha sido agregado a su lista con éxito.');
+            }
         }
     }
 
@@ -457,8 +465,12 @@ class CourseController extends Controller{
                             ->select('slug')
                             ->where('id', '=', $lesson)
                             ->first();
-
-        return redirect('courses/lesson/'.$datosLeccion->slug.'/'.$lesson.'/'.$course)->with('msj-exitoso', 'La configuración del curso ha sido cambiada con éxito.');
+        if ($language == 'en'){
+           return redirect('courses/lesson/'.$datosLeccion->slug.'/'.$lesson.'/'.$course.'#googtrans(es|en)')->with('msj-exitoso', 'La configuración del curso ha sido cambiada con éxito.'); 
+       }else{
+            return redirect('courses/lesson/'.$datosLeccion->slug.'/'.$lesson.'/'.$course.'#googtrans(es|es)')->with('msj-exitoso', 'La configuración del curso ha sido cambiada con éxito.');
+       }
+        
     }
 
     /*CURSO FAVORITO*/

@@ -61,6 +61,7 @@
         </div>
     @endif
 
+    <div class="ml-5">
     @if (!Auth::guest())
         <div class="title-page-course col-md"><span class="text-white">
             <h3><span class="text-white">Hola</span><span class="text-primary"> {{$username}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
@@ -205,179 +206,157 @@
     @endif
     {{-- FIN SECCIÓN TUS CURSOS--}}
 
-    {{-- SECCIÓN RECOMENDACIONES--}}
-@if (!Auth::guest())
-@if($cursos->isNotEmpty())
-@if(!Empty($cursosRecomendados))
-<div class="section-landing mt-3" style="background-color: #121317;">
+   {{-- SECCIÓN RECOMENDACIONES--}}
+   @if (!Auth::guest())
+      @if($cursos->isNotEmpty())
+         @if(!Empty($cursosRecomendados))
+            <div class="section-landing mt-3" style="background-color: #121317;">
+               <div class="col">
+                  @if (Auth::guest())
+                     <h3><span class="text-primary">Recomendados</span></h3>
+                  @else
+                     <h3><span class="text-primary">Recomendados</span><span class="text-white"> según tus intereses.</span></h3>
+                  @endif
+               </div>
 
-    <div class="col">
-            @if (Auth::guest())
-                <h3><span class="text-primary">Recomendados</span></h3>
-            @else
-                <h3><span class="text-primary">Recomendados</span><span class="text-white"> según tus intereses.</span></h3>
-            @endif
-        </div>
+               <!--Carrusel-->
+               @if($total > 0)
+                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                     <div class="carousel-inner">
+                        <div class="carousel-item active">
+                           <div class="row">
+                              @php $contador=0; @endphp
+                              @foreach($cursosRecomendados as $recommended)
+                                 @php $contador++; @endphp
 
-<!--Carrusel-->
+                                 @if($contador <= 3)
+                                    <div class="col-md-4" style="margin-top: 20px;">
+                                       <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white">
+                                          @if (!empty($recommended->thumbnail_cover))
+                                             <img src="{{ asset('uploads/images/courses/covers/'.$recommended->thumbnail_cover) }}" class="card-img-top" alt="...">
+                                          @else
+                                             <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top" alt="...">
+                                          @endif
+                                          <div class="card-img-overlay clearfix">
+                                             <div>
+                                                <h6 class="card-title" style="font-size: 12px">{{$recommended->mentor->display_name}}</h6>
+                                             </div>
+                                             <div class="row ml-0 d-flex h-100">
+                                                <div class="col-md-10 my-auto  recomendados-title text-center" style="margin-bottom: 7px !important">
+                                                   <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> {{$recommended->title}}</p>
+                                                </div>
+                                                <div class="col-md-1 my-auto" style="margin-bottom: 7px !important">
+                                                   <h6 class="text-white w-100">
+                                                      <i class="far fa-user-circle text-center">
+                                                         <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
+                                                      </i> 
+                                                   </h6>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </div>
+                                    @endif
+                                 @endforeach
+                           </div>
+                        </div>
 
-@if($total > 0)
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        @if($total >= 4)
+                           <div class="carousel-item">
+                              <div class="row">
+                                 @php $segundo =0; @endphp
+                                 @foreach($cursosRecomendados as $recommended)
+                                       @php $segundo++; @endphp
 
- <div class="carousel-inner">
+                                       @if($segundo >= 4 && $segundo <= 6)
+                                          <div class="col-md-4" style="margin-top: 20px;">
+                                             <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white">
+                                                @if (!empty($recommended->thumbnail_cover))
+                                                   <img src="{{ asset('uploads/images/courses/covers/'.$recommended->thumbnail_cover) }}" class="card-img-top" alt="...">
+                                                @else
+                                                   <img src="{{ asset('uploads/images/avatar/default.jpg') }}" class="card-img-top" alt="...">
+                                                @endif
+                                                <div class="card-img-overlay clearfix">
+                                                   <div>
+                                                      <h6 class="card-title" style="font-size: 14px">{{$recommended->mentor->display_name}}</h6>
+                                                   </div>
+                                                   <div class="row ml-0 d-flex h-100">
+                                                      <div class="col-md-10 my-auto recomendados-title" style="margin-bottom: 7px !important">
+                                                         <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> {{$recommended->title}}</p>
+                                                      </div>
+                                                      <div class="col-md-2 my-auto" style="margin-bottom: 7px !important">
+                                                         <h6 class="text-white w-100">
+                                                            <i class="far fa-user-circle text-center">
+                                                               <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
+                                                            </i>
+                                                         </h6>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </a>
+                                          </div>
+                                       @endif
+                                 @endforeach
+                              </div>
+                           </div>
+                           <div class="carousel-item">
+                              <div class="row">
+                                 @php $tercero =0; @endphp
+                                 @foreach($cursosRecomendados as $recommended)
+                                       @php $tercero++; @endphp
 
-  <div class="carousel-item active">
-    <div class="row">
+                                       @if($tercero >= 7 && $tercero <= 9)
+                                          <div class="col-md-4" style="margin-top: 20px;">
+                                             <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white text-center">
+                                                @if (!empty($recommended->thumbnail_cover))
+                                                   <img src="{{ asset('uploads/images/courses/covers/'.$recommended->thumbnail_cover) }}" class="card-img-top" alt="...">
+                                                @else
+                                                   <img src="{{ asset('uploads/images/avatar/default.jpg') }}" class="card-img-top" alt="...">
+                                                @endif
+                                                <div class="card-img-overlay clearfix">
+                                                   <div>
+                                                      <h6 class="card-title" style="font-size: 14px">{{$recommended->mentor->display_name}}</h6>
+                                                   </div>
+                                                   <div class="row ml-0 d-flex h-100">
+                                                      <div class="col-md-10 my-auto recomendados-title" style="margin-bottom: 7px !important">
+                                                        <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> {{$recommended->title}}</p>
+                                                      </div>
+                                                      <div class="col-md-2 my-auto" style="margin-bottom: 7px !important">
+                                                         <h6 class="text-white w-100">
+                                                            <i class="far fa-user-circle text-center">
+                                                               <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
+                                                            </i>
+                                                         </h6>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </a>
+                                          </div>
+                                       @endif
+                                 @endforeach
+                              </div>
+                           </div>
+                        @endif
+                     </div>
 
-@php
-$contador=0;
-@endphp
-@foreach($cursosRecomendados as $recommended)
-@php
-$contador++;
-@endphp
-
-@if($contador <= 3)
-
-<div class="col-md-4" style="margin-top: 20px;">
-  @if (!empty($recommended->thumbnail_cover))
- <img src="{{ asset('uploads/images/courses/covers/'.$recommended->thumbnail_cover) }}" class="card-img-top" alt="...">
- @else
- <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top" alt="...">
-  @endif
- <div class="card-img-overlay clearfix">
-<div>
-    <h6 class="card-title" style="font-size: 12px">{{$recommended->mentor->display_name}}</h6>
-</div>
-<div class="row ml-0 d-flex h-100">
-    <div class="col-md-10 my-auto  recomendados-title text-center" style="margin-bottom: 7px !important">
-       <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></p>
-    </div>
-    <div class="col-md-1 my-auto" style="margin-bottom: 7px !important">
-        <h6 class="text-white w-100">
-            <i class="far fa-user-circle text-center">
-                <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
-            </i>
-            
-        </h6>
-    </div>
-</div>
-</div>
- </div>
-@endif
-@endforeach
-</div>
-</div>
-
-@if($total >= 4)
-<div class="carousel-item">
-    <div class="row">
-
-@php
-$segundo =0;
-@endphp
-@foreach($cursosRecomendados as $recommended)
-@php
-$segundo++;
-@endphp
-
-@if($segundo >= 4 && $segundo <= 6)
-
-<div class="col-md-4" style="margin-top: 20px;">
-  @if (!empty($recommended->thumbnail_cover))
- <img src="{{ asset('uploads/images/courses/covers/'.$recommended->thumbnail_cover) }}" class="card-img-top" alt="...">
- @else
- <img src="{{ asset('uploads/images/avatar/default.jpg') }}" class="card-img-top" alt="...">
-  @endif
-<div class="card-img-overlay clearfix">
-<div>
-    <h6 class="card-title" style="font-size: 14px">{{$recommended->mentor->display_name}}</h6>
-</div>
-<div class="row ml-0 d-flex h-100">
-<div class="col-md-10 my-auto recomendados-title" style="margin-bottom: 7px !important">
-        <p class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px;"> <a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white"> {{$recommended->title}}</a></p>
-    </div>
-    <div class="col-md-2 my-auto" style="margin-bottom: 7px !important">
-        <h6 class="text-white w-100">
-            <i class="far fa-user-circle text-center">
-                <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
-            </i>
-            
-        </h6>
-    </div>
-</div>
-</div>
- </div>
-@endif
-@endforeach
-</div>
-</div>
-<div class="carousel-item">
-    <div class="row">
-
-@php
-$tercero =0;
-@endphp
-@foreach($cursosRecomendados as $recommended)
-@php
-$tercero++;
-@endphp
-
-@if($tercero >= 7 && $tercero <= 9)
-
-<div class="col-md-4" style="margin-top: 20px;">
-  @if (!empty($recommended->thumbnail_cover))
- <img src="{{ asset('uploads/images/courses/covers/'.$recommended->thumbnail_cover) }}" class="card-img-top" alt="...">
- @else
- <img src="{{ asset('uploads/images/avatar/default.jpg') }}" class="card-img-top" alt="...">
-  @endif
-<div class="card-img-overlay clearfix">
-<div>
-    <h6 class="card-title" style="font-size: 14px">{{$recommended->mentor->display_name}}</h6>
-</div>
-<div class="row ml-0 d-flex h-100">
-    <div class="col-md-10 my-auto recomendados-title" style="margin-bottom: 7px !important">
-        <h6 class="col-sm w-100 pl-1 pr-1 text-center" style="font-size: 20px"><a href="{{ route('courses.show', [$recommended->slug, $recommended->id]) }}" class="text-white text-center"> {{$recommended->title}}</a></h6>
-    </div>
-    <div class="col-md-2 my-auto" style="margin-bottom: 7px !important">
-        <h6 class="text-white w-100">
-            <i class="far fa-user-circle text-center">
-                <p style="font-size: 10px;">{{ $recommended->users->count() }}</p>
-            </i>
-        </h6>
-    </div>
-</div>
-</div>
- </div>
-@endif
-@endforeach
-</div>
-</div>
-@endif
-
-</div>
-
-@if($total >= 3)
-<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-<i class="fas fa-chevron-circle-left"></i>
-<span class="sr-only">Previous</span>
-</a>
-<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-<i class="fas fa-chevron-circle-right"></i>
-<span class="sr-only">Next</span>
-</a>
-@endif
-
-</div>
-
-@endif
-<!--Carrusel-->
-</div>
-<hr style="margin-top: 40px;border: 1px solid #707070;opacity: 1;margin-bottom: 45px;">
-
-@endif
-@endif
-@endif
+                     @if($total >= 3)
+                           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                              <i class="fas fa-chevron-circle-left"></i>
+                              <span class="sr-only">Previous</span>
+                           </a>
+                           <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                              <i class="fas fa-chevron-circle-right"></i>
+                              <span class="sr-only">Next</span>
+                           </a>
+                     @endif
+                  </div>
+               @endif
+               <!--Carrusel-->
+            </div>
+            <hr style="margin-top: 40px;border: 1px solid #707070;opacity: 1;margin-bottom: 45px;">
+         @endif
+      @endif
+   @endif
 
     {{--FIN SECCIÓN RECOMENDACIONES--}}
     
@@ -531,7 +510,7 @@ $tercero++;
                                                 <a  href="{{ url('courses/mentor/'.$mentor->mentor_id) }}" style="color:#fff"> {{ $mentor->nombre }}</a>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;"></i></a>
+                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;" title="Ver Cursos"></i></a>
                                             </div>
                                         </div>    
                                     </div>
@@ -570,4 +549,5 @@ $tercero++;
     {{-- FIN SECCIÓN MENTORES --}}
     @endif
     {{-- FIN SECCIÓN TUS MENTORES--}}
+    </div>
 @endsection

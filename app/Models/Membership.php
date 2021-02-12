@@ -21,15 +21,11 @@ class Membership extends Model
         return $this->hasMany('App\Models\Course');
     }
 
-    public function shopping_carts(){
-        return $this->hasMany('App\Models\ShoppingCart');
-    }
-
-    public function details(){
-        return $this->hasMany('App\Models\ShoppingCart');
-    }
-
-     public function award(){
+    public function award(){
         return $this->hasOne('App\Models\Award');
+    }
+
+     public function purchases(){
+        return $this->hasMany('App\Models\PurchaseDetail');
     }
 }

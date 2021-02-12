@@ -43,6 +43,7 @@ class MembershipsExpirations extends Command
         try {
             $fechaActual = date('Y-m-d');
             DB::table('wp98_users')
+                ->where('ID', '<>', 1)
                 ->where('membership_id', '<>', NULL)
                 ->where('membership_status', '=', 1)
                 ->where('membership_expiration', '<', $fechaActual)

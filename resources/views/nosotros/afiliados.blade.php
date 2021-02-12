@@ -66,8 +66,8 @@
 </div>
 
 
-<div class="col-md-12 afiliados-box" style="background-color: #F5F5F5;">
-<div class="row">
+<div class="col-md-12 afiliados-box " style="background-color: #F5F5F5; padding-top: 150px;">
+<div class="row" >
   <div class="col-lg-3 col-xs-12 offset-lg-1 mt-4">
       <div class="box">
               <img src="{{ asset('nosotros/afiliados/registrateblue.svg') }}" alt="" height="50px" width="50px">

@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta property="og:title" content="My Business Academy PRO"/>
+        <meta property="og:site_name" content="My Business Academy PRO"/>
+        <meta property="og:url" content="https://mybusinessacademypro.com"/>
+        <meta property="og:description" content="Es la mejor academia online de educación financiera y negocios, dirigida a las personas que quieran convertirse en inversionistas PRO"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:locale" content="es"/>
+        <meta property="og:image" content="https://mybusinessacademypro.com/academia/nosotros/nosotros/nosotros.jpg"/>
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="400" />
+        
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -134,7 +144,6 @@
                         <a href="https://twitter.com/intent/tweet?text=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded twitter mt-2 mb-2" target="_blank"><i class="text-center fa fa-twitter"></i></a>
                         <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//mybusinessacademypro.com/academia/&title=My%20Bussiness%20Academy%20Pro&summary=&source=" class="btn btn-social-media-icon btn-rounded linkedin mt-2 mb-2" target="_blank"><i class="fa fa-linkedin"></i></a>
                         <a href="mailto:?subject=My%20Bussiness%20Academy%20Pro&body=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded email-icon mt-2 mb-2" target="_blank"><i class="fas fa-envelope"></i></a>
-                        <a href="https://www.youtube.com/channel/UCQaLkVtbR6RK8HfhajFnikg" class="btn btn-social-media-icon btn-rounded youtube" target="_blank"><i class="fa fa-youtube"></i></a>
                      </div>
 
                 <div class="section-paises">

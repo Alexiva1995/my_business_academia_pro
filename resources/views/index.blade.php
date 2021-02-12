@@ -35,6 +35,10 @@
             $("#courses-mentor-"+$mentor).css('display', 'none');
             $("#card-mentor-"+$mentor).slideToggle();
         }
+
+        if ({{$modalSinergia}} == 1){
+            $('#sinergia-modal').modal();
+        }
     </script>
 @endpush
 
@@ -163,11 +167,14 @@
 
 @section('content')
 
-@if (app('request')->input('logout') == "1")
-      <script>
-         document.getElementById('logout-form').submit();
-      </script>
-   @endif
+    @if (app('request')->input('logout') == "1")
+        <script>
+            document.getElementById('logout-form').submit();
+        </script>
+    @endif
+
+    
+
     @if (Session::has('msj-exitoso'))
         <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
             <strong>{{ Session::get('msj-exitoso') }}</strong>
@@ -435,7 +442,7 @@
                                                 <a class="text-white" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}"> {{ $mentor->nombre }}</a>
                                             </div>
                                             <div class="col-md-2">
-                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;"></i></a>
+                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;" title="Ver Cursos"></i></a>
                                             </div>
                                         </div>
                                         
@@ -500,27 +507,43 @@
     
     
     {{-- mostrar pop up --}}
-     @if($pop->activado == '1')
-     <div class="modal fade" id="mostrarpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel" style="color:white;">{!! (!empty($pop->titulo)) ? $pop->titulo : '' !!}   </h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          
-       <div class="embed-responsive embed-responsive-16by9">   
-       {!! (!empty($pop->contenido)) ? $pop->contenido : '' !!}   
-       </div>        
-            
-      </div>
-    </div>
-  </div>
-</div> 
-@endif
-{{-- Fin pop up--}}
+    @if($pop->activado == '1')
+        <div class="modal fade" id="mostrarpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel" style="color:white;">{!! (!empty($pop->titulo)) ? $pop->titulo : '' !!}   </h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="embed-responsive embed-responsive-16by9">   
+                            {!! (!empty($pop->contenido)) ? $pop->contenido : '' !!}   
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div> 
+    @endif
+    {{-- Fin pop up--}}
+
+    <div class="modal fade" id="sinergia-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel" style="color:white;">REGÍSTRATE AHORA</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-white pl-5 pr-5 text-center">
+                    Cierra esta ventana si deseas seguir explorando como visitante...
+                    <br><br>
+                    <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=1' }}">REGISTRO</a>
+                </div>
+            </div>
+        </div>
+    </div> 
 
 @endsection
