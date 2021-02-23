@@ -263,7 +263,7 @@
 
         <script type="text/javascript">
     function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'es', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
+      new google.translate.TranslateElement({pageLanguage: jQuery('.goog-te-combo').val(), layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT}, 'google_translate_element');
     }
 
 	function triggerHtmlEvent(element, eventName) {

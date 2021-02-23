@@ -285,18 +285,15 @@
           <div class="card-body">
 
               <p class="card-title" style="text-align: left; color: #2A91FF; font-size: 35px; font-weight: bold;">
-                    MARIANA LÓPEZ DE WAARD
+                    TANIA TOSTADO
                 </p>
 
-               <p class="card-text align-items-center d-flex justify-content-center" style="font-weight: 500; font-size: 19px; line-height: 1.6em; color: #2A91FF; text-align: left;">
-                Licenciada en Marketing con Especialidad en Negocios Internacionales, Filántropa, Exitosa Empresaria y Conferencista de empresas con expansión global.
-               </p>
                <p class="card-text align-items-center d-flex justify-content-center" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">
-                 Experta en la apertura de nuevos mercados y mentora de grandes equipos de trabajo de la industria del Multinivel. Su compromiso es influir positivamente en mujeres y hombres para sacar al líder que llevan dentro e impulsarlos a cumplir sus sueños.</p>
+                Licenciada en Administración financiera con especialidad en finanzas corporativas, ha colaborado con bancos de talla mundial como: UBS, Credit Suisse y Deutche Bank en Suiza, Bank Hapoalim en Israel, Baern Stearns Securities en EUA, entre muchos otros. En 2008, fue ganadora del premio Best Development, otorgado por la International Property Awards y CNBC. Como consultora independiente, asesora a múltiples y reconocidas empresas en latinoamérica para hacer importantes transacciones con cifras de millones de dólares.</p>
             </div>
            </div>
             <div class="col-md-6">
-              <img src="{{ asset('nosotros/fundadores/mujer.jpg') }}" style="width: 100%;">
+              <img src="{{ asset('nosotros/nosotros/16.jpg') }}" style="width: 100%;">
             </div>
           </div>
         </div>
@@ -309,27 +306,6 @@
     </div>
 
 <div class="col-md-10 offset-md-1">
-    <div class="card mb-3" style="max-width: 100%; margin-bottom: 0rem!important;">
-        <div class="row no-gutters">
-           <div class="col-md-4" style="background-color: #EDEDED;">
-              <img src="{{ asset('nosotros/nosotros/16.jpg') }}" class="card-img" alt="...">
-             <div class="card-img-overlay d-flex flex-column" style="color: #fff; text-align: center;">
-               <div class="mt-auto">
-                  <div class="new-course-title" style="background-color: #333; padding: 8px; float: right; color: #2A91FF;">
-                    Tania Tostado
-                  </div>
-              </div>
-             </div>
-           </div>
-          <div class="col-md-8" style="background-color: #EDEDED;">
-            <div class="card-body">
-                <p class="card-text" style="color: #2A91FF; font-size: 35px; font-weight: bold;">Tania Tostado</p>
-
-               <p class="card-text" style="text-align: left; line-height: 30px; font-weight: 500; font-size: 19px;">Licenciada en Administración financiera con especialidad en finanzas corporativas, ha colaborado con bancos de talla mundial como: UBS, Credit Suisse y Deutche Bank en Suiza, Bank Hapoalim en Israel, Baern Stearns Securities en EUA, entre muchos otros. En 2008, fue ganadora del premio Best Development, otorgado por la International Property Awards y CNBC. Como consultora independiente, asesora a múltiples y reconocidas empresas en latinoamérica para hacer importantes transacciones con cifras de millones de dólares.</p>
-            </div>
-          </div>
-        </div>
-    </div>
 
     <div class="card mb-3" style="max-width: 100%; margin-bottom: 0rem!important;  margin-top: 80px;">
         <div class="row no-gutters">
