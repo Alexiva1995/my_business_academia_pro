@@ -33,6 +33,7 @@
                 @if(Auth::user()->rol_id == 0)
                 <a href="{{route('soporte.tickets.team')}}" class="nav-link"><i class="fas fa-tools text-primary"></i> Tickets/Soporte</a>
                 @endif
+                <a href="{{route('soporte')}}" class="nav-link"><i class="fa fa-arrow-circle-left text-primary"></i> Volver al menú principal</a>
                 </div>
             </div>
     </div>

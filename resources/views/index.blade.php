@@ -36,8 +36,8 @@
             $("#card-mentor-"+$mentor).slideToggle();
         }
 
-        if ({{$modalSinergia}} == 1){
-            $('#sinergia-modal').modal();
+        if ({{$modalVisitante}} == 1){
+            $('#visitante-modal').modal();
         }
     </script>
 @endpush
@@ -528,7 +528,7 @@
     @endif
     {{-- Fin pop up--}}
 
-    <div class="modal fade" id="sinergia-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="visitante-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

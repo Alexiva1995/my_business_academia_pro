@@ -26,7 +26,7 @@
         <div class="col-md-12 ticket-box"><h4 class="white"><b>Nota:</b> Si necesitas ayuda los tiempos de respuesta son de 12 a 24 horas</h4></div>
         <div style="float:right;">
                 <a href="{{route('soporte.tickets.clients')}}" class="btn btn-info"><i class="fas fa-ticket-alt"></i> Mis tickets</a>
-                <a href="{{route('soporte.academy')}}" class="btn btn-success"><i class="fas fa-arrow-circle-left"></i> Volver al menú</a>
+                <a href="{{route('soporte')}}" class="btn btn-success"><i class="fas fa-arrow-circle-left"></i> Volver al menú principal</a>
         </div><br><br>
 		<div class="box" style="margin-top: 100px; border-radius:10px!important; background:#2f343a!important;">
 

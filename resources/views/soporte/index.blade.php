@@ -29,8 +29,6 @@
 
         <div class="col-md-8 col-md-offset-2 text-center" style="margin-bottom: 30px;">
             <h3 class="white">Para nosotros lo mas importante es que tengas una buena experiencia, explora cada una de las opciones y si no encuentras lo que buscas <a href="{{route('soporte.tickets')}}" class="text-primary font-weight-bold">crea un ticket</a></h3>
-
-            <h3><a class="btn green" href="{{ route('index') }}"><i class="far fa-arrow-alt-circle-left"></i> Regresar a la academia</a></h3>
         </div>
 
         @if (!is_null($banner))

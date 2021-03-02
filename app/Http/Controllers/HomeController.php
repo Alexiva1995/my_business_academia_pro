@@ -82,10 +82,13 @@ class HomeController extends Controller{
    }
 
    public function index(){
-      $modalSinergia = 0;
-      if (redirect()->getUrlGenerator()->previous() == "https://sinergiared.com/"){
-        $modalSinergia = 1;
+      $modalVisitante = 0;
+      if (Auth::guest()){
+        if ( (redirect()->getUrlGenerator()->previous() == "https://mybusinessacademypro.com/") || (redirect()->getUrlGenerator()->previous() == "https://sinergiared.com/") ){
+          $modalVisitante = 1;
+        }
       }
+     
        //pop up
        $pop = Pop::find(1);
        $pop_up = 0;
@@ -298,7 +301,7 @@ class HomeController extends Controller{
             }
       
       return view('index')->with(compact('cursosDestacados', 'cursosNuevos', 'idStart', 'idEnd', 'previous', 'next', 'refeDirec', 'proximoEvento', 'checkPais', 'horaEvento', 'avance', 'misEventosArray', 'mentores',
-      'pop','pop_up', 'modalSinergia'));
+      'pop','pop_up', 'modalVisitante'));
    }
 
    public function search(Request $request){
