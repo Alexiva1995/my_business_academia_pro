@@ -5,7 +5,7 @@
         <div class="col-md-12">
             
             <div class="box-body">
-              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="2000">
                 <div class="carousel-inner">
                     
                      @php
@@ -18,13 +18,13 @@
                     
                     @if($con == 0)
                   <div class="item active">
-                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}" style="width: 100%; height: 240px;">
+                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}" style="width: 100%; height: 320px;">
 
                    
                   </div>
                   @else
                   <div class="item">
-                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}"  style="width: 100%; height: 240px;">
+                    <img src="{{asset('drop/'.$item->slider)}}" alt="{{$con}}"  style="width: 100%; height: 320px;">
 
                     
                   </div>

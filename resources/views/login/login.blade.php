@@ -11,7 +11,7 @@
         border-color: #2877CB #2877CB #2877CB;
         color: #333;
     }
-
+    
     #video_background {
       position: absolute;
       bottom: 0px;
@@ -23,10 +23,11 @@
       z-index: -1000;
       overflow: hidden;
    }
-
+ 
+ 
 </style>
 
-<video src="{{asset('/fondovideo/video.mp4')}}" type="video/mp4" autoplay="" muted loop="" id="video_background"></video>
+<video src="{{asset('/fondovideo/video.mov')}}" type="video/mov" autoplay="" muted loop="" id="video_background"></video>
 
 <center>
     <img src="{{asset('/images/logo-login.png')}}" style="width: 100px; height: 100px; margin-top: 80px; margin-bottom: 40px;">
@@ -116,7 +117,7 @@
                                 <label for="usr" style="font: 16px sans-serif;">Número de Afiliación</label>
                                 <input type="number" class="form-control" name="ID" value="{{old('ID')}}" style="border-radius: 20px;">
                             </div>
-
+                            
                             <div class="form-group has-feedback" style="margin-top:10px;">
                                 <label for="usr" style="font: 16px sans-serif;">Contraseña</label>
                                <div class="input-group">
@@ -171,7 +172,7 @@
 
                         <div class="form-group has-feedback">
                             <label for="usr">Usuario</label>
-                            <input type="text" class="form-control" name="nameuser" value="{{old('nameuser')}}" style="border-radius: 20px;">
+                            <input type="text" class="form-control" name="nameuser" value="{{old('nameuser')}}" style="border-radius: 20px;" pattern="[A-Za-z ]+$">
                         </div>
 
                         <div class="form-group has-feedback">
@@ -180,21 +181,21 @@
                         </div>
                         <div class="form-group has-feedback">
                             <label for="usr">Contraseña</label>
-                            <input type="password" class="form-control" name="password" ID="txtPassword" style="border-radius: 20px;">
+                            <input type="password" class="form-control" name="password" style="border-radius: 20px;">
                         </div>
                         <div class="form-group has-feedback">
                             <label for="usr">Confirmar contraseña</label>
-                            <input type="password" class="form-control" name="password_confirmation" ID="txtPassword" style="border-radius: 20px;">
+                            <input type="password" class="form-control" name="password_confirmation" style="border-radius: 20px;">
                         </div>
 
                         @if(empty(request()->ref))
                             <div class="form-group has-feedback">
-                            <label for="patrocinador">ID Patrocinador (Si no sabe cual es su patrocinador por favor coloque el ID 1)</label>
+                            <label for="patrocinador">ID Patrocinador</label>
                             <input type="number" class="form-control" name="referred_id" ID="patrocinador" style="border-radius: 20px;">
                         </div>
                         @else
                             <div class="form-group has-feedback">
-                            <label for="patrocinador">ID Patrocinador (Si no sabe cual es su patrocinador por favor coloque el ID 1)</label>
+                            <label for="patrocinador">ID Patrocinador</label>
                             <input type="number" class="form-control" name="referred_id" value="{{request()->ref}}" ID="patrocinador" style="border-radius: 20px;" readonly>
                         </div>
                         @endif
@@ -267,7 +268,7 @@
 
 
 <script type="text/javascript">
-  function mostrarPassword(){
+function mostrarPassword(){
         var cambio = document.getElementById("txtPassword");
         if(cambio.type == "password"){
             cambio.type = "text";
@@ -278,6 +279,6 @@
         }
     } 
     
-</script>
-
+    </script>
+    
 @endsection

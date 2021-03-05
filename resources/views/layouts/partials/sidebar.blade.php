@@ -55,8 +55,8 @@
 @endphp
 
 <!-- Sidebar -->
-<div class="bg-dark-gray" id="sidebar-wrapper">
-    <div class="sidebar-heading border-right" style="border-bottom: solid white 1px; height: 70px;">
+<div class="bg-dark-gray">
+    <!--<div class="sidebar-heading border-right" style="border-bottom: solid white 1px; height: 70px;">
         <div class="row">
             <div class="col-3">
                 <img src="{{ asset('images/logo.png') }}" style="width: 40px; height: 40px;">
@@ -66,8 +66,9 @@
                 <div style="color: white; font-size: 11px; ">A c a d e m y p r o</div>
             </div>
         </div>
-    </div>
-    <div class="list-group list-group-flush">
+        <img src="{{ asset('images/mbapro-completo.png') }}" style="width: auto; height: 45px;">
+    </div>-->
+    <div class="list-group list-group-flush list-sidebar">
         <a href="{{ route('index') }}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fa fa-home"></i> Home</a>
         @if(Auth::user())
         <a href="{{route('transmisiones')}}" class="list-group-item bg-dark-gray" style="color: white;"><i class="fas fa-video"></i> Streaming</a>
@@ -153,8 +154,9 @@
         @endif
         <a href="#" id="menu-toggle2" class="list-group-item bg-dark-gray" style="color: white;"><i class="fa fa-arrow-left"></i> Ocultar</a>
         @guest
+            <center>
             <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=1' }}">REGISTRARME</a>
-            <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=0' }}">ENTRAR</a>
+            <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=0' }}">ENTRAR</a></center>
         @endguest
 
         <div class="col-md-12 col-md-12 pt-3">

@@ -438,11 +438,11 @@
                                 <div class="mt-auto">
                                     <div class="text-sm text-white" style="line-height:1;">
                                         <div class="row">
-                                            <div class="col-md-10">
-                                                <a class="text-white" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}"> {{ $mentor->nombre }}</a>
+                                            <div class="col-md-8">
+                                                <a class="text-white" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}" style="font-size: 18px;"> {{ $mentor->nombre }}</a>
                                             </div>
-                                            <div class="col-md-2">
-                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;" title="Ver Cursos"></i></a>
+                                            <div class="col-md-4 text-right">
+                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});" style="font-size: 13px;"><i class="fa fa-search"></i> Cursos</a>
                                             </div>
                                         </div>
                                         

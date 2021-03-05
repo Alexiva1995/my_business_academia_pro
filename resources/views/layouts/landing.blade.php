@@ -132,95 +132,101 @@
     </head>
     <body>
         <div class="d-flex" id="wrapper">
-            @include('layouts.partials.sidebar')
-
+            
+            @include('layouts.partials.header')
             <!-- Page Content -->
-            <div class="bg-dark-gray" id="page-content-wrapper">
-                @include('layouts.partials.header')
+            <div class="bg-dark-gray" id="page-content-wrapper" style="margin-top: 70px;">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-12" id="sidebar-div">
+                        @include('layouts.partials.sidebar')
+                    </div>
+                    <div class="col-md-10 col-xs-10 col-sm-12" id="content-div">
+                        @yield('content')
+                        
+                        <div class="icon-bar d-block" id="icon-bar">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded facebook mt-2 mb-2" target="_blank"><i class="text-center fa fa-facebook"></i></a>
+                            <a href="https://twitter.com/intent/tweet?text=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded twitter mt-2 mb-2" target="_blank"><i class="text-center fa fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//mybusinessacademypro.com/academia/&title=My%20Bussiness%20Academy%20Pro&summary=&source=" class="btn btn-social-media-icon btn-rounded linkedin mt-2 mb-2" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <a href="mailto:?subject=My%20Bussiness%20Academy%20Pro&body=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded email-icon mt-2 mb-2" target="_blank"><i class="fas fa-envelope"></i></a>
+                        </div>
 
-                @yield('content')
-                     <div class="icon-bar d-block" id="icon-bar">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded facebook mt-2 mb-2" target="_blank"><i class="text-center fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/intent/tweet?text=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded twitter mt-2 mb-2" target="_blank"><i class="text-center fa fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//mybusinessacademypro.com/academia/&title=My%20Bussiness%20Academy%20Pro&summary=&source=" class="btn btn-social-media-icon btn-rounded linkedin mt-2 mb-2" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        <a href="mailto:?subject=My%20Bussiness%20Academy%20Pro&body=https%3A//mybusinessacademypro.com/academia/" class="btn btn-social-media-icon btn-rounded email-icon mt-2 mb-2" target="_blank"><i class="fas fa-envelope"></i></a>
-                     </div>
+                        <div class="section-paises" id="section-paises">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 py-5">
+                                        <div class="mb-5 text-center">
+                                            <img src="{{ asset('images/mba.png')}}" alt="" height="40px" class="mr-md-2 mr-5">
+                                            <img src="{{ asset('images/no_work_no_money.png')}}" alt="" height="40px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/logo-fentix.png')}}" alt="" height="40px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/logo-fxtlive.png')}}" alt="" height="40px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/mytradinglogo.png')}}" alt="" height="40px" class="mr-md-2 mr-5 ml-5">
+                                        </div>
+                                        <div class="mb-25 text-center">
+                                            <img src="{{ asset('images/icf.png')}}" alt="" height="50px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/logo-jose.png')}}" alt="" height="50px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/revolutte.png')}}" alt="" height="50px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/revolutte-insurance.png')}}" alt="" height="50px" class="mr-md-2 mr-5 ml-5">
+                                            <img src="{{ asset('images/revolutte-real-state.png')}}" alt="" height="50px" class="mr-md-2 mr-5 ml-5">
+                                        </div>
+                                        <div class="mb-2 text-center text-white" style="margin:20px;">
+                                            PAISES EN DONDE ESTAMOS PRESENTES
+                                        </div>
+                                        <div class="mb-2 text-center" style="margin:20px;">
+                                            <img src="{{ asset('images/usa.png')}}" height="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/espana.png')}}" height="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/rusia.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/marruecos.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/japon.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/cuba.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/colombia.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/ecuador.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/mexico.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/peru.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/venezuela.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/paraguay.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                            <img src="{{ asset('images/vietnam.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
+                                        </div>
+                                        <div class="mb-2 text-center text-white" style="margin-top: 10px;">
+                                            Medios de Pago
+                                            <img src="{{ asset('images/stripe.png') }}" height="15px" class="mr-md-2 mr-3" style="margin-left: 1rem! important;">
+                                            <img src="{{ asset('images/logopaypalwhite.png') }}" height="15px" class="mr-md-2 mr-3" style="margin-left: 1rem! important;">
+                                        </div>
+                                        <div class="mb-2 text-center text-white" style="margin-top: 10px;">
+                                            Aceptamos
+                                            <img src="{{ asset('images/visa.png') }}" height="15px" class="mr-md-3 mr-3" style="margin-left: 1rem! important;">
+                                            <img src="{{ asset('images/mastercard.png') }}" height="15px" class="mr-md-3 mr-3">
+                                            <img src="{{ asset('images/american.png') }}" height="15px" class="mr-md-3 mr-3">
+                                        </div>
+                                        <div class="mb-2 text-center text-white" style="margin-top: 10px;">
+                                            Pr&oacute;ximamente
+                                            <img src="{{ asset('images/amazon_pay.png') }}" height="15px" class="mr-md-3 mr-3" style="margin-left: 1rem! important;">
+                                            <img src="{{ asset('images/apple_pay.png') }}" height="15px" class="mr-md-3 mr-3">
+                                            <img src="{{ asset('images/g_pay.png') }}" height="15px" class="mr-md-3 mr-3">
 
-                <div class="section-paises">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12 py-5">
-                                <div class="mb-5 text-center">
-                                    <img src="{{ asset('images/mba.png')}}" alt="" height="40px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/no_work_no_money.png')}}" alt="" height="40px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/logo-fentix.png')}}" alt="" height="40px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/logo-fxtlive.png')}}" alt="" height="40px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/mytradinglogo.png')}}" alt="" height="40px" class="mr-md-2 mr-4 ml-4">
-                                </div>
-                                <div class="mb-25 text-center">
-                                    <img src="{{ asset('images/icf.png')}}" alt="" height="50px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/logo-jose.png')}}" alt="" height="50px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/revolutte.png')}}" alt="" height="50px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/revolutte-insurance.png')}}" alt="" height="50px" class="mr-md-2 mr-4 ml-4">
-                                    <img src="{{ asset('images/revolutte-real-state.png')}}" alt="" height="50px" class="mr-md-2 mr-4 ml-4">
-                                </div>
-                                <div class="mb-2 text-center text-white" style="margin:20px;">
-                                    PAISES EN DONDE ESTAMOS PRESENTES
-                                </div>
-                                <div class="mb-2 text-center" style="margin:20px;">
-                                    <img src="{{ asset('images/usa.png')}}" height="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/espana.png')}}" height="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/rusia.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/marruecos.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/japon.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/cuba.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/colombia.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/ecuador.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/mexico.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/peru.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/venezuela.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/paraguay.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                    <img src="{{ asset('images/vietnam.png')}}" height="40px" width="40px" class="mr-md-2 mr-3">
-                                </div>
-                                <div class="mb-2 text-center text-white" style="margin-top: 10px;">
-                                    Medios de Pago
-                                    <img src="{{ asset('images/stripe.png') }}" height="15px" class="mr-md-2 mr-3" style="margin-left: 1rem! important;">
-                                    <img src="{{ asset('images/logopaypalwhite.png') }}" height="15px" class="mr-md-2 mr-3" style="margin-left: 1rem! important;">
-                                </div>
-                                <div class="mb-2 text-center text-white" style="margin-top: 10px;">
-                                    Aceptamos
-                                    <img src="{{ asset('images/visa.png') }}" height="15px" class="mr-md-3 mr-3" style="margin-left: 1rem! important;">
-                                    <img src="{{ asset('images/mastercard.png') }}" height="15px" class="mr-md-3 mr-3">
-                                    <img src="{{ asset('images/american.png') }}" height="15px" class="mr-md-3 mr-3">
-                                </div>
-                                <div class="mb-2 text-center text-white" style="margin-top: 10px;">
-                                    Pr&oacute;ximamente
-                                    <img src="{{ asset('images/amazon_pay.png') }}" height="15px" class="mr-md-3 mr-3" style="margin-left: 1rem! important;">
-                                    <img src="{{ asset('images/apple_pay.png') }}" height="15px" class="mr-md-3 mr-3">
-                                    <img src="{{ asset('images/g_pay.png') }}" height="15px" class="mr-md-3 mr-3">
+                                        </div>
+                                        <div class="text-center text-white" style="margin-top: 20px;">
+                                            <a href="{{route('client.policies')}}" class="text-white" target="_blank" style="padding: 2px;">Pol&iacute;ticas de Uso</a> &nbsp&nbsp
+                                            <a href="{{ route('terms-and-conditions') }}" class="text-white" style="padding: 2px;" target="_blank">T&eacute;rminos y condiciones</a>&nbsp&nbsp
+                                            <a href="#" data-toggle="modal" data-target="#contactModal" class="text-white" style="padding: 2px;" target="_black"> Contacto</a>&nbsp&nbsp
+                                            <a href="{{route('index')}}" class="text-white" style="padding: 2px;">Inicio</a>&nbsp&nbsp
+                                        </div>
 
-                                </div>
-                                <div class="text-center text-white" style="margin-top: 20px;">
-                                    <a href="{{route('client.policies')}}" class="text-white" target="_blank" style="padding: 2px;">Pol&iacute;ticas de Uso</a> &nbsp&nbsp
-                                    <a href="{{ route('terms-and-conditions') }}" class="text-white" style="padding: 2px;" target="_blank">T&eacute;rminos y condiciones</a>&nbsp&nbsp
-                                    <a href="#" data-toggle="modal" data-target="#contactModal" class="text-white" style="padding: 2px;" target="_black"> Contacto</a>&nbsp&nbsp
-                                    <a href="{{route('index')}}" class="text-white" style="padding: 2px;">Inicio</a>&nbsp&nbsp
+                                    </div>
                                 </div>
 
                             </div>
+                            <!-- Boton hacia arriba -->
+                            <a class="ir-arriba"  javascript:void(0) title="Volver arriba">
+                              <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+                              </span>
+                            </a>
                         </div>
 
+                        @include('layouts.partials.footer')
                     </div>
-                    <!-- Boton hacia arriba -->
-                    <a class="ir-arriba"  javascript:void(0) title="Volver arriba">
-                      <span class="fa-stack">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
                 </div>
-
-                @include('layouts.partials.footer')
             </div>
             <!-- /#page-content-wrapper -->
         </div>
@@ -304,7 +310,17 @@
         <script>
             $("#menu-toggle").click(function(e) {
                 e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
+                //$("#wrapper").toggleClass("toggled");
+                if ($("#content-div").hasClass("col-md-10")){
+                    $("#sidebar-div").css("display", "none");
+                    $("#content-div").removeClass("col-md-10");
+                    $("#content-div").addClass("col-md-12");
+                }else{
+                    $("#sidebar-div").css("display", "block");
+                    $("#content-div").removeClass("col-md-12");
+                    $("#content-div").addClass("col-md-10");
+                }
+
                 if ($("#icon-bar").hasClass("d-block")){
                     $("#icon-bar").removeClass("d-block");
                     $("#icon-bar").addClass("d-none");
@@ -315,7 +331,17 @@
             });
             $("#menu-toggle2").click(function(e) {
                 e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
+                //$("#wrapper").toggleClass("toggled");
+                if ($("#content-div").hasClass("col-md-10")){
+                    $("#sidebar-div").css("display", "none");
+                    $("#content-div").removeClass("col-md-10");
+                    $("#content-div").addClass("col-md-12");
+                }else{
+                    $("#sidebar-div").css("display", "block");
+                    $("#content-div").removeClass("col-md-12");
+                    $("#content-div").addClass("col-md-10");
+                }
+                
                 if ($("#icon-bar").hasClass("d-block")){
                     $("#icon-bar").removeClass("d-block");
                     $("#icon-bar").addClass("d-none");

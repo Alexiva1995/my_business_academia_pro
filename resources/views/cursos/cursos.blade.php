@@ -172,7 +172,7 @@
                                 </p>
                                 <div class="card-body p-2">
                                 <div class="row d-flex align-items-center body-miscursos">
-                                    <h6 class="col-9 d-flex align-items-center text-title-miscursos" style="font-size:16px;"><a href="{{ route('courses.show', [$curso->slug, $curso->id]) }}" class="text-secondary">{{$curso->title}}</a>
+                                    <h6 class="col-9 d-flex align-items-center text-title-miscursos" style="font-size:16px; font-weight: bold;"><a href="{{ route('courses.show', [$curso->slug, $curso->id]) }}" class="text-white">{{$curso->title}}</a>
                                     </h6>
 
                                     <div class="col-3 p-2 d-flex align-items-center d-none d-sm-none d-md-block icon-miscursos"><img src="{{ asset('images/icons/video-player-blue.svg') }}" alt="" height="15px" width="15px"></div>
@@ -506,11 +506,11 @@
                                 <div class="mt-auto">
                                     <div class="text-sm text-white" style="line-height:1;">
                                         <div class="row">
-                                            <div class="col-md-10">
-                                                <a  href="{{ url('courses/mentor/'.$mentor->mentor_id) }}" style="color:#fff"> {{ $mentor->nombre }}</a>
+                                            <div class="col-md-8">
+                                                <a class="text-white" href="{{ url('courses/mentor/'.$mentor->mentor_id) }}" style="font-size: 17px;"> {{ $mentor->nombre }}</a>
                                             </div>
-                                            <div class="col-md-2">
-                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});"><i class="fa fa-search" style="font-size: 18px;" title="Ver Cursos"></i></a>
+                                            <div class="col-md-4 text-right">
+                                                <a href="javascript:;" onclick="showMentorCourses({{$mentor->mentor_id}});" style="font-size: 12px;"><i class="fa fa-search"></i> Cursos</a>
                                             </div>
                                         </div>    
                                     </div>

@@ -41,14 +41,14 @@
             </div>
       </div>
    </div>
-	
+   
 </div>
 <hr style="height: 1px;background-color: #707070;">
 <div class="container-fluid" style="background-color: #1C1D21;">
    <div class="col-md-12">
    <div class="row">
             <div class="col-md-6" style="margin-top:10%;">
-               <h1 class="text-primary font-weight-bold ftxlivestreming-text">STREAMING MBA PRO</h1>
+               <h1 class="text-primary font-weight-bold ftxlivestreming-text">MBA PRO STREAMING</h1>
                <h5 class="text-white mt-4">
                Un espacio de entrenamientos en vivo para emprendedores, su propuesta de valor se distingue por ofrecer: Información de primer nivel y en tiempo real, así como motivación para aprender de forma sencilla y herramientas precisas para que se ponga en practica el conocimiento adquirido en los streaming de forma inmediata.
                </h5>
@@ -59,7 +59,7 @@
             </div>
       </div>
    </div>
-	
+   
 </div>
 <hr style="height: 1px;background-color: #707070;">
 <div class="container-fluid" style="background-color: #1C1D21;">
@@ -77,7 +77,7 @@
             </div>
       </div>
    </div>
-	
+   
 </div>
 <hr style="height: 1px;background-color: #707070;">
 
@@ -331,9 +331,9 @@
             @foreach($finalizados as $fin)
                <div class="col-md-3" style="margin-top: 20px;">
                    @if($fin->miniatura == null)
-                    <img src="{{ asset('uploads/avatar/'.$fin->mentor->avatar) }}" class="card-img-top" alt="..." >
+                    <img src="{{ asset('uploads/avatar/'.$fin->mentor->avatar) }}" class="card-img-top" alt="..." style="width: 100%; height: 300px;">
                    @else
-                     <img src="{{ asset('uploads/images/miniatura/'.$fin->miniatura) }}" class="card-img-top" alt="..." >
+                     <img src="{{ asset('uploads/images/miniatura/'.$fin->miniatura) }}" class="card-img-top" alt="..." style="width: 100%; height: 300px;">
                    @endif
                   <div class="card-img-overlay" style="margin-left: 10px; margin-right: 10px;">
                      <h6 class="card-title">{{$fin->mentor->display_name}}</h6>

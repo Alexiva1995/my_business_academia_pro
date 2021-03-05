@@ -98,7 +98,7 @@
 
                            <div class="form-group has-feedback">
                                 <label for="usr" class="text-white">Usuario</label>
-                                <input type="text" class="mejora"  name="nameuser" value="{{old('nameuser')}}" placeholder="Usuario">
+                                <input type="text" class="mejora"  name="nameuser" value="{{old('nameuser')}}" placeholder="Usuario" pattern="[A-Za-z ]+$>
                             </div>
                            
                             <div class="form-group has-feedback">
@@ -115,7 +115,7 @@
                             </div>
 
                             <div class="form-group has-feedback">
-                                <label for="patrocinador" class="text-white">ID Patrocinador (Si no sabe cual es su patrocinador por favor coloque el ID 1)</label>
+                                <label for="patrocinador" class="text-white">ID Patrocinador</label>
                                 <input type="number" class="mejora" name="referred_id" ID="patrocinador" value="{{ (request()->ref != null) ? request()->ref : 1 }}" >
                             </div>
 

@@ -59,11 +59,8 @@
     <div class="col-md-8 offset-md-2" style="margin-top: 50px;">
       <div class="card" style="max-width: 100%; margin-bottom: 0rem!important;">
         <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{ asset('nosotros/nosotros/03.jpg') }}" class="card-img" alt="...">
-            </div>
-            <div class="col-md-4 nosotros-text" style="background-color: white; text-align: center; ">
-              <p class="mt-2" style="padding: 30px 30px; font-weight: 400; font-size: 17px;">El modelo académico cuenta con flexibilidad de aprendizaje, información de primer nivel y herramientas de aplicación sencilla e inmediata.</p>
+            <div class="col-md-8 nosotros-text" style="background-color: white; text-align: center; ">
+              <p class="mt-2" style="padding: 30px 30px; font-weight: 400; font-size: 17px;">Te ofrecemos variedad en temas en formato de microlecciones que te ayudarán a aprender mucho mejor.</p>
             </div>
              <div class="col-md-4" style="min-height: 200px; background-image: url('{{ asset('nosotros/nosotros/04.jpg') }}'); background-size: cover; background-position: top;">
             </div>
@@ -77,7 +74,7 @@
            </div>
           <div class="col-md-8 nosotros-text" style="background-color: #2A91FF;">
             <div class="card-body row align-items-center justify-content-center">
-               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px; color: white;">5 niveles de aprendizaje: desde el principiante, básico o intermedio para introducirte al fascinante mundo de las finanzas, hasta el avanzado y pro, que te llevan a lograr resultados extraordinarios.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px; color: white;">Contamos con 3 tipos de membresías con contenido especializado para SER - HACER - TENER y TRASCENDER asi como 5 niveles de aprendizaje para medir tu crecimiento en cada uno.</p>
             </div>
           </div>
          </div>
@@ -88,7 +85,7 @@
         <div class="row no-gutters">
           <div class="col-md-8 nosotros-text" style="background-color: #fff;">
             <div class="card-body row align-items-center">
-               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px;">Se cuenta con múltiples módulos y varias lecciones que cubren el concepto y contexto total del fascinante mundo Fintech, incluyendo sus diferentes campos de acción, como el forex, real estate y muchos otros.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 19px;">Facilitamos el contenido en los dos idiomas más hablados del mundo entero (inglés y español) además conramos con la traducción por subtítulos en otros más de 10 idiomas.</p>
             </div>
           </div>
            <div class="col-md-4">
@@ -105,7 +102,7 @@
            </div>
           <div class="col-md-8 nosotros-text" style="color: #fff; background-color: #2A91FF;">
             <div class="card-body row align-items-center">
-               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 17px;">Nuestro propósito es llevarte más allá de la riqueza, por ello no solo te hacemos crecer monetariamente, sino también personalmente, ofreciéndote mucho contenido de desarrollo personal y crecimiento integral como profesional.</p>
+               <p class="card-text" style="padding: 30px 30px; font-weight: 400; font-size: 17px;">Acceso permanente - 24hrs. / 7 días a la semana - 365 días con mucho material didactico modulo especial y cuidadosamente para asegurarnos de tu aprendizaje continuo asi como acompañamiento de multiples clases en vivo todas las semanas </p>
             </div>
           </div>
          </div>
@@ -168,6 +165,31 @@
             </div>
         </div>
 </div>
+
+   <div class="container-fluid img-background-razones" style="padding:50px;">
+      <div class="col-md-8 offset-sm-0 offset-md-2 mb-4">
+         <h3 class="text-center"><b style="color: #2A91FF; font-weight: 800; font-size: 40px;">NUESTRO ECOSISTEMA</b></h3>
+      </div>
+
+      <div class="row">
+         <div class="col-md-3 align-self-start mt-2 pt-4">
+            <img src="{{ asset('nosotros/nosotros/mta.png') }}" class="card-img img-fluid logo-scale" alt="...">
+            <img src="{{ asset('nosotros/nosotros/fentix-1.png') }}" class="mt-5 pt-5 card-img img-fluid logo-scale" alt="...">
+            <img src="{{ asset('nosotros/nosotros/revolutte.png') }}" class="card-img img-fluid logo-scale mt-5 pt-5" alt="..." style="width: 200px;">
+         </div>
+         <div class="col align-self-center mt-2">
+            <img src="{{ asset('nosotros/nosotros/world-mba.png') }}" class="card-img img-fluid logo-rotate" alt="...">
+         </div>
+         <div class="col-md-3 mt-2 pt-4">
+          <img src="{{ asset('nosotros/nosotros/ftxlive.png') }}" class="card-img img-fluid logo-scale" alt="...">
+          <img src="{{ asset('nosotros/nosotros/no-work-1.png') }}" class="card-img img-fluid logo-scale mt-5 pt-5" alt="...">
+          <img src="{{ asset('nosotros/nosotros/revolutte-real-state.png') }}" class="card-img img-fluid logo-scale mt-5 pt-5" alt="..." style="width: 200px;">
+         </div>
+         <div class="col-md-12 text-center">
+           <img src="{{ asset('nosotros/nosotros/revolutte-insurance.png') }}" class="card-img img-fluid logo-scale mt-3" alt="..." style="width: 200px;">
+         </div>
+      </div>
+   </div>
 
 
     <!--<div class="col-md-12" style="background-color: #FFFFFF;">

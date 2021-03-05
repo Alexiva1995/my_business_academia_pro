@@ -1,5 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark-gray border-bottom navbar-redes" style="height: 70px;">
-    <button class="btn btn-primary" id="menu-toggle" style="background-color: #1D94FF !important;"><!--<span class="navbar-toggler-icon"></span>--><i class="fas fa-bars"></i></button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark-gray border-bottom" style="height: 70px; position: fixed; z-index: 1000; width: 100%;">
+
+    <div class="sidebar-heading pr-3 pt-3" style="height: 70px">
+        <img src="{{ asset('images/mbapro-completo.png') }}" style="width: 180px; height: 45px;">
+    </div>
+
+    <button class="btn btn-primary ml-3" id="menu-toggle" style="background-color: #1D94FF !important;"><!--<span class="navbar-toggler-icon"></span>--><i class="fas fa-bars"></i></button>
 
     <button class="navbar-toggler d-none" type="button" data-toggle="collapse" data-target="#navbarItems" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -36,6 +41,9 @@
             @endif
             <li class="nav-item">
                 <a class="nav-link items-header" href="{{route('transmisiones')}}">STREAMING</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link items-header" href="{{route('legal')}}">LEGAL</a>
             </li>
             @if (Auth::guest())
                 <!--<li class="nav-item dropdown">

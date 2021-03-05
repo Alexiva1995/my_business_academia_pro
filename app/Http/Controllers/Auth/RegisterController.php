@@ -184,6 +184,15 @@ class RegisterController extends Controller
         $permiso=new PermisosController;
         $permiso->PermisosAdmin($user->ID);
         }
+
+        $data['email'] = $user->user_email;
+        $data['name'] = $user->display_name;
+
+        Mail::send('emails.welcome',['data' => $data], function($msg) use ($data){
+            $msg->to($data['email']);
+            $msg->subject('Bienvenido a My Business AcademyPro');
+            $msg->from('mail@mybusinessacademypro.com');
+        });
         
         if($data['shoping'] != null){
             
