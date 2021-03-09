@@ -1,67 +1,66 @@
 @extends('layouts.landing')
 
 @section('content')
-@if (!Auth::guest())
-<div class="title-page-course col-md"><span class="text-white">
-    <h3 class="mb-4"><span class="text-white">Hola</span><span class="text-primary"> {{Auth::user()->display_name}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
-</div>
-@endif
-
-<div class="container-fluid courses-slider" style="background-color: #1C1D21;margin-bottom: 0px; padding-bottom: 0px;">
-    <div class="container-fluid courses-slider" style="padding-bottom: 0px;">
-      <div id="mainSlider" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item  active ">
-              <div class="overlay"></div>
-                  <img src="{{ asset('images/streaming-1.jpg') }}" class="d-block w-100" alt="...">
-                   <div class="carousel-caption">
-                    <div class="col-md-5 offset-md-5">
-                    <div class="estilostreaming">STREAMING</div>
-                    <div class="estilostreamingtwo">Disfruta de <b> Sesiones en vivo <b></div>
-                  </div>
-              </div>
-          </div>
-        </div>
-    </div>
-  </div>
-</div><!--BANNER END-->
-
-<div class="container-fluid" style="background-color: #1C1D21;">
-   <div class="col-md-12">
-   <div class="row mt-4">
-            <div class="col-md-6">
-            <img src="{{ asset('images/fxtfotohome.png') }}" class="img-fluid" alt="...">
-            </div>
-            <div class="col-md-6" style="margin-top:10%;">
-            <img src="{{ asset('images/FTXlive-logo.png') }}" class="img-fluid" alt="...">
-               <h5 class="text-white mt-4">
-                   El usuario podrá disfrutar, sin importar el lugar en donde se encuentre, con su ordenador o su cel, desde presentaciones de negocios, hasta capacitaciones de todo tipo en vivo, lanzamientos y más.
-               </h5>
-            
-            </div>
+   @if (!Auth::guest())
+      <div class="title-page-course col-md"><span class="text-white">
+         <h3 class="mb-4"><span class="text-white">Hola</span><span class="text-primary"> {{Auth::user()->display_name}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
       </div>
-   </div>
-   
-</div>
-<hr style="height: 1px;background-color: #707070;">
-<div class="container-fluid" style="background-color: #1C1D21;">
-   <div class="col-md-12">
-   <div class="row">
+   @endif
+
+   <div class="container-fluid courses-slider" style="background-color: #1C1D21;margin-bottom: 0px; padding-bottom: 0px;">
+      <div class="container-fluid courses-slider" style="padding-bottom: 0px;">
+         <div id="mainSlider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item  active ">
+                  <div class="overlay"></div>
+                  <img src="{{ asset('images/streaming-1.jpg') }}" class="d-block w-100" alt="...">
+                  <div class="carousel-caption">
+                     <div class="col-md-5 offset-md-5">
+                       <div class="estilostreaming">STREAMING</div>
+                       <div class="estilostreamingtwo">Disfruta de <b> Sesiones en vivo <b></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div><!--BANNER END-->
+
+   <div class="container-fluid" style="background-color: #1C1D21;">
+      <div class="col-md-12">
+         <div class="row mt-4">
+            <div class="col-md-6">
+               <img src="{{ asset('images/fxtfotohome.png') }}" class="img-fluid" alt="...">
+            </div>
             <div class="col-md-6" style="margin-top:10%;">
                <h1 class="text-primary font-weight-bold ftxlivestreming-text">MBA PRO STREAMING</h1>
                <h5 class="text-white mt-4">
-               Un espacio de entrenamientos en vivo para emprendedores, su propuesta de valor se distingue por ofrecer: Información de primer nivel y en tiempo real, así como motivación para aprender de forma sencilla y herramientas precisas para que se ponga en practica el conocimiento adquirido en los streaming de forma inmediata.
+                  El usuario podrá disfrutar, sin importar el lugar en donde se encuentre, con su ordenador o su cel, desde presentaciones de negocios, hasta capacitaciones de todo tipo en vivo, lanzamientos y más.
                </h5>
-            
+            </div>
+         </div>
+      </div> 
+   </div>
+
+   <hr style="height: 1px;background-color: #707070;">
+
+   <div class="container-fluid" style="background-color: #1C1D21;">
+      <div class="col-md-12">
+         <div class="row">
+            <div class="col-md-6" style="margin-top:10%;">
+               <h1 class="text-primary font-weight-bold ftxlivestreming-text">MBA LIVESTREAMING</h1>
+               <h5 class="text-white mt-4">
+                  Un espacio de entrenamientos en vivo para emprendedores, su propuesta de valor se distingue por ofrecer: Información de primer nivel y en tiempo real, así como motivación para aprender de forma sencilla y herramientas precisas para que se ponga en practica el conocimiento adquirido en los streaming de forma inmediata.
+               </h5>
             </div>
             <div class="col-md-6">
-            <img src="{{ asset('images/fxtmodif.png') }}" class="img-fluid" alt="...">
+               <img src="{{ asset('images/fxtmodif.png') }}" class="img-fluid" alt="...">
             </div>
+         </div>
       </div>
    </div>
-   
-</div>
-<hr style="height: 1px;background-color: #707070;">
+
+   <hr style="height: 1px;background-color: #707070;">
 <div class="container-fluid" style="background-color: #1C1D21;">
    <div class="col-md-12">
    <div class="row">

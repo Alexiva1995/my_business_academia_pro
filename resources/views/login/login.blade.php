@@ -170,10 +170,10 @@
 
                         <input name="validar" type="hidden" value="oculto">
 
-                        <div class="form-group has-feedback">
+                        <!--<div class="form-group has-feedback">
                             <label for="usr">Usuario</label>
                             <input type="text" class="form-control" name="nameuser" value="{{old('nameuser')}}" style="border-radius: 20px;" pattern="[A-Za-z ]+$">
-                        </div>
+                        </div>-->
 
                         <div class="form-group has-feedback">
                             <label for="usr">Correo Electronico</label>

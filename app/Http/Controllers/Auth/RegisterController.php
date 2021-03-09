@@ -133,9 +133,9 @@ class RegisterController extends Controller
         $user = User::create([
             'user_email' => $data['user_email'],
             'user_status' => '0',
-            'user_login' => $data['nameuser'],
-            'user_nicename' => $data['nameuser'],
-            'display_name' => ($data['firstname'] == null) ? $data['nameuser'] : $data['firstname'].' '.$data['lastname'],
+            'user_login' => $data['user_email'],
+            'user_nicename' => $data['user_email'],
+            'display_name' => ($data['firstname'] == null) ? $data['user_email'] : $data['firstname'].' '.$data['lastname'],
             'gender' => $data['genero'],
             'birthdate' => $data['edad'],
             'user_registered' => Carbon::now(),
@@ -187,6 +187,7 @@ class RegisterController extends Controller
 
         $data['email'] = $user->user_email;
         $data['name'] = $user->display_name;
+        $data['id'] = $user->ID;
 
         Mail::send('emails.welcome',['data' => $data], function($msg) use ($data){
             $msg->to($data['email']);

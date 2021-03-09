@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark-gray border-bottom" style="height: 70px; position: fixed; z-index: 1000; width: 100%;">
 
-    <div class="sidebar-heading pr-3 pt-3" style="height: 70px">
-        <img src="{{ asset('images/mbapro-completo.png') }}" style="width: 180px; height: 45px;">
+    <div class="sidebar-heading pr-3 pt-2" style="height: 70px">
+        <img src="{{ asset('images/mbapro-completo.png') }}" style="width: 180px; height: 50px;">
     </div>
 
     <button class="btn btn-primary ml-3" id="menu-toggle" style="background-color: #1D94FF !important;"><!--<span class="navbar-toggler-icon"></span>--><i class="fas fa-bars"></i></button>
@@ -27,8 +27,13 @@
                 <!--<a class="nav-link items-header" href="https://www.mybusinessacademypro.com/blog/">BLOG</a>-->
                 <a class="nav-link items-header" href="{{route('step3')}}">BLOG</a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link items-header" href="{{ route('blog.afiliados')}}">AFILIADOS</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link items-header dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">AFILIADOS</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #212529 !important;">
+                    <a class="dropdown-item items-header" href="{{ route('blog.afiliados')}}">AFILIADOS</a>
+                    <a class="dropdown-item items-header" href="{{ route('blog.coaches')}}">COACHES</a>
+                    <a class="dropdown-item items-header" href="{{ route('blog.comisiones')}}">COMISIONES</a>
+                </div>
             </li>
             @if (Auth::guest())
                 <li class="nav-item">
@@ -41,9 +46,6 @@
             @endif
             <li class="nav-item">
                 <a class="nav-link items-header" href="{{route('transmisiones')}}">STREAMING</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link items-header" href="{{route('legal')}}">LEGAL</a>
             </li>
             @if (Auth::guest())
                 <!--<li class="nav-item dropdown">

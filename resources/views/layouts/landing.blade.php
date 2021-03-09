@@ -7,9 +7,9 @@
         <meta property="og:description" content="Es la mejor academia online de educación financiera y negocios, dirigida a las personas que quieran convertirse en inversionistas PRO"/>
         <meta property="og:type" content="website"/>
         <meta property="og:locale" content="es"/>
-        <meta property="og:image" content="https://mybusinessacademypro.com/academia/nosotros/nosotros/nosotros.jpg"/>
-        <meta property="og:image:width" content="400" />
-        <meta property="og:image:height" content="400" />
+        <meta property="og:image" content="https://mybusinessacademypro.com/academia/images/mbapro-negro.png"/>
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="180" />
         
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -100,6 +100,9 @@
             .list-unstyled {
                 padding-left: 0;
                 list-style: none;
+            }
+            .dropdown-menu a:hover{
+                background-color: #007bff !important;
             }
         </style>
 
@@ -207,6 +210,7 @@
                                         <div class="text-center text-white" style="margin-top: 20px;">
                                             <a href="{{route('client.policies')}}" class="text-white" target="_blank" style="padding: 2px;">Pol&iacute;ticas de Uso</a> &nbsp&nbsp
                                             <a href="{{ route('terms-and-conditions') }}" class="text-white" style="padding: 2px;" target="_blank">T&eacute;rminos y condiciones</a>&nbsp&nbsp
+                                            <a href="{{route('legal')}}" class="text-white" style="padding: 2px;">Legal</a>&nbsp&nbsp
                                             <a href="#" data-toggle="modal" data-target="#contactModal" class="text-white" style="padding: 2px;" target="_black"> Contacto</a>&nbsp&nbsp
                                             <a href="{{route('index')}}" class="text-white" style="padding: 2px;">Inicio</a>&nbsp&nbsp
                                         </div>
