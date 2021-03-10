@@ -84,9 +84,7 @@ class HomeController extends Controller{
    public function index(){
       $modalVisitante = 0;
       if (Auth::guest()){
-        if ( (redirect()->getUrlGenerator()->previous() == "https://mybusinessacademypro.com/") || (redirect()->getUrlGenerator()->previous() == "https://sinergiared.com/") ){
-          $modalVisitante = 1;
-        }
+        $modalVisitante = 1;
       }
      
        //pop up

@@ -538,7 +538,8 @@
                     </button>
                 </div>
                 <div class="modal-body text-white pl-5 pr-5 text-center">
-                    Cierra esta ventana si deseas seguir explorando como visitante...
+                    Te encuentras en modo visitante.<br>
+                    Para disfrutar de nuestro contenido a precio preferencial ingresa en este botón.
                     <br><br>
                     <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=1' }}">REGISTRO</a>
                 </div>

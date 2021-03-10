@@ -6,7 +6,7 @@
     	<title>Bienvenido a MBA PRO</title>
     </head>
     <body>
-    	<center><img src="https://mybusinessacademypro.com/academia/images/mbapro-negro.png" style="width: 350px; height: 150px;"></center><br><br>
+    	<center><img src="https://mybusinessacademypro.com/academia/images/mbapro-negro.png" style="width: 450px; height: 150px;"></center><br><br>
 
         <h3>
         	Estimado <b>{{ $data['name'] }}</b>, gracias por registrarte en nuestra academia.

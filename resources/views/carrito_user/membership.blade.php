@@ -63,7 +63,7 @@
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:10px 20px;">
                                                     <div class="col-md-12">
-                                                        <h4 class="card-price text-azul-claro text-center" style="font-size: 38px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price}}/Mes</del> ${{$membresia->descuento}}/Mes</h4>
+                                                        <h4 class="card-price text-azul-claro text-center" style="font-size: 30px; font-weight: bold;"><del style="font-size: 24px;">{{$membresia->price}} USD/Mes</del><br>  {{$membresia->descuento}} USD/Mes</h4>
                                                     </div>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center">¡Aquí podrás dar el primer paso para Aprender lo que deseas <u>SER</u> aquí!</h5>
@@ -71,7 +71,7 @@
                                                 <h5 class="p-2 text-white text-center">+ De 100 videos con increíbles especialistas en los diversos temas de Desarrollo Humano (Liderazgo, Comunicación, Inteligencia Emocional, Coaching, etc.) Y Contenido especial de Educación Financiera Finanzas.</h5>
                                                 <h4 class="p-2 text-azul-claro text-center" style="font-weight: bold;">+ 4 Live Streaming <br> Al Mes</h4>
                                                 
-                                                <h4 class="card-price text-azul-claro text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span style="font-size: 28px;">/Anual</span></h4>
+                                                <h4 class="card-price text-azul-claro text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">{{$membresia->price_annual}} USD</del><br> {{$membresia->discount_annual}}<span style="font-size: 28px;"> USD/Anual</span></h4>
                                                     
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Mensual'])}}" class="btn btn-color-blue text-white btn-block">Plan Mensual</a>
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Anual'])}}" class="btn btn-color-purple text-white btn-block">Plan Anual</a>
@@ -95,7 +95,7 @@
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding: 10px 10px;">
                                                     <div class="col-md-12">
-                                                        <h4 class="card-price text-amarillo text-center" style="font-size: 38px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price}}/Mes</del> ${{$membresia->descuento}}/Mes</h4>
+                                                        <h4 class="card-price text-amarillo text-center" style="font-size: 30px; font-weight: bold;"><del style="font-size: 24px;">{{$membresia->price}} USD/Mes</del><br> {{$membresia->descuento}} USD/Mes</h4>
                                                     </div>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center"> ¡Nos alegra que estés pasando al segundo escalón!</h5>
@@ -106,7 +106,7 @@
                                                 <h5 class="text-white text-center"> + Desarrollo Humano y Finanzas.</h5>
                                                 <h4 class="p-2 text-amarillo text-center" style="font-weight: bold;">+ 6 Live Streaming <br> Al Mes</h4>
                                                 
-                                                <h4 class="card-price text-amarillo text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span style="font-size: 28px;">/Anual</span></h4>
+                                                <h4 class="card-price text-amarillo text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">{{$membresia->price_annual}} USD</del><br> {{$membresia->discount_annual}}<span style="font-size: 28px;"> USD/Anual</span></h4>
                                                 
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Mensual'])}}" class="btn btn-color-amarillo text-white btn-block">Plan Mensual</a>
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Anual'])}}" class="btn btn-color-blue text-white btn-block">Plan Anual</a>
@@ -132,7 +132,7 @@
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:10px 10px;">
                                                     <div class="col-md-12">
-                                                        <h4 class="card-price text-verde text-center" style="font-size: 38px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price}}/Mes</del> ${{$membresia->descuento}}/Mes</h4>
+                                                        <h4 class="card-price text-verde text-center" style="font-size: 30px; font-weight: bold;"><del style="font-size: 24px;">{{$membresia->price}} USD/Mes</del><br> {{$membresia->descuento}} USD/Mes</h4>
                                                     </div>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center"> ¡WOW! Siéntete orgulloso de ti si creces a este nivel en tu formación, lo mejor está por venir.</h5>
@@ -144,7 +144,7 @@
                                                 <h5 class="text-white text-center">+ Ventas, Emprendurismo, Desarrollo Humano y Finanzas</h5>
                                                 <h4 class="p-2 text-verde text-center" style="font-weight: bold;">+ 8 Live Streaming <br> Al Mes</h4>
 
-                                                <h4 class="card-price text-verde text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span style="font-size: 28px;">/Anual</span></h4>
+                                                <h4 class="card-price text-verde text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">{{$membresia->price_annual}} USD</del><br> {{$membresia->discount_annual}}<span style="font-size: 28px;"> USD/Anual</span></h4>
                                                 
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Mensual'])}}" class="btn btn-color-green text-white btn-block">Plan Mensual</a>
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Anual'])}}" class="btn btn-color-amarillo text-white btn-block">Plan Anual</a>
@@ -166,7 +166,7 @@
                                             <div class="card-body" style="position: relative; top:55px; z-index: 1;">
                                                 <div class="row" style="padding:10px 10px;">
                                                     <div class="col-md-12">
-                                                        <h4 class="card-price text-morado text-center" style="font-size: 38px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price}}/Mes</del> ${{$membresia->descuento}}/Mes</h4>
+                                                        <h4 class="card-price text-morado text-center" style="font-size: 30px; font-weight: bold;"><del style="font-size: 24px;">{{$membresia->price}} USD/Mes</del><br> {{$membresia->descuento}} USD/Mes</h4>
                                                     </div>
                                                 </div>
                                                 <h5 class="p-2 text-white text-center">¡FELICIDADES!</h5>
@@ -177,7 +177,7 @@
                                                 <h5 class="p-2 text-white text-center">+ Fintech, Real Estate, Ventas, Emprendurismo, Desarrollo Humano y Finanzas.</h5>
                                                 <h4 class="p-2 text-morado text-center" style="font-weight: bold;">+ 10 Live Streaming <br> Al Mes</h4>
 
-                                                <h4 class="card-price text-morado text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">${{$membresia->price_annual}}</del> ${{$membresia->discount_annual}}<span style="font-size: 28px;">/Anual</span></h4>
+                                                <h4 class="card-price text-morado text-center mb-4" style="font-size: 34px; font-weight: bold;"><del style="font-size: 28px;">{{$membresia->price_annual}} USD</del><br> {{$membresia->discount_annual}}<span style="font-size: 28px;"> USD/Anual</span></h4>
                                                 
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Mensual'])}}" class="btn btn-color-purple text-white btn-block">Plan Mensual</a>
                                                 <a href="{{route('shopping-cart.store', [$membresia->id, 'membresia', 'Anual'])}}" class="btn btn-color-green text-white btn-block">Plan Anual</a>

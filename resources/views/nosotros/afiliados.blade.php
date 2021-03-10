@@ -22,7 +22,7 @@
                   <div class="carousel-caption caption-show">
                      <div class="row">
                         <div class="col-6 mt-4 pl-0 pr-0">
-                           <img src="{{ asset ('images/mbapro-completo.png')}}" class="logo-academia-afiliados" alt="" height="120px" width="300px">
+                           <img src="{{ asset ('images/mbapro-completo.png')}}" class="logo-academia-afiliados" alt="" height="120px" width="380px">
                         </div>
                         <!--<div class="col-9">
                            <div class="d-flex align-items-center mybussiness-title-afiliados mt-4">My Business</div>
