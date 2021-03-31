@@ -98,7 +98,7 @@
             <div class="collapse" id="categoriesDiv2" style="padding-left: 15px;">
                 @foreach($cursos as $curs)
                  @if($curs->membership_id == 1)
-                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="{{ $curs->category->icon }}"></i> {{$curs->title}}</a>
                  @endif
                 @endforeach
             </div> 
@@ -108,7 +108,7 @@
             <div class="collapse" id="categoriesDiv3" style="padding-left: 15px;">
                 @foreach($cursos as $curs)
                  @if($curs->membership_id == 2)
-                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="{{ $curs->category->icon }}"></i> {{$curs->title}}</a>
                  @endif
                 @endforeach
             </div> 
@@ -119,7 +119,7 @@
             <div class="collapse" id="categoriesDiv4" style="padding-left: 15px;">
                 @foreach($cursos as $curs)
                  @if($curs->membership_id == 3) 
-                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="{{ $curs->category->icon }}"></i> {{$curs->title}}</a>
                  @endif
                 @endforeach
             </div> 
@@ -130,7 +130,7 @@
             <div class="collapse" id="categoriesDiv5" style="padding-left: 15px;">
                 @foreach($cursos as $curs)
                  @if($curs->membership_id == 4)
-                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="fas fa-tasks"></i> {{$curs->title}}</a>
+                  <a class="list-group-item bg-dark-gray" href="{{ route('courses.show', [$curs->slug, $curs->id]) }}" style="color: white;"><i class="{{ $curs->category->icon }}"></i> {{$curs->title}}</a>
                  @endif
                 @endforeach
             </div> 

@@ -39,14 +39,11 @@ class EventsController extends Controller
         Carbon::setLocale('es');
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $events = Events::orderBy('id', 'DESC')->get();
+
+    public function index(){
+        $events = Events::where('status', '<>', 2)
+                    ->orderBy('id', 'DESC')
+                    ->get();
 
         $mentores = DB::table('wp98_users')
             ->select('ID', 'user_email')
@@ -69,12 +66,13 @@ class EventsController extends Controller
         return view('admin.events.index')->with(compact('events', 'mentores', 'categorias', 'paises', 'dateNow'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function record(){
+        $events = Events::where('status', '=', 2)
+                    ->orderBy('id', 'DESC')
+                    ->get();
+
+        return view('admin.events.record')->with(compact('events'));
+    }
     public function store(Request $request)
     {
         $streamingConnect = new StreamingController();
@@ -380,9 +378,12 @@ class EventsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function delete($id){
+        $evento = Events::find($id);
+        $evento->status = 2;
+        $evento->save();
+
+        return redirect('admin/events')->with('msj-exitoso', 'El evento ' . $evento->title . ' ha sido eliminado con éxito.');
     }
 
 
@@ -686,7 +687,7 @@ class EventsController extends Controller
         /*DATOS PARA PINTAR EL CALENDARIO*/
         $user_calendar = Calendario::where('iduser', Auth::user()->ID)->get();
         $usuario = Auth::user()->ID;
-        $eventos_agendados = Auth::user()->events->sortByDesc('id');;
+        $eventos_agendados = Auth::user()->events->where('status', '<>', 2)->sortByDesc('id');;
 
         $paisUsuario = DB::table('user_campo')
                         ->select('pais')

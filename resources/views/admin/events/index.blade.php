@@ -104,18 +104,17 @@
 									@if ($event->status == '1' )
 										<a class="btn btn-danger" href="{{ route('admin.events.change-status', [$event->id, 0]) }}" title="Deshabilitar"><i class="fa fa-ban"></i></a>
 									@endif
-
 									@if ($event->status == '0')
-									<a class="btn btn-success" href="{{ route('admin.events.change-status', [$event->id, 1]) }}" title="Habilitar"><i class="fa fa-check"></i></a>
+										<a class="btn btn-success" href="{{ route('admin.events.change-status', [$event->id, 1]) }}" title="Habilitar"><i class="fa fa-check"></i></a>
 									@endif
-
+									<a class="btn btn-danger" href="{{ route('admin.events.delete', $event->id) }}" title="Eliminar"><i class="fa fa-trash"></i></a>
 								</td>
 							</tr>
 						@endforeach
 					</tbody>
 				</table>
 			</div>
-		</div>
+		</div>c
 	</div>
 
 	<!-- Modal Agregar Evento-->
