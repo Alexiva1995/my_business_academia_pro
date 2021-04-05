@@ -141,7 +141,7 @@
 						                <select class="form-control" name="user_id" required>
 						                	<option value="" selected disabled>Seleccione un mentor..</option>
 						                	@foreach ($mentores as $mentor)
-						                		<option value="{{ $mentor->ID }}">{{ $mentor->user_email }}</option>
+						                		<option value="{{ $mentor->ID }}">{{ (!is_null($mentor->display_name)) ? $mentor->display_name : $mentor->user_email }}</option>
 						                	@endforeach
 						                </select>
 						            </div>
@@ -250,7 +250,7 @@
 									<label>Mentor</label>
 									<select class="form-control" name="user_id" id="user_id" required>
 										@foreach ($mentores as $mentor)
-											<option value="{{ $mentor->ID }}">{{ $mentor->user_email }}</option>
+											<option value="{{ $mentor->ID }}">{{ (!is_null($mentor->display_name)) ? $mentor->display_name : $mentor->user_email }}</option>
 										@endforeach
 									</select>
 								</div>
