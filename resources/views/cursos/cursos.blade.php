@@ -439,7 +439,6 @@
     {{-- FIN DE PROMOCIONES PUBLICITARIAS --}}
 
     {{-- SECCIÓN CURSOS POR CATEGORÍA --}}
-    @if(!empty($courses))
     <div class="">
         <div class="container-fluid">
             <div class="col section-title-category">
@@ -448,20 +447,20 @@
                 </h3>
             </div>
             <div class="row">
-                @foreach ($courses as $course)
-                    @if ($course->course_count > 0)
+                @foreach ($categories as $category)
+                    @if ($category->courses_count > 0)
                         <div class="col-sm-4 d-inline-flex p-2">
-                            @if (!is_null($course->cover))
-                                <img src="{{ asset('uploads/images/categories/covers/'.$course->cover) }}" class="card-img-top img-fluid course-category1" alt="...">
+                            @if (!is_null($category->cover))
+                                <img src="{{ asset('uploads/images/categories/covers/'.$category->cover) }}" class="card-img-top img-fluid course-category1" alt="...">
                             @else
                                 <img src="{{ asset('uploads/images/categories/covers/default.jpg') }}" class="card-img-top img-fluid course-category1" alt="...">
                             @endif
                             <div class="course-category-caption ml-1 mr-1">
                                 <div class="col-sm-lg text-sm-left font-weight-bold">
-                                    <a href="{{ url('courses/category/'.$course->id) }}" class="col-sm-lg text-sm-left  text-white">{{$course->title}}</a>
+                                    <a href="{{ url('courses/category/'.$category->id) }}" class="col-sm-lg text-sm-left  text-white">{{$category->title}}</a>
                                 </div>
                                 <div class="col-lg">
-                                    <p class="text-white font-weight-bold">{{$course->course_count}} Cursos</p>
+                                    <p class="text-white font-weight-bold">{{$category->courses_count}} Cursos</p>
                                 </div>
                             </div>
                         </div>
@@ -470,12 +469,6 @@
             </div>
         </div>
     </div>
-    @else
-    <div class="row">
-      No se encontraron mentores...
-    </div>
-
-    @endif
     {{-- FIN SECCIÓN CURSOS POR CATEGORÍA--}}
 
     {{-- SECCIÓN TUS MENTORES--}}

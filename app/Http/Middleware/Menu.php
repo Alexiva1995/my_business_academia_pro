@@ -748,7 +748,6 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->red : 0,
                 'activo' => 0,
             ],
-
             
             'Historial de comisiones' => [
                 'submenu' => 1,
@@ -895,6 +894,15 @@ class Menu
                 'ruta' => 'admin.purchases-record',
                 'black'=> '0',
                 'icono' => 'fa fa-shopping-cart',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
+            ],
+            'Legal' => [
+                'submenu' => 0,
+                'ruta' => 'admin.legal.tabs.index',
+                'black'=> '0',
+                'icono' => 'fas fa-balance-scale',
                 'complementoruta' => '',
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
                 'activo' => 0,

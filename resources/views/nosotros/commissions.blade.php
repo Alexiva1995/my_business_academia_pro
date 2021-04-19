@@ -18,10 +18,10 @@
             <div class="carousel-inner">
                <div class="carousel-item  active ">
                   <div class="overlay"></div>
-                  <img src="{{ asset('nosotros/afiliados/header4.jpg') }}" class="d-block w-100" alt="...">
+                  <img src="{{ asset('nosotros/afiliados/header.jpg') }}" class="d-block w-100" alt="...">
                   <div class="carousel-caption caption-show">
                      <div class="row">
-                        <div class="col-6 mt-4 pl-0 pr-0">
+                        <div class="col-6 mt-5 pl-0 pr-0">
                            <img src="{{ asset ('images/mbapro-completo.png')}}" class="logo-academia-afiliados" alt="" width="300px">
                         </div>
                         <!--<div class="col-9">
@@ -30,7 +30,7 @@
                         </div>-->
                      </div>
                      <div>
-                    	   <h2 class="col-md-8 afiliados-title-two pt-4">Te damos la bienvenida a <b class="text-white font-weight-bold">uno de los <br> mejores y más geniales </b>programas de marketing de Afiliados del mundo</h2>
+                    	   <h2 class="col-md-8 afiliados-title-two pt-5">Te damos la bienvenida a <b class="text-white font-weight-bold">uno de los <br> mejores y más geniales </b>programas de marketing de Afiliados del mundo</h2>
                      </div>
                   </div>
 

@@ -17,13 +17,25 @@ class CategoryController extends Controller{
        // TITLE
         view()->share('title', 'Listado de Categorías');
 
-        $categorias = Category::with('course')
+        $categorias = Category::with('membership:id,name')
+                        ->withCount('courses')
                         ->orderBy('title', 'ASC')
                         ->get();
 
-        return view('admin.courses.categories')->with(compact('categorias'));
+        $memberships = DB::table('memberships')
+                        ->select('id', 'name')
+                        ->orderBy('id', 'ASC')
+                        ->get();
+
+        return view('admin.courses.categories')->with(compact('categorias', 'memberships'));
     }
 
+    public function show_by_membership($membership_id){
+        $categories = Category::where('membership_id', '=', $membership_id)
+                        ->get();
+
+        return view('admin.courses.categoriesSelect')->with(compact('categories'));
+    }
     /**
      * Admin / Cursos / Gestionar Categorías / Agregar Categoría
      */

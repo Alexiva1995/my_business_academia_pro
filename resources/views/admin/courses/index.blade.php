@@ -14,22 +14,57 @@
 		 				document.getElementById('course_id').value = $(this).attr('data-id');
 		 				$("#modal-featured").modal("show");
 					});
+					$('.membership').on('change', function(e){
+						var path = $(this).attr('data-route');
+						var route = path+'/'+$(this).val();
+						var id = $(this).attr("id");
+			 			$.ajax({
+				            url:route,
+				            type:'GET',
+				            success:function(ans){
+				            	if (id == 'membership_id'){
+				            		$("#category_id").html(ans);
+				            		$("#category_id").attr('disabled', false);
+				            	}else{
+				            		$("#category_id2").html(ans);
+				            	}
+				            }
+				        });
+					});
 	            }
 			});
 
-			$('.featured').on('click',function(e){
+			$('.featured').on('click', function(e){
  				e.preventDefault();
 
  				document.getElementById('course_id').value = $(this).attr('data-id');
  				$("#modal-featured").modal("show");
 			});
 
-			$('.show-img').on('click',function(e){
+			$('.show-img').on('click', function(e){
  				e.preventDefault();
 
  				document.getElementById("featured-title").innerHTML = '<b>'+$(this).attr('data-title')+'</b>';
  				$("#featured-img").attr("src", $(this).attr('data-source'));
  				$("#modal-image").modal("show");
+			});
+
+			$('.membership').on('change', function(e){
+				var path = $(this).attr('data-route');
+				var route = path+'/'+$(this).val();
+				var id = $(this).attr("id");
+	 			$.ajax({
+		            url:route,
+		            type:'GET',
+		            success:function(ans){
+		            	if (id == 'membership_id'){
+		            		$("#category_id").html(ans);
+		            		$("#category_id").attr('disabled', false);
+		            	}else{
+		            		$("#category_id2").html(ans);
+		            	}
+		            }
+		        });
 			});
 		});
 
@@ -41,8 +76,11 @@
 	            success:function(ans){
 	                $("#course_id_edit").val(ans[0].id);
 	                $("#title").val(ans[0].title);
-	                $("#category_id option[value="+ans[0].category_id+"]").attr("selected", true);
-	                $("#membership_id option[value="+ans[0].membership_id+"]").attr("selected", true);
+	                $("#membership_id2 option[value="+ans[0].membership_id+"]").attr("selected", true);
+	                for (var i = 0; i < ans[2].length; i++){
+	                	$('#category_id2').append("<option value='"+ans[2][i].id+"' >"+ans[2][i].title+"</option>");
+	                }
+	                $("#category_id2 option[value="+ans[0].category_id+"]").attr("selected", true);
 	                $("#mentor_id option[value="+ans[0].mentor_id+"]").attr("selected", true);
                  	CKEDITOR.instances["description"].setData(ans[0].description);
 					$("#duration").val(ans[0].duration);
@@ -86,8 +124,8 @@
 						<tr>
 							<th class="text-center">#</th>
 							<th class="text-center">Título</th>
-							<th class="text-center">Categoría</th>
 							<th class="text-center">Membresía</th>
+							<th class="text-center">Categoría</th>
 							<th class="text-center">Lecciones</th>
 							<th class="text-center">Acción</th>
 						</tr>
@@ -97,8 +135,8 @@
 							<tr>
 								<td class="text-center">{{ $curso->id }}</td>
 								<td class="text-center">{{ $curso->title }}</td>
-								<td class="text-center">{{ $curso->category->title }}</td>
 								<td class="text-center">{{ $curso->membership->name }}</td>
+								<td class="text-center">{{ $curso->category->title }}</td>
 								<td class="text-center">{{ $curso->lessons_count }}</td>
 								<td class="text-center">
 									<a class="btn btn-info" data-route="{{ route('admin.courses.edit', $curso->id) }}" id="{{$curso->id}}" onclick="editar(this.id);"><i class="fa fa-edit"></i></a>
@@ -145,19 +183,8 @@
 						        </div>
 						        <div class="col-md-12">
 						            <div class="form-group">
-						                <label>Categoría</label>
-						                <select class="form-control category" name="category_id" required>
-						                	<option value="" selected disabled>Seleccione una categoría..</option>
-						                	@foreach ($categorias as $categoria)
-						                		<option value="{{ $categoria->id }}">{{ $categoria->title }}</option>
-						                	@endforeach
-						                </select>
-						            </div>
-						        </div>
-						        <div class="col-md-12">
-						            <div class="form-group">
 						                <label>Membresía</label>
-						            	<select class="form-control" name="membership_id" required>
+						            	<select class="form-control membership" name="membership_id" id="membership_id" data-route="{{ route('admin.courses.categories.show-by-membership') }}" required>
 						                	<option value="" selected disabled>Seleccione una membresía..</option>
 						                	@foreach ($membresias as $membresia)
 						                		<option value="{{ $membresia->id }}">{{ $membresia->name }}</option>
@@ -165,6 +192,15 @@
 						                </select>
 						            </div>
 						        </div>
+						        <div class="col-md-12">
+						            <div class="form-group">
+						                <label>Categoría</label>
+						                <select class="form-control" name="category_id" id="category_id" required disabled>
+						                	<option value="" selected disabled>Seleccione una categoría..</option>
+						                </select>
+						            </div>
+						        </div>
+						       
 						        <div class="col-md-12">
 						            <div class="form-group">
 						                <label>Mentor</label>
@@ -260,21 +296,19 @@
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label>Categoría</label>
-										<select class="form-control" name="category_id" id="category_id" required>
-											@foreach ($categorias as $categoria)
-												<option value="{{ $categoria->id }}">{{ $categoria->title }}</option>
+										<label>Membresía</label>
+										<select class="form-control membership" name="membership_id" id="membership_id2" data-route="{{ route('admin.courses.categories.show-by-membership') }}" required>
+											@foreach ($membresias as $membresia)
+												<option value="{{ $membresia->id }}">{{ $membresia->name }}</option>
 											@endforeach
 										</select>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<label>Membresía</label>
-										<select class="form-control" name="membership_id" id="membership_id" required>
-											@foreach ($membresias as $membresia)
-												<option value="{{ $membresia->id }}">{{ $membresia->name }}</option>
-											@endforeach
+										<label>Categoría</label>
+										<select class="form-control" name="category_id" id="category_id2" required>
+											
 										</select>
 									</div>
 								</div>

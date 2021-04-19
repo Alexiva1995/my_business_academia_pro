@@ -215,7 +215,7 @@ class CourseController extends Controller{
         }
 
         /*Cursos por categoria con el numero de cursos asociados*/
-        $courses = Category::withCount('course')
+        $categories = Category::withCount('courses')
                         ->take(9)
                         ->get();
 
@@ -273,7 +273,7 @@ class CourseController extends Controller{
 
         $promociones = Promotion::where('status', '=', 1)->orderBy('id', 'DESC')->get();
 
-        return view('cursos.cursos')->with(compact('username','cursosDestacados', 'cursosNuevos', 'idStart', 'idEnd', 'previous', 'next', 'courses', 'mentores', 'cursos', 'cursosRecomendados', 'total', 'last_course', 'progress_bar', 'leccion_info', 'promociones'));
+        return view('cursos.cursos')->with(compact('username','cursosDestacados', 'cursosNuevos', 'idStart', 'idEnd', 'previous', 'next', 'categories', 'mentores', 'cursos', 'cursosRecomendados', 'total', 'last_course', 'progress_bar', 'leccion_info', 'promociones'));
     }
 
     /*Ver todos los cursos */
@@ -306,11 +306,6 @@ class CourseController extends Controller{
                     ->orderBy('display_name', 'ASC')
                     ->get();
 
-        $categorias = DB::table('categories')
-                        ->select('id', 'title')
-                        ->orderBy('id', 'ASC')
-                        ->get();
-
         $membresias = DB::table('memberships')
                             ->select('id', 'name')
                             ->orderBy('id', 'ASC')
@@ -323,7 +318,7 @@ class CourseController extends Controller{
         
         $membresias = DB::table('memberships')->get();
 
-        return view('admin.courses.index')->with(compact('cursos', 'mentores', 'categorias', 'membresias', 'etiquetas', 'membresias'));
+        return view('admin.courses.index')->with(compact('cursos', 'mentores', 'membresias', 'etiquetas', 'membresias'));
     }
 
     /**
@@ -550,12 +545,15 @@ class CourseController extends Controller{
     public function edit($id){
         $curso = Course::find($id);
 
+        $categories = Category::where('membership_id', '=', $curso->membership_id)
+                        ->get();
+
         $etiquetasActivas = [];
         foreach ($curso->tags as $etiq){
             array_push($etiquetasActivas, $etiq->id);
         }
 
-        return response()->json([$curso, $etiquetasActivas]);
+        return response()->json([$curso, $etiquetasActivas, $categories]);
     }
 
     /**
