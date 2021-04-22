@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         //
         'App\Console\Commands\StatusUser',
         'App\Console\Commands\MembershipsExpirations',
-        'App\Console\Commands\CorreosUser'
+        'App\Console\Commands\CorreosUser',
+        'App\Console\Commands\ComisionesUser'
     ];
 
     /**
@@ -33,7 +34,10 @@ class Kernel extends ConsoleKernel
                     ->everyMinute();
         $schedule->command('membership:users')->dailyAt('1:00');
         $schedule->command('status:lives')->hourly();
+        
         $schedule->command('correos:user')->everyMinute();
+        
+        $schedule->command('comisiones:user')->hourly();
     }
 
     /**

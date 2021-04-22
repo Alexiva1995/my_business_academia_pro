@@ -719,6 +719,12 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
+                    'Lista de Usuarios' => [
+                        'ruta' => 'users.records',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
                     'Nuevo Usuario' => [
                         'ruta' => 'autenticacion.new-register',
                         'complementoruta' => '?ref='.Auth::user()->ID.'&select=true',
@@ -727,9 +733,7 @@ class Menu
                     ],
                 ]
             ],
-             
-
-             'Entradas' => [
+            'Entradas' => [
                  'submenu' => 0,
                  'ruta' => 'admin-users-entrada',
                  'black'=> '0',
@@ -738,7 +742,6 @@ class Menu
                  'permisoAdmin' => (!empty($permiso)) ? $permiso->entradas : 0,
                  'activo' => 0,
              ],
-
             'Red' => [
                 'submenu' => 0,
                 'ruta' => 'admin-red-index',
@@ -748,7 +751,6 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->red : 0,
                 'activo' => 0,
             ],
-            
             'Historial de comisiones' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -778,7 +780,6 @@ class Menu
                     ],
                 ]
             ],
-            
             'Cursos' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -997,7 +998,6 @@ class Menu
                     ],
                 ]
             ],
-
             'Visión de Usuario' => [
                 'submenu' => 0,
                 'ruta' => 'admin.buscar',
@@ -1007,7 +1007,6 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->vision_usuario : 0,
                 'activo' => 0,
             ],
-            */
             'Lista de Usuarios' => [
                 'submenu' => 0,
                 'ruta' => 'users.records',
@@ -1016,7 +1015,7 @@ class Menu
                 'complementoruta' => '',
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->usuario : 0,
                 'activo' => 0,
-            ],
+            ],*/
             
             
             'Envio de correos' => [

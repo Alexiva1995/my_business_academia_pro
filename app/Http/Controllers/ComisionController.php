@@ -27,10 +27,12 @@ class ComisionController extends Controller
      $user = User::find($iduser);
      $comisiones = new ComisionesController;
      
+    if($user->status == 1){ 
      $directos = User::where('referred_id', $iduser)->get();
       foreach($directos as $direct){
          $this->ComprasDirectos($direct->ID, $iduser);
       }
+    }
    }
    
    public function ComprasDirectos($directo, $iduser){
@@ -41,8 +43,15 @@ class ComisionController extends Controller
      
      $compras = CourseOrden::where('user_id', $directo)->where('status', 1)->get();
       foreach($compras as $compra){
+          
+            $fechaCompra = new Carbon($compra->created_at);
+            $fechaActual = Carbon::now();
+            $actual = Carbon::parse($fechaActual);
+            $fechaCompra = Carbon::parse($fechaCompra);
+            $diferencia = $actual->diffInDays($fechaCompra);
+              
          $check = DB::table('commissions')->select('id')->where('user_id', '=', $iduser)->where('compra_id', '=', $compra->id)->where('tipo_comision', 'membresias')->first();
-          if($check == null){
+          if($check == null && $diferencia <= 30){
               
               $comp = json_decode($compra->detalles);
               $membrecia = DB::table('memberships')->where('id', $comp->idmembresia)->first();
