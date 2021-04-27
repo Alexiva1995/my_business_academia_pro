@@ -120,7 +120,12 @@
         </script>
         <script>
             $(document).ready(function(){ //Hacia arriba
-              irArriba();
+                irArriba();
+                if (screen.width <= 800){
+                    $("#sidebar-div").css("display", "none");
+                    $("#content-div").removeClass("col-md-10");
+                    $("#content-div").addClass("col-md-12");
+                }
             });
 
             function irArriba(){

@@ -39,6 +39,16 @@
         if ({{$modalVisitante}} == 1){
             $('#visitante-modal').modal();
         }
+        
+        $(document).ready(function(){ 
+            if (screen.width <= 1200){
+                $("#streaming-details-div-lg").css("display", "none");
+                $("#streaming-details-div-xs").css("display", "block");
+            }else{
+                $("#streaming-details-div-xs").css("display", "none");
+                $("#streaming-details-div-lg").css("display", "block");
+            }
+        });
     </script>
 @endpush
 
@@ -193,10 +203,10 @@
         </div>
     @endif
 
-	{{-- SLIDER --}}
+    {{-- SLIDER --}}
     @if ($cursosDestacados->count() > 0)
-    	<div class="container-fluid courses-slider">
-    		<div id="mainSlider" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
+        <div class="container-fluid courses-slider">
+            <div id="mainSlider" class="carousel slide carousel-fade" data-ride="carousel" data-interval="2000">
                 @if ($cursosDestacados->count() > 1)
                     @php $contCD = 0; @endphp
                     <ol class="carousel-indicators">
@@ -206,20 +216,20 @@
                         @endforeach
                     </ol>
                 @endif
-    	        <div class="carousel-inner">
+                <div class="carousel-inner">
                     @php $cont = 0; @endphp
                     @foreach ($cursosDestacados as $cursoDestacado)
                         @php $cont++; @endphp
-        	            <div class="carousel-item @if ($cont == 1) active @endif">
-        	                <div class="overlay" ></div>
-        	                <img src="{{ asset('uploads/images/courses/featured_covers/'.$cursoDestacado->featured_cover) }}" class="d-block w-100 img-fluid" alt="...">
-        	                <div class="carousel-caption">
+                        <div class="carousel-item @if ($cont == 1) active @endif">
+                            <div class="overlay" ></div>
+                            <img src="{{ asset('uploads/images/courses/featured_covers/'.$cursoDestacado->featured_cover) }}" class="d-block w-100 img-fluid" alt="...">
+                            <div class="carousel-caption">
                                 <p style="color:#007bff; font-size: 22px; font-weight: bold; margin-top: -20px;">NUEVO CURSO</p>
-        						<div class="course-autor text-white">{{$cursoDestacado->mentor->display_name}}</div>
-        						<div class="course-title"> <a href="{{ route('courses.show', [$cursoDestacado->slug, $cursoDestacado->id]) }}" style="color: white;">{{ $cursoDestacado->title }}</a></div>
-        	                    <!--<div class="course-category">{{ $cursoDestacado->category->title }}</div>-->
-        	                </div>
-        	            </div>
+                                <div class="course-autor text-white">{{$cursoDestacado->mentor->display_name}}</div>
+                                <div class="course-title"> <a href="{{ route('courses.show', [$cursoDestacado->slug, $cursoDestacado->id]) }}" style="color: white;">{{ $cursoDestacado->title }}</a></div>
+                                <!--<div class="course-category">{{ $cursoDestacado->category->title }}</div>-->
+                            </div>
+                        </div>
                     @endforeach
                 </div>
                 @if ($cursosDestacados->count() > 1)
@@ -232,13 +242,13 @@
                         <span class="sr-only">Next</span>
                     </a>
                 @endif
-    	    </div>
-    	</div>
+            </div>
+        </div>
     @endif
     {{-- FIN DEL SLIDER --}}
 
-	{{-- SECCIÓN TU AVANCE (USUARIOS LOGGUEADOS)
-	@if (!Auth::guest())
+    {{-- SECCIÓN TU AVANCE (USUARIOS LOGGUEADOS)
+    @if (!Auth::guest())
         <div class="section-landing">
             <div class="section-title-landing">TU AVANCE</div>
             <div class="row">
@@ -246,11 +256,11 @@
                 <div class="col text-right">Próximo Nivel: Intermedio</div>
                 <div class="w-100"></div>
                 <div class="col" style="padding: 20px 20px;">
-                	<div class="progress" style="background-color: #8E8E8E;">
-		                <div class="progress-bar" role="progressbar" style="width: 35%; background-color: #2A91FF;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-		                <div class="progress-bar bg-success" role="progressbar" style="width: 35%; background: linear-gradient(to right, #2A91FF, #6AB742); border-radius: 30px;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-		                <!--<div class="progress-bar bg-info" role="progressbar" style="width: 35%; background-color: #6AB742;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>-->
-		            </div>
+                    <div class="progress" style="background-color: #8E8E8E;">
+                        <div class="progress-bar" role="progressbar" style="width: 35%; background-color: #2A91FF;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 35%; background: linear-gradient(to right, #2A91FF, #6AB742); border-radius: 30px;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                        <!--<div class="progress-bar bg-info" role="progressbar" style="width: 35%; background-color: #6AB742;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>-->
+                    </div>
                 </div>
                 <div class="w-100"></div>
                 <div class="col text-left">Cursos Realizados: 7</div>
@@ -358,54 +368,59 @@
         <div class="next-streaming">
             <img src="{{ asset('/uploads/images/banner/'.$proximoEvento->image) }}" class="next-streaming-img">
             <div class="next-streaming-info">
-            	<a href="{{route('transmisiones')}}" type="button" class="btn btn-primary btn-next-streaming">Próximo Streaming</a><br>
+                <a href="{{route('transmisiones')}}" type="button" class="btn btn-primary btn-next-streaming">Próximo Streaming</a><br>
 
                 <div class="next-streaming-title">{{ $proximoEvento->title }}</div>
-                <div class="next-streaming-date" style="padding-right: 35%;">
-                    <i class="fa fa-calendar"></i> {{ $proximoEvento->weekend_day }} {{ $proximoEvento->date_day }} de {{ $proximoEvento->month }}<br>
-                    @if (Auth::guest()) 
-                        <i class="fa fa-clock"></i>
-                        @foreach ($proximoEvento->countries as $country)
-                            {{ date('H:i A', strtotime($country->pivot->time)) }} {{ $country->abbreviation }} /
-                        @endforeach
-                    @else
-                        @if (!is_null($checkPais))
-                            <i class="fa fa-clock"></i> {{ date('H:i A', strtotime($horaEvento)) }}
-                        @else
+                <div id="streaming-details-div-lg">
+                    <div class="next-streaming-date" style="padding-right: 5%;">
+                        <i class="fa fa-calendar"></i> {{ $proximoEvento->weekend_day }} {{ $proximoEvento->date_day }} de {{ $proximoEvento->month }}<br>
+                        @if (Auth::guest()) 
                             <i class="fa fa-clock"></i>
                             @foreach ($proximoEvento->countries as $country)
                                 {{ date('H:i A', strtotime($country->pivot->time)) }} {{ $country->abbreviation }} /
                             @endforeach
-                        @endif
-                    @endif
-                </div>
-                @if (!Auth::guest())
-                    <div class="next-streaming-reserve">
-                        @if (is_null(Auth::user()->membership_id))
-                            {{-- USUARIOS LOGUEADOS SIN MEMBRESÍA  --}}
-                            <a href="{{route('shopping-cart.membership')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Adquirir Membresía</a>
                         @else
-                            @if (Auth::user()->membership_status == 1)
-                                @if (!in_array($proximoEvento->id, $misEventosArray))
-                                    @if (Auth::user()->streamings < Auth::user()->membership->streamings)
-                                        {{-- USUARIOS LOGUEADOS CON STREAMINGS DISPONIBLES Y QUE NO TIENEN EL EVENTO AGENDADO AÚN--}}
-                                        <a href="{{ route('schedule.event', [$proximoEvento->id]) }}">Reservar Plaza <i class="fas fa-chevron-right"></i></a>
-                                    @else
-                                        @if (Auth::user()->membership_id < 4)
-                                            <a href="{{route('shopping-cart.store', [Auth::user()->membership_id+1, 'membresia', 'Mensual'])}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Aumentar Membresía</a>
-                                        @else
-                                            <i class="fa fa-times" aria-hidden="true"></i> Límite de Eventos Superado
-                                        @endif
-                                    @endif
-                                @else
-                                    <a href="{{ route('timeliveEvent', $proximoEvento->id) }}">Ir al Evento<i class="fas fa-chevron-right"></i></a>
-                                @endif
+                            @if (!is_null($checkPais))
+                                <i class="fa fa-clock"></i> {{ date('H:i A', strtotime($horaEvento)) }}
                             @else
-                                <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Renovar Membresía</a>
+                                <i class="fa fa-clock"></i>
+                                @foreach ($proximoEvento->countries as $country)
+                                    {{ date('H:i A', strtotime($country->pivot->time)) }} {{ $country->abbreviation }} /
+                                @endforeach
                             @endif
                         @endif
                     </div>
-                @endif
+                    @if (!Auth::guest())
+                        <div class="next-streaming-reserve">
+                            @if (is_null(Auth::user()->membership_id))
+                                {{-- USUARIOS LOGUEADOS SIN MEMBRESÍA  --}}
+                                <a href="{{route('shopping-cart.membership')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Adquirir Membresía</a>
+                            @else
+                                @if (Auth::user()->membership_status == 1)
+                                    @if (!in_array($proximoEvento->id, $misEventosArray))
+                                        @if (Auth::user()->streamings < Auth::user()->membership->streamings)
+                                            {{-- USUARIOS LOGUEADOS CON STREAMINGS DISPONIBLES Y QUE NO TIENEN EL EVENTO AGENDADO AÚN--}}
+                                            <a href="{{ route('schedule.event', [$proximoEvento->id]) }}">Reservar Plaza <i class="fas fa-chevron-right"></i></a>
+                                        @else
+                                            @if (Auth::user()->membership_id < 4)
+                                                <a href="{{route('shopping-cart.store', [Auth::user()->membership_id+1, 'membresia', 'Mensual'])}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Aumentar Membresía</a>
+                                            @else
+                                                <i class="fa fa-times" aria-hidden="true"></i> Límite de Eventos Superado
+                                            @endif
+                                        @endif
+                                    @else
+                                        <a href="{{ route('timeliveEvent', $proximoEvento->id) }}">Ir al Evento<i class="fas fa-chevron-right"></i></a>
+                                    @endif
+                                @else
+                                    <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Renovar Membresía</a>
+                                @endif
+                            @endif
+                        </div>
+                    @endif
+                </div>
+                <div class="next-streaming-reserve" id="streaming-details-div-xs" style="display: none;">
+                    <a href="#next-streaming-details" data-toggle="modal"><i class="fa fa-info-circle"></i> <b>Ver Detalles</b></a>
+                </div>
             </div>
         </div><br><br>
     @endif
@@ -481,7 +496,7 @@
     
     {{-- FIN SECCIÓN MENTORES --}}
 
-	{{-- SECCIÓN REFERIDOS (USUARIOS LOGGUEADOS) --}}
+    {{-- SECCIÓN REFERIDOS (USUARIOS LOGGUEADOS) --}}
     @if (!Auth::guest())
         <div class="pt-4">
             <div class="row">
@@ -542,6 +557,66 @@
                     Para disfrutar de nuestro contenido a precio preferencial ingresa en este botón.
                     <br><br>
                     <a type="button" class="btn btn-primary btn-register-header d-md-block m-2" href="{{ route('log').'?act=1' }}">REGISTRO</a>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="modal fade" id="next-streaming-details" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" style="color:white;">Detalles del Evento</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-white pl-5 pr-5 text-center">
+                   <div class="next-streaming-date">
+                        <i class="fa fa-calendar"></i> {{ $proximoEvento->weekend_day }} {{ $proximoEvento->date_day }} de {{ $proximoEvento->month }}<br>
+                        @if (Auth::guest()) 
+                            <i class="fa fa-clock"></i>
+                            @foreach ($proximoEvento->countries as $country)
+                                {{ date('H:i A', strtotime($country->pivot->time)) }} {{ $country->abbreviation }} /
+                            @endforeach
+                        @else
+                            @if (!is_null($checkPais))
+                                <i class="fa fa-clock"></i> {{ date('H:i A', strtotime($horaEvento)) }}
+                            @else
+                                <i class="fa fa-clock"></i>
+                                @foreach ($proximoEvento->countries as $country)
+                                    {{ date('H:i A', strtotime($country->pivot->time)) }} {{ $country->abbreviation }} /
+                                @endforeach
+                            @endif
+                        @endif
+                    </div>
+                    @if (!Auth::guest())
+                        <div class="next-streaming-reserve">
+                            @if (is_null(Auth::user()->membership_id))
+                                {{-- USUARIOS LOGUEADOS SIN MEMBRESÍA  --}}
+                                <a href="{{route('shopping-cart.membership')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Adquirir Membresía</a>
+                            @else
+                                @if (Auth::user()->membership_status == 1)
+                                    @if (!in_array($proximoEvento->id, $misEventosArray))
+                                        @if (Auth::user()->streamings < Auth::user()->membership->streamings)
+                                            {{-- USUARIOS LOGUEADOS CON STREAMINGS DISPONIBLES Y QUE NO TIENEN EL EVENTO AGENDADO AÚN--}}
+                                            <a href="{{ route('schedule.event', [$proximoEvento->id]) }}">Reservar Plaza <i class="fas fa-chevron-right"></i></a>
+                                        @else
+                                            @if (Auth::user()->membership_id < 4)
+                                                <a href="{{route('shopping-cart.store', [Auth::user()->membership_id+1, 'membresia', 'Mensual'])}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Aumentar Membresía</a>
+                                            @else
+                                                <i class="fa fa-times" aria-hidden="true"></i> Límite de Eventos Superado
+                                            @endif
+                                        @endif
+                                    @else
+                                        <a href="{{ route('timeliveEvent', $proximoEvento->id) }}">Ir al Evento<i class="fas fa-chevron-right"></i></a>
+                                    @endif
+                                @else
+                                    <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Renovar Membresía</a>
+                                @endif
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -298,7 +298,7 @@ h5.title-level {
 }
 
 .next-streaming-title {
-    width: 60%;
+    width: 100%;
     line-height: 70px;
 }
 
@@ -311,7 +311,7 @@ h5.title-level {
 
 .next-streaming-reserve {
     font-size: 35px;
-    padding-top: 60px;
+    /*padding-top: 60px;*/
 }
 
 .referrers-box {
@@ -418,12 +418,12 @@ h5.title-level {
         font-size: 20px;
     }
     .next-streaming-title {
-        width: 50%;
+        width: 100%;
         font-size: 60px;
         line-height: 60px;
     }
     .next-streaming-reserve {
-        padding-top: 50px;
+        /*padding-top: 50px;*/
     }
 }
 
@@ -506,7 +506,7 @@ h5.title-level {
         line-height: 50px;
     }
     .next-streaming-reserve {
-        padding-top: 20px;
+        /*padding-top: 20px;*/
     }
     .vertical-menu p {
         font-size: 2vh;
@@ -536,9 +536,9 @@ h5.title-level {
         font-size: 14px;
     }
     .next-streaming-title {
-        width: 50%;
-        font-size: 30px;
-        line-height: 30px;
+        width: 100%;
+        font-size: 28px;
+        line-height: 28px;
     }
     .carousel-indicators {
         display: none;
