@@ -1,5 +1,7 @@
 # My Business Academia Pro ![Status badge](https://img.shields.io/badge/status-complete-green)
 
+![Logo](https://mybusinessacademypro.com/wp-content/uploads/2020/06/beyond-academy-150x150.png)
+
 ✨ E-learning platform with streaming, which allows the control of an academy oriented to live events, a learning system for courses with their respective evaluations. Integration with payment system such as Stripe, Conpaymets
 
 
