@@ -6,21 +6,19 @@
 			$('#mytable').DataTable( {
 				responsive: true,
 			});
-
-			$('.editar').on('click',function(e){
- 				e.preventDefault();
-
- 				var route = $(this).attr('data-route');
- 				$.ajax({
-	                url:route,
-	                type:'GET',
-	                success:function(ans){
-	                	$("#content-modal").html(ans); 
-	                    $("#modal-edit").modal("show");
-	                }
-	            });
-			});
 		});
+
+		function editar($id){
+			var route = $("#"+$id).attr('data-route');
+ 			$.ajax({
+	            url:route,
+	            type:'GET',
+	            success:function(ans){
+	                $("#content-modal").html(ans);
+	                $("#modal-edit").modal("show");
+	            }
+	        });
+		}
 	</script>
 @endpush
 
@@ -41,9 +39,12 @@
 		<div class="box">
 			<div class="box-body">
 				<div style="text-align: right;">
-					<a data-toggle="modal" data-target="#modal-new" class="btn btn-info descargar"><i class="fa fa-plus-circle"></i> Nueva Lección</a>
+				    <a href="{{ route ('admin.courses.index')}}" class="btn btn-danger descargar"><i class="fas fa-arrow-circle-left"></i> Atrás</a>
+				    <a data-toggle="modal" data-target="#modal-new" class="btn btn-info descargar"><i class="fa fa-plus-circle"></i> Nueva Lección</a>
+
+
 				</div>
-				
+
 				<br class="col-xs-12">
 
 				<table id="mytable" class="table">
@@ -51,9 +52,11 @@
 						<tr>
 							<th class="text-center">#</th>
 							<th class="text-center">Título</th>
+							<th class="text-center">Título Inglés</th>
 							<th class="text-center">Descripción</th>
-                            <th class="text-center">URL</th>
-							<th class="text-center">Duración</th>
+							<th class="text-center">URL Español</th>
+							<th class="text-center">URL Inglés</th>
+							<th class="text-center">Nivel Acceso</th>
                             <th class="text-center">Recursos Adicionales</th>
 							<th class="text-center">Acción</th>
 						</tr>
@@ -63,14 +66,27 @@
 							<tr>
 								<td class="text-center">{{ $leccion->id }}</td>
 								<td class="text-center">{{ $leccion->title }}</td>
+								<td class="text-center">{{ $leccion->english_title }}</td>
 								<td class="text-center">{{ $leccion->description }}</td>
                                 <td class="text-center">{{ $leccion->url }}</td>
-								<td class="text-center">{{ $leccion->duration }}</td>
-                                <td class="text-center">{{ $leccion->materials->count() }}</td>
+								<td class="text-center">{{ $leccion->english_url }}</td>
 								<td class="text-center">
-									<a class="btn btn-info editar" data-route="{{ route('admin.courses.lessons.edit', $leccion->id) }}" title="Editar"><i class="fa fa-edit"></i></a>
+									@if ($leccion->subcategory_id == 1)
+										Principiante
+									@elseif ($leccion->subcategory_id == 2)
+										Básico
+									@elseif ($leccion->subcategory_id == 3)
+										Intermedio
+									@elseif ($leccion->subcategory_id == 4)
+										Avanzado
+									@elseif ($leccion->subcategory_id == 5)
+										Pro
+									@endif
+								</td>
+                                <td class="text-center">{{ $leccion->course->materials->count() }}</td>
+								<td class="text-center">
+									<a class="btn btn-info btn-rounded" data-route="{{ route('admin.courses.lessons.edit', $leccion->id) }}" id="{{$leccion->id}}" onclick="editar(this.id);" title="Editar"><i class="fa fa-edit"></i></a>
 									<a class="btn btn-primary" href="{{ route('admin.courses.lessons.show', $leccion->id) }}" title="Ver Video"><i class="fa fa-video"></i></a>
-									<a class="btn btn-warning" href="{{ route('admin.courses.lessons.resources', $leccion->id) }}" title="Ver Recursos Adicionales"><i class="fa fa-file"></i></a>
 									<a class="btn btn-danger" href="{{ route('admin.courses.lessons.delete', $leccion->id) }}" title="Eliminar"><i class="fa fa-ban"></i></a>
 								</td>
 							</tr>
@@ -101,16 +117,41 @@
 						            	<input type="text" class="form-control" name="title" required>
 						            </div>
 						        </div>
+								<div class="col-md-12">
+						            <div class="form-group">
+						                <label>Título de la Lección (Inglés)</label>
+						            	<input type="text" class="form-control" name="english_title" required>
+						            </div>
+						        </div>
 						        <div class="col-md-12">
 						            <div class="form-group">
 						                <label>Descripción</label>
-						            	<textarea class="form-control" name="description"></textarea> 
+						            	<textarea class="form-control" name="description"></textarea>
 						            </div>
-                                </div>
-                                <div class="col-md-12">
+								</div>
+                               <div class="col-md-12">
 						            <div class="form-group">
-						                <label>URL</label>
-						            	<input type="url" class="form-control" name="url" required>
+						                <label>URL Español</label>
+						            	<input type="url" class="form-control" name="url" pattern="https://vimeo.com/[0-9]{7,9}" title="El formato debe coincidir con el mostrado en la leyenda" required>
+						            	<label style="color: red;">Formato <i class="fa fa-arrow-right"></i> https://vimeo.com/1234567</label>
+						            </div>
+								</div>
+								<div class="col-md-12">
+						            <div class="form-group">
+						                <label>URL Inglés</label>
+						            	<input type="url" class="form-control" name="english_url"  pattern="https://vimeo.com/[0-9]{7,9}" title="El formato debe coincidir con el mostrado en la leyenda" required>
+						            	<label style="color: red;">Formato <i class="fa fa-arrow-right"></i> https://vimeo.com/1234567</label>
+						            </div>
+								</div>
+								<div class="col-md-12">
+						            <div class="form-group">
+						                <label>Nivel de Acceso</label>
+										<select class="form-control" name="subcategory_id" id="" required>
+											<option value="" disabled selected>Seleccione una categoria</option>
+											@foreach ($subcategory as $sub)
+											<option value="{{$sub->id}}">{{$sub->title}}</option>
+											@endforeach
+										</select>
 						            </div>
 						        </div>
 						    </div>

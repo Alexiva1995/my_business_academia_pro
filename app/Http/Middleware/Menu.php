@@ -9,9 +9,9 @@ use Closure;
 // modelo
 use App\Models\SettingCliente;
 use App\Models\SettingsEstructura;
-use App\Models\SettingsPunto; 
+use App\Models\SettingsPunto;
 use App\Models\Binario;
-use App\Models\Settings; 
+use App\Models\Settings;
 use App\Models\Menus;
 
 
@@ -36,12 +36,12 @@ class Menu
                 
                 $data = $this->menu('activos');
                 $menus = $this->menuActivo($data);
-                
+
             }elseif(Auth::user()->status == 0){
-                
+
                 $data = $this->menu('inactivos');
                 $menus = $this->menuInactivo($data);
-                
+
             }
             $settingCliente = SettingCliente::find(1);
             $settingEstructura = SettingsEstructura::find(1);
@@ -49,14 +49,14 @@ class Menu
         }
         return $next($request);
     }
-    
-    
+
+
     public function menu($dato){
-        
+
         if($dato == 'activos'){
-            
+
             $date = Menus::find(1);
-            
+
             $data = [
             'inicio' => json_decode($date->inicio),
             'actualizar' => json_decode($date->actualizar),
@@ -75,11 +75,11 @@ class Menu
             'tienda' => json_decode($date->tienda),
             'herramientas' => json_decode($date->herramientas),
         ];
-        
+
         }else{
-            
+
             $date = Menus::find(2);
-            
+
             $data = [
             'inicio' => json_decode($date->inicio),
             'actualizar' => json_decode($date->actualizar),
@@ -99,7 +99,7 @@ class Menu
             'herramientas' => json_decode($date->herramientas),
         ];
         }
-        
+
         return $data;
     }
 
@@ -112,12 +112,12 @@ class Menu
     {
         $settings = Settings::first();
         $settingPuntos = SettingsPunto::find(1);
-        
+
              $habilitar = 0;
              if (!empty($settingPuntos)) {
                  $habilitar = 1;
              }
-             
+
              $automatico = 0;
              $binario = Binario::find(1);
               if(!empty($binario->binario)){
@@ -135,6 +135,17 @@ class Menu
                 'permisoAdmin' => 1,
                 'activo' => 0,
             ],
+
+            'Academia' => [
+                'submenu' => 0,
+                'ruta' => 'index',
+                'black'=> '0',
+                'icono' => 'fas fa-exchange-alt',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => 0,
+            ],
+
             'Actualizar' => [
                 'submenu' => 0,
                 'ruta' => 'admin-update-all',
@@ -158,29 +169,89 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    'Volumen Grupal' => [
-                        'ruta' => 'individual',
+                ]
+            ],
+
+            'Tickets/Soporte' => [
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
+                'icono' => 'fas fa-ticket-alt',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => (request()->is('admin/ticket*')) ? 'active' : '',
+                'menus' => [
+                    'Generar Tickets/Soporte' => [
+                        'ruta' => 'ticket',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
+                    'Mis Tickets/Soporte' => [
+                        'ruta' => 'soporte.tickets.clients',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    /*
+                    'Todos Los Tickets/Soporte' => [
+                        'ruta' => 'todosticket',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    */
                 ]
             ],
-
+            
             'Billetera' => [
-                'submenu' => 0,
-                'ruta' => 'wallet-index',
-                'black'=> '0',
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
                 'icono' => 'fas fa-wallet',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => (request()->is('admin/wallet*')) ? 'active' : '',
+                'menus' => [
+                    'Mi Billetera' => [
+                        'ruta' => 'wallet-index',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    
+                    'Liquidaciones' => [
+                        'ruta' => 'wallet-cortes',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                 ]
+            ],
+
+
+            'Informe de Comisiones' => [
+                'submenu' => 0,
+                'ruta' => 'wallet-repor-comision-new',
+                'black'=> '0',
+                'icono' => 'glyphicon glyphicon-list-alt',
                 'complementoruta' => '',
                 'permisoAdmin' => 1,
                 'activo' => 0,
             ],
+            
+            'Notificaciones de eventos' => [
+                'submenu' => 0,
+                'ruta' => 'settings-correo-anexar',
+                'black'=> '0',
+                'icono' => 'fas fa-envelope-open-text',
+                'complementoruta' => '',
+                'permisoAdmin' => (Auth::user()->rol_id == 2) ? 1 : 0,
+                'activo' => 0,
+            ],
         ];
     }
-    
-    
-    
+
+
+
     /**
      * Devuelve el menu que se va a usar
      *
@@ -190,18 +261,18 @@ class Menu
     {
         $settings = Settings::first();
         $settingPuntos = SettingsPunto::find(1);
-        
+
              $habilitar = 0;
              if (!empty($settingPuntos)) {
                  $habilitar = 1;
              }
-             
+
              $automatico = 0;
              $binario = Binario::find(1);
               if(!empty($binario->binario)){
                   $automatico = 1;
               }
-              
+
               $red = 0;
               if((request()->is('referraltree*')) ? 'active' : ''){
                   $red ='active';
@@ -210,9 +281,9 @@ class Menu
               }elseif((request()->is('admin/users/networkrecords')) ? 'active' : ''){
                   $red ='active';
               }
-              
-              
-             
+
+
+
         return [
             'Inicio' => [
                 'submenu' => 0,
@@ -302,7 +373,7 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Ventas por link personal' => [
                         'ruta' => 'directas',
                         'complementoruta' => '',
@@ -311,13 +382,13 @@ class Menu
                     ],
                 ]
             ],
-            
+
             'Billetera' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
                 'icono' => 'fas fa-wallet',
                 'complementoruta' => '',
-                'permisoAdmin' => ($data['billetera']->activo == 0) ? 0 : 1,
+                'permisoAdmin' => 1,
                 'activo' => (request()->is('admin/wallet*')) ? 'active' : '',
                 'menus' => [
                     'Mi Billetera' => [
@@ -326,29 +397,16 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    'Historial de Transferencias' => [
-                        'ruta' => 'wallet-historial',
-                        'complementoruta' => '',
-                        'black'=> '0',
-                        'oculto'=> 'activo',
-                    ],
                     
-                    'Historial de Cortes' => [
+                    'Liquidaciones' => [
                         'ruta' => 'wallet-cortes',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
-                    'Canje de Puntos' => [
-                        'ruta' => 'cambio-canje',
-                        'complementoruta' => '',
-                        'black'=> '0',
-                        'oculto'=> ($settings->canje == 1) ? 'activo' : 'inactivo',
-                    ],
-                ]
+                 ]
             ],
-            
+
             'Calendario' => [
                 'submenu' => 0,
                 'ruta' => 'calendario-calendario',
@@ -358,7 +416,7 @@ class Menu
                 'permisoAdmin' => ($data['calendario']->activo == 0) ? 0 : 1,
                 'activo' => 0,
             ],
-            
+
             'Informes' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -391,7 +449,7 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Reportes Afiliados' => [
                         'ruta' => 'info.referidoscompleto',
                         'complementoruta' => '',
@@ -400,8 +458,8 @@ class Menu
                     ],
                 ]
             ],
-            
-            
+
+
             'Sistema de Prospección' => [
                 'submenu' => 0,
                 'ruta' => 'prospeccion-inicio',
@@ -411,7 +469,7 @@ class Menu
                 'permisoAdmin' => ($data['prospeccion']->activo == 0) ? 0 : 1,
                 'activo' => 0,
             ],
-            
+
             'Envio de correos' => [
                 'submenu' => 0,
                 'ruta' => 'correo-vista',
@@ -421,8 +479,8 @@ class Menu
                 'permisoAdmin' => ($data['correos']->activo == 0) ? 0 : 1,
                 'activo' => 0,
             ],
-            
-            
+
+
             'Tickets/Soporte' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -435,10 +493,10 @@ class Menu
                         'ruta' => 'ticket',
                         'complementoruta' => '',
                         'black'=> '0',
-                        'oculto'=> 'activo',
+                        'oculto'=> 'activo', 
                     ],
                     'Mis Tickets/Soporte' => [
-                        'ruta' => 'misticket',
+                        'ruta' => 'soporte.tickets.clients',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
@@ -462,7 +520,7 @@ class Menu
                 'permisoAdmin' => ($data['ranking']->activo == 0) ? 0 : 1,
                 'activo' => 0,
             ],
-            
+
             'Tienda' => [
                 'submenu' => 1,
                 'ruta' => 'javascript',
@@ -477,35 +535,35 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Informacion Bancaria' => [
                         'ruta' => 'bancaria-descargar',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Soporte de Pagos' => [
                         'ruta' => 'link-pago',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Lista de Soporte' => [
                         'ruta' => 'link-listado',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Paypal' => [
                         'ruta' => ''.$settings->paypal,
                         'complementoruta' => '',
                         'black'=> '1',
                         'oculto'=> (!empty($settings->paypal)) ? 'activo' : 'inactivo',
                     ],
-                    
+
                     'Pagar con Paypal' => [
                         'ruta' => 'setting-paypal-util',
                         'complementoruta' => '',
@@ -514,7 +572,7 @@ class Menu
                     ],
                 ]
             ],
-            
+
             'Herramientas' => [
                 'submenu' => 1,
                 'ruta' => 'javascript',
@@ -535,14 +593,14 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Notas' => [
                         'ruta' => 'notas-inicio',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                      'Activacion de Correos' => [
                         'ruta' => 'archivo.vistacorreo',
                         'complementoruta' => '',
@@ -559,13 +617,13 @@ class Menu
      *
      * @return array
      */
-    public function menuAdmin()
+  public function menuAdmin()
     {
         $permiso = null;
         $settings = Settings::first();
         
             $permiso = DB::table('settingpermiso')->where('iduser', Auth::user()->ID)->get()[0];
-            
+
              $habilitar = 0;
              $settingPuntos = SettingsPunto::find(1);
              if (!empty($settingPuntos)) {
@@ -573,7 +631,7 @@ class Menu
                  $habilitar = 1;
                   }
              }
-             
+
              $automatico = 0;
              $binario = Binario::find(1);
               if(!empty($binario->binario)){
@@ -581,14 +639,14 @@ class Menu
                   $automatico = 1;
                   }
               }
-              
+
               $inicio = 0;
               if(!empty($binario->inicio)){
                  if($permiso->binario == 1){
                   $inicio = 1;
                   }
               }
-              
+
               $red = 0;
               if((request()->is('referraltree*')) ? 'active' : ''){
                   $red ='active';
@@ -605,6 +663,16 @@ class Menu
                 'ruta' => 'admin.index',
                 'black'=> '0',
                 'icono' => 'fa fa-home',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => 0,
+            ],
+
+            'Academia' => [
+                'submenu' => 0,
+                'ruta' => 'index',
+                'black'=> '0',
+                'icono' => 'fas fa-exchange-alt',
                 'complementoruta' => '',
                 'permisoAdmin' => 1,
                 'activo' => 0,
@@ -651,6 +719,12 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
+                    'Lista de Usuarios' => [
+                        'ruta' => 'users.records',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
                     'Nuevo Usuario' => [
                         'ruta' => 'autenticacion.new-register',
                         'complementoruta' => '?ref='.Auth::user()->ID.'&select=true',
@@ -659,18 +733,15 @@ class Menu
                     ],
                 ]
             ],
-             
-
             'Entradas' => [
-                'submenu' => 0,
-                'ruta' => 'admin-users-entrada',
-                'black'=> '0',
-                'icono' => 'fas fa-door-closed',
-                'complementoruta' => '',
-                'permisoAdmin' => (!empty($permiso)) ? $permiso->entradas : 0,
-                'activo' => 0,
-            ],
-
+                 'submenu' => 0,
+                 'ruta' => 'admin-users-entrada',
+                 'black'=> '0',
+                 'icono' => 'fas fa-door-closed',
+                 'complementoruta' => '',
+                 'permisoAdmin' => (!empty($permiso)) ? $permiso->entradas : 0,
+                 'activo' => 0,
+             ],
             'Red' => [
                 'submenu' => 0,
                 'ruta' => 'admin-red-index',
@@ -680,7 +751,35 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->red : 0,
                 'activo' => 0,
             ],
-            
+            'Historial de comisiones' => [
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
+                'icono' => 'fas fa-landmark',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->historialcomision  : 0,
+                'activo' => (request()->is('admin/wallet*')) ? 'active' : '',
+                'menus' => [
+                    'Historial' => [
+                        'ruta' => 'wallet-index',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Informe de Comisiones' => [
+                        'ruta' => 'wallet-repor-comision-new',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    
+                    'Liquidaciones' => [
+                        'ruta' => 'wallet-cortes',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                ]
+            ],
             'Cursos' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -712,6 +811,26 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
+                    'Gestionar Insignias' => [
+                        'ruta' => 'insignia.index',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+
+                    'Estadisticas de Cursos' => [
+                        'ruta' => 'admin.courses.estadistica',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    
+                    'Cursos mas vistos' => [
+                        'ruta' => 'admin.courses.vistos',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
                 ]
             ],
             'Eventos' => [
@@ -727,8 +846,76 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                   
+                    'Eventos Eliminados' => [
+                        'ruta' => 'admin.events.record',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
                 ]
+            ],
+            'Banners' => [
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
+                'icono' => 'fas fa-ad',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->banners : 0,
+                'activo' => request()->is('admin/banners') ? 'active' : 0,
+                'menus' => [
+                    'Banners Activos' => [
+                        'ruta' => 'admin.banners.index',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Banners Inactivos' => [
+                        'ruta' => 'admin.banners.disabled',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Banner Soporte' => [
+                        'ruta' => 'admin.banner.soporte',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                ]
+            ],
+            'Membresías' => [
+                'submenu' => 0,
+                'ruta' => 'admin.memberships.index',
+                'black'=> '0',
+                'icono' => 'fa fa-star',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
+            ],
+            'Historial de Compras' => [
+                'submenu' => 0,
+                'ruta' => 'admin.purchases-record',
+                'black'=> '0',
+                'icono' => 'fa fa-shopping-cart',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
+            ],
+            'Legal' => [
+                'submenu' => 0,
+                'ruta' => 'admin.legal.tabs.index',
+                'black'=> '0',
+                'icono' => 'fas fa-balance-scale',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
+            ],
+            'Promociones' => [
+                'submenu' => 0,
+                'ruta' => 'admin.promotions.index',
+                'black'=> '0',
+                'icono' => 'fa fa-star',
+                'complementoruta' => '',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->cursos : 0,
+                'activo' => 0,
             ],
             
             /*
@@ -802,7 +989,7 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Ventas por link personal' => [
                         'ruta' => 'directas',
                         'complementoruta' => '',
@@ -811,7 +998,6 @@ class Menu
                     ],
                 ]
             ],
-            
             'Visión de Usuario' => [
                 'submenu' => 0,
                 'ruta' => 'admin.buscar',
@@ -821,7 +1007,6 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->vision_usuario : 0,
                 'activo' => 0,
             ],
-            */
             'Lista de Usuarios' => [
                 'submenu' => 0,
                 'ruta' => 'users.records',
@@ -829,6 +1014,78 @@ class Menu
                 'icono' => 'fa fa-user-circle',
                 'complementoruta' => '',
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->usuario : 0,
+                'activo' => 0,
+            ],*/
+            
+            
+            'Envio de correos' => [
+                'submenu' => 1,
+                'ruta' => 'javascript:;',
+                'icono' => 'fas fa-envelope-open-text',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->correos : 0,
+                'activo' => (request()->is('admin/correo*')) ? 'active' : '',
+                'menus' => [
+                    'Correos a la Red' => [
+                        'ruta' => 'correo-vista',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Notificaciones de eventos' => [
+                        'ruta' => 'settings-correo-anexar',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                ]
+            ],
+            
+            'Pop up' => [
+                'submenu' => 0,
+                'ruta' => 'setting-pop',
+                'black'=> '0',
+                'icono' => 'fas fa-window-restore',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
+                'activo' => 0,
+            ],
+             'Soporte' => [
+                'submenu' => 3,
+                'ruta' => 'javascript:;',
+                'icono' => 'fas fa-tools',
+                'permisoAdmin' => (!empty($permiso)) ? $permiso->tickets : 0,
+                'activo' => request()->is('admin/soporte/article') ? 'active' : 0,
+                'menus' => [
+                    'Articulos' => [
+                        'ruta' => 'admin.soporte.article',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Tickets/Soporte' => [
+                        'ruta' => 'soporte.tickets.team',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+                    'Tickets/Resueltos' => [
+                        'ruta' => 'soporte.tickets.solved',
+                        'complementoruta' => '',
+                        'black'=> '0',
+                        'oculto'=> 'activo',
+                    ],
+
+                ]
+            ],
+            
+           
+            'Slider' => [
+                'submenu' => 0,
+                'ruta' => 'setting-logo',
+                'black'=> '0',
+                'icono' => 'fas fa-sliders-h',
+                'complementoruta' => '',
+                'permisoAdmin' => 1,
                 'activo' => 0,
             ],
             
@@ -842,7 +1099,7 @@ class Menu
                 'permisoAdmin' => $automatico,
                 'activo' => 0,
             ],
-            
+
             'Bono Inicio' => [
                 'submenu' => 0,
                 'ruta' => 'setting-inicio-verinicio',
@@ -852,7 +1109,7 @@ class Menu
                 'permisoAdmin' => $inicio,
                 'activo' => 0,
             ],
-            
+
             'Puntos Almacenados' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -875,7 +1132,7 @@ class Menu
                     ],
                 ]
             ],
-            
+
             'Calendario' => [
                 'submenu' => 0,
                 'ruta' => 'calendario-calendario',
@@ -885,8 +1142,8 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->calendario : 0,
                 'activo' => 0,
             ],
-            
-            
+
+
             'Billetera' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -901,21 +1158,21 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Comisiones a pagar' => [
                         'ruta' => 'wallet-comisiones-pagar',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Recarga Billetera' => [
                         'ruta' => 'wallet.recarga',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> ($settings->recarga == 1) ? 'activo' : 'inactivo',
                     ],
-                    
+
                     'Canje de Puntos' => [
                         'ruta' => 'cambio-lista',
                         'complementoruta' => '',
@@ -924,8 +1181,8 @@ class Menu
                     ],
                 ]
             ],
-            
-           
+
+
             'Puntos' => [
                 'submenu' => 0,
                 'ruta' => 'puntos.puntos',
@@ -1001,14 +1258,14 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Reportes Afiliados' => [
                         'ruta' => 'info.referidoscompleto',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Reportes Comisiones' => [
                         'ruta' => 'info.ganancia',
                         'complementoruta' => '',
@@ -1016,16 +1273,6 @@ class Menu
                         'oculto'=> 'activo',
                     ],
                 ]
-            ],
-            
-            'Envio de correos' => [
-                'submenu' => 0,
-                'ruta' => 'correo-vista',
-                'black'=> '0',
-                'icono' => 'fas fa-envelope-open-text',
-                'complementoruta' => '',
-                'permisoAdmin' => (!empty($permiso)) ? $permiso->correos : 0,
-                'activo' => 0,
             ],
             
             'Tickets/Soporte' => [
@@ -1055,7 +1302,7 @@ class Menu
                 'permisoAdmin' => (!empty($permiso)) ? $permiso->historial_actividades : 0,
                 'activo' => 0,
             ],
-            
+
             'Prospección' => [
                 'submenu' => 1,
                 'ruta' => 'javascript:;',
@@ -1076,7 +1323,7 @@ class Menu
                         'black'=> '1',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Sistema de Prospección' => [
                         'ruta' => 'prospeccion-inicio',
                         'complementoruta' => '',
@@ -1085,8 +1332,8 @@ class Menu
                     ],
                 ]
             ],
-            
-            
+
+
             'Soporte' => [
                 'submenu' => 0,
                 'ruta' => 'https://sinergiared.com/clientes/index.php/signin',
@@ -1110,56 +1357,56 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Agregar Productos' => [
                         'ruta' => 'tienda-accion-product',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Editar Productos' => [
                         'ruta' => 'tienda-product-nueva',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Crear Categorias' => [
                         'ruta' => 'tienda-listacat',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Solicitudes Compra' => [
                         'ruta' => 'tienda-solicitudes',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Informacion bancaria' => [
                         'ruta' => 'bancaria-bancaria',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Soporte de Pagos' => [
                         'ruta' => 'link-listado',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Paypal' => [
                         'ruta' => ''.$settings->paypal,
                         'complementoruta' => '',
                         'black'=> '1',
                         'oculto'=> (!empty($settings->paypal)) ? 'activo' : 'inactivo',
                     ],
-                    
+
                     'Pagar con Paypal' => [
                         'ruta' => 'setting-paypal-util',
                         'complementoruta' => '',
@@ -1169,7 +1416,7 @@ class Menu
                 ]
             ],
              */
-
+            /* 
             'Ajustes' => [
                 'submenu' => 1,
                 'ruta' => 'javascript',
@@ -1184,14 +1431,14 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Seguridad' => [
                         'ruta' => 'setting-seguridad',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Formulario' => [
                         'ruta' => 'setting-formulario',
                         'complementoruta' => '',
@@ -1199,14 +1446,14 @@ class Menu
                         'oculto'=> 'activo',
                     ],
                     
-                    /*
+                    
                     'Configuración Cripto' => [
                         'ruta' => 'setting-btcconfi',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    */
+                    
                     'Comisiones' => [
                         'ruta' => 'setting-comisiones',
                         'complementoruta' => '',
@@ -1238,77 +1485,77 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Control de Gastos' => [
                         'ruta' => 'setting-admi-nistrador',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    */
+
                     'Plantilla de Correos' => [
                         'ruta' => 'setting-plantilla',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    /*
+
                     'Permiso' => [
                         'ruta' => 'setting-permisos',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    */
+                    
                     'Activacion' => [
                         'ruta' => 'setting-activacion',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    /*
+
                     'Editar Menus' => [
                         'ruta' => 'setting-menu',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    */
+
                     'Monedas' => [
                         'ruta' => 'setting-monedas',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Avatares Arbol' => [
                         'ruta' => 'setting-imagenes',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Redes Sociales' => [
                         'ruta' => 'setting-red',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    /*
+
                     'Metodos de pago' => [
                         'ruta' => 'link-metodo',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Puntos' => [
                         'ruta' => 'setting-puntos',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    */
+
                     'Pop up' => [
                         'ruta' => 'setting-pop',
                         'complementoruta' => '',
@@ -1322,45 +1569,46 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Costo' => [
                         'ruta' => 'setting-depart',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Binario' => [
                         'ruta' => 'binario-configuracion',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Complementos especiales' => [
                         'ruta' => 'setting-comple',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Modulo Complementario' => [
                         'ruta' => 'setting-modulo',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Codigo QR' => [
                         'ruta' => 'link-codigo',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    */
+                   
                 ]
             ],
-
+             */
+            
              /*
             'Herramientas' => [
                 'submenu' => 1,
@@ -1383,31 +1631,32 @@ class Menu
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Crear Anuncios' => [
                         'ruta' => 'archivo.anuncios',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Notas' => [
                         'ruta' => 'notas-inicio',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ],
-                    
+
                     'Lista Anuncios' => [
                         'ruta' => 'archivo.edicion',
                         'complementoruta' => '',
                         'black'=> '0',
                         'oculto'=> 'activo',
                     ]
-                    
+
                 ]
             ]
             */
         ];
     }
 }
+

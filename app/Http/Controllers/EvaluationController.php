@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evaluation; use App\Models\Course; use App\Models\Question;
-use DB; use Auth;
+use DB; use Auth; use PDF;
 
 class EvaluationController extends Controller{
 
@@ -139,11 +139,83 @@ class EvaluationController extends Controller{
         $datosEvaluacion = Evaluation::where('id', '=', $request->evaluation_id)
                             ->with('course')
                             ->first();
-        
+    
+        $datosPrimeraLeccion = DB::table('lessons')
+                                ->where('course_id', '=', $datosEvaluacion->course_id)
+                                ->orderBy('id', 'DESC')
+                                ->first();
         if ($puntaje >= 50){
-            return redirect('courses/show/'.$datosEvaluacion->course->slug.'/'.$datosEvaluacion->course->id)->with('msj-exitoso', '¡Felicidades! Has aprobado la evaluación con '.number_format($puntaje).'%');
+            DB::table('courses_users')
+                ->where('user_id', '=', Auth::user()->ID)
+                ->where('course_id', '=', $datosEvaluacion->course_id)
+                ->update(['finish_date' => date('Y-m-d'), 'certificate' => 1, 'progress' => 100, 'updated_at' => date('Y-m-d H:i:s')]);
+
+            //$this->generate_certificate($datosEvaluacion->course_id);
+            
+            return redirect('courses/lesson/'.$datosPrimeraLeccion->slug.'/'.$datosPrimeraLeccion->id.'/'.$datosPrimeraLeccion->course_id)->with('msj-exitoso', '¡Felicidades! Has aprobado la evaluación con '.number_format($puntaje).'%');
         }else{
-            return redirect('courses/show/'.$datosEvaluacion->course->slug.'/'.$datosEvaluacion->course->id)->with('msj-erroneo', '¡Lo sentimos! Has reprobado la evaluación con '.number_format($puntaje).'%');
+            return redirect('courses/lesson/'.$datosPrimeraLeccion->slug.'/'.$datosPrimeraLeccion->id.'/'.$datosPrimeraLeccion->course_id)->with('msj-erroneo', '¡Lo sentimos! Has reprobado la evaluación con '.number_format($puntaje).'%');
         }
+    }
+
+    //**** Genera el PDF del certificado y lo almacena para mostrarlo posteriormente ***//
+    public function get_certificate($curso_id){
+        $datosCurso = Course::where('id', '=', $curso_id)
+                        ->first();
+        
+        $datosProgreso = DB::table('courses_users')
+                            ->where('user_id', '=', Auth::user()->ID)
+                            ->where('course_id', '=', $curso_id)
+                            ->first();
+
+        $alumno = Auth::user()->display_name;
+        $curso = $datosCurso->title;
+        $dia = date('d', strtotime($datosProgreso->finish_date));
+        switch (date('m', strtotime($datosProgreso->finish_date))) {
+            case '01':
+                $mes = 'Enero';
+            break;
+            case '02':
+                $mes = 'Febrero';
+            break;
+            case '03':
+                $mes = 'Marzo';
+            break;
+            case '04':
+                $mes = 'Abril';
+            break;
+            case '05':
+                $mes = 'Mayo';
+            break;
+            case '06':
+                $mes = 'Junio';
+            break;
+            case '07':
+                $mes = 'Julio';
+            break;
+            case '08':
+                $mes = 'Agosto';
+            break;
+            case '09':
+                $mes = 'Septiembre';
+            break;
+            case '10':
+                $mes = 'Octubre';
+            break;
+            case '11':
+                $mes = 'Noviembre';
+            break;
+            case '12':
+                $mes = 'Diciembre';
+            break;
+        }
+        $ano = date('Y', strtotime($datosProgreso->finish_date));
+
+        //$pdf = \App::make('dompdf.wrapper');
+        $pdf = PDF::loadView('certificado.tipo1', compact('curso', 'alumno', 'dia', 'mes', 'ano'));//->setPaper('a4', 'landscape');
+        /*$output = $pdf->output();
+        $path = public_path()."/certificates/courses/".Auth::user()->ID."-".$curso_id.".pdf"; 
+        file_put_contents($path, $output);*/
+        return $pdf->download('certificate.pdf');
     }
 }

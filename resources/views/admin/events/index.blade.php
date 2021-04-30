@@ -9,28 +9,55 @@
 				responsive: true,
 			});
 
-			$('.editar').on('click',function(e){
- 				e.preventDefault();
+			CKEDITOR.instances["description"].on('blur', function(){
+				var description = CKEDITOR.instances["description"].getData();
+    			if (description.length < 50){
+    			    alert("La descripción del evento debe tener al menos 50 caracteres.");
+    			    $("#btn-store").prop('disabled', true);
+    			}else{
+    			    $("#btn-store").prop('disabled', false);
+    			}
+		    });
+		    
+		    CKEDITOR.instances["description2"].on('blur', function(){
+				var description = CKEDITOR.instances["description2"].getData();
+    			if (description.length < 50){
+    			    alert("La descripción del evento debe tener al menos 50 caracteres.");
+    			    $("#btn-update").prop('disabled', true);
+    			}else{
+    			    $("#btn-update").prop('disabled', false);
+    			}
+		    });
+		});
 
- 				var route = $(this).attr('data-route');
- 				$.ajax({
-	                url:route,
-	                type:'GET',
-	                success:function(ans){
-	                	$("#event_id").val(ans.id);
-	                	$("#title").val(ans.title);
-                 		CKEDITOR.instances["description"].setData(ans.description);
-	                	$("#date").val(ans.date);
-	                	$("#time").val(ans.time);
-	                	$("#duration").val(ans.duration); 
-	                    $("#modal-edit").modal("show");
-	                }
-	            });
-			});
-
-			$('#modal-edit').on('hidden.bs.modal', function (e) {
-			  // do something...
-			})
+		function editar($id){
+			var route = $("#"+$id).attr('data-route');
+ 			$.ajax({
+	            url:route,
+	            type:'GET',
+	            success:function(ans){
+	                $("#event_id").val(ans.id);
+	                $("#title").val(ans.title);
+	                $("#category_id option[value="+ans.category_id+"]").attr("selected", true);
+	                $("#user_id option[value="+ans.user_id+"]").attr("selected", true);
+                 	CKEDITOR.instances["description2"].setData(ans.description);
+	                $("#date").val(ans.date);
+	                $("#time").val(ans.time);
+	                $("#duration").val(ans.duration);
+	                $("#modal-edit").modal("show");
+	            }
+	        });
+		}
+		$("#selectall").on("click", function() {
+			$(".countries").prop("checked", this.checked);
+		});
+		// if all checkbox are selected, check the selectall checkbox and viceversa
+		$(".countries").on("click", function() {
+			if ($(".countries").length == $(".countries:checked").length) {
+				$("#selectall").prop("checked", true);
+			}else{
+				$("#selectall").prop("checked", false);
+			}
 		});
 	</script>
 @endpush
@@ -54,7 +81,7 @@
 				<div style="text-align: right;">
 					<a data-toggle="modal" data-target="#modal-new" class="btn btn-info descargar"><i class="fa fa-plus-circle"></i> Nuevo Evento</a>
 				</div>
-				
+
 				<br class="col-xs-12">
 
 				<table id="mytable" class="table">
@@ -73,22 +100,21 @@
 								<td class="text-center">{{ $event->title }}</td>
 								<td class="text-center">{{ App\Models\Events::findID($event->user_id) }}</td>
 								<td class="text-center">
-									<a class="btn btn-info editar" data-route="{{ route('admin.events.edit', $event->id) }}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-info editar" data-route="{{ route('admin.events.edit', $event->id) }}" id="{{$event->id}}" onclick="editar(this.id);"><i class="fa fa-edit"></i></a>
 									@if ($event->status == '1' )
 										<a class="btn btn-danger" href="{{ route('admin.events.change-status', [$event->id, 0]) }}" title="Deshabilitar"><i class="fa fa-ban"></i></a>
 									@endif
-
 									@if ($event->status == '0')
-									<a class="btn btn-success" href="{{ route('admin.events.change-status', [$event->id, 1]) }}" title="Habilitar"><i class="fa fa-check"></i></a>
+										<a class="btn btn-success" href="{{ route('admin.events.change-status', [$event->id, 1]) }}" title="Habilitar"><i class="fa fa-check"></i></a>
 									@endif
-										
+									<a class="btn btn-danger" href="{{ route('admin.events.delete', $event->id) }}" title="Eliminar"><i class="fa fa-trash"></i></a>
 								</td>
 							</tr>
 						@endforeach
 					</tbody>
 				</table>
 			</div>
-		</div>
+		</div>c
 	</div>
 
 	<!-- Modal Agregar Evento-->
@@ -106,7 +132,7 @@
 						        <div class="col-md-12">
 						            <div class="form-group">
 						                <label>Título del Evento</label>
-						            	<input type="text" class="form-control" name="title" required>
+						            	<input type="text" class="form-control" name="title" minlength="5" required>
 						            </div>
 						        </div>
 								<div class="col-md-12">
@@ -115,7 +141,7 @@
 						                <select class="form-control" name="user_id" required>
 						                	<option value="" selected disabled>Seleccione un mentor..</option>
 						                	@foreach ($mentores as $mentor)
-						                		<option value="{{ $mentor->ID }}">{{ $mentor->user_email }}</option>
+						                		<option value="{{ $mentor->ID }}">{{ (!is_null($mentor->display_name)) ? $mentor->display_name : $mentor->user_email }}</option>
 						                	@endforeach
 						                </select>
 						            </div>
@@ -134,34 +160,67 @@
 								<div class="col-md-12">
 						            <div class="form-group">
 						                <label>Descripción</label>
-										<textarea class="ckeditor form-control" name="description"></textarea>
+										<textarea class="ckeditor form-control" name="description" id="description"></textarea>
 								    </div>
 						        </div>
-								<div class="col-md-12">
+								<div class="col-md-12 text-center">
+									<label>Fecha y Hora del Sistema	 <br><span style="color: red;">{{ date('d-m-Y H:i A', strtotime($dateNow))}}</span></label>
+								</div>
+								<div class="col-md-6">
 									<label>Fecha</label>
 									<input type="date" class="form-control" name="date" required>
 								</div>
-								<div class="col-md-12">
+								<div class="col-md-6">
 									<label>Hora</label>
 									<input type="time" class="form-control" name="time" required>
 								</div>
 								<div class="col-md-12">
+						            <div class="form-group">
+						                <label>Países Disponibles</label>
+						                <div class="row">
+											<div class="col-sm-6 col-md-12 text-center">
+												<input type="checkbox" class="form-check-input" id="selectall">
+											    <label class="form-check-label">Seleccionar todos</label>
+											</div>
+						                	@foreach ($paises as $pais)
+							            		<div class="col-sm-6 col-md-3">
+												    <input type="checkbox" class="form-check-input countries" value="{{ $pais->id }}" name="countries[]">
+												    <label class="form-check-label">{{ $pais->nombre }}</label>
+												</div>
+							            	@endforeach
+						                </div>
+						            </div>
+						        </div>
+								<div class="col-md-12">
 						        	<label>Duración (Minutos)</label>
             						<input type="number" class="form-control" name="duration" required>
-						        </div>
+								</div>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para el banner <br><span style="color: red;">900px  x  321px</span></label>
+								</div>
 						        <div class="col-md-12">
 									<div class="form-group">
 									<label class="control-label text-center">Banner</label>
 										<input class="form-control" type="file" name="banner" required>
 									</div>
+						        </div><br>
+								<div class="col-md-12 text-center">
+									<label>Dimensiones para la miniatura <br><span style="color: red;">350px  x  450px</span></label>
+								</div>
+						        <div class="col-md-12">
+									<div class="form-group">
+									<label class="control-label text-center">Miniatura</label>
+										<input class="form-control" type="file" name="miniatura" required>
+									</div>
 						        </div>
+
 						    </div>
 						</div>
-				        
+
 				    </div>
 	      			<div class="modal-footer">
 	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="submit" class="btn btn-primary">Crear Evento</button>
+	        			<button type="submit" class="btn btn-primary" id="btn-store">Crear Evento</button>
 	      			</div>
 	      		</form>
     		</div>
@@ -183,7 +242,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Título del Evento</label>
-									<input type="text" class="form-control" name="title" id="title" required>
+									<input type="text" class="form-control" name="title" id="title"  minlength="5" required>
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -191,7 +250,7 @@
 									<label>Mentor</label>
 									<select class="form-control" name="user_id" id="user_id" required>
 										@foreach ($mentores as $mentor)
-											<option value="{{ $mentor->ID }}">{{ $mentor->user_email }}</option>
+											<option value="{{ $mentor->ID }}">{{ (!is_null($mentor->display_name)) ? $mentor->display_name : $mentor->user_email }}</option>
 										@endforeach
 									</select>
 								</div>
@@ -209,7 +268,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label>Descripción</label>
-									<textarea class="ckeditor form-control" name="description" id="description"></textarea>
+									<textarea class="ckeditor form-control" name="description" id="description2"></textarea>
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -230,12 +289,19 @@
 									<input class="form-control" type="file" name="banner">
 								</div>
 							</div>
-	    					
+
+							<div class="col-md-12">
+									<div class="form-group">
+									<label class="control-label text-center">Miniatura</label>
+										<input class="form-control" type="file" name="miniatura">
+									</div>
+						  </div>
+
 						</div>
 				    </div>
 	      			<div class="modal-footer">
 	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="submit" class="btn btn-primary">Guardar Cambios</button>
+	        			<button type="submit" class="btn btn-primary" id="btn-update">Guardar Cambios</button>
 	      			</div>
 	      		</form>
     		</div>

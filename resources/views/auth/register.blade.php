@@ -39,23 +39,51 @@
                                     </h3>
                                 </div>
                                 <div class="box-body">
-                                    
+
                                     <input type="hidden" name="tip" value="1">
 
 
-                                    @if(!empty(request()->select))  
+                                    @if(!empty(request()->select))
                                     <div class="form-group">
                                         <label class="control-label" style="text-align: center; color: white;">Tipo de Usuario (*)</label>
-                                       <select class="form-control" name="rango">
+                                       <select class="form-control" name="rango" id="idrang" onchange="avataresMentor()">
                                         <option value="" selected disabled>Seleccion una opcion</option>
                                         <option value="0">Administrador</option>
                                         <option value="1">Moderador</option>
-                                        <option value="2" >Mentor</option>
+                                        <option value="2">Mentor</option>
                                         <option value="3">Cliente</option>
                                        </select>
                                     </div>
                                     @endif
-                                    
+
+                                    <div style="display: none;" id="imagenavatar">
+
+                                      <div class="form-group">
+                                        <label class="control-label" style="text-align: center; color: white;">Nombre (*)</label>
+                                            <input type="text" class="form-control" name="firstname">
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label class="control-label" style="text-align: center; color: white;">Apellido (*)</label>
+                                            <input type="text" class="form-control" name="lastname">
+                                      </div>
+                                        
+                                      <div class="form-group">
+                                        <label class="control-label" style="text-align: center; color: white;">Imagen de Usuario (*)</label>
+                                            <input type="file" name="avatar">
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label class="control-label" style="text-align: center; color: white;">Descripción(*)</label>
+                                           <input class="form-control" type="textarea" name="profession">
+                                      </div>
+                                      <div class="form-group">
+                                        <label class="control-label" style="text-align: center; color: white;">Biografía(*)</label>
+                                           <textarea class="form-control" type="textarea" name="contenido"> </textarea>
+                                      </div>
+                                    </div>
+                                    </div>
+
                                     @foreach($campos as $campo)
                                     @if($campo->tip == 0 || $campo->tip == 1)
                                     @if($campo->tipo == 'select')
@@ -148,8 +176,8 @@
                                             style="background-color:f7f7f7;" oncopy="return false"
                                             onpaste="return false" />
                                     </div>
-                                    
-                                    
+
+
                                     @if (request()->ref == null)
                                     <div class="form-group">
                                         <div class="alert alert-info">
@@ -158,21 +186,21 @@
                                                 Si no sabes cual es el ID de su Patrocinador, por favor Coloque el 1
                                             </span>
                                         </div>
-                                        
+
                     <label class="control-label" style="text-align: center;">ID Patrocinador (*)</label>
             <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" required pattern="[0-9]*"
                 autocomplete="off" name="referred_id" style="background-color:f7f7f7;" oncopy="return false"
                 onpaste="return false" />
-                                        
+
                                     </div>
-                                    
+
                                     @else
                                     <div class=" form-group">
                                         <label class="white" for="">ID Patrocinador (opcional)</label>
                                         <input type="number" class="form-control" name="referred_id" value="{{ request()->ref }}">
                                     </div>
                                     @endif
-                                    
+
                                     {{-- no binario --}}
                                     @if ($settingEstructura->tipoestructura != 'binaria')
                                      @if($settings->posicionamiento == 0)
@@ -186,11 +214,11 @@
                                     </div>
                                      @endif
                                     @else
-                                    
+
                                     @if (!empty(request()->lado))
                                     <input type="hidden" name="ladomatriz" value="{{request()->lado}}" />
                                     @endif
-                                    
+
                                     @if(empty(request()->lado))
                                     {{-- binario --}}
                                         <div class=" form-group">
@@ -217,9 +245,8 @@
                                             <label class="custom-control-label white" for="customCheck1">He leído, Acepto
                                                 los terminos y condiciones</label>
                                         </div>
-                                        <a href="{{asset('assets/terminosycondiciones.pdf')}}" download>
-                                            Descargar Terminos y
-                                            Condiciones</a>
+                                        <a href="{{route('terms-and-conditions')}}" target="_black">
+                                            Visualizar terminos y condiciones</a>
                                         </label>
                                     </div>
                                 </div>
@@ -271,5 +298,18 @@
             document.getElementById("errorEdad").style.display = 'none';
         }
     }
+
+
+    function avataresMentor(){
+
+    var opt = $('#idrang').val();
+
+    if(opt == "2"){
+        $('#imagenavatar').show();
+        }else{
+            $('#imagenavatar').hide();
+        }
+    }
+
 </script>
 @endpush

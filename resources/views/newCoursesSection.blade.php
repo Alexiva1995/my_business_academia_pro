@@ -7,36 +7,29 @@
         <button type="button" class="btn btn-outline-success btn-arrow btn-arrow-next" @if ($next == 0) disabled @endif data-route="{{ route('landing.load-more-courses-new', [$idEnd, 'next'] ) }}"  onclick="loadMoreCoursesNew('next');"><i class="fas fa-chevron-right"></i></button>
     </div>
 </div>
-               
-<div class="row" style="padding: 10px 30px;">
+
+<div id="newers" class="row" style="padding: 10px 30px;">
     @foreach ($cursosNuevos as $cursoNuevo)
-        <div class="col-xl-4 col-lg-4 col-12" style="padding-bottom: 10px;">
-            <div class="card" >
-                @if (!is_null($cursoNuevo->cover))
-                    <img src="{{ asset('uploads/images/courses/covers/'.$cursoNuevo->cover) }}" class="card-img-top new-course-img" alt="...">
+        <div class="col-xl-4 col-lg-4 col-12 box-courses" style="padding-bottom: 10px;">
+            <div class="card">
+                <a href="{{ route('courses.show', [$cursoNuevo->slug, $cursoNuevo->id]) }}" style="color: white;">
+
+                @if (!is_null($cursoNuevo->thumbnail_cover))
+                    <img src="{{ asset('uploads/images/courses/covers/'.$cursoNuevo->thumbnail_cover) }}" class="card-img-top new-course-img" alt="...">
                 @else
-                    <img src="{{ asset('uploads/images/courses/covers/default.jpg') }}" class="card-img-top new-course-img" alt="...">
+                    <img src="{{ asset('uploads/images/courses/covers/default.png') }}" class="card-img-top new-course-img" alt="...">
                 @endif
-                <div class="card-img-overlay d-flex flex-column">
+                <div class="card-img-overlay d-flex flex-column course-overlay">
                     <div class="mt-auto">
-                        <div class="new-course-title">{{ $cursoNuevo->title }}</div>
+                        <div class="section-title-landing text-white" style="line-height:1;">{{ $cursoNuevo->title }}</div>
                         <div class="row">
-                            <div class="col-12 col-xl-6 new-course-category">{{ $cursoNuevo->category->title }}</div>
-                            <div class="col-12 col-xl-6" style="font-size: 16px;">
-                                <div class="row row-cols-3">
-                                    <div class="col text-right no-padding-sides mr-2">
-                                        <i class="far fa-user-circle"></i><br>
-                                        <span class="new-course-items-text">{{$cursoNuevo->views}}</span>
-                                    </div>
-                                    <div class="col text-left no-padding-sides">
-                                        <i class="far fa-thumbs-up"></i><br>
-                                        <span class="new-course-items-text">{{$cursoNuevo->likes}}</span>
-                                    </div>
-                                </div>
-                            </div>
+                           <div class="col-md-12">
+                               <p class="ico" style="float: right;"> <i class="far fa-user-circle"> {{ $cursoNuevo->users->count()}}</i></p>
+                           </div>
                         </div>
                     </div>
                 </div>
+              </a>
             </div>
         </div>
     @endforeach

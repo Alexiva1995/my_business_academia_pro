@@ -65,6 +65,7 @@ class PermisosController extends Controller
           'entradas' => ($datos->entradas == null) ? 0 : 1,
           'email_marketing' => ($datos->email_marketing == null) ? 0 : 1,
           'administrar_redes' => ($datos->administrar_redes == null) ? 0 : 1,
+          'historialcomision' => ($datos->historialcomision == null) ? 0 : 1,
         ]);
       } else {
         Permiso::create([
@@ -98,6 +99,7 @@ class PermisosController extends Controller
           'entradas' => ($datos->entradas == null) ? 0 : 1,
           'email_marketing' => ($datos->email_marketing == null) ? 0 : 1,
           'administrar_redes' => ($datos->administrar_redes == null) ? 0 : 1,
+          'historialcomision' => ($datos->historialcomision == null) ? 0 : 1,
         ]);
       }
 
@@ -125,7 +127,7 @@ class PermisosController extends Controller
             'billetera' => 1,
             'pago' => 1,
             'informes' => 1,
-            'tickets' => 1,
+            'tickets' => 0,
             'buzon' => 1,
             'ranking' => 1,
             'historial_actividades' => 1,
@@ -147,6 +149,7 @@ class PermisosController extends Controller
             'cursos' => 1,
             'eventos' => 1,
             'entradas' => 1,
+            'historialcomision' => 1,
         ]);
     }
 

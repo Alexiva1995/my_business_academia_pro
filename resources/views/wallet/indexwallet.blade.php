@@ -58,9 +58,48 @@
     </div>
 </div>
 
+
+<div class="col-xs-12">
+            <div class="box box-info" style="background-color: #007bff; border-radius: 10px;">
+                <div class="box-body">
+                    <h4 class="box-title white">
+                    <span class="info-box-icon-fecha-blue">
+                    <i class="fa fa-star"></i>
+                    </span>
+                        <p style="padding: 10px 50px;"> Filtrar por Membresía</p>
+                    </h4>
+
+                    <form method="post" action="{{ route('wallet-filtro-membresia') }}">
+                        {{ csrf_field() }}
+                        
+                        <div class="form-group has-feedback date col-xs-12 col-md-4">
+                            <label class="control-label" style="color: white;">Buscar</label>
+                            <select name="membresia" class="form-control">
+                                <option value="" selected> Seleccione una opción</option>
+                                @foreach ($membresias as $membresia)
+                                    <option value="{{ $membresia->name }}">{{ $membresia->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <div class="form-group has-feedback date col-xs-12 col-md-4" style="margin-top: 25px;">
+                            <button class="btn btn-success" type="submit">
+                                Buscar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 <div class="col-xs-12">
     <div class="box box-info">
         <div class="box-body">
+            
+            @if(Auth::user()->rol_id == 0)
+            <a href="#" class="btn btn-info btn-block" data-toggle="modal" data-target="#liquidacion"> Liquidacion</a>
+            @endif
+
             <table id="mytable" class="table">
                 <thead>
                     <tr>
@@ -76,17 +115,26 @@
                             Fecha
                         </th>
                         <th class="text-center">
-                            Descripción
+                            Descripci贸n
                         </th>
+
+                        <th class="text-center">
+                            Membresia
+                        </th>
+
+                        @if(Auth::user()->rol_id != 0)
                         <th class="text-center">
                             Descuento
                         </th>
+                        @endif
                         <th class="text-center">
                             Ingreso
                         </th>
+                        @if(Auth::user()->rol_id != 0)
                         <th class="text-center">
                             Retiro
                         </th>
+                        @endif
                         <th class="text-center">
                             Balance
                         </th>
@@ -115,6 +163,12 @@
                         <td class="text-center">
                             {{$wallet->descripcion}}
                         </td>
+
+                        <td class="text-center">
+                            {{$wallet->membresia}}
+                        </td>
+                        
+                        @if(Auth::user()->rol_id != 0)
                         <td class="text-center">
                             @if ($moneda->mostrar_a_d)
                             {{$moneda->simbolo}} {{$wallet->descuento}}
@@ -122,6 +176,7 @@
                             {{$wallet->descuento}} {{$moneda->simbolo}}
                             @endif
                         </td>
+                        @endif
                         <td class="text-center">
                             @if ($moneda->mostrar_a_d)
                             {{$moneda->simbolo}} {{$wallet->debito}}
@@ -129,6 +184,7 @@
                             {{$wallet->debito}} {{$moneda->simbolo}}
                             @endif
                         </td>
+                        @if(Auth::user()->rol_id != 0)
                         <td class="text-center">
                             @if ($moneda->mostrar_a_d)
                             {{$moneda->simbolo}} {{$wallet->credito}}
@@ -136,6 +192,7 @@
                             {{$wallet->credito}} {{$moneda->simbolo}}
                             @endif
                         </td>
+                        @endif
                         <td class="text-center" style="color:#28a745;">
                             @if ($moneda->mostrar_a_d)
                             {{$moneda->simbolo}} {{$wallet->balance}}
@@ -167,7 +224,7 @@
 </div>
 
 {{-- Comisiones a pagar--}}
-@if(Auth::user()->rol_id == 0)
+{{--@if(Auth::user()->rol_id == 0)
 <div class="col-xs-12">
     <div class="box-body white">
        <h3>Comisiones a Pagar</h3>
@@ -251,12 +308,12 @@
         </div>
     </div>
 </div>
-@endif
+@endif--}}
 
 
 {{-- Recarga Billetera--}}
 
-<div class="col-xs-12">
+{{--<div class="col-xs-12">
     <div class="box-body white">
        <h3>Recargar Billetera</h3>
     </div>
@@ -344,8 +401,10 @@
 
         </div>
     </div>
-</div>
+</div>--}}
 
+
+@include('pagos.componentes.liquidacion')
 
 @endsection
 

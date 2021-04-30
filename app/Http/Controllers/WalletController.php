@@ -24,6 +24,7 @@ use App\Models\Commission;
 use App\Models\SettingsComision;
 use App\Models\Canje;
 use App\Models\Settings; 
+use App\Models\PurchaseDetail;
 // llamada a los controladores
 use App\Http\Controllers\ComisionesController;
 use App\Http\Controllers\IndexController;
@@ -50,6 +51,9 @@ class WalletController extends Controller
 		$totalcompleto =0;
 
 		if (Auth::user()->rol_id == 0) {
+
+			view()->share('title', 'Historial de Comisiones');
+
 			$wallets = Wallet::all();
 			$total = $this->calcularTotal($wallets);
 			//recargas
@@ -74,9 +78,55 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 
-	   	return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+	   	return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
+	
+	
+	//filtro por membresia
+	public function filtromembre(Request $request){
+	    
+	    $moneda = Monedas::where('principal', 1)->get()->first();
+		$datos = [];
+		$totalcompleto =0;
+		
+	    if (Auth::user()->rol_id == 0) {
+
+			view()->share('title', 'Historial de Comisiones');
+
+			$wallets = Wallet::where('membresia', $request->membresia)->get();
+			$total = $this->calcularTotal($wallets);
+			//recargas
+			$recargas = Wallet::where('tipotransacion', 4)->get();
+			$totalrecarga = $this->calcularTotal($recargas);
+		} else {
+			$wallets = Wallet::where('iduser', Auth::user()->ID)->where('membresia', $request->membresia)->get();
+			$total = $this->calcularTotal($wallets);
+			//recargas
+			$recargas = Wallet::where('tipotransacion', 4)->where('iduser', Auth::user()->ID)->get();
+			$totalrecarga = $this->calcularTotal($recargas);
+		}
+		
+		foreach($recargas as $recar){
+         $user = User::find($recar->iduser);
+         $recar->display_name = ($user == null) ? 'N/A' : $user->display_name;
+         $recar->wallet_amount = ($user == null) ? 'N/A' : $user->wallet_amount;
+		}
+		
+		$adicional =0;
+		$monedaAdicional = Monedadicional::find(1);
+        if (!empty($monedaAdicional)) { 
+            $adicional =1;
+        }
+        
+        $membresias = DB::table('memberships')->get();
+        
+        return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
+	}
+	
+	
 
 
 	//filtro por fecha
@@ -86,6 +136,9 @@ class WalletController extends Controller
 		$totalcompleto =0;
 
 	    if(Auth::user()->rol_id == 0){
+
+	    view()->share('title', 'Historial de Comisiones');
+
 	    $wallets = Wallet::whereDate('created_at','>=',$request->fecha1)->whereDate('created_at','<=' ,$request->fecha2)->get();
         $total = $this->calcularTotal($wallets);
 
@@ -116,8 +169,10 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 		
-    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
 	
 	
@@ -129,6 +184,9 @@ class WalletController extends Controller
         
         //filtro usuario
         if($request->user != null){
+
+        view()->share('title', 'Historial de Comisiones');
+        	
 	    $wallets = Wallet::where('iduser', $request->user)->get();
 	    $total = $this->calcularTotal($wallets);
 
@@ -163,9 +221,11 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 		
         
-    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
 
 
@@ -214,8 +274,10 @@ class WalletController extends Controller
         if (!empty($monedaAdicional)) { 
             $adicional =1;
         }
+        
+        $membresias = DB::table('memberships')->get();
 	    
-	    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga'));
+	    return view('wallet.indexwallet')->with(compact('wallets', 'moneda','total','adicional','datos','totalcompleto','recargas','totalrecarga','membresias'));
 	}
 	
 	
@@ -343,6 +405,7 @@ class WalletController extends Controller
 		   'balance' => $datos['balance'],
 		   'tipotransacion' => $datos['tipotransacion'],
 		   'monedaAdicional' => $moneda,
+		   'membresia' => $datos['membresia'],
 	   ]);
 	}
 	
@@ -688,18 +751,67 @@ class WalletController extends Controller
 	//tabla de historial de cortes, liquidaciones
 	public function cortes(){
 	    
-	    view()->share('title', 'Historial de Cortes');
+	    view()->share('title', 'Liquidaciones');
 	    
 	    $moneda = Monedas::where('principal', 1)->get()->first();
-	    $wallets = Wallet::where('iduser', Auth::user()->ID)->where('tipotransacion','!=', '2')->where('tipotransacion','!=', '0')->get();
+	    if(Auth::user()->rol_id != 0){
+	    $wallets = Pagos::where('iduser', Auth::user()->ID)->get();
+	    }else{
+	    $wallets = Pagos::get();    
+	    }
 	    
-	    $adicional =0;
-		$monedaAdicional = Monedadicional::find(1);
-        if (!empty($monedaAdicional)) { 
-            $adicional =1;
-        }
 	    
-	    return view('wallet.cortes')->with(compact('wallets', 'moneda','adicional'));
+	    return view('wallet.cortes')->with(compact('wallets', 'moneda'));
+	}
+	
+	
+	public function cortesfiltros(Request $datos){
+	    
+	    view()->share('title', 'Liquidaciones');
+	    
+	    $moneda = Monedas::where('principal', 1)->get()->first();
+	    if(Auth::user()->rol_id != 0){
+	    $wallets = Pagos::where('iduser', Auth::user()->ID)->whereDate('fechasoli', '>=' ,$datos->fecha1)->whereDate('fechasoli', '<=' ,$datos->fecha2)->get();
+	    }else{
+	    $wallets = Pagos::whereDate('fechasoli', '>=' ,$datos->fecha1)->whereDate('fechasoli', '<=' ,$datos->fecha2)->get();    
+	    }
+	    
+	    
+	    return view('wallet.cortes')->with(compact('wallets', 'moneda'));
+	}
+
+
+		public function reporcomision(){
+	    
+	    if(Auth::user()->rol_id == 0){
+	        $wallets = Wallet::where('idcomision', '!=', 0)->get();
+	         foreach($wallets as $wallet){
+	            $comi = Commission::find($wallet->idcomision);
+	            $user = User::where('user_email', $comi->referred_email)->first();
+	            $purchase  = DB::table('courses_orden')->where('id', $comi->compra_id)->first();
+	            $push = json_decode($purchase->detalles);
+	            $wallet->producto = $push->nombre; 
+	            $wallet->precio = $push->precio;
+ 	            $wallet->correo = $comi->referred_email;
+	            $wallet->comprador = ($user == null) ? 'N/A' : $user->display_name;
+	         }
+	    }else{
+	        
+	      $wallets = Wallet::where('iduser', Auth::user()->ID)->where('idcomision', '!=', 0)->get();
+	        foreach($wallets as $wallet){
+	            $comi = Commission::find($wallet->idcomision);
+	            $user = User::where('user_email', $comi->referred_email)->first();
+	            $purchase  = DB::table('courses_orden')->where('id', $comi->compra_id)->first();
+	            $push = json_decode($purchase->detalles);
+	            $wallet->producto = $push->nombre;
+	            $wallet->precio = $push->precio;
+	            $wallet->correo = $comi->referred_email;
+	            $wallet->comprador = ($user == null) ? 'N/A' : $user->display_name;
+	            
+	         }
+	    }
+	    
+	    return view('wallet.reporte')->with(compact('wallets'));
 	}
 	
 	

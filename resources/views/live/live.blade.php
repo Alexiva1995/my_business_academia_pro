@@ -1,667 +1,498 @@
+
 @extends('layouts.landing')
 
-@section('content')
-@stack('styles')
-
-@php
- //dd($menuResource)
-@endphp
-
-<div class="bg-dark-gray">
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-6 my-auto">
-          <h4 class="text-blue">
-            {{ $event->title }} / ESPECIALISTA
-          </h4>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6 title-level">
-              <h6 class="">Nivel: Principiante</h6>
-            </div>
-            <div class="col-md-6 text-center pt-1 my-auto">
-              <div class="">
-              <a href="" class="btn btn-social-icon btn-facebook btn-rounded"><img src="{{ asset('images/icons/facebook.svg') }}" height="20px" width="20px"></a>
-              <a href="" class="btn btn-social-icon btn-twitter btn-rounded"><img src="{{ asset('images/icons/twitter.svg') }}" height="20px" width="20px"></a>
-              <a href="" class="btn btn-social-icon btn-instagram btn-rounded"><img src="{{ asset('images/icons/instagram.svg') }}" height="20px" width="20px"></a>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<video
-    class="d-block w-100 leccion-curso"
-    controls
-    crossorigin
-    playsinline
-    poster="{{ asset('images/banner_live.png') }}"
-    id="player"
-  >
-    <!-- Video files -->
-    <source
-      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
-      type="video/mp4"
-      size="576"
-    />
-    <source
-      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
-      type="video/mp4"
-      size="720"
-    />
-    <source
-      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
-      type="video/mp4"
-      size="1080"
-    />
-
-    <!-- Caption files -->
-    <track
-      kind="captions"
-      label="English"
-      srclang="en"
-      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
-      default
-    />
-    <track
-      kind="captions"
-      label="Français"
-      srclang="fr"
-      src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"
-    />
-  </video>
-</div>
-@if (Session::has('msj-exitoso'))
-    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-        <strong>{{ Session::get('msj-exitoso') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
-
-@if (Session::has('msj-erroneo'))
-    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-        <strong>{{ Session::get('msj-erroneo') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 pl-0">
-      <div class="row ml-0">
-        <div class="col-md-8">
-          <nav class="mb-2"><!--Menu de navegacion -->
-            <div class="nav nav-tabs nav-fill font-weight-bold" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active mr-1 mt-2 text-center" id="nav-mentor-tab" data-toggle="tab" href="#nav-mentor" role="tab" aria-controls="nav-mentor" aria-selected="true">Info del Especialista</a>
-              <a class="nav-item nav-link mr-1 mt-2 text-center" id="nav-agenda-tab" data-toggle="tab" href="#nav-agenda" role="tab" aria-controls="nav-agenda" aria-selected="false">Próxima Agenda</a>
-              <a class="nav-item nav-link mr-1 mt-2 text-center" id="nav-favoritos-tab" data-toggle="tab" href="#nav-favoritos" role="tab" aria-controls="nav-favoritos" aria-selected="false">Favoritos</a>
-              <a class="nav-item nav-link mr-1 mt-2 text-center" id="nav-anotaciones-tab" data-toggle="tab" href="#nav-anotaciones" role="tab" aria-controls="nav-anotaciones" aria-selected="false">Anotaciones</a>
-            </div>
-            </nav>
-            <div class="col-md-10 pl-0">
-              <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade" id="nav-mentor" role="tabpanel" aria-labelledby="nav-mentor-tab">
-                 <div class="container-fluid">
-                        <div class="row featurette">
-                              <div class="col-md-7 order-md-2">
-                                <h5 class="featurette-heading text-white">Mentor</h5>
-                                <h3 class="featurette-heading text-primary">Nombre y Apellido</h3>
-                                <h6 class="featurette-heading text-white">Conferencista Experto en Liderazgo</h6>
-                                <p class="lead about-course-text">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                                <a href="" class="text-primary">Ver perfil <i class=" fa fa-angle-right"> </i></a>
-                              </div>
-                              <div class="col-md-5 order-md-1">
-                                <img src="{{ asset('images/mentor-course.png') }}" alt="" class="featurette-image img-fluid mx-auto ml-2" width="409" height="370">
-                              </div>
-                        </div>
-                        </div>
-                </div>
-                <div class="tab-pane fade pl-2" id="nav-agenda" role="tabpanel" aria-labelledby="nav-agenda-tab">
-                Sección Próxima agenda en construcción
-                </div>
-                <div class="tab-pane fade pl-2" id="nav-favoritos" role="tabpanel" aria-labelledby="nav-favoritos-tab">
-                Sección Favoritos en construcción
-              </div>
-              <!--Seccion de Anotaciones-->
-              <div class="tab-pane fade show active" id="nav-anotaciones" role="tabpanel" aria-labelledby="nav-anotaciones-tab">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="comments-list">
-                        <div class="media">
-                          <div class="media-body">
-                            <div class="col-12 box-comments">
-                              <div class="card card-anotaciones pb-2">
-                              <div class="card-body p-0">
-                                <form method="POST" action="{{ route('live.anotaciones') }}" class="m-2">
-                                  @csrf
-                                <div class="form-group notes-form-title">
-                                  <input type="text" id="title" placeholder="Título" class="col-md-6 form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
-                                </div>
-                                <div class="form-group notes-form-content">
-                                  <textarea class="form-control{{ $errors->has('content') ? ' is-invalid' : '' }}" id="content"  name="content" value="{{ old('content') }}" required autofocus rows="3">Escribe tu nota</textarea>
-                                </div>
-                                <button type="submit" class="btn btn-success float-right">Guardar nota</button>
-                              </form>
-                            </div>
-                          </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div><!--End Seccion Anotaciones-->
-              </div><!--End tab-content-->
-            </div><!--End col -->
-            <!--Notas-->
-            @foreach ($notes as $note)
-
-            <div class="col-md-10 pl-0">
-              <h4 class="title-note pb-2">Notas Guardadas</h4>
-                        <div class="accordion accordionNotes" id="accordionNoteOne">
-                          <div class="card">
-                            <div class="card-header" id="headingOne">
-                              <p class="mb-2 mt-2" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                {{$note->title}}
-                                <img src="{{ asset('images/icons/chevron-black.svg') }}" height="20px" width="20px" class="float-right">
-                              </p>
-                             </div>
-
-                   <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionNoteOne">
-                     <div class="card-body">
-                     {{$note->content}}
-                      </div>
-                   </div>
-                 </div>
-               </div>
-            </div><!--end Notas-->
-            @endforeach
-
-        </div><!--End col -->
-        <!--Menu y Chat-->
-        <div class="col-md-4 " style='margin-left: -45px !important;'>
-          <div class="row mt-2">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col">
-                  <div class="col vertical-menu">        
-                  <nav >
-                  <div class="nav nav-tabs nav-fill" id="nav-tab-chat" role="tablist">
-
-                  @foreach($menuResource as $menu)
-                    <a class="nav-item nav-link active" id="nav-settings-tab" data-toggle="tab"  href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="true">
-                      <img src="{{ asset('images/icons/settings.svg') }}" height="30px" class="">
-                      <h6 class="text-center d-none d-sm-none d-md-block">{{ $menu->resources->title }}</h6>
-                    </a>
-                  @endforeach
-
-
-                    <!-- <a class="nav-item nav-link active" id="nav-settings-tab" data-toggle="tab"  href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="true">
-                    <img src="{{ asset('images/icons/settings.svg') }}" height="30px" class="">
-                    <h6 class="text-center d-none d-sm-none d-md-block">Configuración</h6>
-                    </a>
-                    <a class="nav-item nav-link" id="nav-participantes-tab" data-toggle="tab" href="#nav-participantes" role="tab" aria-controls="nav-participantes" aria-selected="false">
-                    <img src="{{ asset('images/icons/person.svg') }}" height="30px" class="">
-                    <h6 class="text-center d-none d-sm-none d-md-block">Participantes</h6></a>
-
-                    <a class="nav-item nav-link" id="nav-chat-tab" data-toggle="tab" href="#nav-chat" role="tab" aria-controls="nav-chat" aria-selected="false">
-                    <img src="{{ asset('images/icons/comment.svg') }}" height="30px" class="">
-                    <h6 class="text-center d-none d-sm-none d-md-block">Chat</h6></a>
-
-                    <a class="nav-item nav-link" id="nav-encuesta-tab" data-toggle="tab" href="#nav-encuesta" role="tab" aria-controls="nav-encuesta" aria-selected="false">
-                    <img src="{{ asset('images/icons/lista.svg') }}" height="30px" class="">
-                    <h6 class="text-center d-none d-sm-none d-md-block">Encuesta</h6></a>
-                    <a class="nav-item nav-link" id="nav-presentation-tab" data-toggle="tab" href="#nav-presentation" role="tab" aria-controls="nav-presentation" aria-selected="false">
-                    <img src="{{ asset('images/icons/presentacion.svg') }}" height="30px" class="">
-                    <h6 class="text-center d-none d-sm-none d-md-block">Presentación</h6></a>
-                    <a class="nav-item nav-link" id="nav-video-tab" data-toggle="tab" href="#nav-video" role="tab" aria-controls="nav-video" aria-selected="false">
-                    <img src="{{ asset('images/icons/video.svg') }}" height="30px" class="">
-                  <h6 class="text-center d-none d-sm-none d-md-block">Vídeo</h6></a>
-                    <a class="nav-item nav-link" id="nav-archives-tab" data-toggle="tab" href="#nav-archives" role="tab" aria-controls="nav-archives" aria-selected="false"><img src="{{ asset('images/icons/documentos.svg') }}" height="30px" class="">
-                  <h6 class="text-center d-none d-sm-none d-md-block">Archivos</h6></a>
-                    <a class="nav-item nav-link" id="nav-ofertas-tab" data-toggle="tab" href="#nav-ofertas" role="tab" aria-controls="nav-ofertas" aria-selected="false"><img src="{{ asset('images/icons/descuento.svg') }}" height="30px" class="">
-                  <h6 class="text-center d-none d-sm-none d-md-block">Ofertas</h6></a> -->
-              </div>
-              </nav>
-            </div><!--End menu vertical-->
-                </div>
-                <div class="col pl-0 pr-0 mr-2">
-                  <div class="tab-content" id="nav-chat-tabContent">
-              <div class="tab-pane fade pl-2 active show" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
-                    <div style="text-align: right;">
-                      <a data-toggle="modal" data-target="#modal-settings-survey" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Encuesta</a>
-                    </div> <br>
-                    <div style="text-align: right;">
-                      <a data-toggle="modal" data-target="#modal-settings-presentation" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Presentación</a>
-                    </div> <br>
-                    <div style="text-align: right;">
-                      <a data-toggle="modal" data-target="#modal-settings" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Video</a>
-                    </div> <br>
-                    <div style="text-align: right;">
-                      <a data-toggle="modal" data-target="#modal-settings-file" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Archivos</a>
-                    </div> <br>
-                    <div style="text-align: right;">
-                      <a data-toggle="modal" data-target="#modal-settings-enable" class="btn btn-primary"><i class="fa fa-check"></i> Habilitar recursos</a>
-                    </div>
-              </div>
-              <div class="tab-pane fade pl-2" id="nav-participantes" role="tabpanel" aria-labelledby="nav-participantes-tab">
-                    Sección para participantes
-              </div>
-            <!--Chat list-->
-            <div class="chat-list tab-pane fade pl-2" id="nav-chat" role="tabpanel" aria-labelledby="nav-chat-tab" scroll="auto"> 
-
-                      <div class="form-row">
-                        <div class="col pt-2 logo-user">
-                          <div class="logo-username-green">A</div>
-                        </div>
-                         <div class="col pt-2">
-                           <p class="nombre-anfitrion">Anfitrion</p>
-                         </div>
-
-                         <div class="col-m-12">
-                           <div class="mensaje">                              
-                            </textarea>
-                            <p class="contenido-anfitrion p-1">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                             </p>
-                           </div>
-                         </div>
-                       </div>
-
-
-                       <div class="form-row">
-                        <div class="col logo-user">
-                          <div class="logo-username-blue">JD</div>
-                        </div>
-                         <div class="col">
-                           <p class="nombre-jd">John Doe</p>
-                         </div>
-
-                         <div class="col-m-12">
-                           <div  class="mensaje">
-                            <p class="contenido-anfitrion p-1">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                             </p>
-                           </div>
-                         </div>
-                       </div>
-
-
-                       <div class="form-row">
-                        <div class="col logo-user">
-                          <div class="logo-username-green">A</div>
-                        </div>
-                         <div class="col">
-                           <p class="nombre-anfitrion">Anfitrion</p>
-                         </div>
-
-                         <div class="col-m-12">
-                           <div class="mensaje">
-                            <p class="contenido-anfitrion p-1">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                             </p>
-                           </div>
-                         </div>
-                       </div>
-
-
-                       <div class="form-row">
-                        <div class="col logo-user">
-                          <div class="logo-username-blue">JD</div>
-                        </div>
-                         <div class="col">
-                           <p class="nombre-jd">John Doe</p>
-                         </div>
-
-                         <div class="col-m-12">
-                           <div  class="mensaje">
-                            <p class="contenido-anfitrion p-1">
-                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                             </p>
-                           </div>
-                         </div>
-                       </div>
-                       <div class="card card-anotaciones pb-2">
-                              <div class="card-body p-0">
-                                <h5 class="card-title">
-                                <p class="card-text" align="right">
-                                  <textarea class="place pt-2" name="nota" rows="4" style="">Escribe tu mensaje</textarea>
-                                  <div class="col-12">
-                                    <div class="row p-1">
-                                    <div class="col">
-                                      <div class="row">
-                                        <span>
-                                          <i class="em em-angry small" aria-role="presentation" aria-label="ANGRY FACE"></i>
-                                        </span>
-                                        <span>
-                                          <i class="em em-anguished small" aria-role="presentation" aria-label="ANGUISHED FACE"></i>
-                                        </span>
-                                   <span>
-                                     <i class="em em-astonished small" aria-role="presentation" aria-label="ASTONISHED FACE"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-adult" aria-role="presentation" aria-label="ADULT"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-angel small" aria-role="presentation" aria-label="BABY ANGEL"></i>
-                                   </span>
-                                   <span>
-                                    <i class="em em-baby small" aria-role="presentation" aria-label="BABY"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em---1 small" aria-role="presentation" aria-label="THUMBS UP SIGN"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em--1 small" aria-role="presentation" aria-label="THUMBS DOWN SIGN"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-blush small" aria-role="presentation" aria-label="SMILING FACE WITH SMILING EYES"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-clap small" aria-role="presentation" aria-label="CLAPPING HANDS SIGN"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-cry small" aria-role="presentation" aria-label="CRYING FACE"> </i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-eyes small" aria-role="presentation" aria-label="EYES"></i>
-                                   </span>
-                                   <span>
-                                     <i class="em em-face_with_rolling_eyes small" aria-role="presentation" aria-label="FACE WITH ROLLING EYES"></i>
-                                   </span>
-                                  <span>
-                                    <i class="em em-exploding_head small" aria-role="presentation" aria-label="SHOCKED FACE WITH EXPLODING HEAD"></i>
-                                  </span>
-                                  <span>
-                                    <i class="em em-face_with_raised_eyebrow small" aria-role="presentation" aria-label="FACE WITH ONE EYEBROW RAISED"></i>
-                                  </span>
-                                  <span>
-                                    <i class="em em-dizzy_face small" aria-role="presentation" aria-label="DIZZY FACE"></i>
-                                  </span>
-                                  <span>
-                                    <i class="em em-face_with_monocle small" aria-role="presentation" aria-label="FACE WITH MONOCLE"></i>
-                                  </span>
-                                  <span>
-                                    <i class="em em-face_vomiting small" aria-role="presentation" aria-label="FACE WITH OPEN MOUTH VOMITING"></i>
-                                  </span>
-                                   
-                                  </div>
-                                  
-                                  
-                                  
-                                  
-                                      </div>
-                                      
-                                    </div>
-                                  </div>
-                                  
-                                   
-
-                                  <button type="button" class="btn btn-success float-right btn-sm mr-2">Enviar</button>
-                                </p>
-                            </div>
-                          </div>
-
-                       <div class="col mb-2">
-                         <div class="row">
-                          <div class="col">
-                            <div class="row">
-                              <div class="col">
-
-                              </div>
-
-                            </div>
-                          </div>
-                           
-                         </div>
-                       </div>
-
-                    </div> <!--End chat-list-->
-                    <div class="tab-pane fade pl-2" id="nav-encuesta" role="tabpanel" aria-labelledby="nav-encuesta-tab">
-                    Sección para encuesta
-                  </div>
-                  <div class="tab-pane fade pl-2" id="nav-presentation" role="tabpanel" aria-labelledby="nav-presentation-tab">
-                  Sección para presentación
-                  </div>
-                  <div class="tab-pane fade pl-2" id="nav-video" role="tabpanel" aria-labelledby="nav-video-tab">
-                    Sección para vídeo
-                  </div>
-                  <div class="tab-pane fade pl-2" id="nav-archives" role="tabpanel" aria-labelledby="nav-archives-tab">
-                    Sección para archivos
-                  </div>
-                  <div class="tab-pane fade pl-2" id="nav-ofertas" role="tabpanel" aria-labelledby="nav-ofertas-tab">
-                    Sección para ofertas 
-                  </div>
-            </div><!--End tab-content--> 
-                </div>
-                
-              </div>
-              
-            </div>
-          </div>
-        </div><!--End Menu y Chat-->
-        
-      </div>
-    </div>
-  </div>
-  
-</div>
-
-<!-- Modal Agregar recursos video -->
-<div class="modal fade" id="modal-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog" role="document">
-    		<div class="modal-content" >
-      			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Agregar video</h5>
-      			</div>
-      			<form action="{{ route('set.event.store', [1]) }}" method="POST">
-			        {{ csrf_field() }} 
-				    <div class="modal-body">
-				        <div class="container-fluid">
-	    					<div class="row">
-						        <div class="col-md-12">
-                        <div class="form-group">
-						                <label>Link del Video</label>
-						            	  <input type="text" class="form-control" name="url_video" required>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-            <input type="hidden" name="type" value='video' required>
-				        
-				    </div>
-	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="submit" class="btn btn-success">Enviar</button>
-	      			</div>
-	      		</form>
-    		</div>
-  		</div>
-	</div>
-
-<!-- Modal Agregar recursos file -->
-<div class="modal fade" id="modal-settings-file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog" role="document">
-    		<div class="modal-content" >
-      			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Agregar Archivos</h5>
-      			</div>
-      			<form action="{{ route('set.event.store', [1]) }}" method="POST" enctype="multipart/form-data" >
-			        {{ csrf_field() }} 
-				    <div class="modal-body">
-				        <div class="container-fluid">
-	    					<div class="row">
-						        <div class="col-md-12">
-                        <div class="form-group">
-						                <label>Seleccione un Archivo</label>
-						            	  <input type="file" class="form-control" name="file" required>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-            <input type="hidden" name="type" value='file' required>
-				        
-				    </div>
-	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="submit" class="btn btn-success">Enviar</button>
-	      			</div>
-	      		</form>
-    		</div>
-  		</div>
-	</div>
-
-<!-- Modal Agregar recursos presentation -->
-<div class="modal fade" id="modal-settings-presentation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog" role="document">
-    		<div class="modal-content" >
-      			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Agregar Presentación</h5>
-      			</div>
-      			<form action="{{ route('set.event.store', [1]) }}" method="POST" enctype="multipart/form-data" >
-			        {{ csrf_field() }} 
-				    <div class="modal-body">
-				        <div class="container-fluid">
-	    					<div class="row">
-						        <div class="col-md-12">
-                        <div class="form-group">
-						                <label>Seleccione la presentación</label>
-						            	  <input type="file" class="form-control" name="presentation" required>
-						            </div>
-						        </div>
-						    </div>
-						</div>
-            <input type="hidden" name="type" value='presentation' required>
-				        
-				    </div>
-	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="submit" class="btn btn-success">Enviar</button>
-	      			</div>
-	      		</form>
-    		</div>
-  		</div>
-	</div>
-
-<!-- Modal Agregar recursos encuesta -->
-<div class="modal fade" id="modal-settings-survey" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog modal-lg" role="document">
-    		<div class="modal-content" >
-      			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Agregar Encuesta</h5>
-      			</div>
-      			<form action="{{ route('set.event.store', [1]) }}" method="POST" id="formQuestion">
-			        {{ csrf_field() }} 
-				    <div class="modal-body">
-				        <div class="container-fluid">
-	    					<div class="row">
-                    <div class="col-md-12">
-                      <div id="list_question">
-                          <div class="form-group">
-                              <label>Escribe la pregunta #1</label>
-                              <textarea required class="form-control fieldSurvey" name="q1" id="q1"></textarea>
-                          </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-12">
-                      <a title="Agregar una pregunta más"  class="btn btn-primary btn-circle addQuestion"><i class="fa fa-plus-circle"></i></a>
-						        </div>
-						    </div>
-						</div>
-            <input type="hidden" name="type" value='survey' required>
-            <input type="hidden" name="questions" class="questionsArray">
-				        
-				    </div>
-	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="button" class="btn btn-success sendFormQuestion">Enviar</button>
-	      			</div>
-	      		</form>
-    		</div>
-  		</div>
-	</div>
-
-  <!-- Modal Habilitar recursos 20130394-->
-  <div class="modal fade" id="modal-settings-enable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
-      			<div class="modal-header">
-        			<h5 class="modal-title" id="exampleModalLabel">Configuraciones del Evento</h5>
-      			</div>
-      			<form action="{{ route('admin.courses.add-subcategory') }}" method="POST">
-			        {{ csrf_field() }} 
-				    <div class="modal-body">
-				        <div class="container-fluid">
-	    					<div class="row">
-						        <div class="col-md-12">
-                        <label>Habilitar recursos</label>
-						        </div>
-						    </div>
-						</div>
-				        
-				    </div>
-	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-	      			</div>
-	      		</form>
-    		</div>
-  		</div>
-	</div>
-
- 
-@endsection
+@push('style')
+    .modal-chat{
+        position: absolute;
+        top: 100px;right: 100px;
+        bottom: 0;
+        left: -10%;
+        z-index: 10040;
+        overflow: auto;
+        overflow-y: auto;
+        width: 70%;
+    }
+@endpush
 
 @push('scripts')
-  <script type="text/javascript">
-    let  nextinput = 1;
-    $('.addQuestion').on('click',function(e){
-        e.preventDefault();
-        nextinput++;
-        campo = '<div id="content_' + nextinput + '" class="form-group"> <label>Escribe la pregunta #'+nextinput+'</label> <div class="contentQuestion"> <textarea required class="form-control mr-2 fieldSurvey" id="q'+nextinput+'"&nbsp; name="q' + nextinput + '"&nbsp; ></textarea> <span> <a title="Eliminar pregunta"  class="btn btn-danger btn-circle " onclick="removeQuestion('+nextinput+')"><i class="fa fa-ban"></i></a> </span> </div> </div>';
-        $(".msjError").remove();
-        $("#list_question").append(campo);
-    
-    });
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        function refreshChat(){
+            $("#badge-chat").css('display', 'none');
+        }
+        function refreshVideo(){
+            $("#badge-video").css('display', 'none');
+        }
+        function refreshPresentation(){
+            $("#badge-presentation").css('display', 'none');
+        }
+        function refreshFile(){
+            $("#badge-file").css('display', 'none');
+        }
+        function refreshOffer(){
+            $("#badge-offer").css('display', 'none');
+        }
+        function refreshSurvey(){
+            $("#badge-survey").css('display', 'none');
+        }
 
-   
-    
+        function newNote(){
+            var route = "https://mybusinessacademypro.com/academia/anotaciones/store";
+            var parametros = $('#store_note_form').serialize();
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                success:function(ans){
+                    if (ans == false){
+                        $("#msj-success-ajax").css('display', 'none');
+                        $("#msj-error-text").html("Ya posee una nota con el mismo nombre");
+                        $("#msj-error-ajax").css('display', 'block');
+                    }else{
+                        $("#msj-error-ajax").css('display', 'none');
+                        $("#msj-success-text").html("La nota ha sido agregada con éxito");
+                        $("#msj-success-ajax").css('display', 'block');
+                        $("#title").val("");
+                        $("#content").val("");
+                        $("#notes_section").html(ans);
+                    }
+                }
+            });
+        }
 
-    
+        function editNote($nota){
+            $("#id-note").val($nota.id);
+            $("#title-note").val($nota.title);
+            $("#content-note").val($nota.content);
+            $("#modal-edit-note").modal("show");
+        }
+        
+        function updateNote(){
+            $("#update_note_submit").css('display', 'none');
+            $("#update_note_loader").css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/anotaciones/update";
+            var parametros = $('#update_note_form').serialize();
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                success:function(ans){
+                    $("#update_note_loader").css('display', 'none');
+                    $("#update_note_submit").css('display', 'block');
+                    if (ans == false){
+                        $("#msj-success-ajax").css('display', 'none');
+                        $("#msj-error-text").html("Ya posee una nota con el mismo nombre");
+                        $("#msj-error-ajax").css('display', 'block');
+                        $("#modal-edit-note").modal("hide");
+                    }else{
+                        $("#msj-error-ajax").css('display', 'none');
+                        $("#msj-success-text").html("La nota ha sido actualizada con éxito");
+                        $("#msj-success-ajax").css('display', 'block');
+                        $("#notes_section").html(ans);
+                        $("#modal-edit-note").modal("hide");
+                    }
+                }
+            });
+        }
 
-    $('.sendFormQuestion').on('click',function(e){
-      e.preventDefault();
-      var questionArray = [];
-      let valida = false;
-      let elementos = document.querySelectorAll(".fieldSurvey")
+        function deleteNote($id){
+            var route = "https://mybusinessacademypro.com/academia/anotaciones/delete/"+$id;
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    $("#msj-error-ajax").css('display', 'none');
+                    $("#msj-success-text").html("La nota ha sido eliminada con éxito");
+                    $("#msj-success-ajax").css('display', 'block');
+                    $("#notes_section").html(ans);
+                }
+            });
+        }
+        
+        function newPresentation(){
+            var imgsize = document.getElementById("presentation_file").files[0].size;
 
-      elementos.forEach((elemento) => {
-        questionArray.push(elemento.value)
-        valida = (elemento.value === "") ? true : false
-      })
-      $(".questionsArray").val(questionArray)
+            if(imgsize > 10000000){
+                alert('El archivo supera el tamaño permitido (10MB)');
+            }else{
+                $("#store_presentation_submit").css('display', 'none');
+                $("#store_presentation_loader").css('display', 'block');
+                var route = "https://mybusinessacademypro.com/academia/settings/event";
+                var form = $('#store_presentation_form')[0];
+                var parametros = new FormData(form);
+                $.ajax({
+                    url:route,
+                    type:'POST',
+                    data:  parametros,
+                    processData: false,
+                    contentType: false,
+                    success:function(ans){
+                        $("#store_presentation_loader").css('display', 'none');
+                        $("#store_presentation_submit").css('display', 'block');
+                        if (ans == false){
+                            $("#msj-success-ajax").css('display', 'none');
+                            $("#modal-settings-presentation").modal("hide");
+                            $("#option-modal-settings").modal("hide");
+                            $("#msj-error-text").html("Hubo un error al cargar la memoria");
+                            $("#msj-error-ajax").css('display', 'block');
+                        }else{
+                            $("#msj-error-ajax").css('display', 'none');
+                            $("#modal-settings-presentation").modal("hide");
+                            $("#option-modal-settings").modal("hide");
+                            $("#msj-success-text").html("La memoria ha sido agregada con éxito");
+                            $("#msj-success-ajax").css('display', 'block');
+                            refreshPresentationSection(false);
+                        }
+                    }
+                });
+            }
+        }
+        function newVideo(){
+            $("#store_video_submit").css('display', 'none');
+            $("#store_video_loader").css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/settings/event";
+            var parametros = $('#store_video_form').serialize();
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                success:function(ans){
+                    $("#store_video_loader").css('display', 'none');
+                    $("#store_video_submit").css('display', 'block');
+                    if (ans == false){
+                        $("#msj-success-ajax").css('display', 'none');
+                        $("#modal-settings-video").modal("hide");
+                        $("#option-modal-settings").modal("hide");
+                        $("#msj-error-text").html("Hubo un error al cargar el video");
+                        $("#msj-error-ajax").css('display', 'block');
+                    }else{
+                        $("#msj-error-ajax").css('display', 'none');
+                        $("#modal-settings-video").modal("hide");
+                        $("#option-modal-settings").modal("hide");
+                        $("#msj-success-text").html("El video ha sido agregado con éxito");
+                        $("#msj-success-ajax").css('display', 'block');
+                        refreshVideoSection(false);
+                    }
+                }
+            });
+        }
 
-      if(!valida) 
-        $("#formQuestion").submit();
-      else
-        msjError = '<p class="msjError" style="color: red">No pude enviar campos vacios!</>';
-        $("#list_question").append(msjError);
-    });
+        function newFile(){
+            $("#store_file_submit").css('display', 'none');
+            $("#store_file_loader").css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/settings/event";
+            var form = $('#store_file_form')[0];
+            var parametros = new FormData(form);
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                processData: false,
+                contentType: false,
+                success:function(ans){
+                    $("#store_file_loader").css('display', 'none');
+                    $("#store_file_submit").css('display', 'block');
+                    if (ans == false){
+                        $("#msj-success-ajax").css('display', 'none');
+                        $("#modal-settings-file").modal("hide");
+                        $("#option-modal-settings").modal("hide");
+                        $("#msj-error-text").html("Hubo un error al cargar el archivo");
+                        $("#msj-error-ajax").css('display', 'block');
+                    }else{
+                        $("#msj-error-ajax").css('display', 'none');
+                        $("#modal-settings-file").modal("hide");
+                        $("#option-modal-settings").modal("hide");
+                        $("#msj-success-text").html("El archivo ha sido agregado con éxito");
+                        $("#msj-success-ajax").css('display', 'block');
+                        refreshFileSection(false);
+                    }
 
-     removeQuestion = function(q) {
-      $('#content_'+q).remove()
-    }
-    
+                }
+            });
+        }
 
-  </script>
+        function newOffer(){
+            $("#store_offer_submit").css('display', 'none');
+            $("#store_offer_loader").css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/settings/event";
+            var form = $('#store_offer_form')[0];
+            var parametros = new FormData(form);
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                processData: false,
+                contentType: false,
+                success:function(ans){
+                    $("#store_offer_loader").css('display', 'none');
+                    $("#store_offer_submit").css('display', 'block');
+                    if (ans == false){
+                        $("#msj-success-ajax").css('display', 'none');
+                        $("#modal-settings-offers").modal("hide");
+                        $("#option-modal-settings").modal("hide");
+                        $("#msj-error-text").html("Hubo un error al crear la oferta");
+                        $("#msj-error-ajax").css('display', 'block');
+                    }else{
+                        $("#msj-error-ajax").css('display', 'none');
+                        $("#modal-settings-offers").modal("hide");
+                        $("#option-modal-settings").modal("hide");
+                        $("#msj-success-text").html("La oferta ha sido creada con éxito");
+                        $("#msj-success-ajax").css('display', 'block');
+                        refreshOfferSection(false);
+                    }
+                }
+            });
+        }
+
+        function newResponseSurvey(){
+            $("#survey_response_submit").css('display', 'none');
+            $("#survey_response_loader").css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/survey";
+            var form = $('#survey_response_form')[0];
+            var parametros = new FormData(form);
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                processData: false,
+                contentType: false,
+                success:function(ans){
+                    $("#survey_response_loader").css('display', 'none');
+                    $("#survey_response_submit").css('display', 'block');
+                    if (ans == false){
+                        $("#msj-success-ajax").css('display', 'none');
+                        $("#option-modal-survey").modal("hide");
+                        $("#msj-error-text").html("Hubo un error al responder las encuestas");
+                        $("#msj-error-ajax").css('display', 'block');
+                    }else{
+                        $("#msj-error-ajax").css('display', 'none');
+                        $("#option-modal-survey").modal("hide");
+                        $("#msj-success-text").html("Las respuestas han sido guardadas con éxito");
+                        $("#msj-success-ajax").css('display', 'block');
+                        refreshSurveySection(false);
+                    }
+                }
+            });
+        }
+
+        function deletePresentation($presentation){
+            $("#delete_presentation_submit-"+$presentation).css('display', 'none');
+            $("#delete_presentation_loader-"+$presentation).css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/settings/event/delete";
+            $("#resource_type").val('presentation');
+            $("#resource_id").val($presentation);
+            var parametros = $('#delete_resource_form').serialize();
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                success:function(ans){
+                    $("#delete_presentation_loader-"+$presentation).css('display', 'none');
+                    $("#delete_presentation_submit-"+$presentation).css('display', 'block');
+                    $("#msj-error-ajax").css('display', 'none');
+                    $("#option-modal-presentation").modal("hide");
+                    $("#msj-success-text").html("La memoria ha sido eliminada con éxito");
+                    $("#msj-success-ajax").css('display', 'block');
+                    refreshPresentationSection(false);
+                }
+            });
+        }
+
+        function deleteFile($file){
+            $("#delete_file_submit-"+$file).css('display', 'none');
+            $("#delete_file_loader-"+$file).css('display', 'block');
+            var route = "https://mybusinessacademypro.com/academia/settings/event/delete";
+            $("#resource_type").val('file');
+            $("#resource_id").val($file);
+            var parametros = $('#delete_resource_form').serialize();
+            $.ajax({
+                url:route,
+                type:'POST',
+                data:  parametros,
+                success:function(ans){
+                    $("#delete_file_loader-"+$file).css('display', 'none');
+                    $("#delete_file_submit-"+$file).css('display', 'block');
+                    $("#msj-error-ajax").css('display', 'none');
+                    $("#option-modal-document").modal("hide");
+                    $("#msj-success-text").html("El archivo ha sido eliminado con éxito");
+                    $("#msj-success-ajax").css('display', 'block');
+                    refreshFileSection(false);
+                }
+            });
+        }
+
+        function refreshVideoSection($notification){
+            var route = "https://mybusinessacademypro.com/academia/refresh-video-section/{{$event->id}}";
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    $("#videos_section").html(ans);
+                    if ($notification == true){
+                        $("#badge-video").css('display', 'block');
+                    }
+                }
+            });
+        }
+
+        function refreshPresentationSection($notification){
+            var route = "https://mybusinessacademypro.com/academia/refresh-presentation-section/{{$event->id}}";
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    $("#presentations_section").html(ans);
+                    if ($notification == true){
+                        $("#badge-presentation").css('display', 'block');
+                    }
+                }
+            });
+        }
+
+        function refreshFileSection($notification){
+            var route = "https://mybusinessacademypro.com/academia/refresh-file-section/{{$event->id}}";
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    $("#files_section").html(ans);
+                    if ($notification == true){
+                        $("#badge-file").css('display', 'block');
+                    }
+                }
+            });
+        }
+
+        function refreshOfferSection($notification){
+            var route = "https://mybusinessacademypro.com/academia/refresh-offer-section/{{$event->id}}";
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    $("#offers_section").html(ans);
+                    if ($notification == true){
+                        $("#badge-offer").css('display', 'block');
+                    }
+                }
+            });
+        }
+
+        function refreshSurveySection($notification){
+            var route = "https://mybusinessacademypro.com/academia/refresh-survey-section/{{$event->id}}";
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    $("#surveys_section").html(ans);
+                    if ($notification == true){
+                        if ($("#type_user").val() == 2){
+                            loadCharts();
+                            $("#badge-survey").css('display', 'block');
+                        }else{
+                            $("#badge-survey").css('display', 'block');
+                        }
+                    }else{
+                        if ($("#type_user").val() == 2){
+                            loadCharts();
+                        }
+                    }
+                }
+            });
+        }
+
+        function survey_report($survey_id){
+            var route = "https://mybusinessacademypro.com/academia/download-survey-report/"+$survey_id;
+            $.ajax({
+                url:route,
+                type:'GET',
+                success:function(ans){
+                    console.log(ans);
+                    $("#survey_report_answer").html(ans);
+                    $('#mytable').DataTable({
+                        dom: '<B<t>>',
+                    });
+                    $("#option-modal-survey").modal("hide");
+                    $("#modal-report-survey").modal("show");
+                }
+            });
+        }
+
+        Pusher.logToConsole = true;
+        var pusher = new Pusher('70633ff8ae20c2f8780b', {cluster: 'mt1'});
+        var channel = pusher.subscribe('notificacion-channel');
+        channel.bind('notificacion-event', function(data) {
+            if (data.user != $("#user_auth").val()){
+                if (data.type == 'video'){
+                    refreshVideoSection(true);
+                }else if (data.type == 'presentation'){
+                    refreshPresentationSection(true);
+                }else if (data.type == 'file'){
+                    refreshFileSection(true);
+                }else if (data.type == 'offer'){
+                    refreshOfferSection(true);
+                }else if (data.type == 'survey'){
+                    refreshSurveySection(true);
+                }else if (data.type == 'delete-presentation'){
+                    refreshPresentationSection(false);
+                }else if (data.type == 'delete-file'){
+                    refreshFileSection(false);
+                }
+            }
+        });
+
+        $(".emoji").click(function() {
+            document.getElementById("resetinput").value += $(this).attr('data-emoji');
+        });
+    </script>
 @endpush
+@section('content')
+    <input type="hidden" id="user_auth" value="{{ Auth::user()->ID }}">
+    <input type="hidden" id="event_id" value="{{ $event->id }}">
+    <input type="hidden" id="type_user" value="{{ Auth::user()->rol_id }}">
+
+    <div class="bg-dark-gray">
+        {{-- Encabezado o titulo --}}
+        @include('live.components.cabezera')
+        @include('live.components.avisos')
+
+
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 pl-0">
+                <div class="row ml-0" style="padding-right: 10%; padding-left: 10%;">
+                    {{-- Seccion del Informacion del Mentor --}}
+                    @include('live.components.seccionMentor')
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="delete_resource_form">
+        <input type="hidden" name="resource_id" id="resource_id">
+        <input type="hidden" name="resource_type" id="resource_type">
+    </form>
+    
+    <!-- MODALES PARA LAS OPCIONES DEL MENU -->
+    @include('live.components.optionsMenu.chat')
+    @include('live.components.optionsMenu.setting')
+    @include('live.components.optionsMenu.survey')
+    @include('live.components.optionsMenu.presentation')
+    @include('live.components.optionsMenu.video')
+    @include('live.components.optionsMenu.documents')
+    @include('live.components.optionsMenu.offers')
+
+    <!-- MODALES PARA AGREGAR RECURSOS EN LA OPCIÓN CONFIGURACIÓN DEL MENU -->
+    @include('live.components.modal.agregarRecursosVideo')
+    @include('live.components.modal.agregarRecursosArchivo')
+    @include('live.components.modal.agregarRecursosPresentacion')
+    @include('live.components.modal.agregarRecursosEncuestas')
+    @include('live.components.modal.agregarRecursosOfertas')
+    @include('live.components.modal.editNote')
+    @include('live.components.modal.reporteEncuesta')
+
+    <!-- Scrips de la seccion de live -->
+    @include('live.components.scritpsLive')
+@endsection

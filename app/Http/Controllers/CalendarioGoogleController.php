@@ -58,8 +58,9 @@ class CalendarioGoogleController extends Controller
             $service = new Google_Service_Calendar($this->client);
             
             $evento = Events::find($id);  
-            $start = new Carbon($evento->date);
-            $end = new Carbon('2020-09-10');
+            $concatenar = $evento->date.' '.$evento->time;
+            $start = new Carbon($concatenar);
+            $end = $start->addMinutes($evento->duration);
 
             $calendarId = 'primary';
             $event = new Google_Service_Calendar_Event([

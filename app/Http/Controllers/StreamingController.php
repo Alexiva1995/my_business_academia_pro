@@ -3,166 +3,177 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str as Str;
 use GuzzleHttp\Client;
+use App\Models\Streaming\User; use App\Models\Streaming\Contact;
+use App\Models\Streaming\Meeting; use App\Models\Streaming\Invitation;
+use App\Models\Streaming\ModelHasRole;
+use Auth; use Carbon\Carbon; use DB;
 
-class StreamingController extends Controller
-{
-    public $client;
+class StreamingController extends Controller{
 
-    function __construct()
-	{
-        // TITLE
-		view()->share('title', 'Test De Streaming');
-	}
-    
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    { 
+    public function setToken(){
+        $client = new Client(['base_uri' => 'https://streaming.mybusinessacademypro.com']);
 
-        // CREDENCIALES PARA API DE IBM
-
-        // https://ibm.github.io/video-streaming-developer-docs/
-        // usuario: proyectos@fenttix.com
-        // Contraseña: Livembapro123*
-        //device username:cgpxzukgpqy
-        //device password: hdebc pdtbj qewbr
-    
-
-        //Obtener code
-        // https://authentication.video.ibm.com/authorize?response_type=code&client_id=ca361d98cfa63255356b644e83130e919e62085e&redirect_uri=http://localhost:8000/&state=XYZ
-
-        //result code (Este lo uso para luego pedir el ACCESS TOKEN)
-        // http://localhost:8000/?code=643f3906bf9605da966c6a69c77946c52b0cf180&state=XYZ
-
-
-	   	return view('streaming.indexstreaming');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getAccessToken(Request $request){
-        $client = new Client();
-        $response = $client->request('POST', 'https://video.ibm.com/oauth2/token', [
-            'Authorization' => 'Basic ' .base64_encode('ee69a8f44e5eef4a512eaa7dc4a7501c8b64f019:b115060c57dd13dfce8f0adc25643ca470f8861c'),
+        $response = $client->request('POST', 'api/auth/login', [
+            'headers' => ['Accept' => 'application/json', 'Content-Type' => 'application/x-www-form-urlencoded'],
             'form_params' => [
-                'grant_type' => 'authorization_code',
-                'client_id' => 'ee69a8f44e5eef4a512eaa7dc4a7501c8b64f019',
-                'client_secret' => 'b115060c57dd13dfce8f0adc25643ca470f8861c',
-                'redirect_uri' => 'http://localhost:8000/get_access_token',
-                'code' => $request->get('code'),
+                'email' => 'mbapro',
+                'password' => 'mbapro2020',
+                'device_name' => 'admin-device',
             ]
         ]);
 
-        $result =  json_decode( $response->getBody() );
+        $result = json_decode($response->getBody());
+
+        DB::table('wp98_users')
+            ->where('ID', '=', Auth::user()->ID)
+            ->update(['streaming_token' => $result->token]);
+    }
+
+    public function newMeeting(Request $request, $userId){
+        $client = new Client(['base_uri' => 'https://streaming.mybusinessacademypro.com']);
 
         $headers = [
-            'Authorization' => 'Bearer '.base64_encode($result->access_token),        
             'Accept'        => 'application/json',
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer '.Auth::user()->streaming_token
         ];
 
-        $response2 = $client->request('GET', 'https://api.video.ibm.com/users/self/channels.json', [
-            'headers' => $headers
+        $p = $request->date."T".$request->time;
+        $carbon = new Carbon($p);
+        //$fecha = $carbon->addHours(5)->addMinutes(30);
+        $ultFecha = $carbon->format('Y-m-d H:i:s');
+        $creacionEvento = $client->request('POST', 'api/meetings', [
+            'headers' => $headers,
+            'form_params' => [
+                'title' => $request->title,
+                'agenda' => $request->description,
+                'description' => $request->description,
+                'start_date_time' => $ultFecha,
+                'period' => $request->duration,
+                'category' => [$request->category_id],
+                'type' => ['webinar']
+            ]
         ]);
-        
-        $result2 =  json_decode( $response2->getBody() );
 
-        dd($result2);
-	   	return view('streaming.indexstreaming')->with(compact('hola'));
+        $result = json_decode($creacionEvento->getBody());
 
+        $meeting = Meeting::where('uuid', '=', $result->meeting->uuid)->first();
+        $meeting->type = 'webinar';
+        $meeting->user_id = $userId;
+        $meeting->save();
+
+        return $result->meeting->uuid;
     }
 
-    public function new_channel(){
-        $client = new Client(['base_uri' => 'https://api.video.ibm.com/']);
+    public function updateMeeting(Request $request, $uuid){
+        $client = new Client(['base_uri' => 'https://streaming.mybusinessacademypro.com']);
+
         $headers = [
-            'Authorization' => 'Bearer a20eb6e6921f13d3ce76f88892b16f06cfea551d',        
             'Accept'        => 'application/json',
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer '.Auth::user()->streaming_token
         ];
 
-        $response = $client->request('GET', 'users/self/channels.json', [
-            'headers' => $headers
-        ]);
-        /*$response = $client->request('GET', 'users/self/channels.json', [
-            'Authorization' => 'Bearer cb3b4abe13b99aa35c33f66d7044ace8edc2e526'
-        ]);
-*/
+        $consultaEvento = $client->request('GET', 'api/meetings/'.$uuid, ['headers' => $headers]);
+        $detallesEvento = json_decode($consultaEvento->getBody());
         
+        if ($detallesEvento->status == 'scheduled'){
+            $actualizacionEvento = $client->request('PATCH', 'api/meetings/'.$uuid, [
+                'headers' => $headers,
+                'form_params' => [
+                    'title' => $request->title,
+                    'agenda' => $request->description,
+                    'description' => $request->description,
+                    'start_date_time' => $request->date."T".$request->time,
+                    'period' => $request->duration,
+                    'category' =>[$request->category_id],
+                    'type' => ['webinar']
+                ]
+            ]);
+            
+            $meeting = Meeting::where('uuid', '=', $uuid)->first();
+            $meeting->type = 'webinar';
+            $meeting->save();
+        }
+    }
+    
+    public function getStatus($uuid){
+        $client = new Client(['base_uri' => 'https://streaming.mybusinessacademypro.com']);
 
-         $result =  json_decode( $response->getBody() );
-
-        dd($result);
+        $headers = [
+            'Accept'        => 'application/json',
+            'Content-Type' => 'application/x-www-form-urlencoded',
+            'Authorization' => 'Bearer '.Auth::user()->streaming_token
+        ];
         
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $consultaEvento = $client->request('GET', 'api/meetings/'.$uuid, ['headers' => $headers]);
+        $detallesEvento = json_decode($consultaEvento->getBody());
+        
+        return $detallesEvento->status;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function verifyUser($email){
+        $userStreaming = User::where('email', '=', $email)
+                            ->select('id')
+                            ->first();
+
+        return $userStreaming;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function newUser(Request $request){
+        $usuario = new User($request->all());
+        $usuario->uuid = Str::uuid();
+        $usuario->status = 'activated';
+        $usuario->save();
+
+        $extension = explode('.', $request->avatar);
+        $nombreImg = $usuario->id.".".$extension[1];
+        copy('/home/mbapro/public_html/academia/uploads/avatar/'.$request->avatar, '/home/mbapro/public_html/streaming/storage/app/public/avatar/'.$nombreImg);
+        $usuario->avatar = '/storage/avatar/'.$nombreImg;
+        $usuario->save();
+
+        $role = new ModelHasRole();
+        $role->role_id = $request->role_id;
+        $role->model_type = 'App\Models\User';
+        $role->model_id = $usuario->id;
+        $role->save();
+
+        return $usuario->id;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function verifyContact($user_id){
+        $contactStreaming = Contact::where('user_id', '=', $user_id)
+                                ->select('id')
+                                ->first();
+
+        return $contactStreaming;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function newContact(Request $request){
+        $contact = new Contact($request->all());
+        $contact->uuid = Str::uuid();
+        $contact->save();
+
+        return $contact->id;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function getMeetingId($uuid){
+        $eventStreaming = Meeting::where('uuid', '=', $uuid)
+                            ->select('id')
+                            ->first();
+
+        return $eventStreaming->id;
+    }
+
+    public function newInvitation($meeting_id, $contact_id){
+        $invitation = new Invitation();
+        $invitation->uuid = Str::uuid();
+        $invitation->meeting_id = $meeting_id;
+        $invitation->contact_id = $contact_id;
+        $invitation->save();
+
+        return $invitation;
     }
 }

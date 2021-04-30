@@ -11,6 +11,7 @@ use Illuminate\Routing\Controller;
 use App\Models\CourseOrden;
 use Hexters\CoinPayment\Entities\CoinpaymentTransaction;
 use Hexters\CoinPayment\Traits\ApiCallTrait;
+use App\Http\Controllers\ShoppingCartController;
 
 class IPNController extends Controller {
     
@@ -77,9 +78,18 @@ class IPNController extends Controller {
             try {
                 $transactions->update($info['result']);
                 if ($info['result']['status'] == 100) {
-                    CourseOrden::where('idtransacion_coinpaymen', $req->txn_id)->update([
-                        'status' => 1
-                    ]);
+                    $datosOrden = CourseOrden::where('idtransacion_coinpaymen', $req->txn_id)->first();
+                    $datosOrden->status = 1;
+                    $datosOrden->save();
+
+                    $carrito = new ShoppingCartController();
+                    $detalles = json_decode($datosOrden->detalles);
+                    if (isset($detalles->idmembresia)){
+                        $carrito->process_membership_buy($datosOrden->id);
+                    }else{
+                        $carrito->process_cart($datosOrden->id);
+                    }
+                    
                 }
             } catch (\Exception $e) {
                 \Mail::to($cp_debug_email)->send(new SendEmail([

@@ -35,6 +35,7 @@ CREATE TABLE `purchases` (
   `payment_id` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `status` tinyint(1) NOT NULL,
+  `link` int(11) DEFAULT 0,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

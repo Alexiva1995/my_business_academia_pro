@@ -6,11 +6,10 @@
 			$('#mytable').DataTable( {
 				responsive: true,
 			});
+		});
 
-			$('.editar').on('click',function(e){
- 				e.preventDefault();
-
- 				var route = $(this).attr('data-route');
+		function editar($id){
+ 				var route = $("#"+$id).attr('data-route');
  				$.ajax({
 	                url:route,
 	                type:'GET',
@@ -21,8 +20,7 @@
 	                    $("#modal-edit").modal("show");
 	                }
 	            });
-			});
-		});
+			}
 	</script>
 @endpush
 
@@ -52,6 +50,7 @@
 					<thead>
 						<tr>
 							<th class="text-center">Título</th>
+							<th class="text-center">Membresía</th>
 							<th class="text-center">Icono</th>
 							<th class="text-center">Cursos Asociados</th>
 							<th class="text-center">Acción</th>
@@ -61,10 +60,15 @@
 						@foreach($categorias as $categoria)
 							<tr>
 								<td class="text-center">{{ $categoria->title }}</td>
+								<td class="text-center">
+									@if ($categoria->membership_id > 0)
+										{{ $categoria->membership->name }}
+									@endif
+								</td>
 								<td class="text-center"><i class="{{ $categoria->icon }}"></i></td>
 								<td class="text-center">{{ $categoria->courses_count }}</td>
 								<td class="text-center">
-									<a class="btn btn-info editar" data-route="{{ route('admin.courses.edit-category', $categoria->id) }}"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-info" data-route="{{ route('admin.courses.edit-category', $categoria->id) }}" id="{{$categoria->id}}" onclick="editar(this.id);"><i class="fa fa-edit"></i></a>
 									@if ($categoria->courses_count == 0)
 										<a class="btn btn-danger" href="{{ route('admin.courses.delete-category', $categoria->id) }}"><i class="fa fa-trash"></i></a>
 									@endif
@@ -93,6 +97,17 @@
 						            <div class="form-group">
 						                <label>Título de la Categoría</label>
 						            	<input type="text" class="form-control" name="title" required>
+						            </div>
+						        </div>
+						        <div class="col-md-12">
+						            <div class="form-group">
+						                <label>Membresía</label>
+						            	<select class="form-control" name="membership_id" required>
+						            		<option value="" selected disabled>Seleccione una membresía...</option>
+						            		@foreach ($memberships as $membership)
+						            			<option value="{{ $membership->id }}">{{ $membership->name }}</option>
+						            		@endforeach
+						            	</select>
 						            </div>
 						        </div>
 						        <div class="col-md-12">

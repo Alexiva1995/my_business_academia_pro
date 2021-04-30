@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SetEvent extends Model
 {
-    protected $table = "event_content";
+    protected $table = 'event_content';
     /**
      * The attributes that are mass assignable.
      *
@@ -18,4 +18,9 @@ class SetEvent extends Model
     ];
 
     //métodos
+    public function pregunta()
+    {
+        return $this->hasOne('App\Models\SurveyOptions', 'content_event_id');
+    }
+
 }

@@ -7,20 +7,6 @@
 				responsive: true,
 			});
 
-			$('.editar').on('click',function(e){
- 				e.preventDefault();
-
- 				var route = $(this).attr('data-route');
- 				$.ajax({
-	                url:route,
-	                type:'GET',
-	                success:function(ans){
-	                	$("#content-modal").html(ans); 
-	                    $("#modal-edit").modal("show");
-	                }
-	            });
-			});
-
 		});
 
 		function changeType($opc){
@@ -48,6 +34,18 @@
 		        }
 			}
 		}
+		
+		function editar($id){
+			var route = $("#"+$id).attr('data-route');
+ 			$.ajax({
+	        	url:route,
+	            type:'GET',
+	            success:function(ans){
+	                $("#content-modal").html(ans); 
+	                $("#modal-edit").modal("show");
+	            }
+	        });
+		}
 	</script>
 @endpush
 
@@ -68,6 +66,8 @@
 		<div class="box">
 			<div class="box-body">
 				<div style="text-align: right;">
+				    
+				    <a href="{{ route ('admin.courses.index')}}" class="btn btn-danger descargar"><i class="fas fa-arrow-circle-left"></i> Regresar</a>
 					<a data-toggle="modal" data-target="#modal-new" class="btn btn-info"><i class="fa fa-plus-circle"></i> Nuevo Recurso</a>
 				</div>
 				
@@ -83,7 +83,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($leccion->materials as $material)
+						@foreach($course->materials as $material)
 							<tr>
 								<td class="text-center">{{ $material->id }}</td>
 								<td class="text-center">{{ $material->title }}</td>
@@ -94,8 +94,8 @@
 									@else
 										<a class="btn btn-warning" href="{{ url('uploads/courses/lessons/materials/'.$material->material) }}" target="_blank"><i class="fa fa-search"></i></a>
 									@endif
-									<a class="btn btn-info editar" data-route="{{ route('admin.courses.lessons.resources.edit', $material->id) }}"><i class="fa fa-edit"></i></a>
-									<a class="btn btn-danger" href="{{ route('admin.courses.lessons.resources.delete', $material->id) }}" title="Eliminar"><i class="fa fa-ban"></i></a>
+									<a class="btn btn-info" data-route="{{ route('admin.courses.lessons.resources.edit', $material->id) }}" id="{{$material->id}}" onclick="editar(this.id);"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-danger" href="{{ route('admin.courses.lessons.resources.delete',[$material->id,$course->id]) }}" title="Eliminar"><i class="fa fa-ban"></i></a>
 								</td>
 							</tr>
 						@endforeach
@@ -114,7 +114,7 @@
       			</div>
       			<form action="{{ route('admin.courses.lessons.resources.store') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input type="hidden" name="lesson_id" value="{{ $leccion->id }}">
+					<input type="hidden" name="course_id" value="{{ $course->id }}">
 				    <div class="modal-body">
 				        <div class="container-fluid">
 	    					<div class="row">
@@ -145,12 +145,18 @@
 						            	<input type="url" class="form-control" name="url" id="url">
 						            </div>
 						        </div>
+						         <div class="col-md-12" >
+						            <div class="form-group">
+						                <label>Imagen de Recurso</label>
+						            	<input type="file" class="form-control" name="image">
+						            </div>
+						        </div>
 						    </div>
 						</div>
 				    </div>
 	      			<div class="modal-footer">
 	        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-	        			<button type="submit" class="btn btn-primary">Crear Lección</button>
+	        			<button type="submit" class="btn btn-primary">Crear Material</button>
 	      			</div>
 	      		</form>
     		</div>
@@ -166,6 +172,7 @@
       			</div>
       			<form action="{{ route('admin.courses.lessons.resources.update') }}" method="POST" enctype="multipart/form-data">
 			        {{ csrf_field() }}
+					<input type="hidden" name="course_id" value="{{ $course->id }}">
 				    <div class="modal-body">
 				        <div class="container-fluid" id="content-modal">
 

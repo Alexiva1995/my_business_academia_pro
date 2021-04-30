@@ -30,12 +30,14 @@ class Events extends Model
         'duration',
         'image',
         'status',
+        'correos',
         'type',
         'url_streaming',
-        'url_video'
+        'url_video',
+        'miniatura'
     ];
 
-    
+
     public function users(){
         return $this->belongsToMany('App\Models\User', 'events_users', 'event_id', 'user_id')->withPivot('date', 'time', 'favorite')->withTimestamps();
     }
@@ -70,10 +72,20 @@ class Events extends Model
           return $this->belongsTo('App\Models\User', 'user_id');
        }
 
-    //Relacion Evento que pertenece a un curso
-    public function curso()
-    {
-        return $this->belongsTo('App\Models\Course', 'course_id');
+
+    public function category(){
+        return $this->belongsTo('App\Models\Category');
+    }
+    public function subcategory(){
+        return $this->belongsTo('App\Models\Subcategory');
     }
 
+    public function countries(){
+        return $this->belongsToMany('App\Models\Paises', 'event_countries', 'event_id', 'country_id')->withPivot('date', 'time');
+    }
+
+    public function notes()
+    {
+        return $this->hasMany('App\Models\Note');
+    }
 }

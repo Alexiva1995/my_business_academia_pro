@@ -33,7 +33,7 @@ use PayPal\Api\Transaction;
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TiendaController;
-
+use App\Http\Controllers\ShoppingCartController;
 
 class PaypalController extends Controller
 {
@@ -125,22 +125,20 @@ class PaypalController extends Controller
             return \Redirect::away($redirect_url);
         }
         
-        $mensaje->msjSistema('Ups! Error desconocido.', 'danger');
-        return \Redirect::route('carrito-carrito');
+        return \Redirect::route('shopping-cart.index')->with('msj-erroneo', 'Ups! Error desconocido.');
     }
     
     
     //cancelacion o aceptacion de paypal
-    public function getPaymentStatus($idcompra)
+    public function getPaymentStatus(Request $request, $idcompra)
     {
-        
+       
          // setup PayPal api context
         $paypal_conf = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
         $this->_api_context->setConfig($paypal_conf['settings']);
-
-        $mensaje = new IndexController;
-        $tienda = new TiendaController;
+        
+        $carshoping = new ShoppingCartController;
 
         // Get the payment ID before session clear
         $payment_id = \Session::get('paypal_payment_id');
@@ -148,38 +146,29 @@ class PaypalController extends Controller
         // clear the session payment ID
         \Session::forget('paypal_payment_id');
  
-        $payerId = \Input::get('PayerID');
-        $token = \Input::get('token');
+        $payerId = $request->get('PayerID');
+        $token = $request->get('token');
  
  
         if (empty($payerId) || empty($token)) {
-
-        $tienda->accionSolicitud($idcompra, 'wc-cancelled');
         
-        $mensaje->msjSistema('La compra fue cancelada', 'danger');
-            return \Redirect::route('carrito-carrito');
+            return \Redirect::route('shopping-cart.index')->with('msj-erroneo', 'La compra fue cancelada.');
         }
  
         $payment = Payment::get($payment_id, $this->_api_context);
  
         $execution = new PaymentExecution();
-        $execution->setPayerId(\Input::get('PayerID'));
+        $execution->setPayerId($request->get('PayerID'));
  
         $result = $payment->execute($execution, $this->_api_context);
  
  
         if ($result->getState() == 'approved') {
            
-           $tienda->accionSolicitud($idcompra, 'wc-completed');
-           
-            $mensaje->msjSistema('Compra realizada de forma correcta', 'success');
-            return \Redirect::route('carrito-carrito');
+            $carshoping->process_membership_buy($idcompra);
+            return \Redirect::route('index')->with('msj-exitoso', 'Compra realizada de forma correcta.');
         }
         
-        
-        $tienda->accionSolicitud($idcompra, 'wc-cancelled');
-        
-        $mensaje->msjSistema('La compra fue cancelada', 'danger');
-        return \Redirect::route('carrito-carrito');
+        return \Redirect::route('shopping-cart.index')->with('msj-erroneo', 'La compra fue cancelada.');
     }
 }

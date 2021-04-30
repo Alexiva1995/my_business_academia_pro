@@ -5,23 +5,22 @@
       input[type="radio"] {
          display: none;
       }
-
       label {
          color: grey;
       }
-
       .rating {
          direction: rtl;
          unicode-bidi: bidi-override;
       }
-
       label:hover,
       label:hover ~ label {
          color: orange;
       }
-
       input[type="radio"]:checked ~ label {
          color: orange;
+      }
+      .cuadrado{
+         outline: 1px solid #2A91FF;
       }
    </style>
 @endpush
@@ -45,71 +44,85 @@
    </div>
 
    {{-- BANNER --}}
-   <div class="container-fluid">
-      <video class="d-flex w-100" controls crossorigin playsinline poster="{{ asset('uploads/images/courses/covers/'.$curso->cover) }}" id="player">
-         <!-- Video files -->
-         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576"/>
-         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720"/>
-         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080"/>
-         <!-- Caption files -->
-         <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt" default/>
-         <track kind="captions" label="Français" srclang="fr" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"/>
-
-         <!-- Fallback for browsers that don't support the <video> element -->
-         <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>
-      </video>
+   <div class="container-fluid p-0">
+        @if (!is_null($curso->featured_cover))
+               <div style="max-width: 100%; position: relative; display: inline-block;">
+                    <img src="{{ asset('uploads/images/courses/featured_covers/'.$curso->featured_cover) }}" alt="" style=" max-width:100%; opacity: 0.5;" class="">
+                </div>
+         @else
+         <div style="max-width: 100%; position: relative; display: inline-block;">
+                    <img src="{{ asset('uploads/images/courses/covers/'.$curso->cover) }}" alt="" style=" max-width:100%; opacity: 0.5;">
+         </div>
+         @endif
    </div>
    {{-- FIN DEL BANNER --}}
-   <hr style="border: 1px solid #707070;opacity: 1;" />
+ <hr class="m-0" style="border: 1px solid #707070;opacity: 1;margin-top: 20px !important;margin-bottom: 25px !important;">
 
    {{-- SECCIÓN ACERCA DEL CURSO--}}
    <div class="container-fluid">
       <div class="row">
          <div class="col-md-12">
             <div class="row">
-               <div class="col-md-8">
-                  <h3 class="text-white">{{ $curso->title }}</h3>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-9">
-                  @if (number_format($curso->promedio, 0) >= 1)
-                     <i class="fa fa-star text-warning"></i>
-                  @else
-                     <i class="fa fa-star-o text-secondary"></i>
-                  @endif
-                  @if (number_format($curso->promedio, 0) >= 2)
-                     <i class="fa fa-star text-warning"></i>
-                  @else
-                     <i class="fa fa-star-o text-secondary"></i>
-                  @endif
-                  @if (number_format($curso->promedio, 0) >= 3)
-                     <i class="fa fa-star text-warning"></i>
-                  @else
-                     <i class="fa fa-star-o text-secondary"></i>
-                  @endif
-                  @if (number_format($curso->promedio, 0) >= 4)
-                     <i class="fa fa-star text-warning"></i>
-                  @else
-                     <i class="fa fa-star-o text-secondary"></i>
-                  @endif
-                  @if (number_format($curso->promedio, 0) >= 5)
-                     <i class="fa fa-star text-warning"></i>
-                  @else
-                     <i class="fa fa-star-o text-secondary"></i>
-                  @endif
-                 
-               </div>
-                <div class="col-md-3">
-                  <div class="row">
-                     <h4 class="text-white mr-2">COSTO</h4>
-                     <h1 class="text-success">{{ $curso->price }} USD</h1>
+               <div class="col-md-12">
+                  <h1 class="text-white up">{{ $curso->title }}</h1>
+                  <div>
+                     @if ( (!Auth::guest()) && (!is_null($progresoCurso)) && (is_null($miValoracion)) )
+                        <p class="rating">
+                           <input id="d-radio1c" type="radio" name="points" value="5">
+                           <label for="d-radio1c" href="#ratingModal" data-toggle="modal">
+                              @if (number_format($curso->promedio, 0) >= 5) <i class="fa fa-star" style="color: orange;"></i> @else <i class="fa fa-star-o"></i>@endif
+                           </label>
+                           <input id="d-radio2c" type="radio" name="points" value="4">
+                           <label for="d-radio2c" href="#ratingModal" data-toggle="modal">
+                               @if (number_format($curso->promedio, 0) >= 4) <i class="fa fa-star" style="color: orange;"></i> @else <i class="fa fa-star-o"></i>@endif
+                           </label>
+                           <input id="d-radio3c" type="radio" name="points" value="3">
+                           <label for="d-radio3c" href="#ratingModal" data-toggle="modal">
+                               @if (number_format($curso->promedio, 0) >= 3) <i class="fa fa-star" style="color: orange;"></i> @else <i class="fa fa-star-o"></i>@endif
+                           </label>
+                           <input id="d-radio4c" type="radio" name="points" value="2">
+                           <label for="d-radio4c" href="#ratingModal" data-toggle="modal">
+                               @if (number_format($curso->promedio, 0) >= 2) <i class="fa fa-star" style="color: orange;"></i> @else <i class="fa fa-star-o"></i>@endif
+                           </label>
+                           <input id="d-radio5c" type="radio" name="points" value="1">
+                           <label for="d-radio5c" href="#ratingModal" data-toggle="modal">
+                               @if (number_format($curso->promedio, 0) >= 1) <i class="fa fa-star text" style="color: orange;"></i> @else <i class="fa fa-star-o text"></i>@endif
+                           </label>
+                        </p>
+                     @else
+                        @if (number_format($curso->promedio, 0) >= 1)
+                           <i class="fa fa-star text-warning"></i>
+                        @else
+                           <i class="fa fa-star-o text-secondary"></i>
+                        @endif
+                        @if (number_format($curso->promedio, 0) >= 2)
+                           <i class="fa fa-star text-warning"></i>
+                        @else
+                          <i class="fa fa-star-o text-secondary"></i>
+                        @endif
+                        @if (number_format($curso->promedio, 0) >= 3)
+                           <i class="fa fa-star text-warning"></i>
+                        @else
+                           <i class="fa fa-star-o text-secondary"></i>
+                        @endif
+                        @if (number_format($curso->promedio, 0) >= 4)
+                           <i class="fa fa-star text-warning"></i>
+                        @else
+                           <i class="fa fa-star-o text-secondary"></i>
+                        @endif
+                        @if (number_format($curso->promedio, 0) >= 5)
+                           <i class="fa fa-star text-warning"></i>
+                        @else
+                           <i class="fa fa-star-o text-secondary"></i>
+                        @endif
+                     @endif
+
                   </div>
-                  
                </div>
             </div>
+
             <div class="row">
-               <div class="col-md-12 mt-2">
+               <div class="col-md-9 mt-2">
                   <div class="row">
                      <div class="col-md-3">
                         <h6 class="text-white"> <img src="{{ asset('images/icons/icon-user.svg') }}" alt="" height="30px" width="30px">  {{ $curso->users_count }} Alumnos</h6>
@@ -118,30 +131,61 @@
                         <h6 class="text-white"> <img src="{{ asset('images/icons/icon-book-video.svg') }}" height="30px" width="30px"> {{ $curso->lessons_count }} Lecciones</h6>
                      </div>
                      <div class="col-md-3">
-                        <h6 class="text-white"> 
+                        <h6 class="text-white">
                            <img src="{{ asset('images/icons/clock.svg') }}" height="30px" width="30px">
-                           @if ($curso->duration > 0)
-                              {{ $curso->hours }}h {{ $curso->minutes }}m
+                           @if (!is_null($curso->duration))
+                              {{ $curso->duration }}
                            @else
                               0h 0m
                            @endif
                         </h6>
                      </div>
-                     <div class="col-md-3">
-                        <a href="{{route('shopping-cart.store', [$curso->id])}}" class="btn btn-info play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> AGREGAR AL CARRITO</a>
-                        
+                     @if (!Auth::guest())
+                    @if(Auth::user()->ID == 10067 && $curso->id == 39)
+                       <div class="col-md-3">
+                           <img src="{{ asset('images/medallas/diamante.png') }}" height="30px" width="30px">
                      </div>
+                      @endif
+                      @endif
+
+                     <div class="col-md-4 mt-2">
+                        <h6 class="text-white"><img src="{{ asset('images/icons/calendar.svg') }}" height="30px" width="30px">  Fecha de salida: {{ date('d-m-Y', strtotime($curso->created_at)) }}</h6>
+                     </div>
+
                   </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="col-md-9 mt-2">
-                  <h6 class="text-white"><img src="{{ asset('images/icons/calendar.svg') }}" height="30px" width="30px">  Fecha de salida: {{ date('d-m-Y', strtotime($curso->created_at)) }}</h6>
-               </div>
-               <div class="col-md-3 mt-2">
-                  <a href="" class="btn btn-success play-course-button btn-block">COMPRAR</a>
-                  <a href="#ratingModal" data-toggle="modal" class="btn btn-primary play-course-button btn-block">VALORAR</a>
-                  <a href="{{ route('client.courses.take-evaluation', [$curso->slug, $curso->id]) }}" class="btn btn-primary play-course-button btn-block">PRESENTAR EVALUACIÓN</a>
+               <div class="col-12 col-md-3 mt-2 text-center">
+                  @if (Auth::guest())
+                     <a href="{{route('shopping-cart.membership')}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
+                  @else
+                     @if (is_null($progresoCurso))
+                        @if (is_null(Auth::user()->membership_id))
+                           <a href="{{route('shopping-cart.store', [$curso->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
+                        @else
+                           @if (Auth::user()->membership_id < $curso->membership_id)
+                              <a href="{{route('shopping-cart.store', [$curso->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> AUMENTAR MEMBRESÍA</a>
+                           @else
+                              @if (Auth::user()->membership_status == 1)
+                                 @if(!$curso->lessons->isEmpty())
+                                    <a href="{{route('client.courses.add', [$curso->id, 'es'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-language" aria-hidden="true"></i> INICIAR CURSO EN ESPAÑOL</a>
+                                    <a href="{{route('client.courses.add', [$curso->id, 'en'])}}" class="btn btn-primary play-course-button btn-block" ><i class="fa fa-language" aria-hidden="true"></i> INICIAR CURSO EN INGLÉS</a>
+                                 @endif
+                              @else
+                                 <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
+                              @endif
+                           @endif
+                        @endif
+                     @else
+                        @if (Auth::user()->membership_status == 1)
+                       
+                        @if(!is_null($first_lesson))
+                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mt-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
+                        @endif
+                        @else
+                           <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
+                        @endif
+                     @endif
+                  @endif
                </div>
             </div>
          </div>
@@ -152,8 +196,8 @@
       <div class="row">
          <div class="col-md-12">
             <div class="row">
-               <div class="col-md-12">
-                  <h4 class="text-white ml-5">ACERCA DEL CURSO</h4>
+               <div class="col-md-10">
+                  <h2 class="text-white ml-5 up">ACERCA DEL CURSO </h2>
                   <hr style="border: 1px solid #707070; opacity: 1;" />
                   <div class="col-md-12">
                      <div class="col-md-12 justify-content-center p-2 ml-4" style="color: white;">
@@ -161,19 +205,19 @@
 
                         <div class="container-fluid pt-4">
                            <div class="row featurette">
-                              <div class="col-md-7 order-md-2">
+                              <div class="col-md-9 order-md-2">
                                  <h5 class="featurette-heading text-white">Mentor</h5>
                                  <h3 class="featurette-heading text-primary">{{ $curso->mentor->display_name }}</h3>
                                  <h6 class="featurette-heading text-white">{{ $curso->mentor->profession }}</h6>
                                  <p class="lead about-course-text">{{ $curso->mentor->about }}</p>
-                                 <a href="" class="text-primary">Ver perfil <i class=" fa fa-angle-right"> </i></a>
+                                 <a href="{{route('show.perfil.mentor', $curso->mentor->ID)}}" class="text-primary">Ver perfil <i class=" fa fa-angle-right"> </i></a>
                               </div>
-                              <div class="col-md-5 order-md-1">
+                              <div class="col-md-3 order-md-1">
                                  <img src="{{ asset('uploads/avatar/'.$curso->mentor->avatar) }}" alt="" class="featurette-image img-fluid mx-auto ml-2" width="409" height="370">
                               </div>
                            </div>
                         </div>
-                    
+
                      </div>
                   </div>
                </div>
@@ -184,32 +228,121 @@
    {{-- FIN SECCIÓN ACERCA DEL CURSO--}}
 
    {{-- SECCIÓN LECCIONES--}}
-   <div class="container-fluid pt-4">
+   @php
+         $arrayColor = [
+            0 => '#2A92FF',
+            1 => '#BF4040',
+            2 => '#B9AA1D',
+            3 => '#A5D6E5',
+            4 => '#9C4F9D',
+            5 => '#2A91FF'
+         ];
+
+         $arrayNivel = [
+            1 => 'Principiante',
+            2 => 'Básico',
+            3 => 'Intermedio',
+            4 => 'Avanzado',
+            5 => 'Pro'
+         ];
+   @endphp
+   <div class="container-fluid pt-4 pb-4">
       <div class="col-md-12 section-title-category">
          <h3 class="ml-4">LECCIONES</h3>
       </div>
+      <div class="row justify-content-center">
+         @foreach ($arrayNivel as $nivel => $name)
+         <div class="d-flex align-items-center mt-2 col">
+            <div class="cuadrado" style="background: {{$arrayColor[$nivel]}}; outline-color: {{$arrayColor[$nivel]}}; height: 15px; width: 15px;"></div>
+            <span class="ml-2" style="color: {{$arrayColor[$nivel]}}">{{$name}}</span>
+         </div>
+         @endforeach
+      </div>
       <hr style="border: 1px solid #707070;opacity: 1;" />
-      
-      <div class="col-md-10">
+    
+      <div class="col-md-12">
          <div class="full margin_bottom_30">
+            <div class="text-right mb-2">
+               @if (Auth::guest())
+                  <a href="{{route('shopping-cart.membership')}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
+               @else
+                  @if (is_null($progresoCurso))
+                     @if (is_null(Auth::user()->membership_id))
+                        <a href="{{route('shopping-cart.store', [$curso->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
+                     @else
+                        @if (Auth::user()->membership_id < $curso->membership_id)
+                           <a href="{{route('shopping-cart.store', [$curso->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> AUMENTAR MEMBRESÍA</a>
+                        @else
+                           @if (Auth::user()->membership_status == 1)
+                              @if(!$curso->lessons->isEmpty())
+                                 <a href="{{route('client.courses.add', [$curso->id, 'es'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-language" aria-hidden="true"></i> INICIAR CURSO EN ESPAÑOL</a>
+                                 <a href="{{route('client.courses.add', [$curso->id, 'en'])}}" class="btn btn-primary play-course-button btn-block" ><i class="fa fa-language" aria-hidden="true"></i> INICIAR CURSO EN INGLÉS</a>
+                              @endif
+                           @else
+                              <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
+                           @endif
+                        @endif
+                     @endif
+                  @else
+                     @if (Auth::user()->membership_status == 1)
+                        @if(!is_null($first_lesson))
+                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="px-2 mt-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
+                        @endif
+                     @else
+                        <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
+                     @endif
+                  @endif
+               @endif
+            </div>
+            @if(!$curso->lessons->isEmpty())
             <div class="accordion border_circle">
                <div class="bs-example">
                   <div class="panel-group" id="accordion">
                      @php $cont = 0; @endphp
                      @foreach ($curso->lessons as $leccion)
                         @php $cont++; @endphp
-                        <div class="panel panel-default">
+                        <div class="panel panel-default mb-2">
                            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{$leccion->id}}">
-                              <div class="col-md-12 p-2 accordion-seccion-leccion align-items-center">
-                                 <div class="row">
-                                    <div class="col-md-2">
-                                       <div class="cuadrado"><h2 class="text-white"> @if ($cont < 10) 0{{ $cont }} @else {{ $cont }} @endif</h2></div>
+                              <div class="col-md-12 accordion-seccion-leccion align-items-center">
+                                 <div class="row align-items-center ">
+                                    <div class="col-2 col-md-1 p-0">
+                                       <div class="cuadrado p-1 pl-2 pr-2" style="background: {{$arrayColor[$leccion->subcategory_id]}}; outline-color:{{$arrayColor[$leccion->subcategory_id]}}; ">
+                                          <h4 class="text-white m-0">
+                                             <strong>@if ($cont < 10) 0{{ $cont }} @else {{ $cont }} @endif</strong>
+                                          </h4>
+                                       </div>
                                     </div>
-                                    <div class="col-md-8">
-                                       <p class="panel-title about-course-text"> <h5 class="about-course-text"> {{ $leccion->title }}</h5></p>
+                                    <div class="col-10 col-md-10">
+                                       <h5 class="panel-title about-course-text m-0">
+                                          @if ( (!Auth::guest()) && (!is_null($progresoCurso)) )
+                                             @if (Auth::user()->membership_status == 1)
+                                            @if($first_lesson->id == $leccion->id)
+                                             <a href="{{ route('lesson.show', [$leccion->slug, $leccion->id, $curso->id]) }}" class="text-acordion-leccion text-primary">
+                                                   {{ $leccion->title }}
+                                                </a>
+                                              @else
+
+                                                <a href="{{ route('lesson.show', [$leccion->slug, $leccion->id, $curso->id]) }}" class="text-acordion-leccion">
+                                                   {{ $leccion->title }}
+                                                </a>
+                                                @endif
+                                                 @foreach($lecciones_vistas as $leccion_vista)
+                                                    @if($leccion_vista->lesson_id == $leccion->id)
+                                                   <label class="text-success text-leccion-vista">&nbsp;&nbsp;&nbsp;&nbsp;Vista <i class="far fa-check-circle"></i> </label>
+                                                   @endif
+                                                @endforeach
+                                             @else
+                                                <a href="#newMembership" data-toggle="modal"  class="about-course-text">
+                                                   {{ $leccion->title }}
+                                                </a>
+                                             @endif
+                                          @else
+                                             {{ $leccion->title }}
+                                          @endif
+                                       </h5>
                                     </div>
-                                    <div class="col-md-2">
-                                       <img src="{{ asset('images/icons/chevron.svg') }}" class="leccion-icon float-right"> 
+                                    <div class="col-md-1">
+                                       <img src="{{ asset('images/icons/chevron.svg') }}" class="leccion-icon float-right" height="20">
                                     </div>
                                  </div>
                               </div>
@@ -228,6 +361,50 @@
                   </div>
                </div>
             </div>
+            @else
+            <h3 class="text-white mb-2 mt-2">Este curso no posee lecciones...</h3>
+            @endif
+            <div class="row">
+               <div class="col-12 col-md-6 text-left">
+                  @if (!Auth::guest())
+                     <a href="{{route('client.my-courses')}}" class="btn btn-success btn-block play-course-button mt-2" ><i class="fas fa-user-circle" aria-hidden="true"></i> IR A MIS CURSOS</a>
+                  @endif
+                  <a href="{{route('courses.show.all')}}" class="btn btn-primary btn-block play-course-button mt-2" ><i class="fa fa-search" aria-hidden="true"></i> EXPLORAR MÁS CURSOS</a>
+               </div>
+            
+               <div class="col-12 col-md-6 text-right">
+                  @if (Auth::guest())
+                     <a href="{{route('shopping-cart.membership')}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
+                  @else
+                     @if (is_null($progresoCurso))
+                        @if (is_null(Auth::user()->membership_id))
+                           <a href="{{route('shopping-cart.store', [$curso->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
+                        @else
+                           @if (Auth::user()->membership_id < $curso->membership_id)
+                              <a href="{{route('shopping-cart.store', [$curso->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> AUMENTAR MEMBRESÍA</a>
+                           @else
+                              @if (Auth::user()->membership_status == 1)
+                                 @if(!$curso->lessons->isEmpty())
+                                    <a href="{{route('client.courses.add', [$curso->id, 'es'])}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-language" aria-hidden="true"></i> INICIAR CURSO EN ESPAÑOL</a>
+                                    <a href="{{route('client.courses.add', [$curso->id, 'en'])}}" class="btn btn-primary play-course-button btn-block" ><i class="fa fa-language" aria-hidden="true"></i> INICIAR CURSO EN INGLÉS</a>
+                                 @endif
+                              @else
+                                 <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
+                              @endif
+                           @endif
+                        @endif
+                     @else
+                        @if (Auth::user()->membership_status == 1)
+                        @if(!is_null($first_lesson))
+                           <a href="{{ route('lesson.show', [$first_lesson->slug, $first_lesson->id, $curso->id]) }}" class="mt-2 px-2 mr-auto btn btn-success play-course-button btn-block mb-2"> <i class="fa fa-play" aria-hidden="true"></i> CONTINUAR CURSO</a>
+                        @endif
+                        @else
+                           <a href="{{route('shopping-cart.store', [Auth::user()->membership_id, 'membresia', 'Mensual'])}}" class="btn btn-danger play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> RENOVAR MEMBRESIA</a>
+                        @endif
+                     @endif
+                  @endif     
+               </div>
+            </div>
          </div>
       </div>
    </div>
@@ -241,9 +418,9 @@
                <h3 class="text-white ml-5">VALORACIONES</h3>
                <hr style="border: 1px solid #707070;opacity: 1;" />
                @foreach ($curso->ratings as $valoracion)
-                  <div class="row m-4 pt-4 border-bottom">  
+                  <div class="row m-4 pt-4 border-bottom">
                      <div class="col-md-2">
-                        <div class="circle"><h2 class="text-white"> JD</h2></div>
+                        <div class="circle"><img src="{{ asset('uploads/avatar/'.$valoracion->user->avatar) }}" alt="" class="circle" ></div>
                      </div>
                      <div class="col-md-8">
                         <div class="row">
@@ -259,28 +436,28 @@
                            <div class="col-md-12">
                               <div class="row">
                                  <div class="col-md-12">
-                                    @if ($valoracion->points >= 1) 
-                                       <i class="fa fa-star text-warning"></i> 
+                                    @if ($valoracion->points >= 1)
+                                       <i class="fa fa-star text-warning"></i>
                                     @else
                                        <i class="fa fa-star-o text-secondary"></i>
                                     @endif
-                                    @if ($valoracion->points >= 2) 
-                                       <i class="fa fa-star text-warning"></i> 
+                                    @if ($valoracion->points >= 2)
+                                       <i class="fa fa-star text-warning"></i>
                                     @else
                                        <i class="fa fa-star-o text-secondary"></i>
                                     @endif
-                                    @if ($valoracion->points >= 3) 
-                                       <i class="fa fa-star text-warning"></i> 
+                                    @if ($valoracion->points >= 3)
+                                       <i class="fa fa-star text-warning"></i>
                                     @else
                                        <i class="fa fa-star-o text-secondary"></i>
                                     @endif
-                                    @if ($valoracion->points >= 4) 
-                                       <i class="fa fa-star text-warning"></i> 
+                                    @if ($valoracion->points >= 4)
+                                       <i class="fa fa-star text-warning"></i>
                                     @else
                                        <i class="fa fa-star-o text-secondary"></i>
                                     @endif
-                                    @if ($valoracion->points >= 5) 
-                                       <i class="fa fa-star text-warning"></i> 
+                                    @if ($valoracion->points >= 5)
+                                       <i class="fa fa-star text-warning"></i>
                                     @else
                                        <i class="fa fa-star-o text-secondary"></i>
                                     @endif
@@ -326,7 +503,7 @@
                         <div class="col-4">
                            <label for="comment" style="color: white;">Puntuación</label>
                         </div>
-                        <div class="col-8 text-right"> 
+                        <div class="col-8 text-right">
                            <p class="rating text-right">
                               <input id="radio1c" type="radio" name="points" value="5"><label for="radio1c"><i class="fa fa-star"></i></label>
                               <input id="radio2c" type="radio" name="points" value="4"><label for="radio2c"><i class="fa fa-star"></i></label>
@@ -336,13 +513,38 @@
                            </p>
                         </div>
                      </div>
-                  </div> 
+                  </div>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button type="submit" class="btn btn-primary">Valorar</button>
                </div>
             </form>
+         </div>
+      </div>
+   </div>
+
+   {{-- Modal Membresia --}}
+   <div class="modal fade" id="newMembership" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content" style="background-color: black;">
+            <div class="modal-header">
+               <!-- <h5 class="modal-title" id="exampleModalLabel" style="color: white;">Adquirir nueva membresia</h5> -->
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body text-center">
+                  <h4 class="text-muted mb-4">Parar tener acceso a nuevas lecciones debes mejorar tu membresia</h4>
+                  @php
+                     $idmembresia = empty(Auth::user()->membership_id) ? 1 : (Auth::user()->membership_id + 1);
+                  @endphp
+                  <a href="{{route('shopping-cart.store', $idmembresia)}}" class="btn btn-color-green text-white" style="background: #6ab742;">Subir de nivel</a>
+                  <a href="{{route('courses')}}" class="btn btn-primary text-white">Ver Más Cursos</a>
+            </div>
+            <!-- <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div> -->
          </div>
       </div>
    </div>

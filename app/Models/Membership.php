@@ -8,13 +8,29 @@ class Membership extends Model
 {
     protected $table = 'memberships';
 
-    protected $fillable = ['name', 'image', 'price'];
+    protected $fillable = ['name', 'image', 'price', 'price_annual', 'descuento', 'discount_annual', 'ganancia', 'streamings', 'type'];
+
+    public function upgrade_message(){
+        return $this->hasOne('App\Models\UpgradeMessage');
+    }
+
+    public function categories(){
+        return $this->hasMany('App\Models\Category');
+    }
 
     public function users(){
         return $this->hasMany('App\Models\User');
     }
 
-    public function shopping_carts(){
-        return $this->hasMany('App\Models\ShoppingCart');
+    public function courses(){
+        return $this->hasMany('App\Models\Course');
+    }
+
+    public function award(){
+        return $this->hasOne('App\Models\Award');
+    }
+
+     public function purchases(){
+        return $this->hasMany('App\Models\PurchaseDetail');
     }
 }

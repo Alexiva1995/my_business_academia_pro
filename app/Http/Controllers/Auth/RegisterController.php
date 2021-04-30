@@ -14,6 +14,7 @@ use Auth;
 use Carbon\Carbon;
 // llamado a los modelos
 use App\Models\User; 
+use App\Models\Paises; 
 use App\Models\Settings; 
 use App\Models\Formulario; 
 use App\Models\Notification;
@@ -132,9 +133,9 @@ class RegisterController extends Controller
         $user = User::create([
             'user_email' => $data['user_email'],
             'user_status' => '0',
-            'user_login' => $data['nameuser'],
-            'user_nicename' => $data['nameuser'],
-            'display_name' => ($data['firstname'] == null) ? $data['nameuser'] : $data['firstname'].' '.$data['lastname'],
+            'user_login' => $data['user_email'],
+            'user_nicename' => $data['user_email'],
+            'display_name' => ($data['firstname'] == null) ? $data['user_email'] : $data['firstname'].' '.$data['lastname'],
             'gender' => $data['genero'],
             'birthdate' => $data['edad'],
             'user_registered' => Carbon::now(),
@@ -149,6 +150,10 @@ class RegisterController extends Controller
             'tipouser' => $data['tipouser'],
             'status' => '0',
             'correos' =>'{"pago":"1","compra":"1","pc":"1","liquidacion":"1"}',
+            'avatar' => ($rol_id != 2) ? 'avatar.png' : $this->avatarMentor($data),
+            'profession' => $data['profession'],
+            'about' => $data['contenido'],
+            'pop_up' => '1',
         ]);
 
         $this->insertarCampoUser($user->ID, $data);
@@ -179,14 +184,47 @@ class RegisterController extends Controller
         $permiso=new PermisosController;
         $permiso->PermisosAdmin($user->ID);
         }
+
+        $data['email'] = $user->user_email;
+        $data['name'] = $user->display_name;
+        $data['id'] = $user->ID;
+
+        Mail::send('emails.welcome',['data' => $data], function($msg) use ($data){
+            $msg->to($data['email']);
+            $msg->subject('Bienvenido a My Business AcademyPro');
+            $msg->from('mail@mybusinessacademypro.com');
+        });
         
-        if (Auth::guest()){
+        if($data['shoping'] != null){
+            
+         Auth::loginUsingId($user->ID);     
+         return redirect()->back()->with('msj-exitoso', 'Su Registro ha sido exitoso su ID es: '.$user->ID);  
+
+        }elseif (Auth::guest()){
+
         Auth::loginUsingId($user->ID);   
         return redirect('/')->with('msj-exitoso', 'Su Registro ha sido exitoso su ID es: '.$user->ID);
+
         }else{
+
          $funciones->msjSistema('Su Registro ha sido exitoso el ID es: '.$user->ID, 'success');
-         return redirect()->back();   
+         return redirect()->back();  
+
         }
+    }
+
+
+    public function avatarMentor($datos){
+      
+      $nombre_imagen='avatar.png';
+      if ($datos->file('avatar')) {
+            $imagen = $datos->file('avatar');
+            $nombre_imagen = 'user'.'_'.time().'.'.$imagen->getClientOriginalExtension();
+            $path = public_path() .'/uploads/avatar';
+            //unlink($path.'/'.$user->avatar);
+            $imagen->move($path, $nombre_imagen);
+        }
+       return $nombre_imagen;
     }
 
     /**
@@ -218,6 +256,8 @@ class RegisterController extends Controller
            ->where('ID', '=', $userid)
            ->update([
             'pais' => $data['pais'], 
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             ]);
     }
     /**
@@ -227,7 +267,8 @@ class RegisterController extends Controller
      * @return {view}
      */
     public function newRegister()
-    {
+    {   
+        $paises = Paises::all();
         $settings = Settings::first();
         $estructura='';
         $settingEstructura = SettingsEstructura::find(1);
@@ -241,9 +282,9 @@ class RegisterController extends Controller
             array_push($valoresSelect, OpcionesSelect::find($campo['id']));
         }
         if (!empty(Auth::user()->ID)){
-            return view('auth.register')->with(compact('campos', 'valoresSelect', 'settings', 'patrocinadores'));
+            return view('auth.register')->with(compact('campos', 'valoresSelect', 'settings', 'patrocinadores','paises'));
         }else{
-            return view('auth.register2')->with(compact('campos', 'valoresSelect', 'settings', 'patrocinadores','estructura'));
+            return view('auth.register2')->with(compact('campos', 'valoresSelect', 'settings', 'patrocinadores','estructura','paises'));
         }
       
     }
@@ -272,6 +313,7 @@ class RegisterController extends Controller
             $mensaje = str_replace('@correo', ' '.$data['user_email'].' ', $mensaje);
             $mensaje = str_replace('@usuario', ' '.$data['nameuser'].' ', $mensaje);
             $mensaje = str_replace('@idpatrocinio', ' '.$referido.' ', $mensaje);
+            $mensaje = str_replace('@Nafiliacion', ' '.$user->ID.' ', $mensaje);
             if (strcasecmp(env('MAIL_HOST'), 'smtp.localhost.com') !== 0) {
                 Mail::send('emails.plantilla',  ['data' => $mensaje, 'firma' => $firma], function($msj) use ($plantilla, $data){
                     $msj->subject($plantilla->titulo);
@@ -346,17 +388,21 @@ class RegisterController extends Controller
         // 0: NONE.
         $user_id_default = $settings->referred_id_default;
 
-        // Obtenemos el referido.
+         // Obtenemos el referido.
         $referido = $user_id_default;
-        if(isset($data['referred_id'])){
+        if($data['referred_id'] == null){
+            $data['referred_id'] = $referido;
             if ($this->VerificarUser($data['referred_id'])) {
                 
                 $requisitos = [
                     'error' => 'El Usuario con el ID Referido Suministrado ('.$data['referred_id'].') No Se Encuentra Registrado, Pruebe Con Otro'
                     ];
                     
+                     
                 return $requisitos;
             }
+            $referido =  $data['referred_id'];
+        }else{
             $referido =  $data['referred_id'];
         }
         $posicion = 0;

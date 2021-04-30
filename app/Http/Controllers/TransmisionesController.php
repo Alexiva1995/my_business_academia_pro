@@ -12,8 +12,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Rol;
 use App\Models\User;
 use App\Models\EventResources;
-use App\Models\Course; 
+use App\Models\Course;
 use App\Models\Events;
+use App\Models\Calendario;
 use App\Models\Permiso;
 use App\Models\Category;
 
@@ -25,13 +26,13 @@ class TransmisionesController extends Controller
 
     function __construct()
     {
-        
+
         Carbon::setLocale('es');
     }
 
-    //vista de transmisiones
-    public function transmisiones(){
-        
+   //vista de transmisiones
+   /* public function transmisiones(){
+
         $anuncio =[];
          $finalizados = Events::where('status', '3')->orderBy('id', 'DESC')->take(9)->get();
          $banner = Events::where('status', '1')->where('image','!=',null)->take(1)->first();
@@ -40,32 +41,25 @@ class TransmisionesController extends Controller
         }
         $proximas = Events::where('status', '1')->where('id', '!=', ($banner == null) ? 0 : $banner->id)->take(6)->get();
         $total = count($proximas);
-
          if($banner != null){
-
            $dia = $this->dias($banner->date);
            $mes = $this->meses($banner->date);
            $fech = $dia.' '.date('d', strtotime($banner->dia)).' '.$mes;
-
            $anuncio =[
             'id' => $banner->id,
             'imagen' => ($banner->image == null) ? '3.png' : $banner->image,
             'title' => $banner->title,
             'fechacompleta' => $fech,
             'fecha' => $banner->date,
-
            ];
          }
-
         foreach($proximas as $proxima){
           $user = User::find($proxima->user_id);
           $proxima->avatar = $user->avatar;
           $dia = $this->dias($proxima->date);
           $mes = $this->meses($proxima->date);
           $proxima->fecha = $dia.' '.date('d', strtotime($proxima->date)).' '.$mes;
-
         }
-
         foreach($finalizados as $fin){
          $user = User::find($fin->user_id);
          $cursos = Course::find($fin->course_id);
@@ -73,61 +67,134 @@ class TransmisionesController extends Controller
          $fin->avatar = $user->avatar;
          $fin->nombre = $user->display_name;
          $fin->title_cate = $categoria->title;
-
          //
          $fin->views = $cursos->views;
          $fin->likes = $cursos->likes;
          $fin->shares = $cursos->shares;
         }
-
         return view('transmision.transmision',compact('proximas','total','anuncio','finalizados'));
+    }*/
+
+   public function transmisiones(){
+      setlocale(LC_TIME, 'es_ES.UTF-8'); //Para el server
+     // setlocale(LC_TIME, 'es');//Local
+      Carbon::setLocale('es');
+      $mytime = Carbon::now();
+      //return dd ($mytime->toDateTimeString());
+
+      $evento_actual = Events::where('date', '>=', Carbon::now()->format('Y-m-d'))
+                        ->where('time', '>=', date('H:i:s'))
+                        ->where('status', '=',1)
+                        ->get()
+                        ->first();
+                        //dd(Empty($evento_actual));
+    if(Empty($evento_actual))
+    {
+        $proximos = null;
+         $finalizados = Events::where('date', '<=',date('Y-m-d'))
+                        ->where('status', '=', 0)
+                       ->get();
+
+      $misEventosArray = [];
+      if (!Auth::guest()){
+         $misEventos = DB::table('events_users')
+                        ->select('event_id')
+                        ->where('user_id', '=', Auth::user()->ID)
+                        ->get();
+
+         foreach ($misEventos as $miEvento){
+            array_push($misEventosArray, $miEvento->event_id);
+         }
+      }
+      $total = 0;
+        return view('transmision.transmision',compact('evento_actual','proximos','total','finalizados', 'misEventosArray'));
+
+    }else{
+        $proximos = Events::where('date', '>=', date('Y-m-d'))
+                      ->where('id', '!=', $evento_actual->id)
+                      ->where('status', '=', 1)
+                      ->get();
+
+        //$finalizados = Events::where('status', '=',3)->get();
+        $finalizados = Events::where('date', '<=',date('Y-m-d'))
+                        ->where('status', '=', 0)
+                        ->get();
+        $total = count($proximos);
+
+            $total = count($proximos);
+
+      $misEventosArray = [];
+      if (!Auth::guest()){
+         $misEventos = DB::table('events_users')
+                        ->select('event_id')
+                        ->where('user_id', '=', Auth::user()->ID)
+                        ->get();
+
+         foreach ($misEventos as $miEvento){
+            array_push($misEventosArray, $miEvento->event_id);
+         }
+      }
+
+      return view('transmision.transmision',compact('evento_actual','proximos','total','finalizados', 'misEventosArray'));
     }
 
+   }
 
 
-
-     public function agendar($evento){
-        $check = DB::table('events_users')
+   public function agendar($evento){
+      $check = DB::table('events_users')
                     ->where('user_id', '=', Auth::user()->ID)
                     ->where('event_id', '=', $evento)
                     ->first();
 
-        if (is_null($check)){
-            $datosEvento = DB::table('events')
-                            ->select('date')
-                            ->where('id', '=', $evento)
-                            ->first();
+      if (is_null($check)){
+         $datosEvento = DB::table('events')
+                           ->select('date')
+                           ->where('id', '=', $evento)
+                           ->first();
 
-            $fechaEvento = date('Y-m-d', strtotime($datosEvento->date));
-            $horaEvento = date('H:i:s', strtotime($datosEvento->date));
+         $fechaEvento = date('Y-m-d', strtotime($datosEvento->date));
+         $horaEvento = date('H:i:s', strtotime($datosEvento->date));
 
-            $disponibilidad = DB::table('events_users')
-                                ->where('user_id', '=', Auth::user()->ID)
-                                ->where('date', '=', $fechaEvento)
-                                ->where('time', '=', $horaEvento)
-                                ->first();
+         $disponibilidad = DB::table('events_users')
+                              ->where('user_id', '=', Auth::user()->ID)
+                              ->where('date', '=', $fechaEvento)
+                              ->where('time', '=', $horaEvento)
+                              ->first();
 
-            if (is_null($disponibilidad)){
-                Auth::user()->events()->attach($evento, ['date' => $fechaEvento, 'time' => $horaEvento]);
+         if (is_null($disponibilidad)){
+            Auth::user()->events()->attach($evento, ['date' => $fechaEvento, 'time' => $horaEvento]);
 
-                return redirect()->back()->with('msj', 'El evento ha sido reservado en su agenda con éxito.');
-            }else{
-                return redirect()->back()->with('msj2', 'No se puede agendar este evento porque ya posee en su agenda otro evento en la misma fecha y hora.');
-            }
-        }else{
-            return redirect()->back()->with('msj2', 'Ya este evento se encuentra registrado en su agenda.');
-    
-        }
-    }
+            //Agendar evento en el calendario
+            $new_calendar = Events::where('id', '=', $evento)->first();
+
+            $calendario = new Calendario();
+            $calendario->titulo = $new_calendar->title;
+            $calendario->contenido = $new_calendar->description;
+            $calendario->inicio = $new_calendar->date;
+            $calendario->time = $new_calendar->time;
+            $calendario->color = '#28a745';
+            $calendario->lugar = 'Ninguno';
+            $calendario->iduser = Auth::user()->ID;
+            $calendario->save();
+
+            return redirect()->back()->with('msj', 'El evento ha sido reservado en su agenda con éxito.');
+         }else{
+            return redirect()->back()->with('msj2', 'No se puede agendar este evento porque ya posee en su agenda otro evento en la misma fecha y hora.');
+         }
+      }else{
+         return redirect()->back()->with('msj2', 'Ya este evento se encuentra registrado en su agenda.');
+      }
+   }
 
 
- 
+
 
      public function dias($fecha){
 
        $dia ='';
        $fech = Carbon::parse($fecha)->format('l');
-       
+
        if($fech == 'Saturday'){
          $dia='Sábado';
        }elseif($fech == 'Sunday'){
@@ -152,7 +219,7 @@ class TransmisionesController extends Controller
 
        $mes ='';
        $fech = Carbon::parse($fecha)->format('F');
-       
+
        if($fech == 'January'){
          $mes='Enero';
        }elseif($fech == 'February'){
@@ -181,8 +248,8 @@ class TransmisionesController extends Controller
 
 
        return $mes;
-    } 
+    }
 
-    
+
 
 }

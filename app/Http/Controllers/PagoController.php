@@ -263,18 +263,11 @@ class PagoController extends Controller
 	public function liquidaciones(Request $request){
 	    
 	    $total =0;
-	    
-	    $desde = new Carbon($request->desde);
-	    $hasta = new Carbon($request->hasta);
-	    
-	        
 	    $usuarios = User::where('wallet_amount','>','0')->get();
 	    $fecha = new Carbon;
+	    
 	    foreach($usuarios as $usuario){
 	        $datos = DB::table('user_campo')->where('ID', $usuario->ID)->first();
-	       
-	        //cancelamos los retiros anteriores para no haya saldo negativo en las billeteras
-	        $pagos = $this->cancelar($usuario->ID);
 	        
 	        $monto = Commission::where('user_id', '=', $usuario->ID)
              ->whereDate("date",">=",$request->desde)
@@ -282,7 +275,7 @@ class PagoController extends Controller
              ->where('total', '!=', 0)
              ->get()->sum('total');
              
-	        if($pagos == null && $monto > 0){
+	        if($monto > 0){
 	            
 	            if($usuario->wallet_amount >= $monto){
                 $total = ($usuario->wallet_amount - $monto);
@@ -292,6 +285,8 @@ class PagoController extends Controller
                  $total = ($usuario->wallet_amount - $monto);
              }
              
+             if($monto >= 50){
+
 	             $tipopago = '';
 	             
 	             $banacario = 'Numero de cuenta: '. $datos->cuenta.'';
@@ -328,6 +323,7 @@ class PagoController extends Controller
 			'credito' => $monto,
 			'balance' => 0,
 			'tipotransacion' => 3,
+			'membresia' => ' ',
 		];
 		
 		
@@ -338,7 +334,7 @@ class PagoController extends Controller
 		
 		$user->wallet_amount = $total;
 		$user->save();
-	          
+	           }
 	        }
 	    }
 	    
