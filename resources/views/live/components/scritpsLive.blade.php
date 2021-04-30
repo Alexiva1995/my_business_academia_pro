@@ -51,7 +51,6 @@
                         $("#option-modal-settings").modal("hide");
                         $("#msj-success-text").html("La encuesta ha sido agregada con éxito");
                         $("#msj-success-ajax").css('display', 'block');
-                        refreshMenu();
                         refreshSurveySection(false);
                     }else{
                         $("#msj-success-ajax").css('display', 'none');

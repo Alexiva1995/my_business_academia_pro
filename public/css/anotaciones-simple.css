@@ -89,8 +89,9 @@
       }
 
       .nombre-jd{
-       color:#2A91FF; 
+       color:white; 
        font-weight: bold;
+       font-size: 14px;
       }
 
       .chat-list{
