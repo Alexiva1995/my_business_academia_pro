@@ -1,7 +1,6 @@
 # My Business Academia Pro ![Status badge](https://img.shields.io/badge/status-complete-green)
 
-![Logo](https://mybusinessacademypro.com/wp-content/uploads/2020/06/beyond-academy-150x150.png)
-
+<p align="center"><a href="https://mybusinessacademypro.com/academia/" target="_blank"><img src="https://mybusinessacademypro.com/wp-content/uploads/2020/06/beyond-academy-150x150.png" ></a></p>
 ✨ E-learning platform with streaming, which allows the control of an academy oriented to live events, a learning system for courses with their respective evaluations. Integration with payment system such as Stripe, Conpaymets
 
 
@@ -19,7 +18,7 @@
 1. Una vez instsaladas las dependencias, puedes hacer el build
 `npm build:ddl && npm build`
 
-## 🦀 Base de Datos 
+## 🦀 Database
 
 
 ## 🧾 License
