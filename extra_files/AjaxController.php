@@ -5,7 +5,6 @@ namespace Hexters\CoinPayment\Http\Controllers;
 use App\Jobs\CoinpaymentListener;
 
 use Exception;
-use App\Models\CourseOrden;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -260,10 +259,6 @@ class AjaxController extends CoinPaymentController {
              * Save to database
              */
             $this->model->create($result);
-
-            CourseOrden::where('id', $request['idorden'])->update([
-                'idtransacion_coinpaymen' => $create['result']['txn_id'],
-            ]);
 
             /**
              * Dispatching job
