@@ -67,7 +67,7 @@
             <h3><span class="text-white">Hola</span><span class="text-primary"> {{$username}}</span><span class="text-white"> ¡Nos alegra verte hoy!</span></h3>
         </div>
         @if(!empty($last_course))
-        <div class="container-fluid d-sm-none">
+        <div class="container-fluid d-none d-sm-block">
             <div class="row">
                 <div class="col-md-12">
                     <h5 class="text-white text-uppercase ml-4 text-center" style="font-size: 12px;">
@@ -84,8 +84,6 @@
                 </div>
             </div>
         </div>
-        @else
-
         @endif
     @endif
 

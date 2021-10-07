@@ -372,7 +372,7 @@
                   <a href="{{route('courses.show.all')}}" class="btn btn-primary btn-block play-course-button mt-2" ><i class="fa fa-search" aria-hidden="true"></i> EXPLORAR MÁS CURSOS</a>
                </div>
             
-               <div class="col-12 col-md-6 text-right">
+               <div class="col-12 col-md-6 text-right mt-2">
                   @if (Auth::guest())
                      <a href="{{route('shopping-cart.membership')}}" class="btn btn-success play-course-button btn-block" ><i class="fa fa-shopping-cart" aria-hidden="true"></i> ADQUIRIR MEMBRESIA</a>
                   @else
