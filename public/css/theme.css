@@ -1904,6 +1904,7 @@ p.card-text.font-weight-bold.mr-2 {
     font-size: 36px; 
     color: #2A91FF; 
     font-weight: bold;
+    padding: 10%;
 }
 .coaches-second-section-button-blue{
     background-color: #2A91FF; 
@@ -1924,6 +1925,15 @@ p.card-text.font-weight-bold.mr-2 {
     text-align: left;
     font-size: 22px; 
     color: #696969;
+}
+.coaches-third-section-text{
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 24px; 
+    color: #696969;
+}
+.coaches-third-section-text{
+    padding: 10% 10%;
 }
 
 
@@ -2090,8 +2100,8 @@ p.card-text.font-weight-bold.mr-2 {
     }
     .afiliados-title-two {
         text-align: center;
-        font-size: 18px;
-        line-height: 18px;
+        font-size: 14px;
+        line-height: 14px;
     }
     .seccion-razones {
         padding-top: 10px;
@@ -2119,6 +2129,13 @@ p.card-text.font-weight-bold.mr-2 {
         font-size: 25px;
         line-height: 25px;
         margin-top: 25px;
+    }
+    .coaches-third-section-text{
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .coaches-third-section-image{
+        padding: 2% 10%;
     }
     
     .course-category-caption a {
