@@ -24,10 +24,6 @@
                         <div class="col-6 mt-4 pl-0 pr-0">
                            <img src="{{ asset ('images/mbapro-completo.png')}}" class="logo-academia-afiliados" alt="" width="380px">
                         </div>
-                        <!--<div class="col-9">
-                           <div class="d-flex align-items-center mybussiness-title-afiliados mt-4">My Business</div>
-                           <div class="academia-title-afiliados" style="color: white; font-size: 20px; ">A c a d e m y p r o</div>
-                        </div>-->
                      </div>
                      <div>
                     	   <h2 class="col-md-8 afiliados-title-two pt-4">Te damos la bienvenida a <b class="text-white font-weight-bold">uno de los <br> mejores y más geniales </b>programas de marketing de Afiliados del mundo</h2>

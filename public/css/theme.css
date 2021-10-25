@@ -1355,6 +1355,21 @@ p.card-text.font-weight-bold.mr-2 {
     font-size: 86px;
     line-height: 100px;
 }
+.commissions-text-div{
+    padding: 5% 25%; 
+    font-size: 22px; 
+    line-height: 30px; 
+    font-weight: 400; 
+    color:#696969;
+}
+.commissions-text-black-div{
+    padding: 5% 25%; 
+    text-align: center;
+}
+.commissions-table-div{
+    padding-left: 10%;
+    padding-right: 10%;
+}
 
 .blog-title-two {
     color: white;
@@ -1889,6 +1904,7 @@ p.card-text.font-weight-bold.mr-2 {
     font-size: 36px; 
     color: #2A91FF; 
     font-weight: bold;
+    padding: 10%;
 }
 .coaches-second-section-button-blue{
     background-color: #2A91FF; 
@@ -1909,6 +1925,15 @@ p.card-text.font-weight-bold.mr-2 {
     text-align: left;
     font-size: 22px; 
     color: #696969;
+}
+.coaches-third-section-text{
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: 24px; 
+    color: #696969;
+}
+.coaches-third-section-text{
+    padding: 10% 10%;
 }
 
 
@@ -2066,6 +2091,53 @@ p.card-text.font-weight-bold.mr-2 {
 }
 
 @media (max-width: 450px) {
+    .blog-title-two {
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .logo-academia-afiliados {
+        width: 150px!important;
+    }
+    .afiliados-title-two {
+        text-align: center;
+        font-size: 14px;
+        line-height: 14px;
+    }
+    .seccion-razones {
+        padding-top: 10px;
+    }
+    .banner-coaches-text{ 
+        font-size: 3.5vw !important; 
+        line-height: 3.7vw !important; 
+    }
+    .commissions-text-div{
+        padding: 5% 15%; 
+        font-size: 20px; 
+        line-height: 25px; 
+    }
+    .commissions-text-black-div{
+        padding: 5% 15%; 
+    }
+    .estilostreaming {
+        text-align: center;
+        font-size: 40px;
+        line-height: 20px;
+        margin-top: 5%;
+    }
+    .estilostreamingtwo{
+        text-align: center;
+        font-size: 25px;
+        line-height: 25px;
+        margin-top: 25px;
+    }
+    .coaches-third-section-text{
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+    .coaches-third-section-image{
+        padding: 2% 10%;
+    }
+    
     .course-category-caption a {
         font-size: 23px;
     }
@@ -2249,7 +2321,7 @@ p.card-text.font-weight-bold.mr-2 {
         display: none;
     }
     .banner-coaches-logo{
-        width: 300px;
+        width: 200px;
     }
     .banner-coaches-line{
         width: 100px;
@@ -2333,10 +2405,7 @@ p.card-text.font-weight-bold.mr-2 {
         margin-top: 0px!important;
         text-align: center;
     }
-    .logo-academia-afiliados {
-        height: 50px!important;
-        width: 50px!important;
-    }
+    
     .subtitle-laptop-two {
         display: none;
     }

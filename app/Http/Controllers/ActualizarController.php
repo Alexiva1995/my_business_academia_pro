@@ -91,7 +91,9 @@ class ActualizarController extends Controller
         $data = $this->infoUsuario($id);
         $yo = null;
         $notes = Note::where('user_id', Auth::user()->ID)->with('streaming')->get();
-        return view('usuario.userEdit')->with(compact('data','yo', 'notes'));
+        $trofeos = $data['principal']->awards;
+        
+        return view('usuario.userEdit')->with(compact('data','yo', 'notes', 'trofeos'));
     }
 
 
@@ -147,7 +149,7 @@ class ActualizarController extends Controller
         $funciones = new IndexController;
         $settings = Settings::find(1);
         $settingEstructura = SettingsEstructura::find(1);
-        $concepto = 'Sección '.$request->data.' Actualizada Exitosamente';
+        $concepto = 'Secci贸n '.$request->data.' Actualizada Exitosamente';
         $user = User::find($request->id);
 
         if ($request->data == 'general'){
@@ -233,7 +235,7 @@ class ActualizarController extends Controller
                 DB::table('user_campo')
                     ->where('ID', '=', $user->ID)
                     ->update([
-                        'direccion' => $request['dirección'],
+                        'direccion' => $request['direcci贸n'],
                         'direccion2' => $request['direccion2'],
                         'pais' => $request['pais'],
                         'estado' => $request['estado'],

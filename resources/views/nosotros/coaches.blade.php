@@ -20,10 +20,10 @@
                 <div class="col-12 mt-5 text-center">
                     <img src="{{ asset ('images/mbapro-completo.png')}}"  class="banner-coaches-logo">
                 </div>
-                <div class="col-12 mt-5 text-center text-white pt-4"">
+                <div class="col-12 text-center text-white pt-4">
                     Te damos la bienvenida a uno de los  mejores y más geniales programas de marketing de Afiliados del mundo
                 </div>
-                <div class="col-12 mt-3 text-center">
+                <div class="col-12 mt-3 text-center d-none d-sm-block">
                     <img src="{{ asset ('images/line-blue.png')}}" class="banner-coaches-line">
                 </div>
             </div>
@@ -36,7 +36,7 @@
             <br><br>
             Si ya tienes la formación o experiencia en el medio de comunicación y manejo de equipos, pero ¿quieres obtener proyección internacional? Aquí encontrarás toda la información para digitalizar tus cursos y maximizar su alcance en línea.
 
-            <div class="mt-3 p-5 coaches-second-section-text-blue">¡Haz negocio con nosotros! y ¡Súmate a nuestro equipo de entrenadores!</div>
+            <div class="mt-3 coaches-second-section-text-blue">¡Haz negocio con nosotros! y ¡Súmate a nuestro equipo de entrenadores!</div>
 
             <center><a type="button" class="btn coaches-second-section-button-blue" href="{{ route('log').'?act=1' }}">Regístrate Aquí</a></center><br>
 
@@ -93,10 +93,10 @@
     <div style="background-color: #fff;">
         <div class="row" style="display: flex; align-items: center;">
             <div class="col-xl-6 col-lg-6 col-md-6 col-12 p-5">
-                <div class="pl-5 pr-5" style="font-size: 24px; color: #696969; font-weight: bold;">Haremos producciones a lo largo de todo el mundo y presentaremos a los mejores coaches para tu formación y desarrollo.</div>
-                <div class="pl-5 pr-5 pt-4" style="font-size: 24px; color: #696969;">Personas que tengan todo el conocimiento y experiencia para ofrecerte valor en lo que sea que quieras desarrollar.</div>
+                <div class="coaches-third-section-text"><b>Haremos producciones a lo largo de todo el mundo y presentaremos a los mejores coaches para tu formación y desarrollo.</b></div>
+                <div class="coaches-third-section-text pt-4">Personas que tengan todo el conocimiento y experiencia para ofrecerte valor en lo que sea que quieras desarrollar.</div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 col-12 p-5">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-12 coaches-third-section-image">
                 <img src="{{ asset('nosotros/afiliados/live-streaming.jpg') }}" class="card-img-top" alt="..." style="border: solid 0;">
             </div>
         </div>
